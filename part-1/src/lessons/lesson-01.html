@@ -7,9 +7,14 @@
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <header class="nav-header">
-    <a href="/part-1/index.html" class="nav-header__back">← Back to Index</a>
-    <span class="nav-header__lesson">Lesson 01</span>
+  <header class="header">
+    <nav class="nav">
+      <a href="/part-1/index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <span class="nav-link disabled">← Previous</span>
+        <a href="lesson-02.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
   </header>
 
   <section class="lesson-header">
@@ -154,16 +159,6 @@ gsap.<span class="method">to</span>(box, {
     </div>
   </section>
 
-  <footer class="container">
-    <nav class="nav-footer">
-      <span class="nav-footer__link nav-footer__link--prev" style="opacity: 0.5; cursor: default;">
-        <span class="arrow">←</span> Previous
-      </span>
-      <a href="./lesson-02.html" class="nav-footer__link nav-footer__link--next">
-        Next <span class="arrow">→</span>
-      </a>
-    </nav>
-  </footer>
 
   <script type="module" src="./lesson-01.js"></script>
 </body>

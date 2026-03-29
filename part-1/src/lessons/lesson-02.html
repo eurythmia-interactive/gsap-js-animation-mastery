@@ -7,9 +7,14 @@
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <header class="nav-header">
-    <a href="/part-1/index.html" class="nav-header__back">← Back to Index</a>
-    <span class="nav-header__lesson">Lesson 02</span>
+  <header class="header">
+    <nav class="nav">
+      <a href="/part-1/index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-01.html" class="nav-link">← Previous</a>
+        <a href="lesson-03.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
   </header>
 
   <section class="lesson-header">
@@ -131,16 +136,6 @@ gsap.fromTo() [START: fromVars] ──────────► [END: toVars]
     </div>
   </section>
 
-  <footer class="container">
-    <nav class="nav-footer">
-      <a href="./lesson-01.html" class="nav-footer__link nav-footer__link--prev">
-        <span class="arrow">←</span> Previous
-      </a>
-      <a href="./lesson-03.html" class="nav-footer__link nav-footer__link--next">
-        Next <span class="arrow">→</span>
-      </a>
-    </nav>
-  </footer>
 
   <script type="module" src="./lesson-02.js"></script>
 </body>
