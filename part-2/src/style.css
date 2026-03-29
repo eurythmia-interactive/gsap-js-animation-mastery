@@ -359,7 +359,7 @@ property { color: #f07178; }
   border: 1px solid var(--border);
   border-radius: var(--border-radius);
   padding: var(--space-lg);
-  min-height: 200px;
+  min-height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -727,7 +727,7 @@ property { color: #f07178; }
   grid-template-rows: auto auto;
   gap: 16px;
   width: 100%;
-  min-height: 200px;
+  min-height: 300px;
 }
 
 .demo-card {
