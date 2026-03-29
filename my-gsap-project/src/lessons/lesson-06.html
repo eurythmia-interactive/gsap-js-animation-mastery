@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 06 - Timeline Labels</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <header class="nav-header">
+    <a href="/index.html" class="nav-header__back">← Back to Index</a>
+    <span class="nav-header__lesson">Lesson 06</span>
+  </header>
+
+  <section class="lesson-header">
+    <h1 class="lesson-header__title">Timeline Labels</h1>
+    <p class="lesson-header__subtitle">Mark points in time for navigation and organization</p>
+  </section>
+
+  <section class="section--demo">
+    <div class="demo-area" style="flex-direction: column; gap: 2rem;">
+      <div class="demo-box" style="transform: translateX(-200px);"></div>
+      <div class="demo-btn-group">
+        <button class="demo-btn" id="btn-play">Play</button>
+        <button class="demo-btn" id="btn-start">Jump to Start</button>
+        <button class="demo-btn" id="btn-middle">Jump to Middle</button>
+        <button class="demo-btn" id="btn-end">Jump to End</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--code">
+    <div class="container">
+      <h2>The Code</h2>
+
+      <h3>HTML</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">HTML</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="punctuation">&lt;</span><span class="tag">section</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"section--demo"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-area"</span> <span class="attr">style</span><span class="punctuation">=</span><span class="string">"flex-direction: column; gap: 2rem;"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-box"</span> <span class="attr">style</span><span class="punctuation">=</span><span class="string">"transform: translateX(-200px);"</span><span class="punctuation">&gt;&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-btn-group"</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-btn"</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"btn-play"</span><span class="punctuation">&gt;</span>Play<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-btn"</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"btn-start"</span><span class="punctuation">&gt;</span>Jump to Start<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-btn"</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"btn-middle"</span><span class="punctuation">&gt;</span>Jump to Middle<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-btn"</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"btn-end"</span><span class="punctuation">&gt;</span>Jump to End<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">section</span><span class="punctuation">&gt;</span></code></pre>
+        </div>
+      </div>
+
+      <h3>CSS</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">CSS</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="property">.demo-box</span> {
+  <span class="property">width</span>: <span class="number">100px</span>;
+  <span class="property">height</span>: <span class="number">100px</span>;
+  <span class="property">background</span>: <span class="number">#ff6b35</span>;
+  <span class="property">border-radius</span>: <span class="number">12px</span>;
+  <span class="property">box-shadow</span>: <span class="number">0 0 30px rgba(255, 107, 53, 0.5)</span>;
+}
+
+<span class="property">.demo-btn</span> {
+  <span class="property">padding</span>: <span class="number">0.75rem 1.5rem</span>;
+  <span class="property">background</span>: <span class="number">#252542</span>;
+  <span class="property">border</span>: <span class="number">1px solid #2a2a3e</span>;
+  <span class="property">border-radius</span>: <span class="number">8px</span>;
+  <span class="property">color</span>: <span class="number">#ffffff</span>;
+  <span class="property">cursor</span>: <span class="number">pointer</span>;
+}
+
+<span class="property">.demo-btn:hover</span> {
+  <span class="property">background</span>: <span class="number">#3a3a4e</span>;
+  <span class="property">border-color</span>: <span class="number">#ff6b35</span>;
+}</code></pre>
+        </div>
+      </div>
+
+      <h3>JavaScript</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">JavaScript</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+
+<span class="keyword">const</span> box = document.<span class="method">querySelector</span>(<span class="string">'.demo-box'</span>);
+<span class="keyword">const</span> tl = gsap.<span class="method">timeline</span>({ <span class="property">paused</span>: <span class="number">true</span> });
+
+<span class="comment">// Add animations and labels to mark sections</span>
+tl.<span class="method">to</span>(box, { <span class="property">x</span>: <span class="number">200</span>, <span class="property">duration</span>: <span class="number">1</span> })
+  .<span class="method">addLabel</span>(<span class="string">'middle'</span>)
+  .<span class="method">to</span>(box, { <span class="property">scale</span>: <span class="number">1.5</span>, <span class="property">duration</span>: <span class="number">1</span> })
+  .<span class="method">addLabel</span>(<span class="string">'end'</span>)
+  .<span class="method">to</span>(box, { <span class="property">rotation</span>: <span class="number">360</span>, <span class="property">duration</span>: <span class="number">1</span> });
+
+<span class="comment">// Button controls</span>
+document.<span class="method">querySelector</span>(<span class="string">'#btn-play'</span>).<span class="method">onclick</span> = () => tl.<span class="method">play</span>();
+document.<span class="method">querySelector</span>(<span class="string">'#btn-start'</span>).<span class="method">onclick</span> = () => tl.<span class="method">seek</span>(<span class="number">0</span>);
+document.<span class="method">querySelector</span>(<span class="string">'#btn-middle'</span>).<span class="method">onclick</span> = () => tl.<span class="method">seek</span>(<span class="string">'middle'</span>);
+document.<span class="method">querySelector</span>(<span class="string">'#btn-end'</span>).<span class="method">onclick</span> = () => tl.<span class="method">seek</span>(<span class="string">'end'</span>);</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--explanation">
+    <div class="container">
+      <h2>How It Works</h2>
+      <p><strong>Labels</strong> are named markers you place on a timeline. They help you organize animations into sections and navigate to specific points in time.</p>
+
+      <div class="info-box">
+        <div class="info-box__title">Key Methods</div>
+        <p class="info-box__content">
+          <code>.addLabel('name')</code> - Create a label at current position<br>
+          <code>.seek('labelName')</code> - Jump to a specific label
+        </p>
+      </div>
+
+      <h3>Why Use Labels?</h3>
+      <ul>
+        <li>Organize code into named sections (like chapters)</li>
+        <li>Navigate to specific moments without calculating times</li>
+        <li>Debug timelines more easily</li>
+        <li>Create reusable animation sequences</li>
+      </ul>
+
+      <h3>Timeline Position Methods</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.addLabel(name)</code></td>
+              <td>Add a named marker</td>
+            </tr>
+            <tr>
+              <td><code>.seek(position)</code></td>
+              <td>Jump to time or label</td>
+            </tr>
+            <tr>
+              <td><code>.getLabelTime(name)</code></td>
+              <td>Get time of a label</td>
+            </tr>
+            <tr>
+              <td><code>.currentLabel()</code></td>
+              <td>Get current label name</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Note</h3>
+      <p>In this demo, we used <code>paused: true</code> on the timeline so animations don't play immediately. Click the buttons to navigate!</p>
+    </div>
+  </section>
+
+  <section class="section--exercises">
+    <div class="container">
+      <h2>Try It Yourself</h2>
+      <p>Edit <code>/src/lessons/lesson-06.js</code> and experiment:</p>
+      <ul>
+        <li><strong>Add more labels:</strong> Create labels for each animation section</li>
+        <li><strong>Use seek with time:</strong> Try <code>tl.seek(0.5)</code> to jump to 0.5 seconds</li>
+        <li><strong>Console log:</strong> Add <code>console.log(tl.labels)</code> to see all labels</li>
+        <li><strong>Add more animations:</strong> Create a 5-step animation with 4 labels</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="container">
+    <nav class="nav-footer">
+      <a href="/src/lessons/lesson-05.html" class="nav-footer__link nav-footer__link--prev">
+        <span class="arrow">←</span> Previous
+      </a>
+      <a href="/src/lessons/lesson-07.html" class="nav-footer__link nav-footer__link--next">
+        Next <span class="arrow">→</span>
+      </a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-06.js"></script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 05 - gsap.timeline()</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <header class="nav-header">
+    <a href="/index.html" class="nav-header__back">← Back to Index</a>
+    <span class="nav-header__lesson">Lesson 05</span>
+  </header>
+
+  <section class="lesson-header">
+    <h1 class="lesson-header__title">gsap.timeline() - Sequencing Animations</h1>
+    <p class="lesson-header__subtitle">Chain multiple animations to play in perfect sequence</p>
+  </section>
+
+  <section class="section--demo">
+    <div class="timeline-demo">
+      <div class="timeline-box" data-box="1">1</div>
+      <div class="timeline-box" data-box="2">2</div>
+      <div class="timeline-box" data-box="3">3</div>
+      <div class="timeline-box" data-box="4">4</div>
+    </div>
+  </section>
+
+  <section class="section--code">
+    <div class="container">
+      <h2>The Code</h2>
+
+      <h3>HTML</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">HTML</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="punctuation">&lt;</span><span class="tag">section</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"section--demo"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"timeline-demo"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"timeline-box"</span> <span class="attr">data-box</span><span class="punctuation">=</span><span class="string">"1"</span><span class="punctuation">&gt;</span><span class="number">1</span><span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"timeline-box"</span> <span class="attr">data-box</span><span class="punctuation">=</span><span class="string">"2"</span><span class="punctuation">&gt;</span><span class="number">2</span><span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"timeline-box"</span> <span class="attr">data-box</span><span class="punctuation">=</span><span class="string">"3"</span><span class="punctuation">&gt;</span><span class="number">3</span><span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"timeline-box"</span> <span class="attr">data-box</span><span class="punctuation">=</span><span class="string">"4"</span><span class="punctuation">&gt;</span><span class="number">4</span><span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">section</span><span class="punctuation">&gt;</span></code></pre>
+        </div>
+      </div>
+
+      <h3>CSS</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">CSS</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="property">.timeline-demo</span> {
+  <span class="property">display</span>: <span class="number">flex</span>;
+  <span class="property">gap</span>: <span class="number">1.5rem</span>;
+  <span class="property">align-items</span>: <span class="number">flex-end</span>;
+}
+
+<span class="property">.timeline-box</span> {
+  <span class="property">width</span>: <span class="number">80px</span>;
+  <span class="property">height</span>: <span class="number">80px</span>;
+  <span class="property">border-radius</span>: <span class="number">12px</span>;
+  <span class="property">display</span>: <span class="number">flex</span>;
+  <span class="property">align-items</span>: <span class="number">center</span>;
+  <span class="property">justify-content</span>: <span class="number">center</span>;
+  <span class="property">font-size</span>: <span class="number">1.5rem</span>;
+  <span class="property">font-weight</span>: <span class="number">700</span>;
+  <span class="property">color</span>: <span class="number">white</span>;
+  <span class="property">opacity</span>: <span class="number">0</span>;
+}
+
+<span class="property">.timeline-box[data-box="1"]</span> {
+  <span class="property">background</span>: <span class="number">linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)</span>;
+  <span class="property">box-shadow</span>: <span class="number">0 0 30px rgba(255, 107, 53, 0.5)</span>;
+  <span class="property">transform</span>: <span class="number">translateX(-100px)</span>;
+}
+
+<span class="property">.timeline-box[data-box="2"]</span> {
+  <span class="property">background</span>: <span class="number">linear-gradient(135deg, #667eea 0%, #764ba2 100%)</span>;
+  <span class="property">box-shadow</span>: <span class="number">0 0 30px rgba(102, 126, 234, 0.5)</span>;
+  <span class="property">transform</span>: <span class="number">scale(0)</span>;
+}
+
+<span class="property">.timeline-box[data-box="3"]</span> {
+  <span class="property">background</span>: <span class="number">linear-gradient(135deg, #10b981 0%, #059669 100%)</span>;
+  <span class="property">box-shadow</span>: <span class="number">0 0 30px rgba(16, 185, 129, 0.5)</span>;
+  <span class="property">transform</span>: <span class="number">translateY(80px)</span>;
+}
+
+<span class="property">.timeline-box[data-box="4"]</span> {
+  <span class="property">background</span>: <span class="number">linear-gradient(135deg, #f59e0b 0%, #d97706 100%)</span>;
+  <span class="property">box-shadow</span>: <span class="number">0 0 30px rgba(245, 158, 11, 0.5)</span>;
+  <span class="property">transform</span>: <span class="number">scale(0)</span>;
+}</code></pre>
+        </div>
+      </div>
+
+      <h3>JavaScript</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">JavaScript</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+
+<span class="keyword">const</span> tl = gsap.<span class="method">timeline</span>();
+
+<span class="comment">// Box 1: Slides in from left + rotates</span>
+tl.<span class="method">to</span>(<span class="string">'[data-box="1"]'</span>, {
+  <span class="property">x</span>: <span class="number">0</span>,
+  <span class="property">opacity</span>: <span class="number">1</span>,
+  <span class="property">rotation</span>: <span class="number">360</span>,
+  <span class="property">duration</span>: <span class="number">0.5</span>,
+  <span class="property">ease</span>: <span class="string">"power2.out"</span>
+})
+
+<span class="comment">// Box 2: Scales up with bounce</span>
+  .<span class="method">to</span>(<span class="string">'[data-box="2"]'</span>, {
+    <span class="property">scale</span>: <span class="number">1</span>,
+    <span class="property">opacity</span>: <span class="number">1</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>,
+    <span class="property">ease</span>: <span class="string">"back.out(1.7)"</span>
+  })
+
+<span class="comment">// Box 3: Slides from bottom + spins</span>
+  .<span class="method">to</span>(<span class="string">'[data-box="3"]'</span>, {
+    <span class="property">y</span>: <span class="number">0</span>,
+    <span class="property">opacity</span>: <span class="number">1</span>,
+    <span class="property">rotation</span>: <span class="number">-360</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>,
+    <span class="property">ease</span>: <span class="string">"power2.out"</span>
+  })
+
+<span class="comment">// Box 4: Fades in last</span>
+  .<span class="method">to</span>(<span class="string">'[data-box="4"]'</span>, {
+    <span class="property">scale</span>: <span class="number">1</span>,
+    <span class="property">opacity</span>: <span class="number">1</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>,
+    <span class="property">ease</span>: <span class="string">"elastic.out(1, 0.5)"</span>
+  });</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--explanation">
+    <div class="container">
+      <h2>How It Works</h2>
+      <p>A <strong>Timeline</strong> is a container that holds multiple tweens and plays them in <strong>sequence</strong>. Each animation starts only when the previous one completes.</p>
+
+      <div class="info-box">
+        <div class="info-box__title">The Problem Without Timelines</div>
+        <p class="info-box__content">
+          If you write three separate <code>gsap.to()</code> calls, they all start at the same time! Timelines solve this by chaining animations sequentially.
+        </p>
+      </div>
+
+      <h3>Without Timeline (All Start Together)</h3>
+      <pre style="background: var(--bg-code); padding: 1rem; border-radius: 8px; font-family: var(--font-mono);">
+gsap.to(box1, { x: 100 });  // starts at 0s
+gsap.to(box2, { x: 100 });  // ALSO starts at 0s!
+gsap.to(box3, { x: 100 });  // ALSO starts at 0s!</pre>
+
+      <h3>With Timeline (Sequential)</h3>
+      <pre style="background: var(--bg-code); padding: 1rem; border-radius: 8px; font-family: var(--font-mono);">
+tl.to(box1, { x: 100 });    // starts at 0s, ends at 0.5s
+  .to(box2, { x: 100 });    // starts at 0.5s, ends at 1s
+  .to(box3, { x: 100 });    // starts at 1s, ends at 1.5s</pre>
+
+      <h3>Key Points</h3>
+      <ul>
+        <li>Create with <code>gsap.timeline()</code></li>
+        <li>Chain <code>.to()</code> calls on the timeline</li>
+        <li>Each animation starts when the previous ends</li>
+        <li>The timeline returns itself for method chaining</li>
+      </ul>
+
+      <h3>Timeline Methods</h3>
+      <p>Timelines return themselves, enabling method chaining:</p>
+      <ul>
+        <li><code>.to()</code> - Add animation to end of timeline</li>
+        <li><code>.from()</code> - Add from animation to end</li>
+        <li><code>.fromTo()</code> - Add fromTo animation to end</li>
+        <li><code>.add()</code> - Add a label, callback, or nested timeline</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section--exercises">
+    <div class="container">
+      <h2>Try It Yourself</h2>
+      <p>Edit <code>/src/lessons/lesson-05.js</code> and experiment:</p>
+      <ul>
+        <li><strong>Add more boxes:</strong> Create a 5th box and add it to the timeline</li>
+        <li><strong>Change durations:</strong> Make each animation different lengths</li>
+        <li><strong>Different easings:</strong> Try <code>"bounce.out"</code> or <code>"elastic.out"</code></li>
+        <li><strong>Different properties:</strong> Make each box do something different</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="container">
+    <nav class="nav-footer">
+      <a href="/src/lessons/lesson-04.html" class="nav-footer__link nav-footer__link--prev">
+        <span class="arrow">←</span> Previous
+      </a>
+      <a href="/src/lessons/lesson-06.html" class="nav-footer__link nav-footer__link--next">
+        Next <span class="arrow">→</span>
+      </a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-05.js"></script>
+</body>
+</html>

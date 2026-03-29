@@ -1,0 +1,95 @@
+/* ============================================================================
+   LESSON TEMPLATE STRUCTURE
+   ============================================================================
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson XX - [Title]</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <!-- Navigation Header -->
+  <header class="nav-header">
+    <a href="/index.html" class="nav-header__back">← Back to Index</a>
+    <span class="nav-header__lesson">Lesson XX</span>
+  </header>
+
+  <!-- Lesson Header -->
+  <section class="lesson-header">
+    <h1 class="lesson-header__title">Lesson XX: [Title]</h1>
+    <p class="lesson-header__subtitle">[Subtitle/Concept]</p>
+  </section>
+
+  <!-- Demo Section -->
+  <section class="section--demo">
+    <div class="demo-area">
+      <!-- Demo elements go here -->
+    </div>
+  </section>
+
+  <!-- Code Section -->
+  <section class="section--code">
+    <div class="container">
+      <h2>The Code</h2>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">JavaScript</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code>// Code here</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Explanation Section -->
+  <section class="section--explanation">
+    <div class="container">
+      <h2>How It Works</h2>
+      <p>Explanation text...</p>
+
+      <div class="info-box">
+        <div class="info-box__title">Key Point</div>
+        <p class="info-box__content">Important information...</p>
+      </div>
+
+      <h3>Syntax</h3>
+      <p>Syntax explanation...</p>
+
+      <h3>When to Use</h3>
+      <p>When to use this technique...</p>
+    </div>
+  </section>
+
+  <!-- Exercises Section -->
+  <section class="section--exercises">
+    <div class="container">
+      <h2>Try It Yourself</h2>
+      <ul>
+        <li>Exercise 1</li>
+        <li>Exercise 2</li>
+        <li>Exercise 3</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Navigation Footer -->
+  <footer class="container">
+    <nav class="nav-footer">
+      <a href="/src/lessons/lesson-XX.html" class="nav-footer__link nav-footer__link--prev">
+        <span class="arrow">←</span> Previous
+      </a>
+      <a href="/src/lessons/lesson-XX.html" class="nav-footer__link nav-footer__link--next">
+        Next <span class="arrow">→</span>
+      </a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-XX.js"></script>
+</body>
+</html>
+
+   ============================================================================ */
