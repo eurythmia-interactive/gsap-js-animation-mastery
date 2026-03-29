@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 08 - Text Animations</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-07.html" class="nav-link">← Previous</a>
+        <a href="lesson-09.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 08</span>
+        <span>Part 2: Advanced</span>
+      </div>
+
+      <h1>Text Animations</h1>
+      <p>Animate text with SplitText-style effects using GSAP's text utilities.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo</span>
+        </div>
+        <div class="demo-container" id="demo" style="flex-direction: column; gap: 40px;">
+          <h2 class="split-text" id="title1" style="font-size: 2.5rem; background: linear-gradient(135deg, #00d4ff, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">GSAP MASTERY</h2>
+          <p class="split-text" id="title2" style="font-size: 1.25rem; color: var(--text-secondary);">Advanced Animation Techniques</p>
+        </div>
+        <div class="demo-controls">
+          <button class="demo-btn primary" id="animateBtn">Animate</button>
+          <button class="demo-btn" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>HTML</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="punctuation">&lt;</span><span class="tag">h2</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"split-text"</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"title1"</span><span class="punctuation">&gt;</span>GSAP MASTERY<span class="punctuation">&lt;/</span><span class="tag">h2</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"split-text"</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"title2"</span><span class="punctuation">&gt;</span>Advanced Animation<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>CSS</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">CSS</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="property">.char</span> {
+  <span class="property">display</span>: <span class="number">inline-block</span>;
+}
+
+<span class="property">.word</span> {
+  <span class="property">display</span>: <span class="number">inline-block</span>;
+  <span class="property">overflow</span>: <span class="number">hidden</span>;
+}
+
+<span class="property">.word span</span> {
+  <span class="property">display</span>: <span class="number">inline-block</span>;
+  <span class="property">transform</span>: <span class="number">translateY(100%)</span>;
+}</code></pre>
+          </div>
+        </div>
+
+        <h3>JavaScript</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">JavaScript</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+
+<span class="comment">// Split text into characters</span>
+<span class="keyword">function</span> <span class="method">splitChars</span>(element) {
+  <span class="keyword">const</span> text = element.<span class="property">textContent</span>;
+  element.<span class="property">innerHTML</span> = text.<span class="method">split</span>(<span class="string">''</span>).<span class="method">map</span>(char => 
+    <span class="string">`<span class="char"</span> style="opacity: 0; transform: translateY(20px);"</span><span class="string">></span>${char}<span class="string"></span></span>`
+  `).<span class="method">join</span>(<span class="string">''</span>);
+  <span class="keyword">return</span> element.<span class="method">querySelectorAll</span>(<span class="string">'.char'</span>);
+}
+
+<span class="keyword">function</span> <span class="method">splitWords</span>(element) {
+  <span class="keyword">const</span> text = element.<span class="property">textContent</span>;
+  element.<span class="property">innerHTML</span> = text.<span class="method">split</span>(<span class="string">' '</span>).<span class="method">map</span>(word => 
+    <span class="string">`<span class="word"><span></span>${word}</span></span>`
+  `).<span class="method">join</span>(<span class="string">' '</span>);
+  <span class="keyword">return</span> element.<span class="method">querySelectorAll</span>(<span class="string">'.word span'</span>);
+}
+
+<span class="keyword">const</span> tl = gsap.<span class="method">timeline</span>({ <span class="property">paused</span>: <span class="keyword">true</span> });
+
+<span class="comment">// Animate first title (chars)</span>
+<span class="keyword">const</span> chars1 = <span class="method">splitChars</span>(document.<span class="method">querySelector</span>(<span class="string">'#title1'</span>));
+tl.<span class="method">to</span>(chars1, {
+  <span class="property">opacity</span>: <span class="number">1</span>,
+  <span class="property">y</span>: <span class="number">0</span>,
+  <span class="property">duration</span>: <span class="number">0.5</span>,
+  <span class="property">stagger</span>: <span class="number">0.03</span>,
+  <span class="property">ease</span>: <span class="string">'power2.out'</span>
+}, <span class="number">0</span>);
+
+<span class="comment">// Animate second title (words)</span>
+<span class="keyword">const</span> words = <span class="method">splitWords</span>(document.<span class="method">querySelector</span>(<span class="string">'#title2'</span>));
+tl.<span class="method">to</span>(words, {
+  <span class="property">y</span>: <span class="number">0</span>,
+  <span class="property">duration</span>: <span class="number">0.6</span>,
+  <span class="property">stagger</span>: <span class="number">0.1</span>,
+  <span class="property">ease</span>: <span class="string">'power2.out'</span>
+}, <span class="number">0.3</span>);
+
+document.<span class="method">querySelector</span>(<span class="string">'#animateBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => tl.<span class="method">play</span>());
+document.<span class="method">querySelector</span>(<span class="string">'#resetBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => tl.<span class="method">restart</span>().<span class="method">pause</span>());</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+        <p>GSAP doesn't include SplitText in the free version, but you can create similar effects by manually splitting text into spans and animating them.</p>
+
+        <div class="concept">
+          <h3>Two Approaches</h3>
+          <ul>
+            <li><strong>Character split:</strong> Each letter animates individually - great for headlines</li>
+            <li><strong>Word split:</strong> Each word animates as a unit - cleaner for body text</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>GSAP Club Bonus</h3>
+          <p>If you have GSAP Club, you get access to SplitText which handles all this automatically!</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-07.html">← Previous</a>
+      <a href="lesson-09.html">Next →</a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-08.js"></script>
+</body>
+</html>

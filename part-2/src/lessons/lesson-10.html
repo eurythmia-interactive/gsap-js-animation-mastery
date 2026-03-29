@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10 - Draggable Rotation</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-09.html" class="nav-link">← Previous</a>
+        <a href="lesson-11.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 10</span>
+        <span>Part 2: Advanced</span>
+      </div>
+
+      <h1>Draggable Rotation</h1>
+      <p>Use Draggable to create rotation-based interactions.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Drag to Rotate</span>
+        </div>
+        <div class="demo-container" id="demo">
+          <div class="draggable-box demo-box" id="throwBox" style="background: linear-gradient(135deg, #00d4ff, #8b5cf6); left: 160px; top: 60px;"></div>
+        </div>
+        <div class="demo-controls">
+          <button class="demo-btn" id="resetBtn">Reset Rotation</button>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>JavaScript</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">JavaScript</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+<span class="keyword">import</span> { Draggable } <span class="keyword">from</span> <span class="string">'gsap/Draggable'</span>;
+
+gsap.<span class="method">registerPlugin</span>(Draggable);
+
+<span class="keyword">const</span> box = document.<span class="method">querySelector</span>(<span class="string">'#throwBox'</span>);
+<span class="keyword">const</span> demo = document.<span class="method">querySelector</span>(<span class="string">'#demo'</span>);
+
+Draggable.<span class="method">create</span>(box, {
+  <span class="property">type</span>: <span class="string">'x,y'</span>,
+  <span class="property">bounds</span>: demo,
+  <span class="property">onDrag</span>: <span class="keyword">function</span>() {
+    gsap.<span class="method">to</span>(box, {
+      <span class="property">rotation</span>: <span class="string">'-=2'</span>,
+      <span class="property">duration</span>: <span class="number">0.1</span>,
+      <span class="property">overwrite</span>: <span class="keyword">true</span>
+    });
+  },
+  <span class="property">onDragEnd</span>: <span class="keyword">function</span>() {
+    gsap.<span class="method">to</span>(box, {
+      <span class="property">rotation</span>: <span class="string">'-=30'</span>,
+      <span class="property">duration</span>: <span class="number">0.5</span>,
+      <span class="property">ease</span>: <span class="string">'elastic.out(1, 0.5)'</span>
+    });
+  }
+});
+
+document.<span class="method">querySelector</span>(<span class="string">'#resetBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  gsap.<span class="method">to</span>(box, {
+    <span class="property">rotation</span>: <span class="number">0</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>,
+    <span class="property">ease</span>: <span class="string">'power2.out'</span>
+  });
+});</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+        <p>Draggable tracks the movement of elements and provides callbacks for drag events. Combine with GSAP for smooth animations.</p>
+
+        <div class="concept">
+          <h3>Key Callbacks</h3>
+          <ul>
+            <li><code>onDragStart</code> - Called when drag begins</li>
+            <li><code>onDrag</code> - Called every frame during drag</li>
+            <li><code>onDragEnd</code> - Called when drag ends</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>GSAP Club Bonus</h3>
+          <p>InertiaPlugin (Club bonus) adds physics-based momentum - elements "throw" with realistic coasting!</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-09.html">← Previous</a>
+      <a href="lesson-11.html">Next →</a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-10.js"></script>
+</body>
+</html>

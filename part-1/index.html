@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP Fundamentals Course</title>
+  <link rel="stylesheet" href="./src/style.css">
+  <style>
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .top-nav__link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .top-nav__link:hover {
+      color: var(--accent);
+    }
+
+    .top-nav__part-badge {
+      padding: 0.25rem 0.75rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .top-nav__other {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .top-nav__other a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .top-nav__other a:hover {
+      color: var(--accent-secondary);
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="/" class="top-nav__link">
+      <span>←</span>
+      <span>GSAP Mastery</span>
+    </a>
+    <span class="top-nav__part-badge">Part 1: Fundamentals</span>
+    <div class="top-nav__other">
+      <a href="/part-2/index.html">Part 2: Advanced →</a>
+    </div>
+  </nav>
+
+  <main class="course-index" style="padding-top: 80px;">
+    <header class="course-index__header">
+      <h1 class="course-index__title">GSAP Fundamentals</h1>
+      <p class="course-index__subtitle">15 lessons to master web animation</p>
+    </header>
+
+    <nav class="lesson-list">
+      <a href="./src/lessons/lesson-01.html" class="lesson-link">
+        <span class="lesson-link__number">01</span>
+        <span class="lesson-link__title">gsap.to()</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-02.html" class="lesson-link">
+        <span class="lesson-link__number">02</span>
+        <span class="lesson-link__title">gsap.fromTo()</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-03.html" class="lesson-link">
+        <span class="lesson-link__number">03</span>
+        <span class="lesson-link__title">gsap.fromTo() - Y Axis</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-04.html" class="lesson-link">
+        <span class="lesson-link__number">04</span>
+        <span class="lesson-link__title">gsap.set()</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-05.html" class="lesson-link">
+        <span class="lesson-link__number">05</span>
+        <span class="lesson-link__title">gsap.timeline()</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-06.html" class="lesson-link">
+        <span class="lesson-link__number">06</span>
+        <span class="lesson-link__title">Timeline Labels</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-07.html" class="lesson-link">
+        <span class="lesson-link__number">07</span>
+        <span class="lesson-link__title">Timeline Nesting</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-08.html" class="lesson-link">
+        <span class="lesson-link__number">08</span>
+        <span class="lesson-link__title">Stagger</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-09.html" class="lesson-link">
+        <span class="lesson-link__number">09</span>
+        <span class="lesson-link__title">Easing Deep Dive</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-10.html" class="lesson-link">
+        <span class="lesson-link__number">10</span>
+        <span class="lesson-link__title">Multiple Targets</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-11.html" class="lesson-link">
+        <span class="lesson-link__number">11</span>
+        <span class="lesson-link__title">Callbacks</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-12.html" class="lesson-link">
+        <span class="lesson-link__number">12</span>
+        <span class="lesson-link__title">Control Methods</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-13.html" class="lesson-link">
+        <span class="lesson-link__number">13</span>
+        <span class="lesson-link__title">Mouse Interactions</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-14.html" class="lesson-link">
+        <span class="lesson-link__number">14</span>
+        <span class="lesson-link__title">Repeat & Yoyo</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+
+      <a href="./src/lessons/lesson-15.html" class="lesson-link">
+        <span class="lesson-link__number">15</span>
+        <span class="lesson-link__title">ScrollTrigger</span>
+        <span class="lesson-link__arrow">→</span>
+      </a>
+    </nav>
+  </main>
+</body>
+</html>

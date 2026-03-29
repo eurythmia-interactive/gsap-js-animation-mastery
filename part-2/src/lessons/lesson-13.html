@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 13 - Timelines Best Practices</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-12.html" class="nav-link">← Previous</a>
+        <a href="lesson-14.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 13</span>
+        <span>Part 2: Advanced</span>
+      </div>
+
+      <h1>Timelines Best Practices</h1>
+      <p>Structure complex animations with master timelines and nested sequences.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Choreographed Animation</span>
+        </div>
+        <div class="demo-container" id="demo">
+          <div class="demo-box" id="box1" style="background: #00d4ff; left: 20px;"></div>
+          <div class="demo-box" id="box2" style="background: #8b5cf6; left: 120px;"></div>
+          <div class="demo-box" id="box3" style="background: #ec4899; left: 220px;"></div>
+        </div>
+        <div class="demo-controls">
+          <button class="demo-btn primary" id="playBtn">Play Sequence</button>
+          <button class="demo-btn" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>JavaScript</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">JavaScript</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+
+<span class="keyword">const</span> boxes = [
+  document.<span class="method">querySelector</span>(<span class="string">'#box1'</span>),
+  document.<span class="method">querySelector</span>(<span class="string">'#box2'</span>),
+  document.<span class="method">querySelector</span>(<span class="string">'#box3'</span>)
+];
+
+<span class="comment">// Master timeline with nested sequences</span>
+<span class="keyword">const</span> master = gsap.<span class="method">timeline</span>({ <span class="property">paused</span>: <span class="keyword">true</span> });
+
+<span class="comment">// Step 1: Fade in boxes sequentially</span>
+master.<span class="method">to</span>(boxes, {
+  <span class="property">opacity</span>: <span class="number">1</span>,
+  <span class="property">stagger</span>: <span class="number">0.2</span>,
+  <span class="property">duration</span>: <span class="number">0.5</span>
+});
+
+<span class="comment">// Step 2: Bounce effect</span>
+master.<span class="method">to</span>(boxes, {
+  <span class="property">y</span>: -<span class="number">30</span>,
+  <span class="property">duration</span>: <span class="number">0.3</span>,
+  <span class="property">stagger</span>: <span class="number">0.1</span>,
+  <span class="property">ease</span>: <span class="string">'power2.out'</span>
+}, <span class="string">'-=0.2'</span>);
+
+master.<span class="method">to</span>(boxes, {
+  <span class="property">y</span>: <span class="number">0</span>,
+  <span class="property">duration</span>: <span class="number">0.4</span>,
+  <span class="property">stagger</span>: <span class="number">0.1</span>,
+  <span class="property">ease</span>: <span class="string">'bounce.out'</span>
+});
+
+document.<span class="method">querySelector</span>(<span class="string">'#playBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => master.<span class="method">play</span>());
+document.<span class="method">querySelector</span>(<span class="string">'#resetBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  master.<span class="method">restart</span>().<span class="method">pause</span>();
+  gsap.<span class="method">set</span>(boxes, { <span class="property">opacity</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">0</span> });
+});</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+        <p>Timelines are the backbone of complex animations. Use labels and relative positioning to choreograph multi-step sequences.</p>
+
+        <div class="concept">
+          <h3>Best Practices</h3>
+          <ul>
+            <li><strong>Nested timelines:</strong> Break complex animations into reusable pieces</li>
+            <li><strong>Relative positioning:</strong> Use <code>+=</code> or <code>-=</code> to position relative to end</li>
+            <li><strong>Labels:</strong> Name important points with <code>.addLabel()</code></li>
+            <li><strong>Call callbacks:</strong> Use <code>.call()</code> for side effects</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Position Parameter</h3>
+          <p>The 3rd parameter in <code>.to()</code> controls timing. Use numbers for absolute time, strings like <code>'-=0.5'</code> for relative.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-12.html">← Previous</a>
+      <a href="lesson-14.html">Next →</a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-13.js"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 15 - ScrollTrigger</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="nav-header">
+    <a href="../index.html" class="nav-header__back">← Back to Index</a>
+    <span class="nav-header__lesson">Lesson 15</span>
+  </header>
+
+  <section class="lesson-header">
+    <h1 class="lesson-header__title">ScrollTrigger</h1>
+    <p class="lesson-header__subtitle">Create animations that respond to scroll position</p>
+  </section>
+
+  <section class="scroll-demo-section">
+    <div class="scroll-demo-item">
+      <div class="scroll-demo-number">01</div>
+      <div class="scroll-demo-content">
+        <h2 class="scroll-demo-title">Section One</h2>
+        <p class="scroll-demo-text">Scroll down to see animations trigger as each section comes into view</p>
+      </div>
+    </div>
+
+    <div class="scroll-demo-item">
+      <div class="scroll-demo-number">02</div>
+      <div class="scroll-demo-content">
+        <h2 class="scroll-demo-title">Section Two</h2>
+        <p class="scroll-demo-text">Each section animates in when you scroll to it</p>
+      </div>
+    </div>
+
+    <div class="scroll-demo-item">
+      <div class="scroll-demo-number">03</div>
+      <div class="scroll-demo-content">
+        <h2 class="scroll-demo-title">Section Three</h2>
+        <p class="scroll-demo-text">ScrollTrigger makes scroll-driven animation easy!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--code">
+    <div class="container">
+      <h2>The Code</h2>
+
+      <h3>HTML</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">HTML</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="punctuation">&lt;</span><span class="tag">section</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-section"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-item"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-number"</span><span class="punctuation">&gt;</span>01<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-content"</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">h2</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-title"</span><span class="punctuation">&gt;</span>Section One<span class="punctuation">&lt;/</span><span class="tag">h2</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-text"</span><span class="punctuation">&gt;</span>Scroll down to see animations trigger as each section comes into view<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-item"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-number"</span><span class="punctuation">&gt;</span>02<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-content"</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">h2</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-title"</span><span class="punctuation">&gt;</span>Section Two<span class="punctuation">&lt;/</span><span class="tag">h2</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-text"</span><span class="punctuation">&gt;</span>Each section animates in when you scroll to it<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-item"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-number"</span><span class="punctuation">&gt;</span>03<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-content"</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">h2</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-title"</span><span class="punctuation">&gt;</span>Section Three<span class="punctuation">&lt;/</span><span class="tag">h2</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"scroll-demo-text"</span><span class="punctuation">&gt;</span>ScrollTrigger makes scroll-driven animation easy!<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">section</span><span class="punctuation">&gt;</span></code></pre>
+        </div>
+      </div>
+
+      <h3>CSS</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">CSS</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="property">.scroll-demo-section</span> {
+  <span class="property">padding</span>: <span class="number">6rem 2rem</span>;
+  <span class="property">display</span>: <span class="number">flex</span>;
+  <span class="property">flex-direction</span>: <span class="number">column</span>;
+  <span class="property">gap</span>: <span class="number">4rem</span>;
+  <span class="property">background</span>: <span class="number">linear-gradient(180deg, #1a1a2e 0%, #16213e 100%)</span>;
+  <span class="property">min-height</span>: <span class="number">150vh</span>;
+}
+
+<span class="property">.scroll-demo-item</span> {
+  <span class="property">display</span>: <span class="number">flex</span>;
+  <span class="property">align-items</span>: <span class="number">flex-start</span>;
+  <span class="property">gap</span>: <span class="number">2rem</span>;
+  <span class="property">padding</span>: <span class="number">2rem</span>;
+  <span class="property">background</span>: <span class="number">#252542</span>;
+  <span class="property">border</span>: <span class="number">1px solid #2a2a3e</span>;
+  <span class="property">border-radius</span>: <span class="number">12px</span>;
+  <span class="property">max-width</span>: <span class="number">600px</span>;
+  <span class="property">margin</span>: <span class="number">0 auto</span>;
+}
+
+<span class="property">.scroll-demo-number</span> {
+  <span class="property">font-size</span>: <span class="number">2rem</span>;
+  <span class="property">font-weight</span>: <span class="number">700</span>;
+  <span class="property">color</span>: <span class="number">#ff6b35</span>;
+  <span class="property">min-width</span>: <span class="number">60px</span>;
+}</code></pre>
+        </div>
+      </div>
+
+      <h3>JavaScript</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">JavaScript</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+<span class="keyword">import</span> { ScrollTrigger } <span class="keyword">from</span> <span class="string">'gsap/ScrollTrigger'</span>;
+
+gsap.<span class="method">registerPlugin</span>(ScrollTrigger);
+
+<span class="comment">// Animate each section item when it scrolls into view</span>
+gsap.<span class="method">from</span>(<span class="string">'.scroll-demo-item'</span>, {
+  <span class="property">opacity</span>: <span class="number">0</span>,
+  <span class="property">y</span>: <span class="number">100</span>,
+  <span class="property">duration</span>: <span class="number">1</span>,
+  <span class="property">ease</span>: <span class="string">"power2.out"</span>,
+  <span class="property">stagger</span>: <span class="number">0.3</span>,
+  <span class="property">scrollTrigger</span>: {
+    <span class="property">trigger</span>: <span class="string">'.scroll-demo-section'</span>,
+    <span class="property">start</span>: <span class="string">"top top"</span>,
+    <span class="property">end</span>: <span class="string">"bottom top"</span>,
+    <span class="property">scrub</span>: <span class="number">false</span>,
+    <span class="property">toggleActions</span>: <span class="string">'play none none reverse'</span>
+  }
+});</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--explanation">
+    <div class="container">
+      <h2>How It Works</h2>
+      <p><strong>ScrollTrigger</strong> is GSAP's most powerful plugin. It links animations to scroll position, enabling parallax effects, scroll-driven storytelling, and reveal animations.</p>
+
+      <div class="info-box">
+        <div class="info-box__title">Key Concepts</div>
+        <p class="info-box__content">
+          <strong>trigger</strong> - The element that activates the animation<br>
+          <strong>start/end</strong> - When to start/end relative to viewport<br>
+          <strong>scrub</strong> - Link animation to scroll (true) or trigger once (false)
+        </p>
+      </div>
+
+      <h3>ScrollTrigger Options</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Description</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>trigger</code></td>
+              <td>Element that triggers animation</td>
+              <td><code>'.section'</code></td>
+            </tr>
+            <tr>
+              <td><code>start</code></td>
+              <td>When to start (element, viewport)</td>
+              <td><code>'top 80%'</code></td>
+            </tr>
+            <tr>
+              <td><code>end</code></td>
+              <td>When to end</td>
+              <td><code>'top 50%'</code></td>
+            </tr>
+            <tr>
+              <td><code>scrub</code></td>
+              <td>Link to scroll (true) or trigger once</td>
+              <td><code>true</code> or <code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>toggleActions</code></td>
+              <td>What happens at start/end</td>
+              <td><code>'play none none reverse'</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Toggle Actions</h3>
+      <p>Four actions for four states: <code>onEnter</code>, <code>onLeave</code>, <code>onEnterBack</code>, <code>onLeaveBack</code></p>
+      <ul>
+        <li><strong>play</strong> - Start animation</li>
+        <li><strong>pause</strong> - Pause animation</li>
+        <li><strong>reverse</strong> - Play backwards</li>
+        <li><strong>reset</strong> - Jump to start</li>
+        <li><strong>none</strong> - Do nothing</li>
+      </ul>
+
+      <h3>Common Patterns</h3>
+      <ul>
+        <li><strong>Reveal on scroll:</strong> <code>scrub: false</code>, <code>toggleActions: 'play none none reverse'</code></li>
+        <li><strong>Parallax:</strong> <code>scrub: true</code> with y-axis movement</li>
+        <li><strong>Progress bar:</strong> <code>scrub: true</code> with scaleX</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section--exercises">
+    <div class="container">
+      <h2>Try It Yourself</h2>
+      <p>Edit <code>/src/lessons/lesson-15.js</code> and experiment:</p>
+      <ul>
+        <li><strong>Show markers:</strong> Add <code>markers: true</code> to see trigger points</li>
+        <li><strong>Change start position:</strong> Try <code>'top top'</code> or <code>'center center'</code></li>
+        <li><strong>Different stagger:</strong> Try <code>stagger: 0.5</code> for slower cascade</li>
+        <li><strong>Add rotation:</strong> Include <code>rotation: -10</code> in the animation</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="container">
+    <nav class="nav-footer">
+      <a href="./lesson-14.html" class="nav-footer__link nav-footer__link--prev">
+        <span class="arrow">←</span> Previous
+      </a>
+      <span class="nav-footer__link" style="opacity: 0.5; cursor: default;">
+        Next <span class="arrow">→</span>
+      </span>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-15.js"></script>
+</body>
+</html>

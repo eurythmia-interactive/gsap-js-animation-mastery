@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 15 - Combo Project</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-14.html" class="nav-link">← Previous</a>
+        <span class="nav-link disabled">Next →</span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 15</span>
+        <span>Part 2: Advanced</span>
+      </div>
+
+      <h1>Combo Project: Interactive Portfolio</h1>
+      <p>Put it all together! This project combines Draggable, Flip, ScrollTrigger, and timelines.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Drag & Reorder Cards</span>
+        </div>
+        <div class="demo-container" id="demo" style="height: 400px; padding: 20px;">
+          <div class="portfolio-grid" id="portfolioGrid">
+            <div class="portfolio-card" data-id="1">
+              <div class="portfolio-card__image" style="background: linear-gradient(135deg, #00d4ff, #8b5cf6);"></div>
+              <div class="portfolio-card__content">
+                <h3>Project Alpha</h3>
+                <p>Interactive UI</p>
+              </div>
+            </div>
+            <div class="portfolio-card" data-id="2">
+              <div class="portfolio-card__image" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);"></div>
+              <div class="portfolio-card__content">
+                <h3>Project Beta</h3>
+                <p>Animation System</p>
+              </div>
+            </div>
+            <div class="portfolio-card" data-id="3">
+              <div class="portfolio-card__image" style="background: linear-gradient(135deg, #10b981, #8b5cf6);"></div>
+              <div class="portfolio-card__content">
+                <h3>Project Gamma</h3>
+                <p>Scroll Experience</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-controls">
+          <button class="demo-btn primary" id="animateBtn">Animate All</button>
+          <button class="demo-btn" id="resetBtn">Reset Order</button>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>JavaScript</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">JavaScript</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+<span class="keyword">import</span> { ScrollTrigger } <span class="keyword">from</span> <span class="string">'gsap/ScrollTrigger'</span>;
+<span class="keyword">import</span> { Draggable } <span class="keyword">from</span> <span class="string">'gsap/Draggable'</span>;
+<span class="keyword">import</span> { Flip } <span class="keyword">from</span> <span class="string">'gsap/Flip'</span>;
+
+gsap.<span class="method">registerPlugin</span>(ScrollTrigger, Draggable, Flip);
+
+<span class="keyword">const</span> grid = document.<span class="method">querySelector</span>(<span class="string">'#portfolioGrid'</span>);
+<span class="keyword">const</span> cards = document.<span class="method">querySelectorAll</span>(<span class="string">'.portfolio-card'</span>);
+<span class="keyword">let</span> draggables = [];
+
+<span class="comment">// Make cards draggable</span>
+cards.<span class="method">forEach</span>(card => {
+  <span class="keyword">const</span> drag = Draggable.<span class="method">create</span>(card, {
+    <span class="property">type</span>: <span class="string">'x,y'</span>,
+    <span class="property">bounds</span>: grid,
+    <span class="property">onDragEnd</span>: <span class="keyword">function</span>() {
+      reorderCards(<span class="keyword">this</span>.<span class="property">target</span>);
+    }
+  });
+  draggables.<span class="method">push</span>(drag[<span class="number">0</span>]);
+});
+
+<span class="comment">// Flip animation when reordering</span>
+<span class="keyword">function</span> <span class="method">reorderCards</span>(draggedCard) {
+  <span class="keyword">const</span> state = Flip.<span class="method">getState</span>(cards);
+  
+  <span class="comment">// Find insertion point based on position</span>
+  <span class="keyword">const</span> cardArray = Array.<span class="method">from</span>(cards);
+  <span class="keyword">const</span> rect = draggedCard.<span class="method">getBoundingClientRect</span>();
+  <span class="keyword">const</span> centerY = rect.<span class="property">top</span> + rect.<span class="property">height</span> / <span class="number">2</span>;
+  
+  <span class="keyword">let</span> insertBefore = <span class="keyword">null</span>;
+  cardArray.<span class="method">forEach</span>(card => {
+    <span class="keyword">if</span> (card !== draggedCard) {
+      <span class="keyword">const</span> r = card.<span class="method">getBoundingClientRect</span>();
+      <span class="keyword">if</span> (centerY > r.<span class="property">top</span> + r.<span class="property">height</span> / <span class="number">2</span>) {
+        insertBefore = card;
+      }
+    }
+  });
+  
+  <span class="keyword">if</span> (insertBefore) {
+    grid.<span class="method">insertBefore</span>(draggedCard, insertBefore);
+  } <span class="keyword">else</span> {
+    grid.<span class="method">appendChild</span>(draggedCard);
+  }
+  
+  Flip.<span class="method">from</span>(state, { <span class="property">duration</span>: <span class="number">0.5</span>, <span class="property">stagger</span>: <span class="number">0.05</span> });
+}
+
+<span class="comment">// Scroll-triggered entrance animation</span>
+gsap.<span class="method">from</span>(cards, {
+  <span class="property">opacity</span>: <span class="number">0</span>,
+  <span class="property">y</span>: <span class="number">50</span>,
+  <span class="property">stagger</span>: <span class="number">0.15</span>,
+  <span class="property">duration</span>: <span class="number">0.8</span>,
+  <span class="property">ease</span>: <span class="string">'power2.out'</span>,
+  <span class="property">scrollTrigger</span>: {
+    <span class="property">trigger</span>: grid,
+    <span class="property">start</span>: <span class="string">'top 80%'</span>
+  }
+});</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+        <p>This combo project demonstrates how GSAP plugins work together to create rich interactive experiences.</p>
+
+        <div class="concept">
+          <h3>Plugins Used</h3>
+          <ul>
+            <li><strong>Draggable:</strong> Makes cards draggable with bounds</li>
+            <li><strong>Flip:</strong> Smooth reordering animations</li>
+            <li><strong>ScrollTrigger:</strong> Entrance animations on scroll</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Combining Plugins</h3>
+          <p>GSAP's plugins are designed to work together. Draggable handles user input, Flip animates state changes, and ScrollTrigger adds scroll-based triggers.</p>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header">
+            <span class="exercise-icon">🎯</span>
+            <h3>Challenge</h3>
+          </div>
+          <p>Extend this project:</p>
+          <ul>
+            <li>Add click-to-expand card detail view</li>
+            <li>Add a delete animation when cards are removed</li>
+            <li>Add keyboard navigation (arrow keys to reorder)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-14.html">← Previous</a>
+      <span style="opacity: 0.5;">Next →</span>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-15.js"></script>
+</body>
+</html>

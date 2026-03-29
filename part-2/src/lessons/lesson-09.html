@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 09 - SVG Transforms</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-08.html" class="nav-link">← Previous</a>
+        <a href="lesson-10.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 09</span>
+        <span>Part 2: Advanced</span>
+      </div>
+
+      <h1>SVG Transforms</h1>
+      <p>Animate SVG elements with transforms for scaling, rotation, and more.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - SVG Shape Animation</span>
+        </div>
+        <div class="demo-container" id="demo">
+          <svg viewBox="0 0 100 100" width="200" height="200">
+            <path id="morphPath" fill="url(#grad)" d="M 50,10 A 40,40 0 1,1 49.99,10" />
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#00d4ff" />
+                <stop offset="100%" style="stop-color:#8b5cf6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="demo-controls">
+          <button class="demo-btn primary" id="morphBtn">Scale</button>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>HTML</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="punctuation">&lt;</span><span class="tag">svg</span> <span class="attr">viewBox</span><span class="punctuation">=</span><span class="string">"0 0 100 100"</span> <span class="attr">width</span><span class="punctuation">=</span><span class="string">"200"</span> <span class="attr">height</span><span class="punctuation">=</span><span class="string">"200"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">path</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"morphPath"</span> <span class="attr">d</span><span class="punctuation">=</span><span class="string">"M 50,10 A 40,40 0 1,1 49.99,10"</span> <span class="punctuation">/&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">svg</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>JavaScript</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">JavaScript</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+
+<span class="keyword">const</span> path = document.<span class="method">querySelector</span>(<span class="string">'#morphPath'</span>);
+
+<span class="keyword">let</span> isExpanded = <span class="keyword">true</span>;
+
+document.<span class="method">querySelector</span>(<span class="string">'#morphBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  <span class="keyword">if</span> (isExpanded) {
+    gsap.<span class="method">to</span>(path, {
+      <span class="property">scaleX</span>: <span class="number">1.3</span>,
+      <span class="property">scaleY</span>: <span class="number">0.7</span>,
+      <span class="property">transformOrigin</span>: <span class="string">'50% 50%'</span>,
+      <span class="property">duration</span>: <span class="number">1</span>,
+      <span class="property">ease</span>: <span class="string">'power2.inOut'</span>
+    });
+  } <span class="keyword">else</span> {
+    gsap.<span class="method">to</span>(path, {
+      <span class="property">scaleX</span>: <span class="number">1</span>,
+      <span class="property">scaleY</span>: <span class="number">1</span>,
+      <span class="property">duration</span>: <span class="number">1</span>,
+      <span class="property">ease</span>: <span class="string">'power2.inOut'</span>
+    });
+  }
+  isExpanded = !isExpanded;
+});</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+        <p>SVG elements can be animated just like HTML elements using GSAP. Use <code>transformOrigin</code> to control the pivot point.</p>
+
+        <div class="concept">
+          <h3>SVG Transform Tips</h3>
+          <ul>
+            <li><code>transformOrigin: '50% 50%'</code> - Center of the SVG</li>
+            <li><code>transformOrigin: '0% 0%'</code> - Top-left corner</li>
+            <li>Use <code>scaleX</code>, <code>scaleY</code> for independent scaling</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>GSAP Club Bonus</h3>
+          <p>MorphSVG (Club bonus) can smoothly morph between completely different path shapes, even with different point counts!</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-08.html">← Previous</a>
+      <a href="lesson-10.html">Next →</a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-09.js"></script>
+</body>
+</html>

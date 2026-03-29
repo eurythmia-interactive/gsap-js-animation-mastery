@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 14 - ScrollTrigger Callbacks</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-back">← Back to Index</span>
+      <div class="nav-links">
+        <a href="lesson-13.html" class="nav-link">← Previous</a>
+        <a href="lesson-15.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 14</span>
+        <span>Part 2: Advanced</span>
+      </div>
+
+      <h1>ScrollTrigger Callbacks</h1>
+      <p>Use ScrollTrigger callbacks to trigger actions at specific scroll positions.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Progress Indicator</span>
+          <span id="progressText" style="color: var(--accent);">0%</span>
+        </div>
+        <div class="demo-container" id="demo" style="height: 400px;">
+          <div class="demo-box" id="indicator" style="background: linear-gradient(135deg, #00d4ff, #8b5cf6); width: 60px; height: 60px; border-radius: 50%;"></div>
+          <div class="progress-bar" id="progressBar" style="position: absolute; bottom: 40px; left: 20px; right: 20px; width: auto;">
+            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+          </div>
+        </div>
+        <div class="demo-controls">
+          <div class="progress-bar" style="width: 200px;">
+            <div class="progress-fill" id="scrollProgress" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>JavaScript</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">JavaScript</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+<span class="keyword">import</span> { ScrollTrigger } <span class="keyword">from</span> <span class="string">'gsap/ScrollTrigger'</span>;
+
+gsap.<span class="method">registerPlugin</span>(ScrollTrigger);
+
+<span class="keyword">const</span> indicator = document.<span class="method">querySelector</span>(<span class="string">'#indicator'</span>);
+<span class="keyword">const</span> progressFill = document.<span class="method">querySelector</span>(<span class="string">'#progressFill'</span>);
+<span class="keyword">const</span> progressText = document.<span class="method">querySelector</span>(<span class="string">'#progressText'</span>);
+
+<span class="comment">// Bounce the indicator on enter</span>
+gsap.<span class="method">fromTo</span>(indicator, 
+  { <span class="property">scale</span>: <span class="number">0</span>, <span class="property">opacity</span>: <span class="number">0</span> },
+  {
+    <span class="property">scale</span>: <span class="number">1</span>,
+    <span class="property">opacity</span>: <span class="number">1</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>,
+    <span class="property">ease</span>: <span class="string">'back.out'</span>,
+    <span class="property">scrollTrigger</span>: {
+      <span class="property">trigger</span>: <span class="string">'#demo'</span>,
+      <span class="property">start</span>: <span class="string">'top 80%'</span>,
+      <span class="property">once</span>: <span class="keyword">true</span>
+    }
+  }
+);
+
+<span class="comment">// Update progress as you scroll</span>
+ScrollTrigger.<span class="method">create</span>({
+  <span class="property">trigger</span>: <span class="string">'#demo'</span>,
+  <span class="property">start</span>: <span class="string">'top bottom'</span>,
+  <span class="property">end</span>: <span class="string">'bottom top'</span>,
+  <span class="property">onUpdate</span>: <span class="keyword">function</span>(self) {
+    <span class="keyword">const</span> progress = Math.<span class="method">round</span>(self.<span class="property">progress</span> * <span class="number">100</span>);
+    progressFill.<span class="property">style</span>.<span class="property">width</span> = progress + <span class="string">'%'</span>;
+    progressText.<span class="property">textContent</span> = progress + <span class="string">'%'</span>;
+  }
+});</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+        <p>ScrollTrigger provides lifecycle callbacks: <code>onEnter</code>, <code>onLeave</code>, <code>onUpdate</code>, and more.</p>
+
+        <div class="concept">
+          <h3>Available Callbacks</h3>
+          <ul>
+            <li><code>onEnter</code> - When scroll enters the trigger zone (forward)</li>
+            <li><code>onLeave</code> - When scroll leaves the trigger zone</li>
+            <li><code>onUpdate</code> - Fires every frame during scroll</li>
+            <li><code>onToggle</code> - Fires when visibility toggles</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>self.progress</h3>
+          <p>In <code>onUpdate</code>, <code>self.progress</code> is a value from 0 to 1 representing scroll position within the trigger range.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-13.html">← Previous</a>
+      <a href="lesson-15.html">Next →</a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-14.js"></script>
+</body>
+</html>

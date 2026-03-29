@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 07 - ScrollTrigger Pin & Snap</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-06.html" class="nav-link">← Previous</a>
+        <a href="lesson-08.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 07</span>
+        <span>Part 2: Advanced</span>
+      </div>
+
+      <h1>ScrollTrigger Pin & Snap</h1>
+      <p>Pin elements in place while scrolling, with optional snap points.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Scroll to See Pin Effect</span>
+        </div>
+        <div class="demo-container" id="pinDemo" style="height: 300px;">
+          <div class="pin-content" id="pinContent">
+            <div class="pin-box" style="background: linear-gradient(135deg, #00d4ff, #8b5cf6);"></div>
+            <p style="margin-top: 16px; color: var(--text-secondary);">Scroll indicator below →</p>
+          </div>
+          <div class="scroll-hint" style="position: absolute; bottom: 20px; color: var(--text-muted); font-size: 0.875rem;">
+            ↓ Keep scrolling ↓
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>JavaScript</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">JavaScript</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+<span class="keyword">import</span> { ScrollTrigger } <span class="keyword">from</span> <span class="string">'gsap/ScrollTrigger'</span>;
+
+gsap.<span class="method">registerPlugin</span>(ScrollTrigger);
+
+<span class="comment">// Simple pin animation</span>
+gsap.<span class="method">fromTo</span>(<span class="string">'#pinContent'</span>, 
+  { <span class="property">opacity</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">50</span> },
+  {
+    <span class="property">opacity</span>: <span class="number">1</span>,
+    <span class="property">y</span>: <span class="number">0</span>,
+    <span class="property">duration</span>: <span class="number">1</span>,
+    <span class="property">scrollTrigger</span>: {
+      <span class="property">trigger</span>: <span class="string">'#pinDemo'</span>,
+      <span class="property">start</span>: <span class="string">'top top'</span>,
+      <span class="property">end</span>: <span class="string)'+=100%'</span>,
+      <span class="property">pin</span>: <span class="keyword">true</span>,
+      <span class="property">scrub</span>: <span class="number">1</span>,
+      <span class="property">anticipatePin</span>: <span class="number">1</span>
+    }
+  }
+);</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+        <p><code>pin: true</code> tells ScrollTrigger to fix the trigger element in place while the animation plays, creating sticky-section effects.</p>
+
+        <div class="concept">
+          <h3>Pin Options</h3>
+          <ul>
+            <li><code>pin: true</code> - Pin the trigger element</li>
+            <li><code>pinSpacing: true</code> - Add space after the pin (default)</li>
+            <li><code>anticipatePin: 1</code> - Prevents jump on fast scroll</li>
+          </ul>
+        </div>
+
+        <h3>Snap with ScrollTrigger</h3>
+        <p>GSAP ScrollTrigger has built-in snap support. Enable it in ScrollTrigger:</p>
+        <pre><code>scrollTrigger: {
+  snap: {
+    snapTo: 1 / 5,  // Snap to one of 5 equal divisions
+    duration: 0.5,
+    delay: 0.1
+  }
+}</code></pre>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-06.html">← Previous</a>
+      <a href="lesson-08.html">Next →</a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-07.js"></script>
+</body>
+</html>

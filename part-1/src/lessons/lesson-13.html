@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 13 - Mouse Interactions</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="nav-header">
+    <a href="../index.html" class="nav-header__back">← Back to Index</a>
+    <span class="nav-header__lesson">Lesson 13</span>
+  </header>
+
+  <section class="lesson-header">
+    <h1 class="lesson-header__title">Mouse Interactions</h1>
+    <p class="lesson-header__subtitle">Trigger animations with hover and click events</p>
+  </section>
+
+  <section class="section--demo">
+    <div class="demo-area">
+      <div class="demo-card">
+        <div class="demo-card__image"></div>
+        <h3 class="demo-card__title">Hover Me</h3>
+        <p class="demo-card__text">Move your mouse over this card and click it!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--code">
+    <div class="container">
+      <h2>The Code</h2>
+
+      <h3>HTML</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">HTML</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="punctuation">&lt;</span><span class="tag">section</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"section--demo"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-area"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-card"</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-card__image"</span><span class="punctuation">&gt;&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">h3</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-card__title"</span><span class="punctuation">&gt;</span>Hover Me<span class="punctuation">&lt;/</span><span class="tag">h3</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-card__text"</span><span class="punctuation">&gt;</span>Move your mouse over this card and click it!<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">section</span><span class="punctuation">&gt;</span></code></pre>
+        </div>
+      </div>
+
+      <h3>CSS</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">CSS</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="property">.demo-card</span> {
+  <span class="property">width</span>: <span class="number">200px</span>;
+  <span class="property">height</span>: <span class="number">280px</span>;
+  <span class="property">background</span>: <span class="number">#252542</span>;
+  <span class="property">border</span>: <span class="number">1px solid #2a2a3e</span>;
+  <span class="property">border-radius</span>: <span class="number">12px</span>;
+  <span class="property">padding</span>: <span class="number">1.5rem</span>;
+  <span class="property">display</span>: <span class="number">flex</span>;
+  <span class="property">flex-direction</span>: <span class="number">column</span>;
+  <span class="property">gap</span>: <span class="number">1rem</span>;
+  <span class="property">transition</span>: <span class="number">transform 0.3s ease, box-shadow 0.3s ease</span>;
+}
+
+<span class="property">.demo-card__image</span> {
+  <span class="property">width</span>: <span class="number">100%</span>;
+  <span class="property">height</span>: <span class="number">120px</span>;
+  <span class="property">background</span>: <span class="number">linear-gradient(135deg, #667eea 0%, #764ba2 100%)</span>;
+  <span class="property">border-radius</span>: <span class="number">8px</span>;
+}
+
+<span class="property">.demo-card__title</span> {
+  <span class="property">font-size</span>: <span class="number">1rem</span>;
+  <span class="property">font-weight</span>: <span class="number">600</span>;
+}
+
+<span class="property">.demo-card__text</span> {
+  <span class="property">font-size</span>: <span class="number">0.85rem</span>;
+  <span class="property">color</span>: <span class="number">#6b6375</span>;
+}</code></pre>
+        </div>
+      </div>
+
+      <h3>JavaScript</h3>
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__title">JavaScript</span>
+        </div>
+        <div class="code-block__content">
+          <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+
+<span class="keyword">const</span> card = document.<span class="method">querySelector</span>(<span class="string">'.demo-card'</span>);
+
+<span class="comment">// Hover animations</span>
+card.<span class="method">addEventListener</span>(<span class="string">'mouseenter'</span>, () => {
+  gsap.<span class="method">to</span>(card, {
+    <span class="property">y</span>: <span class="number">-15</span>,
+    <span class="property">scale</span>: <span class="number">1.08</span>,
+    <span class="property">boxShadow</span>: <span class="string">"0 30px 50px rgba(255, 107, 53, 0.3)"</span>,
+    <span class="property">duration</span>: <span class="number">0.4</span>,
+    <span class="property">ease</span>: <span class="string">"power2.out"</span>
+  });
+});
+
+card.<span class="method">addEventListener</span>(<span class="string">'mouseleave'</span>, () => {
+  gsap.<span class="method">to</span>(card, {
+    <span class="property">y</span>: <span class="number">0</span>,
+    <span class="property">scale</span>: <span class="number">1</span>,
+    <span class="property">boxShadow</span>: <span class="string">"0 10px 20px rgba(0,0,0,0.1)"</span>,
+    <span class="property">duration</span>: <span class="number">0.4</span>,
+    <span class="property">ease</span>: <span class="string">"power2.out"</span>
+  });
+});
+
+<span class="comment">// Click animation - rotates 360 degrees</span>
+card.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  gsap.<span class="method">to</span>(card, {
+    <span class="property">rotation</span>: <span class="string">'+=360'</span>,
+    <span class="property">duration</span>: <span class="number">1.2</span>,
+    <span class="property">ease</span>: <span class="string">"power3.out"</span>
+  });
+});</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--explanation">
+    <div class="container">
+      <h2>How It Works</h2>
+      <p>Animations can respond to user interaction by using standard DOM event listeners. GSAP tweens can be triggered on <code>mouseenter</code>, <code>mouseleave</code>, <code>click</code>, and more.</p>
+
+      <div class="info-box">
+        <div class="info-box__title">Mouse Events</div>
+        <p class="info-box__content">
+          <code>mouseenter</code> - Cursor enters element<br>
+          <code>mouseleave</code> - Cursor leaves element<br>
+          <code>click</code> - User clicks element
+        </p>
+      </div>
+
+      <h3>Relative Values</h3>
+      <p>Notice the <code>rotation: '+=15'</code> - this uses GSAP's relative value syntax. It adds 15 degrees to the current rotation each click, rather than setting it to an absolute value.</p>
+
+      <h3>Common Patterns</h3>
+      <ul>
+        <li><strong>Hover effects:</strong> Animate on mouseenter, reverse on mouseleave</li>
+        <li><strong>Click toggles:</strong> Check current state and animate accordingly</li>
+        <li><strong>Drag:</strong> Use mousedown/mouseup for drag-like interactions</li>
+      </ul>
+
+      <h3>Important Notes</h3>
+      <ul>
+        <li>GSAP tweens on the same property will overwrite each other by default</li>
+        <li>Use <code>overwrite: 'auto'</code> or <code>overwrite: true</code> for automatic cleanup</li>
+        <li>Consider using <code>gsap.quickTo()</code> for high-frequency updates like drag</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section--exercises">
+    <div class="container">
+      <h2>Try It Yourself</h2>
+      <p>Edit <code>/src/lessons/lesson-13.js</code> and experiment:</p>
+      <ul>
+        <li><strong>Different hover effect:</strong> Try changing opacity or adding rotation</li>
+        <li><strong>Smooth click:</strong> Animate scale down then up on click</li>
+        <li><strong>Double click:</strong> After 2 clicks, make it spin 360°</li>
+        <li><strong>Add a button:</strong> Make a button that triggers a card animation</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="container">
+    <nav class="nav-footer">
+      <a href="./lesson-12.html" class="nav-footer__link nav-footer__link--prev">
+        <span class="arrow">←</span> Previous
+      </a>
+      <a href="./lesson-14.html" class="nav-footer__link nav-footer__link--next">
+        Next <span class="arrow">→</span>
+      </a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/lessons/lesson-13.js"></script>
+</body>
+</html>
