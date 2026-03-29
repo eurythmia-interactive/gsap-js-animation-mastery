@@ -516,6 +516,7 @@ property { color: #f07178; }
   font-size: 0.875rem;
   cursor: pointer;
   user-select: none;
+  position: absolute;
 }
 
 .demo-circle {
@@ -723,8 +724,10 @@ property { color: #f07178; }
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
   gap: 16px;
   width: 100%;
+  min-height: 200px;
 }
 
 .demo-card {
