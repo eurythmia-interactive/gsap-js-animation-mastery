@@ -33,16 +33,38 @@
         </div>
         <div class="demo-container" id="demo" style="height: 800px; padding: 0; overflow: hidden; background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);">
           <div class="parallax-bg"></div>
-          <div class="parallax-shapes">
-            <div class="parallax-shape" style="width: 400px; height: 400px; top: -100px; left: -100px; background: radial-gradient(circle, rgba(0,212,255,0.3), transparent);"></div>
-            <div class="parallax-shape" style="width: 300px; height: 300px; top: 50px; right: -80px; background: radial-gradient(circle, rgba(139,92,246,0.3), transparent);"></div>
-            <div class="parallax-shape" style="width: 200px; height: 200px; top: 250px; left: 10%; background: radial-gradient(circle, rgba(236,72,153,0.25), transparent);"></div>
-            <div class="parallax-shape" style="width: 150px; height: 150px; top: 400px; right: 15%; background: radial-gradient(circle, rgba(0,212,255,0.35), transparent);"></div>
-            <div class="parallax-shape" style="width: 250px; height: 250px; top: 550px; left: 30%; background: radial-gradient(circle, rgba(139,92,246,0.25), transparent);"></div>
-            <div class="parallax-shape" style="width: 100px; height: 100px; top: 150px; left: 60%; background: radial-gradient(circle, rgba(236,72,153,0.3), transparent);"></div>
-            <div class="parallax-shape" style="width: 180px; height: 180px; top: 350px; left: 70%; background: radial-gradient(circle, rgba(0,212,255,0.2), transparent);"></div>
-            <div class="parallax-shape" style="width: 120px; height: 120px; top: 650px; right: 40%; background: radial-gradient(circle, rgba(236,72,153,0.25), transparent);"></div>
+          
+          <!-- Layer 0: Distant - Clouds at top, Mountains at bottom -->
+          <div class="parallax-layer parallax-layer--distant">
+            <!-- Clouds (top) -->
+            <div class="parallax-shape" style="width: 500px; height: 200px; top: -50px; left: -100px; background: radial-gradient(ellipse, rgba(45,27,78,0.6), transparent);"></div>
+            <div class="parallax-shape" style="width: 400px; height: 180px; top: -30px; left: 30%; background: radial-gradient(ellipse, rgba(26,26,46,0.5), transparent);"></div>
+            <div class="parallax-shape" style="width: 450px; height: 160px; top: -60px; right: -50px; background: radial-gradient(ellipse, rgba(45,27,78,0.4), transparent);"></div>
+            <!-- Mountains (bottom) -->
+            <div class="parallax-shape" style="width: 600px; height: 300px; bottom: -150px; left: -100px; background: linear-gradient(135deg, rgba(15,15,26,0.8) 0%, transparent 70%); clip-path: polygon(0% 100%, 50% 0%, 100% 100%);"></div>
+            <div class="parallax-shape" style="width: 500px; height: 250px; bottom: -120px; left: 20%; background: linear-gradient(120deg, rgba(26,26,46,0.7) 0%, transparent 70%); clip-path: polygon(0% 100%, 60% 0%, 100% 100%);"></div>
+            <div class="parallax-shape" style="width: 550px; height: 280px; bottom: -140px; right: -50px; background: linear-gradient(225deg, rgba(15,15,26,0.75) 0%, transparent 70%); clip-path: polygon(0% 100%, 55% 0%, 100% 100%);"></div>
           </div>
+          
+          <!-- Layer 1: Mid - Medium shapes -->
+          <div class="parallax-layer parallax-layer--mid">
+            <div class="parallax-shape" style="width: 250px; height: 250px; top: 100px; left: -60px; background: radial-gradient(circle, rgba(139,92,246,0.4), transparent);"></div>
+            <div class="parallax-shape" style="width: 200px; height: 200px; top: 250px; right: -40px; background: radial-gradient(circle, rgba(0,212,255,0.35), transparent);"></div>
+            <div class="parallax-shape" style="width: 180px; height: 180px; top: 450px; left: 15%; background: radial-gradient(circle, rgba(139,92,246,0.3), transparent);"></div>
+            <div class="parallax-shape" style="width: 220px; height: 220px; top: 550px; right: 20%; background: radial-gradient(circle, rgba(0,212,255,0.25), transparent);"></div>
+          </div>
+          
+          <!-- Layer 2: Close - Smaller, faster circles -->
+          <div class="parallax-layer parallax-layer--close">
+            <div class="parallax-shape" style="width: 120px; height: 120px; top: 150px; left: 20%; background: radial-gradient(circle, rgba(236,72,153,0.5), transparent);"></div>
+            <div class="parallax-shape" style="width: 100px; height: 100px; top: 300px; right: 25%; background: radial-gradient(circle, rgba(0,212,255,0.5), transparent);"></div>
+            <div class="parallax-shape" style="width: 80px; height: 80px; top: 200px; left: 55%; background: radial-gradient(circle, rgba(236,72,153,0.6), transparent);"></div>
+            <div class="parallax-shape" style="width: 110px; height: 110px; top: 480px; left: 40%; background: radial-gradient(circle, rgba(139,92,246,0.5), transparent);"></div>
+            <div class="parallax-shape" style="width: 90px; height: 90px; top: 380px; left: 10%; background: radial-gradient(circle, rgba(0,212,255,0.45), transparent);"></div>
+            <div class="parallax-shape" style="width: 70px; height: 70px; top: 580px; right: 15%; background: radial-gradient(circle, rgba(236,72,153,0.55), transparent);"></div>
+          </div>
+          
+          <!-- Layer 3: Text - Closest, moves opposite -->
           <div class="parallax-content">
             <h2 style="font-size: 5rem; font-weight: 900; background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 50%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.1em;">PARALLAX</h2>
             <p style="font-size: 1.5rem; color: #a0a0b0; margin-top: 1rem; letter-spacing: 0.05em;">Scroll to see the depth effect</p>
