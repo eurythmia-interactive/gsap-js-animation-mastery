@@ -4,34 +4,34 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 gsap.to('.parallax-bg', {
-  y: -100,
+  y: -150,
   ease: 'none',
   scrollTrigger: {
     trigger: '#demo',
     start: 'top bottom',
     end: 'bottom top',
-    scrub: true
+    scrub: 1.5
   }
 });
 
 gsap.to('.parallax-shapes', {
-  y: -200,
+  y: -300,
   ease: 'none',
   scrollTrigger: {
     trigger: '#demo',
     start: 'top bottom',
     end: 'bottom top',
-    scrub: true
+    scrub: 1
   }
 });
 
 gsap.to('.parallax-content', {
-  y: 50,
+  y: 100,
   ease: 'none',
   scrollTrigger: {
     trigger: '#demo',
     start: 'top bottom',
     end: 'bottom top',
-    scrub: true
+    scrub: 1.5
   }
 });

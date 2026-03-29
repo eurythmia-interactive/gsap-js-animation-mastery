@@ -857,9 +857,9 @@ property { color: #f07178; }
 .parallax-bg {
   position: absolute;
   width: 100%;
-  height: 120%;
-  background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
-  top: -10%;
+  height: 150%;
+  background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 40%, #2d1b4e 100%);
+  top: -25%;
 }
 
 .parallax-shapes {
@@ -880,15 +880,15 @@ property { color: #f07178; }
 }
 
 .parallax-mid {
-  height: 120%;
-  top: -5%;
+  height: 150%;
+  top: -25%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .parallax-front {
-  height: 120%;
+  height: 150%;
   top: 0;
   display: flex;
   align-items: flex-end;
@@ -897,15 +897,14 @@ property { color: #f07178; }
 }
 
 .parallax-shape {
-  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
   border-radius: 50%;
   position: absolute;
 }
 
 .parallax-text {
-  font-size: 3rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  font-size: 4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary), var(--accent-tertiary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
