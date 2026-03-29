@@ -4,18 +4,18 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 gsap.to('.parallax-bg', {
-  y: -150,
+  y: -200,
   ease: 'none',
   scrollTrigger: {
     trigger: '#demo',
     start: 'top bottom',
     end: 'bottom top',
-    scrub: 1.5
+    scrub: 2
   }
 });
 
 gsap.to('.parallax-shapes', {
-  y: -300,
+  y: -500,
   ease: 'none',
   scrollTrigger: {
     trigger: '#demo',
@@ -26,12 +26,12 @@ gsap.to('.parallax-shapes', {
 });
 
 gsap.to('.parallax-content', {
-  y: 100,
+  y: 150,
   ease: 'none',
   scrollTrigger: {
     trigger: '#demo',
     start: 'top bottom',
     end: 'bottom top',
-    scrub: 1.5
+    scrub: 2
   }
 });
