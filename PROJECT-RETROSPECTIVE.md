@@ -73,6 +73,17 @@ GSAP-Exercises/
     │       ├── lesson-01.js
     │       └── ... (through lesson-15)
     └── (documentation in root)
+
+part-3/                # Text Animation Course (NEW)
+    ├── index.html        # Part 3 hub
+    ├── src/
+    │   ├── style.css    # Text animation styles
+    │   └── lessons/
+    │       ├── lesson-01.html + .js  (Character Cascade)
+    │       ├── lesson-02.html + .js  (Typewriter)
+    │       ├── lesson-03.html + .js  (Word Stagger)
+    │       ├── lesson-04.html + .js  (Clip-Path)
+    │       └── lesson-05.html + .js  (SVG Draw-On)
 ```
 
 ### Vite Multi-Page Config
@@ -85,7 +96,8 @@ export default defineConfig({
       input: {
         main: './index.html',
         part1: './part-1/index.html',
-        part2: './part-2/index.html'
+        part2: './part-2/index.html',
+        part3: './part-3/index.html'
       }
     }
   }
@@ -101,6 +113,8 @@ export default defineConfig({
 | `/part-1/src/lessons/lesson-XX.html` | Part 1 lessons |
 | `/part-2/` | Part 2 index |
 | `/part-2/src/lessons/lesson-XX.html` | Part 2 lessons |
+| `/part-3/` | Part 3 index |
+| `/part-3/src/lessons/lesson-XX.html` | Part 3 lessons |
 
 ---
 
@@ -186,7 +200,36 @@ export default defineConfig({
 
 ---
 
-## 6. Critical GSAP Learnings
+## 6. Part 3: Text Animation
+
+### Theme: Deep Purple + Cyan/Purple Accent
+
+```css
+--bg-primary: #0f0f1a;
+--bg-secondary: #1a1a2e;
+--accent: #00d4ff;
+--accent-secondary: #8b5cf6;
+```
+
+### Lesson Structure
+
+| Lesson | Topic | Core Concept |
+|--------|-------|-------------|
+| 01 | Character Cascade | Split text into chars, stagger animation |
+| 02 | Typewriter | Sequential character reveal |
+| 03 | Word Stagger | Split text into words, stagger animation |
+| 04 | Clip-Path | Clip-path reveal animations |
+| 05 | SVG Draw-On | SVG path stroke animation |
+
+### Techniques Used
+
+- Custom `splitText()` utility (no paid GSAP plugin needed)
+- 100% free techniques for text animation
+- Pre-converted SVG path data for draw-on effects
+
+---
+
+## 7. Critical GSAP Learnings
 
 ### 6.1 Initial State is Everything
 
@@ -421,6 +464,18 @@ npm run dev
 - Removed ScrollTrigger from lesson
 - Improved drag-to-reorder with proper Flip state capture
 
+### Error 11: CSS Class Name Mismatches
+
+**Cause:** HTML uses `.lesson-grid` but CSS defined `.lessons-grid`
+
+**Fix:** Always verify class names match between HTML and CSS
+
+### Error 12: SVG getTotalLength on Text Elements
+
+**Cause:** Using `getTotalLength()` on `<text>` elements returns undefined
+
+**Fix:** Use `<path>` elements with pre-converted path data for text draw-on effects
+
 ---
 
 ## 9. Navigation Architecture
@@ -619,9 +674,42 @@ pkill -f vite
 - Root hub: `http://localhost:5173/`
 - Part 1: `http://localhost:5173/part-1/`
 - Part 2: `http://localhost:5173/part-2/`
+- Part 3: `http://localhost:5173/part-3/`
+
+---
+
+## 13. Text Animation Techniques
+
+### splitText() Utility
+
+Custom function to split text into character/word spans without GSAP's paid SplitText plugin.
+
+```javascript
+function splitText(element, type = 'chars') {
+  const text = element.textContent;
+  element.innerHTML = '';
+  return text.split('').map(char => {
+    const span = document.createElement('span');
+    span.textContent = char === ' ' ? '\u00A0' : char;
+    span.style.display = 'inline-block';
+    element.appendChild(span);
+    return span;
+  });
+}
+```
+
+### SVG getTotalLength() Limitation
+
+- `getTotalLength()` ONLY works on SVG `<path>` elements
+- Does NOT work on `<text>`, `<rect>`, `<circle>`
+- For text draw-on effects, use pre-converted path data
+
+### Pre-converted Path Data
+
+Convert text to paths in design tool (Figma/Illustrator), then animate with strokeDasharray/strokeDashoffset.
 
 ---
 
 *Document created: March 2026*  
 *Project: GSAP Mastery Tutorial Platform*  
-*Parts: 1 (Fundamentals) + 2 (Advanced)*
+*Parts: 1 (Fundamentals) + 2 (Advanced) + 3 (Text Animation)*

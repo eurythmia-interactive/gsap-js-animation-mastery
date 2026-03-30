@@ -71,6 +71,41 @@ document.addEventListener('DOMContentLoaded', () => {
 // OR ensure gsap.set() runs immediately
 ```
 
+### getTotalLength() returns undefined on text
+```javascript
+// getTotalLength() only works on <path>, NOT <text>
+// ❌ This fails:
+const text = document.querySelector('#myText');
+const len = text.getTotalLength(); // undefined!
+
+// ✅ Use <path> elements instead:
+const path = document.querySelector('#myPath');
+const len = path.getTotalLength(); // works!
+```
+
+### CSS class names don't match
+```javascript
+// HTML uses one class name, CSS defines another
+// ❌ HTML: <div class="lesson-grid">
+// ❌ CSS: .lessons-grid { ... }
+
+// ✅ Must match exactly:
+HTML: <div class="lessons-grid">
+CSS: .lessons-grid { ... }
+```
+
+### Animation runs before user sees it
+```javascript
+// Animation auto-runs on page load, user misses it!
+// ❌ No buttons, animation starts immediately
+gsap.from('.text', { opacity: 0, y: 50 });
+
+// ✅ Add Play/Reset buttons:
+playBtn.addEventListener('click', () => {
+  gsap.fromTo(target, { opacity: 0 }, { opacity: 1, duration: 1 });
+});
+```
+
 ## Debug Commands
 
 ```bash

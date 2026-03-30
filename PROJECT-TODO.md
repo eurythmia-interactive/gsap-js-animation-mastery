@@ -1,8 +1,8 @@
 # GSAP Mastery - Project TODO
 
-## Project Status: ✅ COMPLETE (with bug fixes in progress)
+## Project Status: ✅ COMPLETE - All 3 Parts
 
-Both courses are built. Part 2 lessons are being refined for better demos.
+All three courses are built and functional. Part 3 added March 2026.
 
 ---
 
@@ -31,6 +31,16 @@ Both courses are built. Part 2 lessons are being refined for better demos.
 - [x] Previous/Next navigation
 - [x] Back to Index links
 - [x] Documentation (PROJECT-RETROSPECTIVE, PROJECT-TUTORIAL-PLAN)
+
+### Part 3: Text Animation (March 2026)
+- [x] 5 lessons using 100% free techniques
+- [x] Deep purple theme (#0f0f1a) + cyan/purple accents
+- [x] Custom splitText() utility (no paid plugin needed)
+- [x] Lesson 01: Character Cascade (stagger wave animation)
+- [x] Lesson 02: Typewriter Terminal (TextPlugin)
+- [x] Lesson 03: Word Stagger (elastic bounce)
+- [x] Lesson 04: Clip-Path Wipe (CSS reveal)
+- [x] Lesson 05: SVG Draw-On (pre-converted path data)
 
 ---
 
@@ -130,8 +140,10 @@ git commit -m "message"
 | http://localhost:5173/ | Main hub |
 | http://localhost:5173/part-1/ | Part 1 index |
 | http://localhost:5173/part-2/ | Part 2 index |
+| http://localhost:5173/part-3/ | Part 3 index |
 | http://localhost:5173/part-1/src/lessons/lesson-01.html | Part 1 Lesson 1 |
 | http://localhost:5173/part-2/src/lessons/lesson-01.html | Part 2 Lesson 1 |
+| http://localhost:5173/part-3/src/lessons/lesson-01.html | Part 3 Lesson 1 |
 
 ---
 

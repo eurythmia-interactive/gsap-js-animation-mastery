@@ -57,3 +57,42 @@ To create a GSAP lesson:
 - css-positioning
 - html-structure
 - debugging
+
+---
+
+## Lesson Verification Checklist
+
+Before marking a lesson complete, verify ALL items:
+
+### Structure
+- [ ] HTML has proper doctype, head, body
+- [ ] CSS linked correctly (`../style.css` from lessons folder)
+- [ ] JS linked with `type="module"` or at bottom
+- [ ] Navigation links work (prev/next/back)
+
+### Selectors
+- [ ] All `querySelector` targets exist in HTML
+- [ ] All IDs used match HTML element IDs
+- [ ] All class names match CSS definitions
+
+### Animation
+- [ ] Initial state set (gsap.set or inline styles)
+- [ ] Play button triggers animation
+- [ ] Reset button returns to initial state
+- [ ] Animation actually plays when clicked
+
+### SVG Specific
+- [ ] `getTotalLength()` called on `<path>`, NOT `<text>`
+- [ ] For text: use pre-converted path data or `<textPath>`
+- [ ] Stroke/fill properly defined
+
+### Import Paths
+- [ ] Utils imported from correct depth:
+  - Part 1 lessons: `../../utils/splitText.js`
+  - Part 2 lessons: `../../../utils/splitText.js`
+  - Part 3 lessons: `../../../utils/splitText.js`
+
+### Code Section
+- [ ] Displayed code matches actual JS code
+- [ ] Import paths shown are correct
+- [ ] No references to paid plugins (SplitText)
