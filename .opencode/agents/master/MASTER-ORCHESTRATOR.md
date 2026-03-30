@@ -616,6 +616,8 @@ pkill -f vite  # Kill existing
 npm run dev     # Start new
 ```
 
+**Important:** Vite entry points must be configured in `vite.config.js`. Any `index.html` not configured as an entry point will not serve correctly - Vite will fall back to a default page. Avoid placing `index.html` files in `src/` folders; use root-level indices instead.
+
 ### File Creation
 ```bash
 # Always read before writing

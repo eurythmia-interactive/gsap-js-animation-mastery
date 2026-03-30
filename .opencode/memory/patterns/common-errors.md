@@ -38,6 +38,15 @@
 **Cause:** Using `getTotalLength()` on `<text>` elements returns undefined
 **Fix:** Use `<path>` elements with pre-converted path data for text draw-on effects
 
+### Error: Wrong Page Showing on /part-X/src/index.html
+**Cause:** Vite configured with specific entry points in `vite.config.js`
+- `/part-7/src/index.html` was NOT a configured entry point
+- Vite fell back to serving default page (Global Hub)
+**Fix:** 
+- Add redirect at `part-7/src/index.html`: `<meta http-equiv="refresh" content="0;url=/part-7/index.html">`
+- Always configure Vite entry points for any index.html you want to serve
+- Avoid index.html in src folders - use root level instead
+
 ---
 
 ## CSS Errors
