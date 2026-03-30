@@ -24,7 +24,6 @@
       line-height: 1.3;
       color: var(--text-primary);
       margin: 12px 0;
-      opacity: 1;
       overflow: hidden;
     }
 
@@ -36,6 +35,37 @@
     .wipe-text:nth-child(3) {
       font-style: italic;
       color: var(--accent-secondary);
+    }
+
+    .demo-controls {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--bg-code);
+      border-top: 1px solid var(--border);
+    }
+
+    .demo-btn {
+      padding: 0.75rem 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .demo-btn:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+
+    .demo-btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg-primary);
     }
   </style>
 </head>
@@ -51,24 +81,100 @@
       <a href="lesson-05.html" class="nav-link">Next →</a>
     </nav>
 
-    <section class="demo-container lesson-04-demo">
-      <div class="wipe-text" data-split>Design is not just what it looks like.</div>
-      <div class="wipe-text" data-split>Design is how it works.</div>
-      <div class="wipe-text" data-split>— Steve Jobs</div>
+    <section class="demo-section">
+      <div class="demo-header">
+        <span class="demo-title">Demo - Clip-Path Wipe</span>
+      </div>
+      <section class="demo-container lesson-04-demo">
+        <div class="wipe-text">Design is not just what it looks like.</div>
+        <div class="wipe-text">Design is how it works.</div>
+        <div class="wipe-text">— Steve Jobs</div>
+      </section>
+      <div class="demo-controls">
+        <button class="demo-btn primary" id="playBtn">Play</button>
+        <button class="demo-btn" id="resetBtn">Reset</button>
+      </div>
     </section>
 
     <section class="code-section">
-      <h2 class="code-section__title">Key Code</h2>
-      <pre class="code-block"><code>// Clip-path wipe animation
-gsap.from('.wipe-text', {
-  clipPath: 'inset(0 100% 0 0)',
-  duration: 1,
-  stagger: 0.25,
-  ease: 'power3.out'
+      <h2 class="code-section__title">The Code</h2>
+
+      <h3>HTML</h3>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-label">HTML</span>
+        </div>
+        <div class="code-content">
+          <pre><code><span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-container lesson-04-demo"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"wipe-text"</span><span class="punctuation">&gt;</span>Design is not just...<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"wipe-text"</span><span class="punctuation">&gt;</span>Design is how it works.<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"wipe-text"</span><span class="punctuation">&gt;</span>— Steve Jobs<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+        </div>
+      </div>
+
+      <h3>JavaScript</h3>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-label">JavaScript</span>
+        </div>
+        <div class="code-content">
+          <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+
+<span class="keyword">const</span> wipeTexts = document.<span class="method">querySelectorAll</span>(<span class="string">'.wipe-text'</span>);
+<span class="keyword">const</span> playBtn = document.<span class="method">querySelector</span>(<span class="string">'#playBtn'</span>);
+<span class="keyword">const</span> resetBtn = document.<span class="method">querySelector</span>(<span class="string">'#resetBtn'</span>);
+
+<span class="comment">// Set initial state: fully hidden (clipped from right)</span>
+gsap.<span class="method">set</span>(wipeTexts, {
+  <span class="property">clipPath</span>: <span class="string">'inset(0 100% 0 0)'</span>
+});
+
+<span class="comment">// Play: wipe in from left to right</span>
+playBtn.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  gsap.<span class="method">fromTo</span>(wipeTexts,
+    { <span class="property">clipPath</span>: <span class="string">'inset(0 100% 0 0)'</span> },
+    { <span class="property">clipPath</span>: <span class="string">'inset(0 0% 0 0)'</span>,
+      <span class="property">duration</span>: <span class="number">1</span>,
+      <span class="property">stagger</span>: <span class="number">0.25</span>,
+      <span class="property">ease</span>: <span class="string">'power3.out'</span>
+    }
+  );
+});
+
+<span class="comment">// Reset: hide again</span>
+resetBtn.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  gsap.<span class="method">to</span>(wipeTexts, {
+    <span class="property">clipPath</span>: <span class="string">'inset(0 100% 0 0)'</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>,
+    <span class="property">stagger</span>: <span class="number">0.1</span>,
+    <span class="property">ease</span>: <span class="string">'power2.in'</span>
+  });
 });</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-content">
+      <h2>How It Works</h2>
+      <p>CSS <code>clip-path: inset()</code> reveals portions of an element. We animate it from <code>inset(0 100% 0 0)</code> (fully hidden from the right) to <code>inset(0 0% 0 0)</code> (fully visible).</p>
+
+      <div class="concept">
+        <h3>clip-path: inset() Syntax</h3>
+        <p><code>inset(top right bottom left)</code> - Values represent how much of each edge is hidden.</p>
+        <ul>
+          <li><code>inset(0 100% 0 0)</code> = Hidden on the right 100%</li>
+          <li><code>inset(0 0% 0 0)</code> = Fully visible</li>
+        </ul>
+      </div>
+
+      <div class="tip">
+        <h3>Browser Support</h3>
+        <p>clip-path works in all modern browsers. Not supported in IE.</p>
+      </div>
     </section>
   </div>
-  <script src="../../../utils/splitText.js"></script>
-  <script src="lesson-04.js"></script>
+
+  <script type="module" src="./lesson-04.js"></script>
 </body>
 </html>

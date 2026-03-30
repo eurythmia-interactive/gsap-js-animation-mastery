@@ -1,20 +1,36 @@
 // Lesson 04: Clip-Path Wipe
 // Text wipes in from left to right using clip-path: inset()
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Split text into spans for character-level animation
-  const textElements = document.querySelectorAll('.wipe-text');
-  
-  // Initialize split text
-  if (typeof splitText === 'function') {
-    textElements.forEach(el => splitText(el));
-  }
+import { gsap } from 'gsap';
 
-  // Clip-path wipe animation - reveals from left to right
-  gsap.from('.wipe-text', {
+const wipeTexts = document.querySelectorAll('.wipe-text');
+const playBtn = document.querySelector('#playBtn');
+const resetBtn = document.querySelector('#resetBtn');
+
+// Set initial state: fully hidden (clipped from right)
+gsap.set(wipeTexts, {
+  clipPath: 'inset(0 100% 0 0)'
+});
+
+// Play: wipe in from left to right
+playBtn.addEventListener('click', () => {
+  gsap.fromTo(wipeTexts,
+    { clipPath: 'inset(0 100% 0 0)' },
+    {
+      clipPath: 'inset(0 0% 0 0)',
+      duration: 1,
+      stagger: 0.25,
+      ease: 'power3.out'
+    }
+  );
+});
+
+// Reset: hide again
+resetBtn.addEventListener('click', () => {
+  gsap.to(wipeTexts, {
     clipPath: 'inset(0 100% 0 0)',
-    duration: 1,
-    stagger: 0.25,
-    ease: 'power3.out'
+    duration: 0.5,
+    stagger: 0.1,
+    ease: 'power2.in'
   });
 });
