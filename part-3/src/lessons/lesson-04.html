@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 04: Clip-Path Wipe</title>
+  <link rel="stylesheet" href="../../../styles.css">
+  <style>
+    .lesson-04-demo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 350px;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wipe-text {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      font-size: 42px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text-primary);
+      margin: 12px 0;
+      opacity: 1;
+    }
+
+    .wipe-text:first-child {
+      font-size: 52px;
+      margin-top: 0;
+    }
+
+    .wipe-text:nth-child(3) {
+      font-style: italic;
+      color: var(--accent-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="header__title">Lesson 04: Clip-Path Wipe</h1>
+      <p class="header__subtitle">Text reveals using inset() clip-path animation</p>
+    </header>
+
+    <nav class="navigation">
+      <a href="lesson-03.html" class="nav-link nav-link--prev">← Previous</a>
+      <a href="lesson-05.html" class="nav-link nav-link--next">Next →</a>
+    </nav>
+
+    <section class="demo-container lesson-04-demo">
+      <div class="wipe-text" data-split>Design is not just what it looks like.</div>
+      <div class="wipe-text" data-split>Design is how it works.</div>
+      <div class="wipe-text" data-split>— Steve Jobs</div>
+    </section>
+
+    <section class="code-section">
+      <h2 class="code-section__title">Key Code</h2>
+      <pre class="code-block"><code>// Clip-path wipe animation
+gsap.from('.wipe-text', {
+  clipPath: 'inset(0 100% 0 0)',
+  duration: 1,
+  stagger: 0.25,
+  ease: 'power3.out'
+});</code></pre>
+    </section>
+  </div>
+  <script src="../../../utils/splitText.js"></script>
+  <script src="lesson-04.js"></script>
+</body>
+</html>

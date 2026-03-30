@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 01 - Character Cascade</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="/part-3/index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <span class="nav-link disabled">Previous</span>
+        <a href="lesson-02.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 01</span>
+        <span>Part 3: Text Animations</span>
+      </div>
+
+      <h1>Character Cascade</h1>
+      <p>Learn how to split text into individual characters and animate them in sequence for stunning visual effects.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Character Cascade</span>
+        </div>
+        <div class="demo-container" id="demo">
+          <div id="title" class="text-gradient text-glow">ANIMATE</div>
+        </div>
+        <div class="demo-controls">
+          <button class="demo-btn primary" id="playBtn">Play</button>
+          <button class="demo-btn" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>HTML</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"demo-container"</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"demo"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"title"</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-gradient text-glow"</span><span class="punctuation">&gt;</span>ANIMATE<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>CSS</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">CSS</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="property">#title</span> {
+  <span class="property">font-size</span>: <span class="number">4rem</span>;
+  <span class="property">font-weight</span>: <span class="number">bold</span>;
+  <span class="property">letter-spacing</span>: <span class="number">0.3em</span>;
+}
+
+<span class="property">.char-span</span> {
+  <span class="property">display</span>: <span class="number">inline-block</span>;
+  <span class="property">will-change</span>: <span class="number">transform</span>;
+}</code></pre>
+          </div>
+        </div>
+
+        <h3>JavaScript</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">JavaScript</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
+<span class="keyword">import</span> { splitText, unsplitText } <span class="keyword">from</span> <span class="string">'../../utils/splitText.js'</span>;
+
+<span class="keyword">const</span> title = document.<span class="method">querySelector</span>(<span class="string">'#title'</span>);
+<span class="keyword">const</span> playBtn = document.<span class="method">querySelector</span>(<span class="string">'#playBtn'</span>);
+<span class="keyword">const</span> resetBtn = document.<span class="method">querySelector</span>(<span class="string">'#resetBtn'</span>);
+
+<span class="comment">// Split title into characters on page load</span>
+<span class="keyword">const</span> chars = splitText(title, <span class="string">'chars'</span>);
+
+<span class="comment">// Set initial hidden state</span>
+gsap.<span class="method">set</span>(chars, {
+  <span class="property">opacity</span>: <span class="number">0</span>,
+  <span class="property">y</span>: <span class="number">100</span>,
+  <span class="property">scale</span>: <span class="number">0</span>,
+  <span class="property">skewX</span>: <span class="number">45</span>
+});
+
+<span class="comment">// Play button - animate characters in with bounce</span>
+playBtn.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  gsap.<span class="method">fromTo</span>(chars,
+    {
+      <span class="property">opacity</span>: <span class="number">0</span>,
+      <span class="property">y</span>: <span class="number">100</span>,
+      <span class="property">scale</span>: <span class="number">0</span>,
+      <span class="property">skewX</span>: <span class="number">45</span>
+    },
+    {
+      <span class="property">opacity</span>: <span class="number">1</span>,
+      <span class="property">y</span>: <span class="number">0</span>,
+      <span class="property">scale</span>: <span class="number">1</span>,
+      <span class="property">skewX</span>: <span class="number">0</span>,
+      <span class="property">stagger</span>: <span class="number">0.05</span>,
+      <span class="property">ease</span>: <span class="string">'back.out(1.7)'</span>
+    }
+  );
+});
+
+<span class="comment">// Reset button - return to initial hidden state</span>
+resetBtn.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  gsap.<span class="method">to</span>(chars, {
+    <span class="property">opacity</span>: <span class="number">0</span>,
+    <span class="property">y</span>: <span class="number">100</span>,
+    <span class="property">scale</span>: <span class="number">0</span>,
+    <span class="property">skewX</span>: <span class="number">45</span>,
+    <span class="property">stagger</span>: <span class="number">0.03</span>,
+    <span class="property">ease</span>: <span class="string">'power2.in'</span>
+  });
+});</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+        <p>We use a custom <code>splitText()</code> function to break text into individual character spans, then animate them with GSAP's stagger property for smooth cascade effects.</p>
+
+        <div class="concept">
+          <h3>splitText() Function</h3>
+          <ul>
+            <li><code>splitText(element, 'chars')</code> - Splits text into character spans</li>
+            <li><code>splitText(element, 'words')</code> - Splits text into word spans</li>
+            <li>Returns array of <code>&lt;span&gt;</code> elements</li>
+            <li>Handles emoji and unicode correctly</li>
+          </ul>
+        </div>
+
+        <div class="concept">
+          <h3>Stagger Animation</h3>
+          <p>The <code>stagger</code> property creates the cascade effect by animating each character with a delay. A stagger of <code>0.05</code> means each character starts 50ms after the previous one.</p>
+        </div>
+
+        <div class="tip">
+          <h3>Performance Tip</h3>
+          <p>Use <code>will-change: transform</code> on character spans to enable GPU acceleration. This makes text animations silky smooth.</p>
+        </div>
+
+        <div class="tip">
+          <h3>Why Manual Split?</h3>
+          <p>GSAP's SplitText is a paid plugin. Our custom <code>splitText()</code> function gives you the same control without requiring a license!</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <span style="opacity: 0.5;">← Previous</span>
+      <a href="lesson-02.html">Next →</a>
+    </nav>
+  </footer>
+
+  <script type="module" src="./lesson-01.js"></script>
+</body>
+</html>

@@ -7,7 +7,8 @@ export default defineConfig({
       input: {
         main: './index.html',
         part1: './part-1/index.html',
-        part2: './part-2/index.html'
+        part2: './part-2/index.html',
+        part3: './part-3/index.html'
       }
     }
   }

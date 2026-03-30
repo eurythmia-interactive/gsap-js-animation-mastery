@@ -1,0 +1,159 @@
+/**
+ * Part 3: Text Animations Shared Styles
+ * Theme: Deep Purple (#0f0f1a) + Cyan (#00d4ff) + Purple (#8b5cf6) + Pink (#ec4899)
+ * 
+ * Browser Compatibility Notes:
+ * - background-clip: text requires -webkit- prefix for Safari < 13.1 and older browsers
+ * - text-fill-color: transparent is WebKit-specific, paired with background-clip
+ * - Some text-shadow glow effects may render differently across browsers
+ */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (VARIABLES)
+   ============================================ */
+
+:root {
+  /* Core Text Colors */
+  --text-cyan: #00d4ff;
+  --text-purple: #8b5cf6;
+  --text-pink: #ec4899;
+  
+  /* Glow Effect Color */
+  --text-glow: rgba(0, 212, 255, 0.6);
+  --text-glow-strong: rgba(0, 212, 255, 0.9);
+  
+  /* Theme Colors */
+  --bg-deep: #0f0f1a;
+  --bg-card: #0a0a0f;
+  --border-glow: rgba(0, 212, 255, 0.3);
+}
+
+/* ============================================
+   1. TEXT-GRADIENT
+   Gradient text effect using background-clip
+   ============================================ */
+
+.text-gradient {
+  /* Fallback background for browsers without support */
+  background: linear-gradient(135deg, var(--text-cyan), var(--text-purple));
+  
+  /* Standard property (modern browsers) */
+  background-clip: text;
+  -webkit-background-clip: text;
+  
+  /* Make text transparent to show gradient beneath */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  
+  /* Optional: add slight glow to the gradient text */
+  text-shadow: 0 0 30px var(--text-glow);
+}
+
+/* ============================================
+   2. TEXT-GLOW
+   Multi-layer neon glow effect using text-shadow
+   ============================================ */
+
+.text-glow {
+  color: var(--text-cyan);
+  
+  /* Layered text-shadows create neon glow effect */
+  text-shadow:
+    0 0 5px var(--text-cyan),
+    0 0 10px var(--text-cyan),
+    0 0 20px var(--text-glow),
+    0 0 30px var(--text-glow),
+    0 0 40px var(--text-glow),
+    0 0 60px rgba(0, 212, 255, 0.4);
+}
+
+/* ============================================
+   3. CHAR-SPAN
+   Base character span styling for GSAP splits
+   Critical: inline-block enables transform animations
+   ============================================ */
+
+.char-span {
+  display: inline-block;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ============================================
+   4. WORD-SPAN
+   Word span styling for GSAP word splits
+   ============================================ */
+
+.word-span {
+  display: inline-block;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ============================================
+   5. TEXT-OUTLINE
+   SVG-style outline text effect via CSS
+   Works with SVG <text> elements
+   ============================================ */
+
+.text-outline {
+  stroke: var(--text-cyan);
+  stroke-width: 1;
+  fill: transparent;
+  filter: drop-shadow(0 0 3px var(--text-cyan)) 
+          drop-shadow(0 0 6px var(--text-glow));
+}
+
+/* ============================================
+   6. TERMINAL-CARD
+   Dark card styling for typewriter demos
+   ============================================ */
+
+.terminal-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  box-shadow: 
+    0 0 10px rgba(0, 212, 255, 0.1),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 20px 24px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+/* ============================================
+   7. CURSOR-BLINK
+   Blinking cursor animation via CSS keyframes
+   ============================================ */
+
+.cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: var(--text-cyan);
+  vertical-align: text-bottom;
+  animation: cursor-blink-animation 1s step-end infinite;
+}
+
+@keyframes cursor-blink-animation {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0; }
+}
+
+/* ============================================
+   BONUS: UTILITY CLASSES
+   ============================================ */
+
+.text-gradient-glow {
+  background: linear-gradient(135deg, var(--text-cyan), var(--text-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 
+    0 0 20px var(--text-glow),
+    0 0 40px var(--text-glow),
+    0 0 60px rgba(139, 92, 246, 0.4);
+  filter: drop-shadow(0 0 10px var(--text-glow));
+}
