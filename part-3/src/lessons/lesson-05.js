@@ -1,5 +1,4 @@
 import { gsap } from 'gsap';
-import { splitText, unsplitText } from '../../../utils/splitText.js';
 
 // Get DOM elements
 const drawText = document.querySelector('#drawText');

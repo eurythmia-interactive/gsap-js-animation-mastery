@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lesson 04: Clip-Path Wipe</title>
-  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="stylesheet" href="../style.css">
   <style>
     .lesson-04-demo {
       display: flex;
@@ -25,6 +25,7 @@
       color: var(--text-primary);
       margin: 12px 0;
       opacity: 1;
+      overflow: hidden;
     }
 
     .wipe-text:first-child {
@@ -45,9 +46,9 @@
       <p class="header__subtitle">Text reveals using inset() clip-path animation</p>
     </header>
 
-    <nav class="navigation">
-      <a href="lesson-03.html" class="nav-link nav-link--prev">← Previous</a>
-      <a href="lesson-05.html" class="nav-link nav-link--next">Next →</a>
+    <nav class="nav">
+      <a href="lesson-03.html" class="nav-link">← Previous</a>
+      <a href="lesson-05.html" class="nav-link">Next →</a>
     </nav>
 
     <section class="demo-container lesson-04-demo">

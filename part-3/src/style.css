@@ -24,6 +24,13 @@
   --border: #2a2a3e;
   --border-light: #3a3a4e;
   
+  /* Text Animation Colors */
+  --text-cyan: #00d4ff;
+  --text-purple: #8b5cf6;
+  --text-pink: #ec4899;
+  --text-glow: rgba(0, 212, 255, 0.6);
+  --border-glow: rgba(0, 212, 255, 0.3);
+  
   /* Typography */
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'Fira Code', 'Monaco', 'Consolas', 'Monospace', monospace;
@@ -250,7 +257,20 @@ a:hover {
   padding: var(--space-lg);
   background: var(--bg-primary);
   position: relative;
+  perspective: 1000px;
 }
+
+/* Word stagger title styling */
+.word-title {
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+/* Word color classes for stagger animation */
+.word-0 { color: var(--text-cyan); }
+.word-1 { color: var(--text-purple); }
+.word-2 { color: var(--text-pink); }
 
 /* Demo text styling */
 .demo-container #title {

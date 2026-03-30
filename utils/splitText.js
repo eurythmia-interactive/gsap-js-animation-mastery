@@ -192,7 +192,10 @@ function unsplitText(element) {
   // If no stored original, element is already in original state
 }
 
-// Export for module usage (if applicable)
+// Export for module usage
+export { splitText, unsplitText };
+
+// CommonJS fallback
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { splitText, unsplitText };
 }

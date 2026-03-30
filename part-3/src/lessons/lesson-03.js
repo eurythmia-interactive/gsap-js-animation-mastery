@@ -1,5 +1,5 @@
 import { gsap } from 'gsap';
-import { splitText, unsplitText } from '../../../utils/splitText.js';
+import { splitText } from '../../../utils/splitText.js';
 
 // Get DOM elements
 const title = document.querySelector('#title');
