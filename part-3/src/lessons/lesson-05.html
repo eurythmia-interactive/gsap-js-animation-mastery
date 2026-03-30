@@ -10,7 +10,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 250px;
+      min-height: 300px;
       padding: 48px;
       position: relative;
       overflow: hidden;
@@ -18,23 +18,14 @@
 
     .svg-container {
       width: 100%;
-      max-width: 600px;
+      max-width: 700px;
     }
 
     .draw-path {
       fill: transparent;
-      stroke-width: 3;
+      stroke-width: 4;
       stroke-linecap: round;
       stroke-linejoin: round;
-    }
-
-    .gradient-stroke {
-      stroke: url(#cyanPurpleGradient);
-    }
-
-    .glow-stroke {
-      filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6)) 
-              drop-shadow(0 0 16px rgba(139, 92, 246, 0.4));
     }
 
     .demo-controls {
@@ -88,7 +79,7 @@
       </div>
 
       <h1>SVG Draw-On Effect</h1>
-      <p>Learn how to animate SVG strokes drawing on using strokeDasharray and strokeDashoffset.</p>
+      <p>Learn how to animate SVG text strokes drawing on using strokeDasharray and strokeDashoffset.</p>
 
       <div class="demo-section">
         <div class="demo-header">
@@ -98,20 +89,45 @@
           <div class="svg-container">
             <svg viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="cyanPurpleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <!-- Cyan to purple gradient -->
+                <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stop-color="#00d4ff" />
+                  <stop offset="50%" stop-color="#667eea" />
                   <stop offset="100%" stop-color="#8b5cf6" />
                 </linearGradient>
+                
+                <!-- Multi-layer glow filter -->
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="4" result="blur1"/>
+                  <feGaussianBlur stdDeviation="8" result="blur2"/>
+                  <feMerge>
+                    <feMergeNode in="blur2"/>
+                    <feMergeNode in="blur1"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
               </defs>
-              <!-- Main decorative path - a wave line -->
-              <path 
-                id="drawPath" 
-                d="M50,75 Q150,25 250,75 T450,75 T650,75" 
-                class="draw-path gradient-stroke glow-stroke"
-              />
-              <!-- Small decorative circles at ends -->
-              <circle cx="50" cy="75" r="6" fill="#00d4ff" class="glow-stroke" style="stroke: none;"/>
-              <circle cx="550" cy="75" r="6" fill="#8b5cf6" class="glow-stroke" style="stroke: none;"/>
+              
+              <!-- "DRAW ON" as individual letter paths -->
+              <g filter="url(#glow)" stroke="url(#textGradient)" fill="transparent">
+                <!-- D -->
+                <path class="draw-path" d="M30,30 L30,120 M30,30 L70,30 Q110,30 110,75 Q110,120 70,120 L30,120 M50,75 L70,75 Q85,75 85,90 Q85,105 70,105 L50,105 Z" />
+                
+                <!-- R -->
+                <path class="draw-path" d="M130,30 L130,120 M130,30 L170,30 Q200,30 200,75 Q200,105 170,105 L130,105 M175,75 L200,120" />
+                
+                <!-- A -->
+                <path class="draw-path" d="M220,120 L255,30 L290,120 M235,90 L275,90" />
+                
+                <!-- W -->
+                <path class="draw-path" d="M310,30 L325,120 L350,60 L375,120 L400,30 L410,120 M320,50 L395,50" />
+                
+                <!-- O -->
+                <path class="draw-path" d="M470,75 Q470,30 510,30 Q550,30 550,75 Q550,120 510,120 Q470,120 470,75 Z M490,75 Q490,100 510,100 Q530,100 530,75 Q530,50 510,50 Q490,50 490,75 Z" />
+                
+                <!-- N -->
+                <path class="draw-path" d="M570,120 L570,30 L575,30 L600,100 L600,30 L605,30 L605,120 L600,120 L575,50 L575,120 Z" />
+              </g>
             </svg>
           </div>
         </div>
@@ -132,13 +148,16 @@
           <div class="code-content">
             <pre><code><span class="punctuation">&lt;</span><span class="tag">svg</span> <span class="attr">viewBox</span><span class="punctuation">=</span><span class="string">"0 0 600 150"</span> <span class="attr">xmlns</span><span class="punctuation">=</span><span class="string">"http://www.w3.org/2000/svg"</span><span class="punctuation">&gt;</span>
   <span class="punctuation">&lt;</span><span class="tag">defs</span><span class="punctuation">&gt;</span>
-    <span class="punctuation">&lt;</span><span class="tag">linearGradient</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"cyanPurpleGradient"</span> <span class="attr">x1</span><span class="punctuation">=</span><span class="string">"0%"</span> <span class="attr">y1</span><span class="punctuation">=</span><span class="string">"0%"</span> <span class="attr">x2</span><span class="punctuation">=</span><span class="string">"100%"</span> <span class="attr">y2</span><span class="punctuation">=</span><span class="string">"0%"</span><span class="punctuation">&gt;</span>
-      <span class="punctuation">&lt;</span><span class="tag">stop</span> <span class="attr">offset</span><span class="punctuation">=</span><span class="string">"0%"</span> <span class="attr">stop-color</span><span class="punctuation">=</span><span class="string">"#00d4ff"</span> <span class="punctuation">/&gt;</span>
-      <span class="punctuation">&lt;</span><span class="tag">stop</span> <span class="attr">offset</span><span class="punctuation">=</span><span class="string">"100%"</span> <span class="attr">stop-color</span><span class="punctuation">=</span><span class="string">"#8b5cf6"</span> <span class="punctuation">/&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">linearGradient</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"textGradient"</span> <span class="attr">x1</span><span class="punctuation">=</span><span class="string">"0%"</span> <span class="attr">y1</span><span class="punctuation">=</span><span class="string">"0%"</span> <span class="attr">x2</span><span class="punctuation">=</span><span class="string">"100%"</span> <span class="attr">y2</span><span class="punctuation">=</span><span class="string">"0%"</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">stop</span> <span class="attr">offset</span><span class="punctuation">="0%"</span> <span class="attr">stop-color</span><span class="punctuation">="#00d4ff"</span> <span class="punctuation">/&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">stop</span> <span class="attr">offset</span><span class="punctuation">="100%"</span> <span class="attr">stop-color</span><span class="punctuation">="#8b5cf6"</span> <span class="punctuation">/&gt;</span>
     <span class="punctuation">&lt;/</span><span class="tag">linearGradient</span><span class="punctuation">&gt;</span>
   <span class="punctuation">&lt;/</span><span class="tag">defs</span><span class="punctuation">&gt;</span>
-  <span class="punctuation">&lt;</span><span class="tag">path</span> <span class="attr">id</span><span class="punctuation">=</span><span class="string">"drawPath"</span> <span class="attr">d</span><span class="punctuation">=</span><span class="string">"M50,75 Q150,25 250,75 T450,75 T650,75"</span>
-        <span class="attr">class</span><span class="punctuation">=</span><span class="string">"draw-path gradient-stroke glow-stroke"</span> <span class="punctuation">/&gt;</span>
+  
+  <span class="comment">&lt;!-- Each letter is a &lt;path&gt; element --&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">path</span> <span class="attr">class</span><span class="punctuation">="draw-path"</span> <span class="attr">d</span><span class="punctuation">="M30,30 L30,120 ..."</span> <span class="punctuation">/&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">path</span> <span class="attr">class</span><span class="punctuation">="draw-path"</span> <span class="attr">d</span><span class="punctuation">="M130,30 ..."</span> <span class="punctuation">/&gt;</span>
+  <span class="comment">&lt;!-- ... more letters ... --&gt;</span>
 <span class="punctuation">&lt;/</span><span class="tag">svg</span><span class="punctuation">&gt;</span></code></pre>
           </div>
         </div>
@@ -151,36 +170,40 @@
           <div class="code-content">
             <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
 
-<span class="keyword">const</span> drawPath = document.<span class="method">querySelector</span>(<span class="string">'#drawPath'</span>);
+<span class="keyword">const</span> drawPaths = document.<span class="method">querySelectorAll</span>(<span class="string">'.draw-path'</span>);
 <span class="keyword">const</span> playBtn = document.<span class="method">querySelector</span>(<span class="string">'#playBtn'</span>);
 <span class="keyword">const</span> resetBtn = document.<span class="method">querySelector</span>(<span class="string">'#resetBtn'</span>);
 
-<span class="comment">// Get the total length of the path</span>
-<span class="keyword">const</span> length = drawPath.<span class="method">getTotalLength</span>();
+<span class="comment">// Get lengths for each path</span>
+<span class="keyword">const</span> lengths = Array.<span class="method">from</span>(drawPaths).<span class="method">map</span>(path => path.<span class="method">getTotalLength</span>());
 
-<span class="comment">// Set initial state: stroke is invisible</span>
-gsap.<span class="method">set</span>(drawPath, {
-  <span class="property">strokeDasharray</span>: length,
-  <span class="property">strokeDashoffset</span>: length
+<span class="comment">// Set initial state: all strokes invisible</span>
+drawPaths.<span class="method">forEach</span>((path, i) => {
+  gsap.<span class="method">set</span>(path, {
+    <span class="property">strokeDasharray</span>: lengths[i],
+    <span class="property">strokeDashoffset</span>: lengths[i]
+  });
 });
 
-<span class="comment">// Play button - animate stroke drawing on</span>
+<span class="comment">// Play: animate strokes drawing on</span>
 playBtn.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
-  gsap.<span class="method">fromTo</span>(drawPath,
-    { <span class="property">strokeDashoffset</span>: length },
+  gsap.<span class="method">fromTo</span>(drawPaths,
+    { <span class="property">strokeDashoffset</span>: (i) => lengths[i] },
     {
       <span class="property">strokeDashoffset</span>: <span class="number">0</span>,
-      <span class="property">duration</span>: <span class="number">2</span>,
+      <span class="property">duration</span>: <span class="number">2.5</span>,
+      <span class="property">stagger</span>: <span class="number">0.1</span>,
       <span class="property">ease</span>: <span class="string">'power2.inOut'</span>
     }
   );
 });
 
-<span class="comment">// Reset button - return stroke to hidden state</span>
+<span class="comment">// Reset: hide strokes again</span>
 resetBtn.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
-  gsap.<span class="method">to</span>(drawPath, {
-    <span class="property">strokeDashoffset</span>: length,
+  gsap.<span class="method">to</span>(drawPaths, {
+    <span class="property">strokeDashoffset</span>: (i) => lengths[i],
     <span class="property">duration</span>: <span class="number">0.5</span>,
+    <span class="property">stagger</span>: <span class="number">0.05</span>,
     <span class="property">ease</span>: <span class="string">'power2.in'</span>
   });
 });</code></pre>
@@ -190,26 +213,26 @@ resetBtn.<span class="method">addEventListener</span>(<span class="string">'clic
 
       <div class="lesson-content">
         <h2>How It Works</h2>
-        <p>SVG strokes can be animated to create a "drawing" effect using two key properties: <code>strokeDasharray</code> and <code>strokeDashoffset</code>.</p>
+        <p>SVG strokes can be animated to create a "drawing" effect. We use pre-converted path data for each letter so we can measure the total length with <code>getTotalLength()</code>.</p>
 
         <div class="concept">
-          <h3>strokeDasharray</h3>
-          <p>Defines the pattern of dashes and gaps. Setting it equal to the path length means the entire stroke is one continuous dash.</p>
+          <h3>Converting Text to Paths</h3>
+          <p>In a design tool like Figma or Illustrator:</p>
+          <ul>
+            <li>Type your text</li>
+            <li>Select <strong>Outline Stroke</strong> (Figma) or <strong>Create Outlines</strong> (Illustrator)</li>
+            <li>Copy the SVG path data</li>
+          </ul>
         </div>
 
         <div class="concept">
-          <h3>strokeDashoffset</h3>
-          <p>The distance into the dash pattern to start. By animating from full length to 0, the stroke appears to "draw on".</p>
-        </div>
-
-        <div class="concept">
-          <h3>getTotalLength()</h3>
-          <p>This SVG DOM method returns the total length of the path, allowing us to set up the dash pattern precisely.</p>
+          <h3>strokeDasharray & strokeDashoffset</h3>
+          <p>Setting both to the path's total length means the entire stroke is one dash. Animating the offset from length to 0 makes it "draw on".</p>
         </div>
 
         <div class="tip">
-          <h3>Works on Paths Only</h3>
-          <p><code>getTotalLength()</code> works on <code>&lt;path&gt;</code>, <code>&lt;rect&gt;</code>, <code>&lt;circle&gt;</code>, etc., but NOT on <code>&lt;text&gt;</code> elements.</p>
+          <h3>Why Not &lt;text&gt; Element?</h3>
+          <p>SVG's <code>&lt;text&gt;</code> element doesn't support <code>getTotalLength()</code>. That's why we convert to paths!</p>
         </div>
       </div>
     </div>
