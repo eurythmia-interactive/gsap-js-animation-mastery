@@ -1,19 +1,47 @@
 import { gsap } from 'gsap';
 
-const cards = document.querySelectorAll('.batch-card');
+const cards1 = document.querySelectorAll('.batch-card');
+const cards2 = document.querySelectorAll('.batch-card-2');
 
-gsap.set(cards, { opacity: 0, y: 50 });
+gsap.set(cards1, { opacity: 0, y: 50 });
+gsap.set(cards2, { opacity: 0, y: 50 });
 
-const batch = gsap.batch(cards, {
-  duration: 0.5,
-  ease: 'power2.out',
-  stagger: 0.1
+document.querySelector('#batchBtn1').addEventListener('click', () => {
+  gsap.to(cards1, {
+    opacity: 1,
+    y: 0,
+    duration: 0.5,
+    ease: 'power2.out',
+    stagger: 0.1
+  });
 });
 
-document.querySelector('#batchBtn').addEventListener('click', () => {
-  batch.enter();
+document.querySelector('#reverseBtn1').addEventListener('click', () => {
+  gsap.to(cards1, {
+    opacity: 0,
+    y: 50,
+    duration: 0.5,
+    ease: 'power2.out',
+    stagger: 0.1
+  });
 });
 
-document.querySelector('#reverseBtn').addEventListener('click', () => {
-  batch.reverse();
+document.querySelector('#batchBtn2').addEventListener('click', () => {
+  gsap.to(cards2, {
+    opacity: 1,
+    y: 0,
+    duration: 0.5,
+    ease: 'power2.out',
+    stagger: 0.1
+  });
+});
+
+document.querySelector('#reverseBtn2').addEventListener('click', () => {
+  gsap.to(cards2, {
+    opacity: 0,
+    y: 50,
+    duration: 0.5,
+    ease: 'power2.out',
+    stagger: 0.1
+  });
 });

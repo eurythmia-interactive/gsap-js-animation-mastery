@@ -1,8 +1,8 @@
 # GSAP Mastery - Project TODO
 
-## Project Status: ✅ COMPLETE
+## Project Status: ✅ COMPLETE (with bug fixes in progress)
 
-Both courses are built and working. This document tracks potential future improvements.
+Both courses are built. Part 2 lessons are being refined for better demos.
 
 ---
 
@@ -26,7 +26,7 @@ Both courses are built and working. This document tracks potential future improv
 ### Part 2: Advanced Course
 - [x] 15 lessons covering production-ready techniques
 - [x] Cyan theme with CSS variables
-- [x] Auto-playing demos
+- [x] Interactive demos with buttons
 - [x] HTML + CSS + JavaScript code display
 - [x] Previous/Next navigation
 - [x] Back to Index links
@@ -34,10 +34,36 @@ Both courses are built and working. This document tracks potential future improv
 
 ---
 
+## Recent Fixes (March 2026)
+
+### Lesson 10 - Draggable Rotation
+- [x] Added missing reset button event listener
+
+### Lesson 12 - Batch Animations → Staggered Animations
+- [x] Fixed: `gsap.batch()` is not a public API
+- [x] Replaced with proper `gsap.to()` with `stagger` property
+- [x] Added second row of cards with independent controls
+
+### Lesson 13 - Timelines Best Practices → Multi-Group Choreography
+- [x] Complete redesign with 2 groups of 3 boxes
+- [x] Group A (cyan): enters left, bounces, exits right
+- [x] Group B (purple): enters right with spin, counter-bounce, exits left
+- [x] Labels and callbacks for timeline navigation
+- [x] Highlight ring pulses at crossing point
+- [x] Simplified approach: boxes start at inline positions (no opacity: 0 hiding)
+
+### Lesson 15 - Combo Project (Portfolio Grid)
+- [x] Fixed missing animateBtn handler
+- [x] Removed conflicting ScrollTrigger
+- [x] Improved drag-to-reorder with Flip animations
+- [x] "Animate All" shuffles cards with elastic animation
+- [x] "Reset Order" returns cards to original order
+
+---
+
 ## Potential Future Improvements
 
 ### Content Enhancements
-
 - [ ] Add video explanations for complex lessons
 - [ ] Create interactive exercises for each lesson
 - [ ] Add quizzes to test understanding
@@ -45,7 +71,6 @@ Both courses are built and working. This document tracks potential future improv
 - [ ] Add code sandbox integration (CodePen, CodeSandbox)
 
 ### Technical Improvements
-
 - [ ] Add TypeScript support
 - [ ] Implement proper 404 page
 - [ ] Add sitemap.xml for SEO
@@ -54,15 +79,11 @@ Both courses are built and working. This document tracks potential future improv
 - [ ] Implement dark/light theme toggle
 
 ### Part 2 Enhancements
-
-- [ ] Fix any remaining demo bugs
-- [ ] Add more visual variety to demos
-- [ ] Improve lesson-04 (horizontal scroll) demo
 - [ ] Add MorphSVG demo with proper path data
-- [ ] Improve lesson-10 (throw physics) demo
+- [ ] Improve lesson-04 (horizontal scroll) demo
+- [ ] Add more visual variety to demos
 
 ### Documentation
-
 - [ ] Create CONTRIBUTING.md
 - [ ] Add troubleshooting FAQ section
 - [ ] Create lesson template generator script
@@ -72,8 +93,8 @@ Both courses are built and working. This document tracks potential future improv
 
 ## Known Issues (Non-Critical)
 
-1. **Part 2 Lesson 4 (Horizontal Scroll):** Demo may not work perfectly in all browsers due to scroll-trigger complexity
-2. **Part 2 Lesson 9 (SVG Transforms):** Uses basic scale transforms instead of true MorphSVG (Club bonus feature)
+1. **Part 2 Lesson 6 (MotionPath):** Uses basic path animation instead of complex MorphSVG
+2. **Part 2 Lesson 9 (SVG Transforms):** Uses scale transforms instead of true MorphSVG
 
 ---
 
@@ -114,5 +135,21 @@ git commit -m "message"
 
 ---
 
-*Document version: 1.0*  
+## Key Lesson Updates
+
+### Lesson 12: From gsap.batch() to Stagger
+**Before:** Used non-existent `gsap.batch()` API
+**After:** Uses proven `gsap.to()` with `stagger` property
+
+### Lesson 13: From Simple Bounce to Multi-Group Choreography
+**Before:** 3 boxes doing simple fade + bounce
+**After:** 2 groups of 3 boxes with interlocking dance-like choreography
+
+### Lesson 15: From Broken to Working
+**Before:** Missing button handler, conflicting ScrollTrigger
+**After:** Clean Draggable + Flip integration
+
+---
+
+*Document version: 1.1*
 *Last updated: March 2026*

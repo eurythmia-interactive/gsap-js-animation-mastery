@@ -77,11 +77,11 @@
 document.<span class="method">querySelector</span>(<span class="string">'#morphBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
   <span class="keyword">if</span> (isExpanded) {
     gsap.<span class="method">to</span>(path, {
-      <span class="property">scaleX</span>: <span class="number">1.3</span>,
-      <span class="property">scaleY</span>: <span class="number">0.7</span>,
+      <span class="property">scaleX</span>: <span class="number">1.5</span>,
+      <span class="property">scaleY</span>: <span class="number">1.5</span>,
       <span class="property">transformOrigin</span>: <span class="string">'50% 50%'</span>,
       <span class="property">duration</span>: <span class="number">1</span>,
-      <span class="property">ease</span>: <span class="string">'power2.inOut'</span>
+      <span class="property">ease</span>: <span class="string">'elastic.out(1, 0.5)'</span>
     });
   } <span class="keyword">else</span> {
     gsap.<span class="method">to</span>(path, {

@@ -9,11 +9,25 @@ const demo = document.querySelector('#demo');
 Draggable.create(box, {
   type: 'x,y',
   bounds: demo,
+  onDrag: function() {
+    gsap.to(box, {
+      rotation: '-=2',
+      duration: 0.1
+    });
+  },
   onDragEnd: function() {
     gsap.to(box, {
-      rotation: '+=15',
+      rotation: '-=30',
       duration: 0.5,
       ease: 'elastic.out(1, 0.5)'
     });
   }
+});
+
+document.querySelector('#resetBtn').addEventListener('click', () => {
+  gsap.to(box, {
+    rotation: 0,
+    duration: 0.5,
+    ease: 'power2.out'
+  });
 });

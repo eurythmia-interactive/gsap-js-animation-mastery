@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lesson 12 - Batch Animations</title>
+  <title>Lesson 12 - Staggered Animations</title>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -24,14 +24,14 @@
         <span>Part 2: Advanced</span>
       </div>
 
-      <h1>Batch Animations</h1>
-      <p>Use gsap.batch() to efficiently animate multiple elements with smart fan-out.</p>
+<h1>Staggered Animations</h1>
+        <p>Use gsap.to() with the stagger property to efficiently animate multiple elements with cascading timing.</p>
 
       <div class="demo-section">
         <div class="demo-header">
-          <span class="demo-title">Demo - Staggered Cards</span>
+          <span class="demo-title">Demo - Staggered Card Animation</span>
         </div>
-        <div class="demo-container" id="demo" style="flex-wrap: wrap; gap: 16px; align-items: flex-start; height: auto; min-height: 300px; padding: 20px;">
+        <div class="demo-container" id="demo" style="flex-wrap: wrap; gap: 16px; align-items: flex-start; height: auto; min-height: auto; padding: 20px;">
           <div class="batch-card">Card 1</div>
           <div class="batch-card">Card 2</div>
           <div class="batch-card">Card 3</div>
@@ -40,8 +40,21 @@
           <div class="batch-card">Card 6</div>
         </div>
         <div class="demo-controls">
-          <button class="demo-btn primary" id="batchBtn">Batch Enter</button>
-          <button class="demo-btn" id="reverseBtn">Reverse</button>
+          <button class="demo-btn primary" id="batchBtn1">Batch Enter 1st Line</button>
+          <button class="demo-btn" id="reverseBtn1">Reverse 1st Line</button>
+        </div>
+
+        <div class="demo-container" id="demo2" style="flex-wrap: wrap; gap: 16px; align-items: flex-start; height: auto; min-height: auto; padding: 20px; margin-top: 20px;">
+          <div class="batch-card-2">Card 7</div>
+          <div class="batch-card-2">Card 8</div>
+          <div class="batch-card-2">Card 9</div>
+          <div class="batch-card-2">Card 10</div>
+          <div class="batch-card-2">Card 11</div>
+          <div class="batch-card-2">Card 12</div>
+        </div>
+        <div class="demo-controls">
+          <button class="demo-btn primary" id="batchBtn2">Batch Enter 2nd Line</button>
+          <button class="demo-btn" id="reverseBtn2">Reverse 2nd Line</button>
         </div>
       </div>
 
@@ -70,28 +83,42 @@
           <div class="code-content">
             <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
 
-<span class="keyword">const</span> cards = document.<span class="method">querySelectorAll</span>(<span class="string">'.batch-card'</span>);
+<span class="keyword">const</span> cards1 = document.<span class="method">querySelectorAll</span>(<span class="string">'.batch-card'</span>);
+<span class="keyword">const</span> cards2 = document.<span class="method">querySelectorAll</span>(<span class="string">'.batch-card-2'</span>);
 
-<span class="comment">// Set initial state</span>
-gsap.<span class="method">set</span>(cards, { <span class="property">opacity</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">50</span> });
+gsap.<span class="method">set</span>(cards1, { <span class="property">opacity</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">50</span> });
+gsap.<span class="method">set</span>(cards2, { <span class="property">opacity</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">50</span> });
 
-<span class="comment">// Create batch animation</span>
-<span class="keyword">const</span> batch = gsap.<span class="method">batch</span>(cards, {
-  <span class="property">duration</span>: <span class="number">0.5</span>,
-  <span class="property">ease</span>: <span class="string">'power2.out'</span>,
-  <span class="property">stagger</span>: <span class="number">0.1</span>,
-  <span class="property">onUpdate</span>: <span class="keyword">function</span>(self) {
-    <span class="comment">// self.items = elements in this batch</span>
-    <span class="comment">// self.events = batch event (start, end, enter)</span>
-  }
+document.<span class="method">querySelector</span>(<span class="string">'#batchBtn1'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  gsap.<span class="method">to</span>(cards1, {
+    <span class="property">opacity</span>: <span class="number">1</span>, <span class="property">y</span>: <span class="number">0</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>, <span class="property">ease</span>: <span class="string">'power2.out'</span>,
+    <span class="property">stagger</span>: <span class="number">0.1</span>
+  });
 });
 
-document.<span class="method">querySelector</span>(<span class="string">'#batchBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
-  batch.<span class="method">enter</span>();
+document.<span class="method">querySelector</span>(<span class="string">'#reverseBtn1'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  gsap.<span class="method">to</span>(cards1, {
+    <span class="property">opacity</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">50</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>, <span class="property">ease</span>: <span class="string">'power2.out'</span>,
+    <span class="property">stagger</span>: <span class="number">0.1</span>
+  });
 });
 
-document.<span class="method">querySelector</span>(<span class="string">'#reverseBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
-  batch.<span class="method">reverse</span>();
+document.<span class="method">querySelector</span>(<span class="string">'#batchBtn2'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  gsap.<span class="method">to</span>(cards2, {
+    <span class="property">opacity</span>: <span class="number">1</span>, <span class="property">y</span>: <span class="number">0</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>, <span class="property">ease</span>: <span class="string">'power2.out'</span>,
+    <span class="property">stagger</span>: <span class="number">0.1</span>
+  });
+});
+
+document.<span class="method">querySelector</span>(<span class="string">'#reverseBtn2'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  gsap.<span class="method">to</span>(cards2, {
+    <span class="property">opacity</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">50</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>, <span class="property">ease</span>: <span class="string">'power2.out'</span>,
+    <span class="property">stagger</span>: <span class="number">0.1</span>
+  });
 });</code></pre>
           </div>
         </div>
@@ -99,20 +126,20 @@ document.<span class="method">querySelector</span>(<span class="string">'#revers
 
       <div class="lesson-content">
         <h2>How It Works</h2>
-        <p><code>gsap.batch()</code> creates a smart batch animation that handles elements in groups, reducing the number of callbacks and improving performance for large lists.</p>
+        <p>Use <code>gsap.to()</code> with the <code>stagger</code> property to efficiently animate multiple elements with smart timing delays.</p>
 
         <div class="concept">
-          <h3>Batch Methods</h3>
+          <h3>Stagger Properties</h3>
           <ul>
-            <li><code>batch.enter()</code> - Animate elements that match the selector</li>
-            <li><code>batch.exit()</code> - Reverse animation for matching elements</li>
-            <li><code>batch.reverse()</code> - Toggle direction</li>
+            <li><code>stagger: 0.1</code> - Delay between each element's animation start</li>
+            <li><code>stagger: { each: 0.1 }</code> - Same as above, explicit form</li>
+            <li><code>stagger: { from: 'end' }</code> - Start from the last element</li>
           </ul>
         </div>
 
         <div class="tip">
           <h3>Performance</h3>
-          <p>Batch is especially useful when animating 50+ elements. It groups updates to reduce layout thrashing.</p>
+          <p>Stagger is optimized by GSAP to minimize layout thrashing. For 50+ elements, consider using <code>will-change</code> CSS property.</p>
         </div>
       </div>
     </div>

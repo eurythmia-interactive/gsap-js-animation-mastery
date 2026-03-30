@@ -25,7 +25,7 @@
       </div>
 
       <h1>Combo Project: Interactive Portfolio</h1>
-      <p>Put it all together! This project combines Draggable, Flip, ScrollTrigger, and timelines.</p>
+      <p>Put it all together! This project combines Draggable and Flip to create a reorderable card grid.</p>
 
       <div class="demo-section">
         <div class="demo-header">
@@ -72,67 +72,48 @@
           </div>
           <div class="code-content">
             <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
-<span class="keyword">import</span> { ScrollTrigger } <span class="keyword">from</span> <span class="string">'gsap/ScrollTrigger'</span>;
 <span class="keyword">import</span> { Draggable } <span class="keyword">from</span> <span class="string">'gsap/Draggable'</span>;
 <span class="keyword">import</span> { Flip } <span class="keyword">from</span> <span class="string">'gsap/Flip'</span>;
 
-gsap.<span class="method">registerPlugin</span>(ScrollTrigger, Draggable, Flip);
+gsap.<span class="method">registerPlugin</span>(Draggable, Flip);
 
 <span class="keyword">const</span> grid = document.<span class="method">querySelector</span>(<span class="string">'#portfolioGrid'</span>);
-<span class="keyword">const</span> cards = document.<span class="method">querySelectorAll</span>(<span class="string">'.portfolio-card'</span>);
-<span class="keyword">let</span> draggables = [];
+<span class="keyword">const</span> cards = gsap.<span class="method">utils.toArray</span>(<span class="string">'.portfolio-card'</span>);
+<span class="keyword">const</span> animateBtn = document.<span class="method">querySelector</span>(<span class="string">'#animateBtn'</span>);
+<span class="keyword">const</span> resetBtn = document.<span class="method">querySelector</span>(<span class="string">'#resetBtn'</span>);
 
 <span class="comment">// Make cards draggable</span>
-cards.<span class="method">forEach</span>(card => {
-  <span class="keyword">const</span> drag = Draggable.<span class="method">create</span>(card, {
-    <span class="property">type</span>: <span class="string">'x,y'</span>,
-    <span class="property">bounds</span>: grid,
-    <span class="property">onDragEnd</span>: <span class="keyword">function</span>() {
-      reorderCards(<span class="keyword">this</span>.<span class="property">target</span>);
-    }
-  });
-  draggables.<span class="method">push</span>(drag[<span class="number">0</span>]);
+Draggable.<span class="method">create</span>(cards, {
+  <span class="property">type</span>: <span class="string">'x,y'</span>,
+  <span class="property">bounds</span>: grid,
+  <span class="property">edgeResistance</span>: <span class="number">0.65</span>,
+  <span class="property">onDragStart</span>: <span class="keyword">function</span>() {
+    gsap.<span class="method">to</span>(<span class="keyword">this</span>.<span class="property">target</span>, { <span class="property">scale</span>: <span class="number">1.05</span>, <span class="property">zIndex</span>: <span class="number">100</span>, <span class="property">duration</span>: <span class="number">0.2</span> });
+  },
+  <span class="property">onDragEnd</span>: <span class="keyword">function</span>() {
+    <span class="keyword">const</span> target = <span class="keyword">this</span>.<span class="property">target</span>;
+    gsap.<span class="method">to</span>(target, { <span class="property">scale</span>: <span class="number">1</span>, <span class="property">zIndex</span>: <span class="number">1</span>, <span class="property">duration</span>: <span class="number">0.2</span> });
+    
+    <span class="keyword">const</span> state = Flip.<span class="method">getState</span>(cards);
+    <span class="comment">// Reorder logic...</span>
+    <span class="comment">// Then Flip.from(state, { duration: 0.5 }) animates the transition</span>
+  }
 });
 
-<span class="comment">// Flip animation when reordering</span>
-<span class="keyword">function</span> <span class="method">reorderCards</span>(draggedCard) {
+<span class="comment">// Shuffle cards with elastic animation</span>
+animateBtn.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
   <span class="keyword">const</span> state = Flip.<span class="method">getState</span>(cards);
-  
-  <span class="comment">// Find insertion point based on position</span>
-  <span class="keyword">const</span> cardArray = Array.<span class="method">from</span>(cards);
-  <span class="keyword">const</span> rect = draggedCard.<span class="method">getBoundingClientRect</span>();
-  <span class="keyword">const</span> centerY = rect.<span class="property">top</span> + rect.<span class="property">height</span> / <span class="number">2</span>;
-  
-  <span class="keyword">let</span> insertBefore = <span class="keyword">null</span>;
-  cardArray.<span class="method">forEach</span>(card => {
-    <span class="keyword">if</span> (card !== draggedCard) {
-      <span class="keyword">const</span> r = card.<span class="method">getBoundingClientRect</span>();
-      <span class="keyword">if</span> (centerY > r.<span class="property">top</span> + r.<span class="property">height</span> / <span class="number">2</span>) {
-        insertBefore = card;
-      }
-    }
-  });
-  
-  <span class="keyword">if</span> (insertBefore) {
-    grid.<span class="method">insertBefore</span>(draggedCard, insertBefore);
-  } <span class="keyword">else</span> {
-    grid.<span class="method">appendChild</span>(draggedCard);
-  }
-  
-  Flip.<span class="method">from</span>(state, { <span class="property">duration</span>: <span class="number">0.5</span>, <span class="property">stagger</span>: <span class="number">0.05</span> });
-}
+  <span class="keyword">const</span> randomOrder = [...cards].<span class="method">sort</span>(() => Math.<span class="method">random</span>() - <span class="number">0.5</span>);
+  randomOrder.<span class="method">forEach</span>(card => grid.<span class="method">appendChild</span>(card));
+  Flip.<span class="method">from</span>(state, { <span class="property">duration</span>: <span class="number">0.8</span>, <span class="property">stagger</span>: <span class="number">0.1</span>, <span class="property">ease</span>: <span class="string">'elastic.out(1, 0.5)'</span> });
+});
 
-<span class="comment">// Scroll-triggered entrance animation</span>
-gsap.<span class="method">from</span>(cards, {
-  <span class="property">opacity</span>: <span class="number">0</span>,
-  <span class="property">y</span>: <span class="number">50</span>,
-  <span class="property">stagger</span>: <span class="number">0.15</span>,
-  <span class="property">duration</span>: <span class="number">0.8</span>,
-  <span class="property">ease</span>: <span class="string">'power2.out'</span>,
-  <span class="property">scrollTrigger</span>: {
-    <span class="property">trigger</span>: grid,
-    <span class="property">start</span>: <span class="string">'top 80%'</span>
-  }
+<span class="comment">// Reset to original order</span>
+resetBtn.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+  <span class="keyword">const</span> state = Flip.<span class="method">getState</span>(cards);
+  <span class="keyword">const</span> sortedCards = [...cards].<span class="method">sort</span>((a, b) => <span class="method">parseInt</span>(a.dataset.id) - <span class="method">parseInt</span>(b.dataset.id));
+  sortedCards.<span class="method">forEach</span>(card => grid.<span class="method">appendChild</span>(card));
+  Flip.<span class="method">from</span>(state, { <span class="property">duration</span>: <span class="number">0.6</span>, <span class="property">stagger</span>: <span class="number">0.08</span>, <span class="property">ease</span>: <span class="string">'power2.out'</span> });
 });</code></pre>
           </div>
         </div>
@@ -145,15 +126,14 @@ gsap.<span class="method">from</span>(cards, {
         <div class="concept">
           <h3>Plugins Used</h3>
           <ul>
-            <li><strong>Draggable:</strong> Makes cards draggable with bounds</li>
-            <li><strong>Flip:</strong> Smooth reordering animations</li>
-            <li><strong>ScrollTrigger:</strong> Entrance animations on scroll</li>
+            <li><strong>Draggable:</strong> Makes cards draggable with bounds and edge resistance</li>
+            <li><strong>Flip:</strong> Captures element states and animates between them</li>
           </ul>
         </div>
 
         <div class="tip">
-          <h3>Combining Plugins</h3>
-          <p>GSAP's plugins are designed to work together. Draggable handles user input, Flip animates state changes, and ScrollTrigger adds scroll-based triggers.</p>
+          <h3>How It Works</h3>
+          <p>When you drag a card to a new position, Flip captures the current state, we reorder the DOM, then Flip animates all cards from their old positions to new positions smoothly.</p>
         </div>
 
         <div class="exercise">
@@ -163,9 +143,9 @@ gsap.<span class="method">from</span>(cards, {
           </div>
           <p>Extend this project:</p>
           <ul>
-            <li>Add click-to-expand card detail view</li>
-            <li>Add a delete animation when cards are removed</li>
-            <li>Add keyboard navigation (arrow keys to reorder)</li>
+            <li>Add a delete button that removes cards with animation</li>
+            <li>Add a filter system (show only certain cards)</li>
+            <li>Add keyboard navigation (arrow keys to move focused card)</li>
           </ul>
         </div>
       </div>

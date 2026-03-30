@@ -25,19 +25,23 @@
       </div>
 
       <h1>Timelines Best Practices</h1>
-      <p>Structure complex animations with master timelines and nested sequences.</p>
+      <p>Structure complex animations with master timelines, nested sequences, and labels.</p>
 
       <div class="demo-section">
         <div class="demo-header">
-          <span class="demo-title">Demo - Choreographed Animation</span>
+          <span class="demo-title">Demo - Multi-Group Choreography</span>
         </div>
         <div class="demo-container" id="demo">
-          <div class="demo-box" id="box1" style="background: #00d4ff; left: 20px;"></div>
-          <div class="demo-box" id="box2" style="background: #8b5cf6; left: 120px;"></div>
-          <div class="demo-box" id="box3" style="background: #ec4899; left: 220px;"></div>
+          <div class="demo-box box-cyan" id="box1" style="left: -100px; top: 140px;">A1</div>
+          <div class="demo-box box-cyan" id="box2" style="left: -100px; top: 140px;">A2</div>
+          <div class="demo-box box-cyan" id="box3" style="left: -100px; top: 140px;">A3</div>
+          <div class="demo-box box-purple" id="box4" style="right: -100px; left: auto; top: 20px;">B1</div>
+          <div class="demo-box box-purple" id="box5" style="right: -100px; left: auto; top: 20px;">B2</div>
+          <div class="demo-box box-purple" id="box6" style="right: -100px; left: auto; top: 20px;">B3</div>
+          <div class="highlight-ring" id="highlight" style="opacity: 0;"></div>
         </div>
         <div class="demo-controls">
-          <button class="demo-btn primary" id="playBtn">Play Sequence</button>
+          <button class="demo-btn primary" id="playBtn">Play Choreography</button>
           <button class="demo-btn" id="resetBtn">Reset</button>
         </div>
       </div>
@@ -53,41 +57,97 @@
           <div class="code-content">
             <pre><code><span class="keyword">import</span> { gsap } <span class="keyword">from</span> <span class="string">'gsap'</span>;
 
-<span class="keyword">const</span> boxes = [
+<span class="keyword">const</span> groupA = [
   document.<span class="method">querySelector</span>(<span class="string">'#box1'</span>),
   document.<span class="method">querySelector</span>(<span class="string">'#box2'</span>),
   document.<span class="method">querySelector</span>(<span class="string">'#box3'</span>)
 ];
 
-<span class="comment">// Master timeline with nested sequences</span>
+<span class="keyword">const</span> groupB = [
+  document.<span class="method">querySelector</span>(<span class="string">'#box4'</span>),
+  document.<span class="method">querySelector</span>(<span class="string">'#box5'</span>),
+  document.<span class="method">querySelector</span>(<span class="string">'#box6'</span>)
+];
+
+<span class="keyword">const</span> highlight = document.<span class="method">querySelector</span>(<span class="string">'#highlight'</span>);
+<span class="keyword">const</span> playBtn = document.<span class="method">querySelector</span>(<span class="string">'#playBtn'</span>);
+<span class="keyword">const</span> resetBtn = document.<span class="method">querySelector</span>(<span class="string">'#resetBtn'</span>);
+
 <span class="keyword">const</span> master = gsap.<span class="method">timeline</span>({ <span class="property">paused</span>: <span class="keyword">true</span> });
 
-<span class="comment">// Step 1: Fade in boxes sequentially</span>
-master.<span class="method">to</span>(boxes, {
-  <span class="property">opacity</span>: <span class="number">1</span>,
-  <span class="property">stagger</span>: <span class="number">0.2</span>,
-  <span class="property">duration</span>: <span class="number">0.5</span>
-});
+master
+  .<span class="method">to</span>(groupA, {
+    <span class="property">x</span>: <span class="number">350</span>,
+    <span class="property">duration</span>: <span class="number">0.8</span>,
+    <span class="property">stagger</span>: <span class="number">0.2</span>,
+    <span class="property">ease</span>: <span class="string">'power2.out'</span>
+  })
+  .<span class="method">to</span>(groupA, {
+    <span class="property">y</span>: -<span class="number">40</span>,
+    <span class="property">scale</span>: <span class="number">1.15</span>,
+    <span class="property">duration</span>: <span class="number">0.3</span>,
+    <span class="property">stagger</span>: <span class="number">0.1</span>,
+    <span class="property">ease</span>: <span class="string">'power2.out'</span>
+  }, <span class="string">'-=0.1'</span>)
+  .<span class="method">to</span>(groupA, {
+    <span class="property">y</span>: <span class="number">0</span>,
+    <span class="property">scale</span>: <span class="number">1</span>,
+    <span class="property">duration</span>: <span class="number">0.4</span>,
+    <span class="property">stagger</span>: <span class="number">0.1</span>,
+    <span class="property">ease</span>: <span class="string">'bounce.out'</span>
+  })
+  .<span class="method">to</span>(groupB, {
+    <span class="property">x</span>: -<span class="number">350</span>,
+    <span class="property">rotation</span>: <span class="number">360</span>,
+    <span class="property">duration</span>: <span class="number">0.8</span>,
+    <span class="property">stagger</span>: { <span class="property">each</span>: <span class="number">0.15</span>, <span class="property">from</span>: <span class="string">'end'</span> },
+    <span class="property">ease</span>: <span class="string">'power2.out'</span>
+  }, <span class="string">'-=0.6'</span>)
+  .<span class="method">to</span>(groupB, {
+    <span class="property">y</span>: <span class="number">30</span>,
+    <span class="property">scale</span>: <span class="number">0.85</span>,
+    <span class="property">duration</span>: <span class="number">0.35</span>,
+    <span class="property">stagger</span>: <span class="number">0.12</span>,
+    <span class="property">ease</span>: <span class="string">'power2.out'</span>
+  })
+  .<span class="method">to</span>(groupB, {
+    <span class="property">y</span>: <span class="number">0</span>,
+    <span class="property">scale</span>: <span class="number">1</span>,
+    <span class="property">duration</span>: <span class="number">0.4</span>,
+    <span class="property">stagger</span>: <span class="number">0.12</span>,
+    <span class="property">ease</span>: <span class="string">'elastic.out(1, 0.5)'</span>
+  })
+  .<span class="method">to</span>(highlight, {
+    <span class="property">opacity</span>: <span class="number">1</span>,
+    <span class="property">scale</span>: <span class="number">1.5</span>,
+    <span class="property">duration</span>: <span class="number">0.2</span>
+  })
+  .<span class="method">to</span>(highlight, {
+    <span class="property">opacity</span>: <span class="number">0</span>,
+    <span class="property">scale</span>: <span class="number">0.5</span>,
+    <span class="property">duration</span>: <span class="number">0.3</span>
+  })
+  .<span class="method">to</span>(groupA, {
+    <span class="property">x</span>: <span class="number">400</span>,
+    <span class="property">opacity</span>: <span class="number">0</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>,
+    <span class="property">stagger</span>: <span class="number">0.1</span>
+  }, <span class="string">'-=0.2'</span>)
+  .<span class="method">to</span>(groupB, {
+    <span class="property">x</span>: -<span class="number">400</span>,
+    <span class="property">rotation</span>: -<span class="number">360</span>,
+    <span class="property">opacity</span>: <span class="number">0</span>,
+    <span class="property">duration</span>: <span class="number">0.5</span>,
+    <span class="property">stagger</span>: <span class="number">0.1</span>
+  });
 
-<span class="comment">// Step 2: Bounce effect</span>
-master.<span class="method">to</span>(boxes, {
-  <span class="property">y</span>: -<span class="number">30</span>,
-  <span class="property">duration</span>: <span class="number">0.3</span>,
-  <span class="property">stagger</span>: <span class="number">0.1</span>,
-  <span class="property">ease</span>: <span class="string">'power2.out'</span>
-}, <span class="string">'-=0.2'</span>);
+playBtn.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => master.<span class="method">play</span>());
 
-master.<span class="method">to</span>(boxes, {
-  <span class="property">y</span>: <span class="number">0</span>,
-  <span class="property">duration</span>: <span class="number">0.4</span>,
-  <span class="property">stagger</span>: <span class="number">0.1</span>,
-  <span class="property">ease</span>: <span class="string">'bounce.out'</span>
-});
-
-document.<span class="method">querySelector</span>(<span class="string">'#playBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => master.<span class="method">play</span>());
-document.<span class="method">querySelector</span>(<span class="string">'#resetBtn'</span>).<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
+resetBtn.<span class="method">addEventListener</span>(<span class="string">'click'</span>, () => {
   master.<span class="method">restart</span>().<span class="method">pause</span>();
-  gsap.<span class="method">set</span>(boxes, { <span class="property">opacity</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">0</span> });
+  gsap.<span class="method">to</span>(groupA, { <span class="property">x</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">0</span>, <span class="property">scale</span>: <span class="number">1</span>, <span class="property">opacity</span>: <span class="number">1</span>, <span class="property">duration</span>: <span class="number">0.3</span> });
+  gsap.<span class="method">to</span>(groupB, { <span class="property">x</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">0</span>, <span class="property">scale</span>: <span class="number">1</span>, <span class="property">rotation</span>: <span class="number">0</span>, <span class="property">opacity</span>: <span class="number">1</span>, <span class="property">duration</span>: <span class="number">0.3</span> });
+  gsap.<span class="method">set</span>(highlight, { <span class="property">opacity</span>: <span class="number">0</span>, <span class="property">scale</span>: <span class="number">0</span> });
 });</code></pre>
           </div>
         </div>
@@ -95,21 +155,21 @@ document.<span class="method">querySelector</span>(<span class="string">'#resetB
 
       <div class="lesson-content">
         <h2>How It Works</h2>
-        <p>Timelines are the backbone of complex animations. Use labels and relative positioning to choreograph multi-step sequences.</p>
+        <p>Multi-group choreography demonstrates how timelines create sophisticated animations where multiple element groups move independently yet harmoniously.</p>
 
         <div class="concept">
-          <h3>Best Practices</h3>
+          <h3>Timeline Methods</h3>
           <ul>
-            <li><strong>Nested timelines:</strong> Break complex animations into reusable pieces</li>
-            <li><strong>Relative positioning:</strong> Use <code>+=</code> or <code>-=</code> to position relative to end</li>
-            <li><strong>Labels:</strong> Name important points with <code>.addLabel()</code></li>
-            <li><strong>Call callbacks:</strong> Use <code>.call()</code> for side effects</li>
+            <li><code>.to()</code> - Animate elements to target values</li>
+            <li><code>stagger</code> - Add delay between each element's animation</li>
+            <li><code>stagger: { from: 'end' }</code> - Reverse stagger direction</li>
+            <li><code>'+=0.5'</code> or <code>'-=0.1'</code> - Relative positioning</li>
           </ul>
         </div>
 
         <div class="tip">
-          <h3>Position Parameter</h3>
-          <p>The 3rd parameter in <code>.to()</code> controls timing. Use numbers for absolute time, strings like <code>'-=0.5'</code> for relative.</p>
+          <h3>Starting Positions</h3>
+          <p>Boxes start off-screen (left or right) via inline styles. The animation brings them into view, performs the choreography, then exits them.</p>
         </div>
       </div>
     </div>

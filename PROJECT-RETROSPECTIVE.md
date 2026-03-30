@@ -179,10 +179,10 @@ export default defineConfig({
 | 09 | SVG Transforms | Shape animations |
 | 10 | Draggable Rotation | Rotation interactions |
 | 11 | SVG Animation | Stroke dasharray |
-| 12 | Batch Animations | Efficient mass animations |
-| 13 | Timelines Best Practices | Complex sequences |
+| 12 | Staggered Animations | Efficient mass animations with stagger |
+| 13 | Multi-Group Choreography | Complex timeline sequences |
 | 14 | ScrollTrigger Callbacks | Progress tracking |
-| 15 | Combo Project | Portfolio grid |
+| 15 | Combo Project | Portfolio grid with Flip |
 
 ---
 
@@ -260,6 +260,41 @@ rotation: '+=15'
 
 // ✅ FULL SPIN
 rotation: '+=360'
+```
+
+### 6.8 Multi-Group Choreography Pattern
+
+For complex scenes with multiple element groups:
+
+1. **Start positions via inline styles** - Avoids race conditions with DOMContentLoaded
+2. **No hiding logic** - Elements stay visible at starting positions
+3. **Master timeline with labels** - Organizes phases (intro, crossing, outro)
+4. **Relative positioning** - `'intro+=0.5'` offsets nested timelines
+5. **Callbacks at key moments** - Trigger effects like highlight pulses
+
+```javascript
+master
+  .addLabel('intro')
+  .add(timelineA, 'intro')           // Start at intro label
+  .add(timelineB, 'intro+=0.5')       // Offset by 0.5s
+  .addLabel('crossing', '-=0.3')     // Before end of timelineB
+  .addCallback(() => { /* pulse */ }, 'crossing')
+```
+
+### 6.9 Stagger Over Batch
+
+`gsap.batch()` is internal-only. Use `stagger` property for mass animations:
+
+```javascript
+// ❌ batch() is not a public API
+const batch = gsap.batch(cards, { stagger: 0.1 });
+
+// ✅ Use stagger directly
+gsap.to(cards, {
+  opacity: 1,
+  stagger: 0.1,  // Delay between each card
+  duration: 0.5
+});
 ```
 
 ---
@@ -355,6 +390,36 @@ npm run dev
 **Cause:** Container didn't have fixed size, so it grew with expanded cards.
 
 **Fix:** Set `min-height` on container and card grid.
+
+### Error 8: gsap.batch() Does Not Exist
+
+**Cause:** Lesson 12 claimed to use `gsap.batch()` which is an internal utility, not a public API.
+
+**Fix:** Replaced with standard `gsap.to()` using `stagger` property for mass animations.
+
+### Error 9: Lesson 13 Initial State Race Condition
+
+**Cause:** Boxes flashed visible then disappeared because:
+- CSS `opacity: 0` was applied
+- JS `DOMContentLoaded` might not fire (script at bottom of body)
+- If event didn't fire, `gsap.set()` to hide elements never ran
+
+**Fix:** Simplified approach:
+- Boxes start at visible inline positions (left: -100px or right: -100px)
+- No hiding logic needed - animation plays from starting position
+- Reset returns boxes to starting inline positions
+
+### Error 10: Lesson 15 Missing Handler + Plugin Conflict
+
+**Cause:** 
+1. `#animateBtn` had no event listener (button did nothing)
+2. ScrollTrigger conflicted with Draggable (scroll animations interfered with drag)
+3. Reorder logic was flawed
+
+**Fix:**
+- Added missing animateBtn handler
+- Removed ScrollTrigger from lesson
+- Improved drag-to-reorder with proper Flip state capture
 
 ---
 

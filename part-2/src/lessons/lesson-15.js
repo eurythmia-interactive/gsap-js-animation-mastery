@@ -1,71 +1,99 @@
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Draggable } from 'gsap/Draggable';
 import { Flip } from 'gsap/Flip';
 
-gsap.registerPlugin(ScrollTrigger, Draggable, Flip);
+gsap.registerPlugin(Draggable, Flip);
 
 const grid = document.querySelector('#portfolioGrid');
-const cards = document.querySelectorAll('.portfolio-card');
-let draggables = [];
+const cards = gsap.utils.toArray('.portfolio-card');
+const animateBtn = document.querySelector('#animateBtn');
+const resetBtn = document.querySelector('#resetBtn');
 
-cards.forEach(card => {
-  const drag = Draggable.create(card, {
-    type: 'x,y',
-    bounds: grid,
-    onDragEnd: function() {
-      reorderCards(this.target);
-    }
-  });
-  draggables.push(drag[0]);
+let currentOrder = [1, 2, 3];
+
+cards.forEach((card, index) => {
+  card.style.cursor = 'grab';
 });
 
-function reorderCards(draggedCard) {
-  const state = Flip.getState(cards);
-
-  const cardArray = Array.from(cards);
-  const rect = draggedCard.getBoundingClientRect();
-  const centerY = rect.top + rect.height / 2;
-
-  let insertBefore = null;
-  cardArray.forEach(card => {
-    if (card !== draggedCard) {
-      const r = card.getBoundingClientRect();
-      if (centerY > r.top + r.height / 2) {
-        insertBefore = card;
+Draggable.create(cards, {
+  type: 'x,y',
+  bounds: grid,
+  edgeResistance: 0.65,
+  onDragStart: function() {
+    gsap.to(this.target, { scale: 1.05, zIndex: 100, duration: 0.2 });
+  },
+  onDragEnd: function() {
+    const target = this.target;
+    gsap.to(target, { scale: 1, zIndex: 1, duration: 0.2 });
+    
+    const state = Flip.getState(cards);
+    const cardArray = Array.from(cards);
+    const rect = target.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    let insertBefore = null;
+    
+    cardArray.forEach((card, i) => {
+      if (card !== target) {
+        const r = card.getBoundingClientRect();
+        const cardCenterX = r.left + r.width / 2;
+        const cardCenterY = r.top + r.height / 2;
+        
+        const dist = Math.hypot(centerX - cardCenterX, centerY - cardCenterY);
+        
+        if (centerY < r.bottom && centerY > r.top - 20) {
+          if (centerX < cardCenterX && !insertBefore) {
+            insertBefore = card;
+          }
+        }
       }
+    });
+    
+    const currentIndex = cardArray.indexOf(target);
+    const targetIndex = insertBefore ? cardArray.indexOf(insertBefore) : cardArray.length;
+    
+    if (currentIndex !== targetIndex) {
+      if (insertBefore) {
+        grid.insertBefore(target, insertBefore);
+      } else {
+        grid.appendChild(target);
+      }
+      
+      Flip.from(state, {
+        duration: 0.5,
+        stagger: 0.05,
+        ease: 'power2.out'
+      });
     }
-  });
-
-  if (insertBefore) {
-    grid.insertBefore(draggedCard, insertBefore);
-  } else {
-    grid.appendChild(draggedCard);
-  }
-
-  Flip.from(state, { duration: 0.5, stagger: 0.05 });
-}
-
-gsap.from(cards, {
-  opacity: 0,
-  y: 50,
-  stagger: 0.15,
-  duration: 0.8,
-  ease: 'power2.out',
-  scrollTrigger: {
-    trigger: grid,
-    start: 'top 80%'
   }
 });
 
-document.querySelector('#resetBtn').addEventListener('click', () => {
+animateBtn.addEventListener('click', () => {
   const state = Flip.getState(cards);
-  const order = [1, 2, 3];
-  const gridEl = grid;
-  cards.forEach(card => {
-    const id = card.dataset.id;
-    const targetIndex = order.indexOf(parseInt(id));
-    gridEl.appendChild(card);
+  
+  const randomOrder = [...cards].sort(() => Math.random() - 0.5);
+  randomOrder.forEach(card => grid.appendChild(card));
+  
+  Flip.from(state, {
+    duration: 0.8,
+    stagger: 0.1,
+    ease: 'elastic.out(1, 0.5)'
   });
-  Flip.from(state, { duration: 0.5, stagger: 0.05 });
+});
+
+resetBtn.addEventListener('click', () => {
+  const state = Flip.getState(cards);
+  
+  const sortedCards = [...cards].sort((a, b) => {
+    return parseInt(a.dataset.id) - parseInt(b.dataset.id);
+  });
+  
+  sortedCards.forEach(card => grid.appendChild(card));
+  
+  Flip.from(state, {
+    duration: 0.6,
+    stagger: 0.08,
+    ease: 'power2.out'
+  });
 });

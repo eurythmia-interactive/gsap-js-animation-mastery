@@ -71,8 +71,8 @@
 | 09 | SVG Transforms | Shape animation | SVG |
 | 10 | Draggable Rotation | Rotation drag | Draggable |
 | 11 | SVG Stroke | Draw-on effects | SVG |
-| 12 | Batch Animations | Mass animations | `gsap.batch()` |
-| 13 | Timelines Best Practices | Architecture | Timeline |
+| 12 | Staggered Animations | Mass animations | `stagger` property |
+| 13 | Multi-Group Choreography | Complex sequences | Timeline + Labels |
 | 14 | ScrollTrigger Callbacks | Progress | ScrollTrigger |
 | 15 | Combo Project | Portfolio grid | All combined |
 
@@ -204,8 +204,8 @@ gsap.timeline()                      // Sequence animations
 
 ```javascript
 gsap.quickTo(target, prop, options)  // Optimized updater
-gsap.batch(targets, options)          // Batch animations
-Flip.getState(targets)                 // Capture element state
+gsap.to(targets, { stagger: 0.1 })  // Staggered animations
+Flip.getState(targets)               // Capture element state
 Flip.from(state, options)            // Animate state change
 Draggable.create(target, options)    // Make draggable
 MotionPathPlugin.path(path, options)  // Animate along path
