@@ -1,0 +1,706 @@
+/* Part 7: Advanced Text Animation - Multi-Palette Theme System */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (Base)
+   ============================================ */
+
+:root {
+  /* Type Scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-hero: clamp(3rem, 8vw, 5rem);
+}
+
+/* ============================================
+   PHONE FRAME MOCKUP (from Part 6)
+   ============================================ */
+
+.demo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+  background: var(--bg-primary, #0a0a0f);
+}
+
+.phone-frame {
+  width: 375px;
+  height: 812px;
+  border-radius: 40px;
+  border: 12px solid #1a1a1a;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.phone-notch {
+  width: 150px;
+  height: 30px;
+  background: #000;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 20px 20px;
+  z-index: 10;
+}
+
+.phone-home-indicator {
+  width: 130px;
+  height: 5px;
+  background: #fff;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.3;
+}
+
+.phone-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.phone-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================
+   PALETTE 1: SUNSET GRADIENT (E1 - Landing Pages)
+   Lessons 01-03
+   ============================================ */
+
+.palette-sunset {
+  --primary: #ff6b35;
+  --primary-dark: #f5410f;
+  --primary-light: #ff8a5a;
+  --secondary: #f72585;
+  --accent: #7209b7;
+  --gradient-start: #ff6b35;
+  --gradient-mid: #f72585;
+  --gradient-end: #7209b7;
+  --background: #0a0a0f;
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121f;
+  --surface: #151520;
+  --surface-elevated: #1a1a2e;
+  --text-primary: #ffffff;
+  --text-secondary: #c4c4d4;
+  --text-muted: #8888a0;
+  --border: #2a2a3e;
+  
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-headlines: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Poppins', sans-serif;
+}
+
+.palette-sunset .gradient-bg {
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+}
+
+/* ============================================
+   PALETTE 2: FRESH MINT (E2 - E-commerce)
+   Lessons 04-06
+   ============================================ */
+
+.palette-mint {
+  --primary: #0d9488;
+  --primary-dark: #0f766e;
+  --primary-light: #14b8a6;
+  --secondary: #10b981;
+  --accent: #34d399;
+  --gradient-start: #0d9488;
+  --gradient-end: #10b981;
+  --background: #f8fafc;
+  --bg-primary: #f8fafc;
+  --bg-secondary: #e2e8f0;
+  --surface: #ffffff;
+  --surface-elevated: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border: #e2e8f0;
+  
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-headlines: 'Bebas Neue', sans-serif;
+  --font-body: 'Source Sans Pro', sans-serif;
+  --font-accent: 'Poppins', sans-serif;
+}
+
+/* ============================================
+   PALETTE 3: CORPORATE NAVY (E3 - Corporate)
+   Lessons 07-09
+   ============================================ */
+
+.palette-corporate {
+  --primary: #1e3a5f;
+  --primary-dark: #152a45;
+  --primary-light: #2d4a6f;
+  --secondary: #c9a227;
+  --accent: #d4af37;
+  --gradient-start: #1e3a5f;
+  --gradient-end: #c9a227;
+  --background: #fafbfc;
+  --bg-primary: #fafbfc;
+  --bg-secondary: #f1f4f8;
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted: #a0aec0;
+  --border: #e2e8f0;
+  
+  /* Typography */
+  --font-display: 'Abril Fatface', serif;
+  --font-headlines: 'Abril Fatface', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Cormorant Garamond', serif;
+}
+
+/* ============================================
+   PALETTE 4: PLAYFUL VIBRANT (E4 - Polls/Quizzes)
+   Lessons 10-12
+   ============================================ */
+
+.palette-playful {
+  --primary: #ff6b6b;
+  --primary-dark: #ee5a5a;
+  --primary-light: #ff8a8a;
+  --secondary: #feca57;
+  --accent: #48dbfb;
+  --gradient-start: #ff6b6b;
+  --gradient-end: #feca57;
+  --background: #1a1a2e;
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #252542;
+  --surface: #252542;
+  --surface-elevated: #2f2f4a;
+  --text-primary: #ffffff;
+  --text-secondary: #c4c4d4;
+  --text-muted: #8888a0;
+  --border: #3a3a5a;
+  
+  /* Typography */
+  --font-display: 'Poppins', sans-serif;
+  --font-headlines: 'Poppins', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+  --font-accent: 'Bebas Neue', sans-serif;
+}
+
+/* ============================================
+   PALETTE 5: DATA VIZ (E5 - Infographics)
+   Lessons 13-15
+   ============================================ */
+
+.palette-dataviz {
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --primary-light: #60a5fa;
+  --secondary: #06b6d4;
+  --accent: #14b8a6;
+  --gradient-start: #3b82f6;
+  --gradient-mid: #06b6d4;
+  --gradient-end: #14b8a6;
+  --background: #0f172a;
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --surface: #1e293b;
+  --surface-elevated: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: #334155;
+  
+  /* Typography */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-headlines: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Source Sans Pro', sans-serif;
+}
+
+/* ============================================
+   PALETTE 6: ARTISTIC PASTEL (E6 - Animated Poetry)
+   Lessons 16-18
+   ============================================ */
+
+.palette-pastel {
+  --primary: #c4b5fd;
+  --primary-dark: #a78bfa;
+  --primary-light: #ddd6fe;
+  --secondary: #fda4af;
+  --accent: #fdba74;
+  --gradient-start: #c4b5fd;
+  --gradient-mid: #fda4af;
+  --gradient-end: #fdba74;
+  --background: #1c1917;
+  --bg-primary: #1c1917;
+  --bg-secondary: #292524;
+  --surface: #292524;
+  --surface-elevated: #3f3f46;
+  --text-primary: #fafaf9;
+  --text-secondary: #d6d3d1;
+  --text-muted: #a8a29e;
+  --border: #44403c;
+  
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-headlines: 'Playfair Display', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  --font-accent: 'Inter', sans-serif;
+}
+
+/* ============================================
+   PALETTE 7: CINEMATIC DARK (E7 - Storytelling)
+   Lessons 19-21
+   ============================================ */
+
+.palette-cinematic {
+  --primary: #7c3aed;
+  --primary-dark: #6d28d9;
+  --primary-light: #8b5cf6;
+  --secondary: #db2777;
+  --accent: #f472b6;
+  --gradient-start: #7c3aed;
+  --gradient-mid: #a855f7;
+  --gradient-end: #db2777;
+  --background: #030712;
+  --bg-primary: #030712;
+  --bg-secondary: #0a0a14;
+  --surface: #0a0a14;
+  --surface-elevated: #111827;
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --border: #1f1f2e;
+  
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-headlines: 'Playfair Display', serif;
+  --font-body: 'Source Sans Pro', sans-serif;
+  --font-accent: 'Poppins', sans-serif;
+}
+
+/* ============================================
+   LESSON PAGE LAYOUT
+   ============================================ */
+
+.lesson-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding: 2rem;
+  font-family: var(--font-body);
+}
+
+.lesson-header {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.lesson-title {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+}
+
+.lesson-subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+}
+
+.lesson-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+@media (min-width: 1024px) {
+  .lesson-content {
+    /* Desktop: stacked vertically - demo above, code below */
+    flex-direction: column;
+  }
+}
+
+/* ============================================
+   DEMO SECTION
+   ============================================ */
+
+.demo-section {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  width: 100%;
+}
+
+/* ============================================
+   CODE SECTION  
+   ============================================ */
+
+.code-section {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  width: 100%;
+}
+
+.demo-title {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+/* Demo Container */
+.demo-container {
+  background: var(--background);
+  border-radius: 12px;
+  padding: 2rem;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* View Mode Toggle */
+.view-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.view-toggle button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface-elevated);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-toggle button:hover,
+.view-toggle button.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Animation Controls */
+.animation-controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+}
+
+/* View Mode Toggle */
+.view-toggle {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.code-block {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--text-primary);
+  white-space: pre;
+  background: var(--surface);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+/* Code section titles */
+.code-title {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+/* Syntax highlighting */
+.code-block .keyword { color: #c792ea; }
+.code-block .string { color: #c3e88d; }
+.code-block .number { color: #f78c6c; }
+.code-block .comment { color: #546e7a; }
+.code-block .tag { color: #f07178; }
+.code-block .attr { color: #ffcb6b; }
+.code-block .value { color: #c3e88d; }
+
+/* ============================================
+   ANIMATION ELEMENTS
+   ============================================ */
+
+/* Hero Text */
+.text-hero {
+  font-size: var(--text-hero);
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-headlines);
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Subheadline */
+.text-subhead {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-family: var(--font-accent);
+  margin-top: 1rem;
+}
+
+/* Body Text */
+.text-body {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* Price Display */
+.price-display {
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  font-family: var(--font-headlines);
+  color: var(--primary);
+}
+
+/* Stat Counter */
+.stat-number {
+  font-size: var(--text-6xl);
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: var(--primary);
+}
+
+/* Poem Text */
+.poem-text {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: var(--text-2xl);
+  color: var(--text-primary);
+  line-height: 2;
+  text-align: center;
+}
+
+/* Chapter Title */
+.chapter-title {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+}
+
+/* Top Navigation */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-nav__link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.top-nav__link:hover {
+  color: var(--primary);
+}
+
+.top-nav__title {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.top-nav__link--hub {
+  color: var(--accent);
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background: var(--surface-elevated);
+  border-color: var(--primary);
+}
+
+.nav-link--prev { color: var(--text-muted); }
+.nav-link--next { background: var(--primary); border-color: var(--primary); color: white; }
+.nav-link--next:hover { background: var(--primary-dark); }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .lesson-title {
+    font-size: var(--text-3xl);
+  }
+  
+  .demo-wrapper {
+    padding: 1rem;
+  }
+  
+  .phone-frame {
+    transform: scale(0.85);
+    transform-origin: top center;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-frame {
+    transform: scale(0.75);
+  }
+  
+  .text-hero {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+}
+
+/* ============================================
+   SCREEN MODE CONTAINERS
+   ============================================ */
+
+/* Desktop Mode */
+.screen-desktop {
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Phone Sim Mode */
+.screen-phone-sim {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.screen-phone-sim .phone-frame {
+  transform: scale(1);
+}
+
+/* Mobile Responsive Mode */
+.screen-mobile {
+  width: 100%;
+  padding: 1rem;
+}
+
+@media (max-width: 480px) {
+  .screen-mobile {
+    padding: 0.5rem;
+  }
+}
+
+/* Hidden by default */
+.screen-desktop.hidden,
+.screen-phone-sim.hidden,
+.screen-mobile.hidden {
+  display: none;
+}

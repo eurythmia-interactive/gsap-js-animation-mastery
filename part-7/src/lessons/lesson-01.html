@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 01: The Big Reveal - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    /**
+     * splitText utility - splits text into spans for animation
+     */
+    function splitText(element, type = 'chars') {
+      if (!(element instanceof HTMLElement)) return [];
+      if (type !== 'chars' && type !== 'words') return [];
+      
+      const originalText = element.textContent || '';
+      element.dataset.gsapSplitOriginal = originalText;
+      element.innerHTML = '';
+      
+      if (originalText === '') return [];
+      
+      if (type === 'chars') {
+        return Array.from(originalText).map(char => {
+          const span = document.createElement('span');
+          span.innerHTML = char === ' ' ? '&nbsp;' : char;
+          span.style.display = 'inline-block';
+          element.appendChild(span);
+          return span;
+        });
+      } else {
+        const words = originalText.split(' ');
+        return words.map(word => {
+          const span = document.createElement('span');
+          span.textContent = word;
+          span.style.display = 'inline-block';
+          element.appendChild(span);
+          return span;
+        });
+      }
+    }
+  </script>
+  <style>
+    .demo-container {
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 10vw, 6rem);
+      color: #ffffff;
+      text-align: center;
+      line-height: 1;
+      overflow: hidden;
+    }
+    
+    .hero-subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      margin-top: 1.5rem;
+      opacity: 0;
+    }
+    
+    .glow-orb {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    
+    .glow-orb--orange {
+      background: #ff6b35;
+      top: -100px;
+      left: -100px;
+    }
+    
+    .glow-orb--pink {
+      background: #f72585;
+      bottom: -100px;
+      right: -100px;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-sunset">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">The Big Reveal</h1>
+    <p class="lesson-subtitle">Full headline fade + rise with character stagger</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - Character Wave Animation</div>
+      <div class="demo-container">
+        <div class="glow-orb glow-orb--orange"></div>
+        <div class="glow-orb glow-orb--pink"></div>
+        
+        <h2 class="hero-title" id="hero-title">DIGITAL CREATIVE</h2>
+        <p class="hero-subtitle" id="hero-subtitle">We craft immersive digital experiences</p>
+        
+        <div class="view-toggle">
+          <button class="active" onclick="setView('desktop')">Desktop</button>
+          <button onclick="setView('phone')">Phone Sim</button>
+          <button onclick="setView('mobile')">Mobile</button>
+        </div>
+        
+        <div class="animation-controls" style="margin-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="playAnimation()">▶ Play</button>
+          <button class="btn btn-secondary" onclick="resetAnimation()">Reset</button>
+          <button class="btn btn-secondary" onclick="replayAnimation()">Replay</button>
+        </div>
+      </div>
+      
+      <!-- Phone Sim View -->
+      <div class="phone-sim-container" id="phone-sim" style="display: none; margin-top: 1rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); padding: 2rem;">
+            <div class="glow-orb glow-orb--orange" style="width: 200px; height: 200px;"></div>
+            <div class="glow-orb glow-orb--pink" style="width: 200px; height: 200px;"></div>
+            <h2 class="hero-title" style="font-size: 2.5rem;" id="hero-title-phone">DIGITAL<br>CREATIVE</h2>
+            <p class="hero-subtitle" id="hero-subtitle-phone" style="font-size: 0.875rem;">We craft immersive</p>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;h2</span> <span class="attr">id</span>=<span class="string">"hero-title"</span><span class="tag">&gt;</span>DIGITAL CREATIVE<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">id</span>=<span class="string">"hero-subtitle"</span><span class="tag">&gt;</span>We craft immersive...<span class="tag">&lt;/p&gt;</span>
+
+<span class="comment">&lt;!-- View Toggle --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"view-toggle"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="string">"setView('desktop')"</span><span class="tag">&gt;</span>Desktop<span class="tag">&lt;/button&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="string">"setView('phone')"</span><span class="tag">&gt;</span>Phone Sim<span class="tag">&lt;/button&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="string">"setView('mobile')"</span><span class="tag">&gt;</span>Mobile<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript Animation</div>
+      <pre class="code-block"><span class="comment">// Custom splitText function (free alternative)</span>
+<span class="keyword">const</span> chars = <span class="attr">splitText</span>(<span class="attr">heroElement</span>, <span class="string">"chars"</span>);
+
+<span class="comment">// Set initial state - characters start below and invisible</span>
+gsap.<span class="attr">set</span>(chars, {
+  <span class="attr">opacity</span>: <span class="number">0</span>,
+  <span class="attr">y</span>: <span class="number">100</span>,
+  <span class="attr">rotationX</span>: -<span class="number">90</span>
+});
+
+<span class="comment">// Create animation timeline</span>
+<span class="keyword">const</span> tl = gsap.<span class="attr">timeline</span>();
+
+tl.<span class="attr">to</span>(chars, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">y</span>: <span class="number">0</span>,
+  <span class="attr">rotationX</span>: <span class="number">0</span>,
+  <span class="attr">stagger</span>: <span class="number">0.03</span>,
+  <span class="attr">duration</span>: <span class="number">0.8</span>,
+  <span class="attr">ease</span>: <span class="string">"back.out(1.7)"</span>
+})
+.<span class="attr">to</span>(<span class="string">"#hero-subtitle"</span>, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">y</span>: <span class="number">0</span>,
+  <span class="attr">duration</span>: <span class="number">0.6</span>,
+  <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+}, <span class="string">"-=0.3"</span>);
+
+<span class="comment">// Control functions</span>
+<span class="keyword">function</span> playAnimation() { tl.<span class="attr">play</span>(); }
+<span class="keyword">function</span> resetAnimation() {
+  gsap.<span class="attr">set</span>(chars, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">100</span>, <span class="attr">rotationX</span>: -<span class="number">90</span> });
+  tl.<span class="attr">restart</span>();
+}</pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// Custom splitText creates spans for each character
+</span>  <span class="attr">splitText</span>(element, <span class="string">"chars"</span>)  <span class="comment">// Returns array of spans
+</span>  <span class="attr">splitText</span>(element, <span class="string">"words"</span>)  <span class="comment">// Returns array of word spans
+
+<span class="comment">// stagger: 0.03 means 30ms between each character
+</span><span class="comment">// back.out(1.7) creates a bouncy overshoot effect
+</span><span class="comment">// rotationX gives a 3D flip feeling</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="../index.html" class="nav-link nav-link--prev">← Part 7 Index</a>
+    <a href="lesson-02.html" class="nav-link nav-link--next">Next: Staggered Headlines →</a>
+  </nav>
+
+  <script>
+    let tl;
+    let split;
+    
+    function initAnimation() {
+      // Use custom splitText instead of official SplitText plugin
+      const element = document.getElementById('hero-title');
+      split = splitText(element, 'chars');
+      
+      gsap.set(split, {
+        opacity: 0,
+        y: 100,
+        rotationX: -90
+      });
+      
+      gsap.set("#hero-subtitle", {
+        opacity: 0,
+        y: 20
+      });
+      
+      tl = gsap.timeline();
+      
+      tl.to(split, {
+        opacity: 1,
+        y: 0,
+        rotationX: 0,
+        stagger: 0.03,
+        duration: 0.8,
+        ease: "back.out(1.7)"
+      })
+      .to("#hero-subtitle", {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out"
+      }, "-=0.3");
+      
+      tl.pause();
+    }
+    
+    function playAnimation() { tl.play(); }
+    function resetAnimation() {
+      if (split) {
+        gsap.set(split, { opacity: 0, y: 100, rotationX: -90 });
+      }
+      gsap.set("#hero-subtitle", { opacity: 0, y: 20 });
+      if (tl) tl.restart();
+    }
+    function replayAnimation() { if (tl) tl.restart(); }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      const phoneSim = document.getElementById('phone-sim');
+      if (view === 'phone') {
+        phoneSim.style.display = 'block';
+      } else {
+        phoneSim.style.display = 'none';
+      }
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>

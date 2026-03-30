@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 15: Card Proportions - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      border: 12px solid #38383a;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 150px;
+      height: 30px;
+      background: #000;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 130px;
+      height: 5px;
+      background: #fff;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-ios">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Card Proportions</h1>
+    <p class="lesson-subtitle">Full-width cards, corner radius, and e-commerce product layouts</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #000; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #000;">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-white text-sm font-semibold">9:41</span>
+              <div class="flex items-center gap-1">
+                <span class="text-white text-xs">●●●●</span>
+              </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="px-4 pt-2 pb-4">
+              <h1 class="text-white text-xl font-bold">Products</h1>
+              <p class="text-gray-500 text-sm">Featured items</p>
+            </div>
+            
+            <!-- Full-Width Card -->
+            <div class="px-4 pb-4 space-y-4">
+              <!-- Featured Product Card -->
+              <div class="bg-zinc-900 rounded-3xl p-5">
+                <div class="aspect-video bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl mb-4 flex items-center justify-center">
+                  <span class="text-white/30 text-4xl font-bold">01</span>
+                </div>
+                <div class="flex items-start justify-between">
+                  <div>
+                    <h3 class="text-white font-semibold text-lg">Premium Headphones</h3>
+                    <p class="text-gray-500 text-sm mt-1">Wireless noise-canceling</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-white font-bold text-lg">$299</p>
+                    <p class="text-green-400 text-xs">In Stock</p>
+                  </div>
+                </div>
+                <button class="w-full mt-4 min-h-[48px] bg-blue-600 text-white rounded-xl font-semibold">
+                  Add to Cart
+                </button>
+              </div>
+              
+              <!-- Horizontal Scroll Cards -->
+              <div class="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">You May Also Like</div>
+              <div class="flex gap-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x">
+                <div class="min-w-[200px] snap-start">
+                  <div class="bg-zinc-900 rounded-2xl p-4">
+                    <div class="aspect-square bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl mb-3 flex items-center justify-center">
+                      <span class="text-white/30 text-2xl font-bold">02</span>
+                    </div>
+                    <p class="text-white text-sm font-medium">Smart Watch</p>
+                    <p class="text-gray-500 text-xs mt-1">$199</p>
+                  </div>
+                </div>
+                <div class="min-w-[200px] snap-start">
+                  <div class="bg-zinc-900 rounded-2xl p-4">
+                    <div class="aspect-square bg-gradient-to-br from-orange-500 to-red-600 rounded-xl mb-3 flex items-center justify-center">
+                      <span class="text-white/30 text-2xl font-bold">03</span>
+                    </div>
+                    <p class="text-white text-sm font-medium">Wireless Earbuds</p>
+                    <p class="text-gray-500 text-xs mt-1">$129</p>
+                  </div>
+                </div>
+                <div class="min-w-[200px] snap-start">
+                  <div class="bg-zinc-900 rounded-2xl p-4">
+                    <div class="aspect-square bg-gradient-to-br from-green-500 to-cyan-600 rounded-xl mb-3 flex items-center justify-center">
+                      <span class="text-white/30 text-2xl font-bold">04</span>
+                    </div>
+                    <p class="text-white text-sm font-medium">Speaker</p>
+                    <p class="text-gray-500 text-xs mt-1">$89</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Card Radius Guide -->
+              <div class="bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
+                <div class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-3">Corner Radius Scale</div>
+                <div class="flex gap-3">
+                  <div class="flex-1">
+                    <div class="h-12 bg-blue-600/30 rounded-lg mb-2"></div>
+                    <p class="text-gray-500 text-xs text-center">rounded-lg</p>
+                    <p class="text-gray-600 text-[10px] text-center">8px</p>
+                  </div>
+                  <div class="flex-1">
+                    <div class="h-12 bg-blue-600/30 rounded-xl mb-2"></div>
+                    <p class="text-gray-500 text-xs text-center">rounded-xl</p>
+                    <p class="text-gray-600 text-[10px] text-center">12px</p>
+                  </div>
+                  <div class="flex-1">
+                    <div class="h-12 bg-blue-600/30 rounded-2xl mb-2"></div>
+                    <p class="text-gray-500 text-xs text-center">rounded-2xl</p>
+                    <p class="text-gray-600 text-[10px] text-center">16px</p>
+                  </div>
+                  <div class="flex-1">
+                    <div class="h-12 bg-blue-600/30 rounded-3xl mb-2"></div>
+                    <p class="text-gray-500 text-xs text-center">rounded-3xl</p>
+                    <p class="text-gray-600 text-[10px] text-center">24px</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- Full-width card --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bg-zinc-900 rounded-3xl p-5"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"aspect-video bg-zinc-800 
+               rounded-2xl mb-4"</span><span class="tag">&gt;</span><span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;h3</span> <span class="attr">class</span>=<span class="string">"text-white font-semibold"</span><span class="tag">&gt;</span>Product<span class="tag">&lt;/h3&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"text-gray-400 text-sm"</span><span class="tag">&gt;</span>$99<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- Horizontal scroll cards --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"flex gap-4 overflow-x-auto 
+               pb-4 snap-x"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"min-w-[280px] snap-start"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bg-zinc-900 rounded-2xl p-4"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"aspect-[4/3] bg-zinc-800 
+                   rounded-xl mb-3"</span><span class="tag">&gt;</span><span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"text-white text-sm"</span><span class="tag">&gt;</span>Card<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Card Design Guidelines</div>
+        <pre class="code-block"><span class="comment">/* Mobile card corner radius */</span>
+<span class="attr">rounded-lg</span>:  <span class="number">8px</span>;   <span class="comment">/* Small elements */</span>
+<span class="attr">rounded-xl</span>: <span class="number">12px</span>;  <span class="comment">/* Buttons, inputs */</span>
+<span class="attr">rounded-2xl</span>: <span class="number">16px</span>; <span class="comment">/* Cards */</span>
+<span class="attr">rounded-3xl</span>: <span class="number">24px</span>; <span class="comment">/* Large cards */</span>
+
+<span class="comment">/* Card padding scale */</span>
+<span class="attr">p-4</span>:  <span class="number">16px</span>;  <span class="comment">/* Compact */</span>
+<span class="attr">p-5</span>:  <span class="number">20px</span>;  <span class="comment">/* Standard */</span>
+<span class="attr">p-6</span>:  <span class="number">24px</span>;  <span class="comment">/* Spacious */</span>
+
+<span class="comment">/* Card proportions */</span>
+<span class="attr">aspect-video</span>: <span class="number">16/9</span>;   <span class="comment">/* Full-width image */</span>
+<span class="attr">w-full</span>: <span class="number">100%</span>;            <span class="comment">/* Full width */</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-14.html" class="nav-link nav-link--prev">← Aspect Ratios</a>
+    <a href="lesson-16.html" class="nav-link nav-link--next">Next: Swipe & Gestures →</a>
+  </nav>
+</body>
+</html>

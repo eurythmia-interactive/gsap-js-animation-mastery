@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 01 - Font Pairing Principles - Landing Page Design</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans'],
+            display: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <span class="nav-link disabled">Previous</span>
+        <a href="lesson-02.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 01</span>
+        <span>Part 5: Landing Page Design</span>
+      </div>
+
+      <h1>Font Pairing Principles</h1>
+      <p>The most effective landing page typography combines fonts with distinct personalities. In this lesson, we'll explore the contrast pairing formula that creates visual hierarchy and brand character.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Contrast Pairing: Serif + Sans</span>
+        </div>
+        <div class="demo-container">
+          <div class="w-full max-w-2xl text-center">
+            <h2 class="font-display text-5xl font-bold text-white mb-4">Build Something Beautiful</h2>
+            <p class="text-lg text-zinc-400 mb-8">The perfect balance of elegance and clarity. Our platform helps you create stunning landing pages without compromising on performance.</p>
+            <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-8 py-4 rounded-full transition-colors duration-200">
+              Start Free Trial
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>HTML with Tailwind Classes</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="punctuation">&lt;</span><span class="tag">h2</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"font-display text-5xl font-bold text-white mb-4"</span><span class="punctuation">&gt;</span>
+  Build Something Beautiful
+<span class="punctuation">&lt;/</span><span class="tag">h2</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-lg text-zinc-400 mb-8"</span><span class="punctuation">&gt;</span>
+  The perfect balance...
+<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-amber-500 hover:bg-amber-600 text-black font-bold px-8 py-4 rounded-full"</span><span class="punctuation">&gt;</span>
+  Start Free Trial
+<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+        <p>Font pairing creates visual hierarchy through contrast. The key is combining fonts with distinct personalities:</p>
+
+        <div class="concept">
+          <h3>Display Font (Playfair Display)</h3>
+          <ul>
+            <li><code>font-display</code> → Playfair Display serif font</li>
+            <li>Use for headlines and hero text</li>
+            <li>Creates editorial, sophisticated feel</li>
+            <li>Bold weights (600-800) work best</li>
+          </ul>
+        </div>
+
+        <div class="concept">
+          <h3>Body Font (Inter)</h3>
+          <ul>
+            <li><code>font-sans</code> → Inter sans-serif font</li>
+            <li>Use for paragraphs and UI elements</li>
+            <li>Highly readable at all sizes</li>
+            <li>Weights 400-600 for body, 700 for emphasis</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Pairing Formula</h3>
+          <ul>
+            <li><strong>Contrast Pair:</strong> Serif + Sans-Serif = Classic, editorial feel</li>
+            <li><strong>Modern Pair:</strong> Geometric + Humanist = Clean, contemporary</li>
+            <li><strong>Tech Pair:</strong> Sans-Serif + Monospace = Developer-friendly</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Google Fonts Setup</h3>
+          <p>Add to your HTML head:</p>
+          <code>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet"&gt;</code>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <span style="opacity: 0.5;">← Previous</span>
+      <a href="lesson-02.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

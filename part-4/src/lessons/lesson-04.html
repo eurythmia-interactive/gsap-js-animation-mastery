@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 04 - Typography - Tailwind CSS Basics</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-03.html" class="nav-link">← Previous</a>
+        <a href="lesson-05.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 04</span>
+        <span>Part 4: Tailwind CSS Basics</span>
+      </div>
+
+      <h1>Typography</h1>
+      <p>Master Tailwind's typography utilities for font size, weight, line height, letter spacing, and more.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Typography</span>
+        </div>
+        <div class="demo-container">
+          <div class="space-y-6 w-full max-w-2xl text-left">
+            <!-- Font Sizes -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Font Sizes (text-*)</p>
+              <div class="space-y-2 bg-gray-800 p-4 rounded">
+                <p class="text-xs">text-xs (0.75rem / 12px)</p>
+                <p class="text-sm">text-sm (0.875rem / 14px)</p>
+                <p class="text-base">text-base (1rem / 16px)</p>
+                <p class="text-lg">text-lg (1.125rem / 18px)</p>
+                <p class="text-xl">text-xl (1.25rem / 20px)</p>
+                <p class="text-2xl">text-2xl (1.5rem / 24px)</p>
+                <p class="text-3xl">text-3xl (1.875rem / 30px)</p>
+              </div>
+            </div>
+            
+            <!-- Font Weights -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Font Weights (font-*)</p>
+              <div class="flex flex-wrap gap-4 bg-gray-800 p-4 rounded">
+                <span class="font-thin text-white">Thin</span>
+                <span class="font-light text-white">Light</span>
+                <span class="font-normal text-white">Normal</span>
+                <span class="font-medium text-white">Medium</span>
+                <span class="font-semibold text-white">Semibold</span>
+                <span class="font-bold text-white">Bold</span>
+                <span class="font-black text-white">Black</span>
+              </div>
+            </div>
+            
+            <!-- Line Height -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Line Height (leading-*)</p>
+              <div class="space-y-4 bg-gray-800 p-4 rounded">
+                <div>
+                  <span class="text-emerald-400 text-sm">leading-tight (1.25)</span>
+                  <p class="leading-tight text-gray-300">The quick brown fox jumps over the lazy dog. Tight line height compresses text together.</p>
+                </div>
+                <div>
+                  <span class="text-emerald-400 text-sm">leading-normal (1.5)</span>
+                  <p class="leading-normal text-gray-300">The quick brown fox jumps over the lazy dog. Normal line height is balanced.</p>
+                </div>
+                <div>
+                  <span class="text-emerald-400 text-sm">leading-loose (2.0)</span>
+                  <p class="leading-loose text-gray-300">The quick brown fox jumps over the lazy dog. Loose line height breathes.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Text Transform -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Text Transform</p>
+              <div class="flex flex-wrap gap-4 bg-gray-800 p-4 rounded">
+                <span class="uppercase text-white">uppercase</span>
+                <span class="lowercase text-white">LOWERCASE</span>
+                <span class="capitalize text-white">capitalize each word</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Font Size & Weight</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Font sizes: text-xs through text-9xl --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">h1</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-4xl"</span><span class="punctuation">&gt;</span>Large Heading<span class="punctuation">&lt;/</span><span class="tag">h1</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-sm text-gray-400"</span><span class="punctuation">&gt;</span>Small muted text<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Font weights: font-thin (100) to font-black (900) --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"font-bold"</span><span class="punctuation">&gt;</span>Bold text<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"font-semibold"</span><span class="punctuation">&gt;</span>Semibold text<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>Line Height & Letter Spacing</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Line height: leading-none to leading-loose --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"leading-relaxed"</span><span class="punctuation">&gt;</span>Relaxed line height<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Letter spacing: tracking-tighter to tracking-widest --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"tracking-widest uppercase"</span><span class="punctuation">&gt;</span>SPACED OUT<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Text alignment --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-center"</span><span class="punctuation">&gt;</span>Centered text<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>Typography Summary</h2>
+
+        <div class="concept">
+          <h3>Font Sizes</h3>
+          <ul>
+            <li><code>text-xs</code> = 0.75rem (12px)</li>
+            <li><code>text-sm</code> = 0.875rem (14px)</li>
+            <li><code>text-base</code> = 1rem (16px) - default</li>
+            <li><code>text-lg</code> = 1.125rem (18px)</li>
+            <li><code>text-xl</code> = 1.25rem (20px)</li>
+            <li><code>text-2xl</code> to <code>text-9xl</code></li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Font Families</h3>
+          <ul>
+            <li><code>font-sans</code> - Sans-serif (default)</li>
+            <li><code>font-serif</code> - Serif</li>
+            <li><code>font-mono</code> - Monospace</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Common Combinations</h3>
+          <ul>
+            <li><code>text-sm text-gray-400</code> - Muted secondary text</li>
+            <li><code>text-lg font-semibold</code> - Subheadings</li>
+            <li><code>text-3xl font-bold tracking-tight</code> - Hero titles</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-03.html">← Previous</a>
+      <a href="lesson-05.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

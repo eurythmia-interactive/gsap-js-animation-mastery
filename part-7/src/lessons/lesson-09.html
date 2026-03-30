@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 09: Tagline Power - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/DrawSVGPlugin.min.js"></script>
+  <script>
+  function splitText(selector, type = 'chars') {
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) return [];
+    const text = el.textContent || '';
+    el.dataset.orig = text;
+    el.innerHTML = '';
+    if (!text) return [];
+    
+    if (type === 'chars') {
+      return Array.from(text).map(c => {
+        const s = document.createElement('span');
+        s.innerHTML = c === ' ' ? '&nbsp;' : c;
+        s.style.display = 'inline-block';
+        el.appendChild(s);
+        return s;
+      });
+    } else {
+      return text.split(' ').map(w => {
+        const s = document.createElement('span');
+        s.textContent = w;
+        s.style.display = 'inline-block';
+        s.style.marginRight = '0.25em';
+        el.appendChild(s);
+        return s;
+      });
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-container {
+      background: linear-gradient(180deg, #fafbfc 0%, #f1f4f8 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tagline-container {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .tagline-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-style: italic;
+      color: #1a202c;
+      line-height: 1.3;
+      display: inline;
+    }
+    
+    .tagline-underline {
+      display: block;
+      width: 200px;
+      height: 4px;
+      background: linear-gradient(90deg, #1e3a5f, #c9a227);
+      margin: 1rem auto 0;
+      border-radius: 2px;
+    }
+    
+    .tagline-path {
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+    }
+    
+    .company-name {
+      font-family: 'Abril Fatface', serif;
+      font-size: 1.5rem;
+      color: #1e3a5f;
+      margin-top: 2rem;
+      letter-spacing: 0.15em;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-corporate">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">Tagline Power</h1>
+    <p class="lesson-subtitle">Corporate tagline with subtle draw-on effect</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - SVG Draw Animation</div>
+      <div class="demo-container">
+        <div class="tagline-container">
+          <span class="tagline-text" id="tagline">Excellence Through Innovation</span>
+          <svg class="tagline-underline" viewBox="0 0 200 4" preserveAspectRatio="none">
+            <line class="tagline-path" x1="0" y1="2" x2="200" y2="2" stroke="#c9a227" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <span class="company-name" id="company-name" style="opacity: 0;">MERIDIAN PARTNERS</span>
+        </div>
+        
+        <div class="view-toggle">
+          <button class="active" onclick="setView('desktop')">Desktop</button>
+          <button onclick="setView('phone')">Phone Sim</button>
+          <button onclick="setView('mobile')">Mobile</button>
+        </div>
+        
+        <div class="animation-controls" style="margin-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="playAnimation()">▶ Play</button>
+          <button class="btn btn-secondary" onclick="resetAnimation()">Reset</button>
+          <button class="btn btn-secondary" onclick="replayAnimation()">Replay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"tagline-container"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;span</span> <span class="attr">id</span>=<span class="string">"tagline"</span><span class="tag">&gt;</span>Excellence Through Innovation<span class="tag">&lt;/span&gt;</span>
+  <span class="tag">&lt;svg</span> <span class="attr">class</span>=<span class="string">"tagline-underline"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;line</span> <span class="attr">class</span>=<span class="string">"tagline-path"</span> ...<span class="tag">&gt;&lt;/line&gt;</span>
+  <span class="tag">&lt;/svg&gt;</span>
+  <span class="tag">&lt;span</span> <span class="attr">id</span>=<span class="string">"company-name"</span><span class="tag">&gt;</span>MERIDIAN PARTNERS<span class="tag">&lt;/span&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript Animation</div>
+      <pre class="code-block"><span class="comment">// Register DrawSVG plugin</span>
+gsap.<span class="attr">registerPlugin</span>(DrawSVGPlugin);
+
+<span class="comment">// Split tagline into words using custom splitText</span>
+<span class="keyword">const</span> splitTagline = <span class="attr">splitText</span>(<span class="string">"#tagline"</span>, <span class="string">"words"</span>);
+
+<span class="comment">// Set initial states</span>
+gsap.<span class="attr">set</span>(splitTagline, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">20</span> });
+gsap.<span class="attr">set</span>(<span class="string">".tagline-path"</span>, { <span class="attr">strokeDashoffset</span>: <span class="number">300</span> });
+
+<span class="comment">// Create timeline</span>
+<span class="keyword">const</span> tl = gsap.timeline();
+
+tl
+  <span class="comment">// Words fade in with stagger</span>
+  .<span class="attr">to</span>(splitTagline, {
+    <span class="attr">opacity</span>: <span class="number">1</span>,
+    <span class="attr">y</span>: <span class="number">0</span>,
+    <span class="attr">stagger</span>: <span class="number">0.15</span>,
+    <span class="attr">duration</span>: <span class="number">0.6</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+  })
+  <span class="comment">// SVG line draws on</span>
+  .<span class="attr">to</span>(<span class="string">".tagline-path"</span>, {
+    <span class="attr">strokeDashoffset</span>: <span class="number">0</span>,
+    <span class="attr">duration</span>: <span class="number">1</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.inOut"</span>
+  }, <span class="string">"+=0.3"</span>)
+  <span class="comment">// Company name fades in</span>
+  .<span class="attr">to</span>(<span class="string">"#company-name"</span>, {
+    <span class="attr">opacity</span>: <span class="number">1</span>,
+    <span class="attr">letterSpacing</span>: <span class="string">"0.3em"</span>,
+    <span class="attr">duration</span>: <span class="number">1</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+  }, <span class="string">"-=0.5"</span>);</pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// DrawSVG animates SVG stroke properties
+</span><span class="comment">// stroke-dasharray = total length of path
+</span><span class="comment">// stroke-dashoffset = how much is hidden
+</span><span class="comment">// From 300 to 0 = complete draw on</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-08.html" class="nav-link nav-link--prev">← Service Grid</a>
+    <a href="lesson-10.html" class="nav-link nav-link--next">Next: Question Enter →</a>
+  </nav>
+
+  <script>
+    let tl;
+    
+    function initAnimation() {
+      try {
+        gsap.registerPlugin(DrawSVGPlugin);
+        
+        const splitTagline = splitText("#tagline", "words");
+        
+        gsap.set(splitTagline, { opacity: 0, y: 20 });
+        gsap.set(".tagline-path", { strokeDashoffset: 300 });
+        
+        tl = gsap.timeline();
+        
+        tl.to(splitTagline, {
+          opacity: 1, y: 0, stagger: 0.15, duration: 0.6, ease: "power2.out"
+        })
+        .to(".tagline-path", {
+          strokeDashoffset: 0, duration: 1, ease: "power2.inOut"
+        }, "+=0.3")
+        .to("#company-name", {
+          opacity: 1, letterSpacing: "0.3em", duration: 1, ease: "power2.out"
+        }, "-=0.5");
+        
+        tl.pause();
+      } catch(e) {
+        console.log('DrawSVG not available, using fallback');
+        gsap.set("#tagline", { opacity: 1 });
+        gsap.set(".tagline-underline", { opacity: 1 });
+        gsap.set("#company-name", { opacity: 1 });
+      }
+    }
+    
+    function playAnimation() { if (tl) tl.play(); }
+    function resetAnimation() {
+      if (tl) tl.restart();
+      else {
+        gsap.set("#tagline", { opacity: 0 });
+        gsap.set(".tagline-underline *", { strokeDashoffset: 300 });
+        gsap.set("#company-name", { opacity: 0 });
+        initAnimation();
+      }
+    }
+    function replayAnimation() { resetAnimation(); }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>

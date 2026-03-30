@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 01: Screen Anatomy - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 393px;
+      height: 852px;
+      border-radius: 55px;
+      border: 14px solid #18181b;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 126px;
+      height: 37px;
+      background: #000;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 24px 24px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 166px;
+      height: 6px;
+      background: #fff;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-rose">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Screen Anatomy</h1>
+    <p class="lesson-subtitle">Understanding viewport, DPI, aspect ratios, and safe areas</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #0f0f0f; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: linear-gradient(180deg, #1a1a2e 0%, #0f0f0f 100%);">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-white text-sm font-semibold">9:41</span>
+              <div class="flex items-center gap-1">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3C7.46 3 3.34 4.78.29 7.67c-.18.18-.29.43-.29.71 0 .28.11.53.29.71l2.48 2.48c.18.18.43.29.71.29.27 0 .52-.11.7-.28.79-.74 1.69-1.36 2.66-1.85.33-.16.56-.5.56-.9v-3.1c1.45-.48 3-.73 4.6-.73s3.15.25 4.6.72v3.1c0 .39.23.74.56.9.98.49 1.87 1.12 2.67 1.85.18.18.43.28.7.28.28 0 .53-.11.71-.29l2.48-2.48c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71C20.66 4.78 16.54 3 12 3z"/></svg>
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.34C7 21.4 7.6 22 8.33 22h7.34c.73 0 1.33-.6 1.33-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+              </div>
+            </div>
+            
+            <!-- App Header -->
+            <div class="px-4 pt-2 pb-4">
+              <h1 class="text-white text-xl font-bold">iPhone 14 Pro</h1>
+              <p class="text-gray-400 text-sm">393 × 852 px (19.5:9)</p>
+            </div>
+            
+            <!-- Safe Area Visualization -->
+            <div class="mx-4 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
+              <div class="text-rose-400 text-xs font-semibold uppercase tracking-wider mb-3">Screen Zones</div>
+              
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-400 text-xs">Status Bar</span>
+                  <span class="text-gray-500 text-xs">~54px</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-400 text-xs">Dynamic Island</span>
+                  <span class="text-gray-500 text-xs">~37px</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-400 text-xs">Content Area</span>
+                  <span class="text-gray-500 text-xs">~693px</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-400 text-xs">Home Indicator</span>
+                  <span class="text-gray-500 text-xs">~34px</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Safe Area Demo -->
+            <div class="mx-4 mt-4 p-4 bg-gradient-to-r from-rose-500 to-orange-500 rounded-2xl">
+              <p class="text-white text-sm font-medium">Full-bleed gradient</p>
+              <p class="text-white/70 text-xs mt-1">Extends under Dynamic Island</p>
+            </div>
+            
+            <!-- Specs -->
+            <div class="mx-4 mt-4 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
+              <div class="text-rose-400 text-xs font-semibold uppercase tracking-wider mb-3">iPhone 14 Pro Specs</div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <p class="text-gray-500 text-xs">Resolution</p>
+                  <p class="text-white text-sm font-mono">1179 × 2556</p>
+                </div>
+                <div>
+                  <p class="text-gray-500 text-xs">CSS Size</p>
+                  <p class="text-white text-sm font-mono">393 × 852</p>
+                </div>
+                <div>
+                  <p class="text-gray-500 text-xs">Pixel Ratio</p>
+                  <p class="text-white text-sm font-mono">3x</p>
+                </div>
+                <div>
+                  <p class="text-gray-500 text-xs">Aspect Ratio</p>
+                  <p class="text-white text-sm font-mono">19.5:9</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- iPhone 14 Pro Frame: 393×852 --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"phone-frame"</span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- Dynamic Island --&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"phone-notch"</span><span class="tag">&gt;&lt;/div&gt;</span>
+  
+  <span class="comment">&lt;!-- Safe area content --&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"pt-[env(safe-area-inset-top)] 
+               pb-[env(safe-area-inset-bottom)]"</span><span class="tag">&gt;</span>
+    <span class="comment">&lt;!-- App content here --&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  
+  <span class="comment">&lt;!-- Home indicator --&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"phone-home-indicator"</span><span class="tag">&gt;&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Common Screen Sizes</div>
+        <pre class="code-block"><span class="comment">/* iPhone SE (2nd gen) */</span>
+<span class="attr">width</span>: <span class="number">375px</span>;  <span class="attr">height</span>: <span class="number">667px</span>;
+
+<span class="comment">/* iPhone X/11/12/13 */</span>
+<span class="attr">width</span>: <span class="number">375px</span>;  <span class="attr">height</span>: <span class="number">812px</span>;
+
+<span class="comment">/* iPhone 14 Pro */</span>
+<span class="attr">width</span>: <span class="number">393px</span>;  <span class="attr">height</span>: <span class="number">852px</span>;
+
+<span class="comment">/* iPhone 14 Pro Max */</span>
+<span class="attr">width</span>: <span class="number">430px</span>;  <span class="attr">height</span>: <span class="number">932px</span>;</pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="../index.html" class="nav-link nav-link--prev">← Back to Index</a>
+    <a href="lesson-02.html" class="nav-link nav-link--next">Next: Touch Targets →</a>
+  </nav>
+</body>
+</html>

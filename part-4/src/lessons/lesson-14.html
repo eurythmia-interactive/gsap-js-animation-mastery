@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 14 - Interactivity - Tailwind CSS Basics</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-13.html" class="nav-link">← Previous</a>
+        <a href="lesson-15.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 14</span>
+        <span>Part 4: Tailwind CSS Basics</span>
+      </div>
+
+      <h1>Interactivity</h1>
+      <p>Control cursor styles, pointer events, text selection, and other interactive behaviors.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Interactivity</span>
+        </div>
+        <div class="demo-container">
+          <div class="space-y-8 w-full max-w-2xl">
+            <!-- Cursor Styles -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">cursor-* (cursor styles)</p>
+              <div class="flex flex-wrap gap-4 bg-gray-800 p-4 rounded-lg">
+                <button class="px-4 py-2 bg-emerald-500 text-white rounded-lg cursor-pointer">
+                  cursor-pointer
+                </button>
+                <button class="px-4 py-2 bg-gray-600 text-white rounded-lg cursor-default">
+                  cursor-default
+                </button>
+                <button class="px-4 py-2 bg-gray-600 text-white rounded-lg cursor-move">
+                  cursor-move
+                </button>
+                <button class="px-4 py-2 bg-gray-600 text-white rounded-lg cursor-grab">
+                  cursor-grab
+                </button>
+                <button class="px-4 py-2 bg-gray-600 text-white rounded-lg cursor-not-allowed">
+                  cursor-not-allowed
+                </button>
+              </div>
+            </div>
+            
+            <!-- Pointer Events -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">pointer-events-* (control clickability)</p>
+              <div class="relative bg-gray-800 p-4 rounded-lg">
+                <button class="px-4 py-2 bg-blue-500 text-white rounded-lg">
+                  Clickable Button
+                </button>
+                <button class="px-4 py-2 bg-gray-600 text-gray-400 rounded-lg ml-4 pointer-events-none">
+                  pointer-events-none (not clickable)
+                </button>
+                <p class="text-xs text-gray-500 mt-2">The gray button ignores clicks due to pointer-events-none</p>
+              </div>
+            </div>
+            
+            <!-- User Select -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">select-* (text selection)</p>
+              <div class="flex flex-col gap-4 bg-gray-800 p-4 rounded-lg">
+                <p class="text-white select-text">
+                  <span class="text-emerald-400">select-text:</span> You can select this text normally.
+                </p>
+                <p class="text-white select-none">
+                  <span class="text-pink-400">select-none:</span> Try selecting this text - it won't work!
+                </p>
+                <p class="text-white select-all">
+                  <span class="text-orange-400">select-all:</span> Click once to select all text here!
+                </p>
+              </div>
+            </div>
+            
+            <!-- Outline -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">outline-* (focus outlines)</p>
+              <div class="flex flex-col gap-4 bg-gray-800 p-4 rounded-lg">
+                <input 
+                  type="text" 
+                  placeholder="No outline (outline-none)"
+                  class="px-4 py-2 bg-gray-700 text-white rounded-lg outline-none border border-gray-600 focus:border-emerald-500"
+                >
+                <input 
+                  type="text" 
+                  placeholder="With outline (outline-2 outline-emerald-500)"
+                  class="px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-emerald-500 focus:outline focus:outline-2 focus:outline-emerald-500/50"
+                >
+              </div>
+            </div>
+            
+            <!-- Scroll Behavior -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Scroll lock example (overflow-hidden)</p>
+              <div class="bg-gray-800 p-4 rounded-lg">
+                <div class="flex gap-4">
+                  <div class="w-1/2">
+                    <p class="text-white text-sm mb-2">overflow-hidden:</p>
+                    <div class="h-24 bg-gray-700 rounded-lg p-2 overflow-hidden">
+                      <p class="text-gray-400 text-xs">This content is clipped. No scrollbars appear even though there's more content here.</p>
+                    </div>
+                  </div>
+                  <div class="w-1/2">
+                    <p class="text-white text-sm mb-2">overflow-auto:</p>
+                    <div class="h-24 bg-gray-700 rounded-lg p-2 overflow-auto">
+                      <p class="text-gray-400 text-xs">This container scrolls. You can scroll to see more content if it overflows.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Cursor Styles</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Cursor variants --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"cursor-pointer"</span><span class="punctuation">&gt;</span>Pointer<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"cursor-default"</span><span class="punctuation">&gt;</span>Default<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"cursor-move"</span><span class="punctuation">&gt;</span>Move<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"cursor-grab"</span><span class="punctuation">&gt;</span>Grab<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"cursor-not-allowed"</span><span class="punctuation">&gt;</span>Not Allowed<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>Pointer Events & Selection</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Pointer events (click handling) --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"pointer-events-none"</span><span class="punctuation">&gt;</span>Cannot be clicked<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"pointer-events-auto"</span><span class="punctuation">&gt;</span>Can be clicked (default)<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- User selection --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"select-none"</span><span class="punctuation">&gt;</span>Cannot select<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"select-text"</span><span class="punctuation">&gt;</span>Can select (default)<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"select-all"</span><span class="punctuation">&gt;</span>Click to select all<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>Quick Reference</h2>
+
+        <div class="concept">
+          <h3>Cursor Styles</h3>
+          <ul>
+            <li><code>cursor-pointer</code> - Hand (links, buttons)</li>
+            <li><code>cursor-default</code> - Arrow (default)</li>
+            <li><code>cursor-move</code> - Move indicator</li>
+            <li><code>cursor-grab</code> - Grab (for draggable)</li>
+            <li><code>cursor-not-allowed</code> - Not allowed</li>
+            <li><code>cursor-wait</code> - Loading spinner</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Common Use Cases</h3>
+          <ul>
+            <li><code>select-none</code> - Game elements, icons</li>
+            <li><code>select-all</code> - Code blocks, terminal</li>
+            <li><code>pointer-events-none</code> - Overlay elements</li>
+            <li><code>cursor-grab</code> - Draggable items</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Overflow Values</h3>
+          <ul>
+            <li><code>overflow-auto</code> - Scroll when needed</li>
+            <li><code>overflow-hidden</code> - No scroll, clipped</li>
+            <li><code>overflow-scroll</code> - Always show scrollbars</li>
+            <li><code>overflow-visible</code> - Show outside container</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-13.html">← Previous</a>
+      <a href="lesson-15.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 01 - What is Tailwind? - Tailwind CSS Basics</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <span class="nav-link disabled">Previous</span>
+        <a href="lesson-02.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 01</span>
+        <span>Part 4: Tailwind CSS Basics</span>
+      </div>
+
+      <h1>What is Tailwind?</h1>
+      <p>Tailwind CSS is a <strong>utility-first</strong> CSS framework that provides low-level utility classes to build custom designs directly in your HTML.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Traditional CSS vs Tailwind</span>
+        </div>
+        <div class="demo-container">
+          <div class="w-full max-w-md">
+            <h3 class="text-emerald-400 text-lg font-semibold mb-4">Traditional CSS</h3>
+            <div class="bg-gray-800 p-6 rounded-lg mb-8">
+              <p class="text-gray-300 text-sm font-mono mb-2">.my-button {</p>
+              <p class="text-gray-400 text-sm font-mono pl-4">background-color: #10b981;</p>
+              <p class="text-gray-400 text-sm font-mono pl-4">color: white;</p>
+              <p class="text-gray-400 text-sm font-mono pl-4">padding: 1rem 2rem;</p>
+              <p class="text-gray-400 text-sm font-mono pl-4">border-radius: 0.5rem;</p>
+              <p class="text-gray-400 text-sm font-mono pl-4">font-weight: 600;</p>
+              <p class="text-gray-300 text-sm font-mono">}</p>
+            </div>
+            
+            <h3 class="text-emerald-400 text-lg font-semibold mb-4">Tailwind CSS</h3>
+            <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200">
+              Click me - Hover me!
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>HTML with Tailwind Classes</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200"</span><span class="punctuation">&gt;</span>
+  Click me - Hover me!
+<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+        <p>Each class in Tailwind is a single CSS property. You compose them directly in your HTML:</p>
+
+        <div class="concept">
+          <h3>Utility Classes Explained</h3>
+          <ul>
+            <li><code>bg-emerald-500</code> → background-color: #10b981</li>
+            <li><code>hover:bg-emerald-600</code> → darker green on hover</li>
+            <li><code>text-white</code> → color: white</li>
+            <li><code>px-6</code> → padding-left & padding-right: 1.5rem</li>
+            <li><code>py-3</code> → padding-top & padding-bottom: 0.75rem</li>
+            <li><code>rounded-lg</code> → border-radius: 0.5rem</li>
+            <li><code>font-semibold</code> → font-weight: 600</li>
+            <li><code>transition-colors</code> → animate color changes</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Play CDN Setup</h3>
+          <p>Add this script to your HTML to use Tailwind without any build step:</p>
+          <code>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</code>
+        </div>
+
+        <div class="tip">
+          <h3>Why Tailwind?</h3>
+          <ul>
+            <li>No naming struggles - no need for .button-primary</li>
+            <li>Consistent spacing, colors, and shadows</li>
+            <li>Responsive design built-in</li>
+            <li>Small CSS file size (tree-shaking in production)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <span style="opacity: 0.5;">← Previous</span>
+      <a href="lesson-02.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

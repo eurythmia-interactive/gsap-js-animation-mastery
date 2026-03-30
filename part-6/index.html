@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Part 6: Mobile-First Design - GSAP Mastery</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a12;
+      --bg-secondary: #12121f;
+      --bg-card: #1a1a2e;
+      --accent: #f472b6;
+      --accent-2: #818cf8;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --text-muted: #6b6375;
+      --border: #2a2a3e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      min-height: 100vh;
+      color: var(--text-primary);
+    }
+
+    .hero {
+      min-height: 40vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 30%, rgba(244, 114, 182, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 70%, rgba(129, 140, 248, 0.1) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-2%, -2%); }
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .hero__badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: rgba(244, 114, 182, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 50px;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero__title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero__subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .modules {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .module {
+      margin-bottom: 3rem;
+    }
+
+    .module__header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .module__number {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+
+    .module__info h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .module__info p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .module--1 .module__number { background: rgba(244, 63, 94, 0.2); color: #f43f5e; }
+    .module--2 .module__number { background: rgba(100, 116, 139, 0.2); color: #94a3b8; }
+    .module--3 .module__number { background: rgba(120, 113, 108, 0.2); color: #a8a29e; }
+    .module--4 .module__number { background: rgba(220, 38, 38, 0.2); color: #ef4444; }
+    .module--5 .module__number { background: rgba(0, 122, 255, 0.2); color: #4d9fff; }
+    .module--6 .module__number { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .lesson-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lesson-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .lesson-card__number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .lesson-card__title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .lesson-card__desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .lesson-card__arrow {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .lessons-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero__content">
+      <span class="hero__badge">Part 6</span>
+      <h1 class="hero__title">Mobile-First Design</h1>
+      <p class="hero__subtitle">Master smartphone screen anatomy, touch interactions, mobile typography, and responsive patterns with Tailwind CSS</p>
+    </div>
+  </section>
+
+  <section class="modules">
+    <!-- Module 1: Smartphone Fundamentals -->
+    <div class="module module--1">
+      <div class="module__header">
+        <div class="module__number">1</div>
+        <div class="module__info">
+          <h2>Smartphone Fundamentals</h2>
+          <p>Screen anatomy, touch targets, and safe areas</p>
+        </div>
+      </div>
+      <div class="lessons-grid">
+        <a href="src/lessons/lesson-01.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 01</span>
+          <h3 class="lesson-card__title">Screen Anatomy</h3>
+          <p class="lesson-card__desc">Understand viewport, DPI, aspect ratios, and safe areas with iPhone 14 Pro frame</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-02.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 02</span>
+          <h3 class="lesson-card__title">Touch Targets</h3>
+          <p class="lesson-card__desc">Design with 44x44px minimum, spacing for fat fingers, and interactive grids</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-03.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 03</span>
+          <h3 class="lesson-card__title">Safe Areas</h3>
+          <p class="lesson-card__desc">Handle notch, Dynamic Island, home indicator with env() CSS</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Module 2: Dark Mode Patterns -->
+    <div class="module module--2">
+      <div class="module__header">
+        <div class="module__number">2</div>
+        <div class="module__info">
+          <h2>Dark Mode Patterns</h2>
+          <p>OLED blacks, elevation, and typography</p>
+        </div>
+      </div>
+      <div class="lessons-grid">
+        <a href="src/lessons/lesson-04.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 04</span>
+          <h3 class="lesson-card__title">Dark Mode Foundations</h3>
+          <p class="lesson-card__desc">OLED blacks, elevation through lightness, light vs dark comparison</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-05.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 05</span>
+          <h3 class="lesson-card__title">Elevated Surfaces</h3>
+          <p class="lesson-card__desc">Hierarchy through subtle lightness shifts with social media feed cards</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-06.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 06</span>
+          <h3 class="lesson-card__title">Dark Typography</h3>
+          <p class="lesson-card__desc">Reduced eye strain, proper contrast ratios, article reader hierarchy</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Module 3: Mobile Typography -->
+    <div class="module module--3">
+      <div class="module__header">
+        <div class="module__number">3</div>
+        <div class="module__info">
+          <h2>Mobile Typography</h2>
+          <p>Fluid scaling, line length, system fonts</p>
+        </div>
+      </div>
+      <div class="lessons-grid">
+        <a href="src/lessons/lesson-07.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 07</span>
+          <h3 class="lesson-card__title">Fluid Type Scale</h3>
+          <p class="lesson-card__desc">CSS clamp(), viewport-based scaling, responsive headline demo</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-08.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 08</span>
+          <h3 class="lesson-card__title">Line Length & Leading</h3>
+          <p class="lesson-card__desc">40-60 character ideal, relaxed leading, optimal reading experience</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-09.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 09</span>
+          <h3 class="lesson-card__title">System Fonts</h3>
+          <p class="lesson-card__desc">SF Pro, Roboto, font-stack performance, platform comparison</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Module 4: Spatial Distribution -->
+    <div class="module module--4">
+      <div class="module__header">
+        <div class="module__number">4</div>
+        <div class="module__info">
+          <h2>Spatial Distribution</h2>
+          <p>Vertical stacking, touch spacing, rhythm</p>
+        </div>
+      </div>
+      <div class="lessons-grid">
+        <a href="src/lessons/lesson-10.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 10</span>
+          <h3 class="lesson-card__title">Vertical Stacking</h3>
+          <p class="lesson-card__desc">Mobile-first column layouts, flex-col, space-y, content feed</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-11.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 11</span>
+          <h3 class="lesson-card__title">Touch-Friendly Spacing</h3>
+          <p class="lesson-card__desc">Generous padding, 48px targets, comfortable form layout</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-12.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 12</span>
+          <h3 class="lesson-card__title">Section Rhythm</h3>
+          <p class="lesson-card__desc">Consistent vertical flow, breathing room, news article layout</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Module 5: Proportions & Grid -->
+    <div class="module module--5">
+      <div class="module__header">
+        <div class="module__number">5</div>
+        <div class="module__info">
+          <h2>Proportions & Grid</h2>
+          <p>Mobile grids, aspect ratios, card design</p>
+        </div>
+      </div>
+      <div class="lessons-grid">
+        <a href="src/lessons/lesson-13.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 13</span>
+          <h3 class="lesson-card__title">Mobile Grid Systems</h3>
+          <p class="lesson-card__desc">4-column grid, full-bleed vs contained, Pinterest-style masonry</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-14.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 14</span>
+          <h3 class="lesson-card__title">Aspect Ratios</h3>
+          <p class="lesson-card__desc">16:9, 4:3, 1:1, 9:16 ratios, object-fit, image gallery</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-15.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 15</span>
+          <h3 class="lesson-card__title">Card Proportions</h3>
+          <p class="lesson-card__desc">Full-width cards, corner radius, e-commerce product cards</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Module 6: Mobile Patterns -->
+    <div class="module module--6">
+      <div class="module__header">
+        <div class="module__number">6</div>
+        <div class="module__info">
+          <h2>Mobile Patterns</h2>
+          <p>Swipe gestures, pull-to-refresh, complete UI</p>
+        </div>
+      </div>
+      <div class="lessons-grid">
+        <a href="src/lessons/lesson-16.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 16</span>
+          <h3 class="lesson-card__title">Swipe & Gestures</h3>
+          <p class="lesson-card__desc">Horizontal snap scroll, swipe actions, momentum scrolling</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-17.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 17</span>
+          <h3 class="lesson-card__title">Pull-to-Refresh</h3>
+          <p class="lesson-card__desc">Elastic scroll, loading indicators, feed refresh pattern</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+        <a href="src/lessons/lesson-18.html" class="lesson-card">
+          <span class="lesson-card__number">Lesson 18</span>
+          <h3 class="lesson-card__title">Complete Mobile App UI</h3>
+          <p class="lesson-card__desc">Instagram-style app combining all mobile concepts</p>
+          <span class="lesson-card__arrow">Start →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="/index.html">← Back to all parts</a></p>
+    <p style="margin-top: 1rem;">Part 6: Mobile-First Design</p>
+  </footer>
+</body>
+</html>

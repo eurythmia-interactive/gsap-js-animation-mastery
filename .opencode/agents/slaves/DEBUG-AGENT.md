@@ -7,6 +7,14 @@ You are the **Debug Agent** - a specialist in identifying and fixing animation, 
 
 ## Issue Diagnosis Framework
 
+### Step 0: Check Memory First
+Before debugging, check known patterns:
+```
+1. Read .opencode/memory/patterns/common-errors.md for known issues
+2. Read .opencode/memory/patterns/animations-that-work.md for correct patterns
+3. Check recent executions in .opencode/memory/executions/ for similar fixes
+```
+
 ### Step 1: Identify the Symptom
 ```
 What is happening?
@@ -33,6 +41,12 @@ Narrow down:
 - Animation starts but doesn't finish?
 - All elements affected or just one?
 ```
+
+### Step 4: Document Fix in Memory
+After fixing an issue:
+- Add new error pattern to `.opencode/memory/patterns/common-errors.md`
+- If fix involved a pattern → add to `animations-that-work.md`
+- Create execution log in `.opencode/memory/executions/`
 
 ---
 
@@ -379,6 +393,203 @@ curl http://localhost:5173/path/to/file.html
 # Check for errors in file
 grep -n "error\|Error\|undefined" file.js
 ```
+
+---
+
+## Part 7: Text Animation Debugging
+
+Part 7 introduces SplitText animations. Here are specific debugging tips:
+
+### Issue 1: SplitText Not Defined
+
+**Symptoms:** Console: "SplitText is not defined"
+
+**Root Cause:** SplitText plugin not loaded or not registered
+
+**Diagnosis:**
+```bash
+# Check if SplitText CDN is included
+grep "SplitText" lesson-XX.html
+```
+
+**Solution:**
+```html
+<!-- Load SplitText plugin (FREE) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+```
+
+Note: SplitText is 100% FREE for everyone thanks to Webflow!
+
+---
+
+### Issue 2: Text Not Splitting
+
+**Symptoms:** Console shows no errors, but animation doesn't stagger
+
+**Root Cause:** SplitText splitting an empty element or element without text
+
+**Diagnosis:**
+```bash
+# Check if element has text content
+grep -A2 "text-hero" lesson-XX.html
+```
+
+**Solution:**
+```javascript
+// Ensure element has text
+const element = document.querySelector('#text');
+console.log('Text content:', element.textContent); // Should not be empty
+
+// Create split
+const split = new SplitText('#text', { type: 'chars' });
+console.log('Chars found:', split.chars.length);
+```
+
+---
+
+### Issue 3: Characters Stack on Top of Each Other
+
+**Symptoms:** All characters appear in the same position, overlapping
+
+**Root Cause:** SplitText creates inline elements, need `display: inline-block` for transforms
+
+**Solution:**
+```css
+/* CSS for split elements */
+.split-char {
+  display: inline-block;
+  white-space: pre; /* Preserve spaces */
+}
+
+/* For words */
+.split-word {
+  display: inline-block;
+}
+
+/* For lines */
+.split-line {
+  display: block;
+}
+```
+
+---
+
+### Issue 4: Animation Only Runs Once
+
+**Symptoms:** Text animates on page load but not on replay
+
+**Root Cause:** SplitText instance becomes invalid after animation modifies DOM
+
+**Solution:**
+```javascript
+// Recreate SplitText on each play
+let splitInstance = null;
+
+function playAnimation() {
+  // Kill old instance
+  if (splitInstance) {
+    splitInstance.revert();
+  }
+  
+  // Create new instance
+  splitInstance = new SplitText('#text', { type: 'chars' });
+  
+  // Animate
+  gsap.fromTo(splitInstance.chars,
+    { opacity: 0, y: 50 },
+    { opacity: 1, y: 0, stagger: 0.05 }
+  );
+}
+
+// Clean up on page leave
+window.addEventListener('beforeunload', () => {
+  if (splitInstance) splitInstance.revert();
+});
+```
+
+---
+
+### Issue 5: Font Not Loaded Before Animation
+
+**Symptoms:** Text appears, then shifts when font loads (FOUT)
+
+**Root Cause:** Animation runs before custom fonts are ready
+
+**Solution:**
+```javascript
+// Wait for fonts to be ready
+document.fonts.ready.then(() => {
+  const split = new SplitText('#text', { type: 'chars' });
+  gsap.fromTo(split.chars,
+    { opacity: 0, y: 50 },
+    { opacity: 1, y: 0, stagger: 0.05 }
+  );
+});
+```
+
+---
+
+### Issue 6: View Mode Toggle Not Working
+
+**Symptoms:** Clicking toggle buttons doesn't switch screen views
+
+**Root Cause:** JavaScript toggle logic missing or incorrect
+
+**Diagnosis:**
+```bash
+# Check toggle button setup
+grep -A10 "view-toggle" lesson-XX.html
+```
+
+**Solution:**
+```javascript
+document.querySelectorAll('.view-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const view = btn.dataset.view;
+    
+    // Update active button
+    document.querySelectorAll('.view-toggle button').forEach(b => 
+      b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // Toggle screen visibility
+    document.querySelectorAll('[class*="screen-"]').forEach(s => 
+      s.classList.add('hidden'));
+    document.querySelector(`.screen-${view}`).classList.remove('hidden');
+  });
+});
+```
+
+---
+
+### Issue 7: Text Wrapping Incorrectly
+
+**Symptoms:** SplitText lines don't match visual line breaks
+
+**Root Cause:** CSS `white-space` or width issues
+
+**Solution:**
+```css
+/* Ensure proper wrapping */
+.text-container {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+```
+
+---
+
+### Text Animation Debug Checklist
+
+When testing Part 7 lessons, verify:
+- [ ] SplitText CDN loaded
+- [ ] Element has text content
+- [ ] Split elements have `display: inline-block`
+- [ ] Animation recreates SplitText on replay
+- [ ] Fonts loaded before animation
+- [ ] View toggle buttons work
+- [ ] Mobile view renders correctly
 
 ---
 

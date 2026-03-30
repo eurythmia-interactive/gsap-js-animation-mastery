@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 17: Pull-to-Refresh - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      border: 12px solid #262626;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 150px;
+      height: 30px;
+      background: #000;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 130px;
+      height: 5px;
+      background: #fff;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-bounce {
+      animation: bounce 1s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-material">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Pull-to-Refresh</h1>
+    <p class="lesson-subtitle">Elastic scroll, loading indicators, and feed refresh patterns</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #0f0f0f; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #0f0f0f; overflow-y: auto;">
+            <!-- Pull-to-Refresh Indicator (shown at top) -->
+            <div class="flex flex-col items-center justify-center py-8 overscroll-contain" style="overscroll-behavior: contain;">
+              <div class="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+              <p class="text-purple-400 text-xs mt-2 font-medium">Refreshing...</p>
+            </div>
+            
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-2 pb-2">
+              <span class="text-white text-sm font-semibold">9:41</span>
+              <div class="flex items-center gap-1">
+                <span class="text-white text-xs">●●●●</span>
+              </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="px-4 pb-4">
+              <h1 class="text-white text-xl font-bold">Feed</h1>
+              <p class="text-gray-500 text-sm">Pull down to refresh</p>
+            </div>
+            
+            <!-- Feed Content -->
+            <div class="px-4 space-y-4 pb-8">
+              <!-- Post 1 -->
+              <div class="bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500"></div>
+                  <div>
+                    <p class="text-white text-sm font-semibold">@design</p>
+                    <p class="text-gray-500 text-xs">2m ago</p>
+                  </div>
+                </div>
+                <p class="text-gray-300 text-sm leading-relaxed">Pull-to-refresh is a familiar pattern users expect. The spinning indicator tells them new content is loading.</p>
+                <div class="mt-3 aspect-video bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-xl"></div>
+              </div>
+              
+              <!-- Post 2 -->
+              <div class="bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-cyan-500"></div>
+                  <div>
+                    <p class="text-white text-sm font-semibold">@mobile</p>
+                    <p class="text-gray-500 text-xs">15m ago</p>
+                  </div>
+                </div>
+                <p class="text-gray-300 text-sm leading-relaxed">Mobile patterns have standardized over the years. Users know exactly what to do when they see these familiar UI patterns.</p>
+              </div>
+              
+              <!-- Post 3 -->
+              <div class="bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500"></div>
+                  <div>
+                    <p class="text-white text-sm font-semibold">@ux</p>
+                    <p class="text-gray-500 text-xs">32m ago</p>
+                  </div>
+                </div>
+                <p class="text-gray-300 text-sm leading-relaxed">The key to good mobile UX is predictability. Users should feel confident navigating your app without thinking.</p>
+              </div>
+            </div>
+            
+            <!-- Refresh Indicator Guide -->
+            <div class="mx-4 mb-4 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
+              <div class="text-purple-400 text-xs font-semibold uppercase tracking-wider mb-3">Refresh States</div>
+              <div class="space-y-3">
+                <!-- Idle -->
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 border-2 border-zinc-700 rounded-full flex items-center justify-center">
+                    <span class="text-zinc-500 text-xs">↓</span>
+                  </div>
+                  <div>
+                    <p class="text-gray-400 text-xs font-medium">Pull down</p>
+                    <p class="text-gray-600 text-[10px]">Idle state - pull to refresh</p>
+                  </div>
+                </div>
+                <!-- Pulling -->
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 border-2 border-purple-500 rounded-full flex items-center justify-center -translate-y-1">
+                    <span class="text-purple-500 text-xs">↑</span>
+                  </div>
+                  <div>
+                    <p class="text-gray-400 text-xs font-medium">Release to refresh</p>
+                    <p class="text-gray-600 text-[10px]">Threshold reached</p>
+                  </div>
+                </div>
+                <!-- Refreshing -->
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+                  <div>
+                    <p class="text-purple-400 text-xs font-medium">Refreshing...</p>
+                    <p class="text-gray-600 text-[10px]">Loading new content</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- Refresh indicator --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"flex flex-col items-center 
+               justify-center py-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"w-8 h-8 border-4 border-purple-600 
+               border-t-transparent rounded-full 
+               animate-spin"</span><span class="tag">&gt;</span><span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"text-purple-400 text-xs mt-2"</span><span class="tag">&gt;</span>
+    Refreshing...
+  <span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- Scrollable content --&gt;</span>
+<span class="tag"&lt;div</span> <span class="attr">class</span>=<span class="string">"overscroll-contain"</span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- Feed content --&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- CSS for animations --&gt;</span>
+<span class="tag">&lt;style&gt;</span>
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+<span class="tag">&lt;/style&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Pull-to-Refresh Best Practices</div>
+        <pre class="code-block"><span class="comment">/* Contain overscroll (prevent page scroll) */</span>
+<span class="attr">overscroll-behavior</span>: <span class="number">contain</span>;
+
+<span class="comment">/* Momentum scrolling */</span>
+<span class="attr">-webkit-overflow-scrolling</span>: <span class="number">touch</span>;
+
+<span class="comment">/* Hidden scrollbar but keep scroll */</span>
+<span class="attr">scrollbar-width</span>: <span class="number">none</span>;  <span class="comment">/* Firefox */</span>
+<span class="attr">scrollbar-width</span>: <span class="number">none</span>;
+
+<span class="comment">/* Hide scrollbar webkit */</span>
+<span class="attr">::-webkit-scrollbar</span> {
+  <span class="attr">display</span>: <span class="number">none</span>;
+}
+
+<span class="comment">/* Refresh indicator positioning */</span>
+<span class="comment">/* Position at top, outside scroll area */</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-16.html" class="nav-link nav-link--prev">← Swipe & Gestures</a>
+    <a href="lesson-18.html" class="nav-link nav-link--next">Next: Complete Mobile App UI →</a>
+  </nav>
+</body>
+</html>

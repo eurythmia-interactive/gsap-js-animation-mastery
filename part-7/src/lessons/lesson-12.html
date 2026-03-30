@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 12: Progress Bar - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-container {
+      background: linear-gradient(135deg, #1a1a2e 0%, #252542 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .progress-container {
+      width: 100%;
+      max-width: 400px;
+    }
+    
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .progress-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #c4c4d4;
+    }
+    
+    .progress-percent {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: #feca57;
+    }
+    
+    .progress-bar-bg {
+      width: 100%;
+      height: 16px;
+      background: #3a3a5a;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff6b6b, #feca57);
+      border-radius: 8px;
+      position: relative;
+    }
+    
+    .progress-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    .progress-details {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      color: #8888a0;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-playful">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">Progress Bar</h1>
+    <p class="lesson-subtitle">Animated progress with percentage text</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - Progress Animation</div>
+      <div class="demo-container">
+        <div class="progress-container">
+          <div class="progress-header">
+            <span class="progress-label">Quiz Completion</span>
+            <span class="progress-percent" id="progress-percent">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+          <div class="progress-details">
+            <span id="completed-count">0 questions</span>
+            <span>of 5 questions</span>
+          </div>
+        </div>
+        
+        <div class="view-toggle">
+          <button class="active" onclick="setView('desktop')">Desktop</button>
+          <button onclick="setView('phone')">Phone Sim</button>
+          <button onclick="setView('mobile')">Mobile</button>
+        </div>
+        
+        <div class="animation-controls" style="margin-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="playAnimation()">▶ Play</button>
+          <button class="btn btn-secondary" onclick="resetAnimation()">Reset</button>
+          <button class="btn btn-secondary" onclick="replayAnimation()">Replay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"progress-container"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"progress-header"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="string">"progress-label"</span><span class="tag">&gt;</span>Quiz Completion<span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="string">"progress-percent"</span> <span class="attr">id</span>=<span class="string">"progress-percent"</span><span class="tag">&gt;</span>0%<span class="tag">&lt;/span&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"progress-bar-bg"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"progress-bar-fill"</span> <span class="attr">id</span>=<span class="string">"progress-fill"</span><span class="tag">&gt;&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript Animation</div>
+      <pre class="code-block"><span class="keyword">const</span> targetPercent = <span class="number">60</span>;  <span class="comment">// 3 out of 5 = 60%</span>
+<span class="keyword">const</span> counter = { <span class="attr">value</span>: <span class="number">0</span> };
+
+<span class="keyword">const</span> tl = gsap.timeline();
+
+<span class="comment">// Animate percentage number</span>
+tl.<span class="attr">to</span>(counter, {
+  <span class="attr">value</span>: targetPercent,
+  <span class="attr">duration</span>: <span class="number">1.5</span>,
+  <span class="attr">ease</span>: <span class="string">"power2.out"</span>,
+  <span class="attr">onUpdate</span>: () => {
+    document.<span class="attr">getElementById</span>(<span class="string">"progress-percent"</span>).<span class="attr">textContent</span> = 
+      Math.<span class="attr">round</span>(counter.value) + <span class="string">"%"</span>;
+  }
+})
+
+<span class="comment">// Animate progress bar width</span>
+.<span class="attr">to</span>(<span class="string">"#progress-fill"</span>, {
+  <span class="attr">width</span>: targetPercent + <span class="string">"%"</span>,
+  <span class="attr">duration</span>: <span class="number">1.5</span>,
+  <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+}, <span class="string">"<"</span>)  <span class="comment">// "<" = same start time as previous</span>
+
+<span class="comment">// Pulse effect on completion</span>
+.<span class="attr">to</span>(<span class="string">"#progress-percent"</span>, {
+  <span class="attr">scale</span>: <span class="number">1.2</span>,
+  <span class="attr">duration</span>: <span class="number">0.3</span>,
+  <span class="attr">ease</span>: <span class="string">"back.out(2)"</span>
+})
+.<span class="attr">to</span>(<span class="string">"#progress-percent"</span>, {
+  <span class="attr">scale</span>: <span class="number">1</span>,
+  <span class="attr">duration</span>: <span class="number">0.3</span>,
+  <span class="attr">ease</span>: <span class="string">"elastic.out(1, 0.5)"</span>
+});</pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// "<" in timeline = start at same time as previous
+</span><span class="comment">// Counter object for animated percentage
+</span><span class="comment">// onUpdate fires on every frame during animation
+</span><span class="comment">// Pulse effect adds satisfaction to completion</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-11.html" class="nav-link nav-link--prev">← Answer Choices</a>
+    <a href="lesson-13.html" class="nav-link nav-link--next">Next: Stat Counter →</a>
+  </nav>
+
+  <script>
+    let tl;
+    
+    function initAnimation() {
+      const targetPercent = 60;
+      const counter = { value: 0 };
+      
+      tl = gsap.timeline();
+      
+      tl.to(counter, {
+        value: targetPercent,
+        duration: 1.5,
+        ease: "power2.out",
+        onUpdate: () => {
+          document.getElementById("progress-percent").textContent = Math.round(counter.value) + "%";
+        }
+      })
+      .to("#progress-fill", {
+        width: targetPercent + "%",
+        duration: 1.5,
+        ease: "power2.out"
+      }, "<")
+      .to("#progress-percent", {
+        scale: 1.2,
+        duration: 0.3,
+        ease: "back.out(2)"
+      })
+      .to("#progress-percent", {
+        scale: 1,
+        duration: 0.3,
+        ease: "elastic.out(1, 0.5)"
+      });
+      
+      tl.pause();
+    }
+    
+    function playAnimation() { tl.play(); }
+    function resetAnimation() {
+      document.getElementById("progress-percent").textContent = "0%";
+      gsap.set("#progress-fill", { width: "0%" });
+      if (tl) tl.restart();
+    }
+    function replayAnimation() { if (tl) tl.restart(); }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>

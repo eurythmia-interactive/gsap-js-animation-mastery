@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10 - Borders & Shadows - Tailwind CSS Basics</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-09.html" class="nav-link">← Previous</a>
+        <a href="lesson-11.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 10</span>
+        <span>Part 4: Tailwind CSS Basics</span>
+      </div>
+
+      <h1>Borders & Shadows</h1>
+      <p>Style borders and shadows with Tailwind's comprehensive utilities.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Borders & Shadows</span>
+        </div>
+        <div class="demo-container">
+          <div class="space-y-8 w-full max-w-2xl">
+            <!-- Border Width -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Border Width</p>
+              <div class="flex flex-wrap gap-4">
+                <div class="w-16 h-16 bg-gray-800 border border-gray-500 rounded flex items-center justify-center text-xs text-gray-400">border</div>
+                <div class="w-16 h-16 bg-gray-800 border-2 border-gray-500 rounded flex items-center justify-center text-xs text-gray-400">border-2</div>
+                <div class="w-16 h-16 bg-gray-800 border-4 border-gray-500 rounded flex items-center justify-center text-xs text-gray-400">border-4</div>
+                <div class="w-16 h-16 bg-gray-800 border-8 border-gray-500 rounded flex items-center justify-center text-xs text-gray-400">border-8</div>
+              </div>
+            </div>
+            
+            <!-- Border Radius -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Border Radius (rounded-*)</p>
+              <div class="flex flex-wrap gap-4">
+                <div class="w-16 h-16 bg-blue-500 rounded-none flex items-center justify-center text-white text-xs">none</div>
+                <div class="w-16 h-16 bg-blue-500 rounded-sm flex items-center justify-center text-white text-xs">sm</div>
+                <div class="w-16 h-16 bg-blue-500 rounded flex items-center justify-center text-white text-xs">default</div>
+                <div class="w-16 h-16 bg-blue-500 rounded-md flex items-center justify-center text-white text-xs">md</div>
+                <div class="w-16 h-16 bg-blue-500 rounded-lg flex items-center justify-center text-white text-xs">lg</div>
+                <div class="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center text-white text-xs">xl</div>
+                <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white text-xs">2xl</div>
+                <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">full</div>
+              </div>
+            </div>
+            
+            <!-- Border Colors -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Border Colors</p>
+              <div class="flex flex-wrap gap-4">
+                <div class="w-16 h-16 bg-gray-800 border-2 border-emerald-500 rounded-lg flex items-center justify-center text-xs text-emerald-400">emerald</div>
+                <div class="w-16 h-16 bg-gray-800 border-2 border-blue-500 rounded-lg flex items-center justify-center text-xs text-blue-400">blue</div>
+                <div class="w-16 h-16 bg-gray-800 border-2 border-purple-500 rounded-lg flex items-center justify-center text-xs text-purple-400">purple</div>
+                <div class="w-16 h-16 bg-gray-800 border-2 border-white/30 rounded-lg flex items-center justify-center text-xs text-white/70">white/30</div>
+              </div>
+            </div>
+            
+            <!-- Shadows -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Box Shadows (shadow-*)</p>
+              <div class="flex flex-wrap gap-6 justify-center">
+                <div class="w-20 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center text-gray-800 text-xs font-medium">sm</div>
+                <div class="w-20 h-20 bg-white rounded-lg shadow-md flex items-center justify-center text-gray-800 text-xs font-medium">md</div>
+                <div class="w-20 h-20 bg-white rounded-lg shadow-lg flex items-center justify-center text-gray-800 text-xs font-medium">lg</div>
+                <div class="w-20 h-20 bg-white rounded-lg shadow-xl flex items-center justify-center text-gray-800 text-xs font-medium">xl</div>
+                <div class="w-20 h-20 bg-white rounded-lg shadow-2xl flex items-center justify-center text-gray-800 text-xs font-medium">2xl</div>
+              </div>
+            </div>
+            
+            <!-- Custom Shadow -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Custom Shadow (shadow-[...])</p>
+              <div class="flex flex-wrap gap-6 justify-center">
+                <div class="w-20 h-20 bg-emerald-500 rounded-lg shadow-[0_4px_20px_rgba(16,185,129,0.4)] flex items-center justify-center text-white text-xs font-medium">
+                  glow
+                </div>
+                <div class="w-20 h-20 bg-gray-800 rounded-lg shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center justify-center text-white text-xs font-medium">
+                  inset
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Borders</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Border width: border, border-2, border-4 --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"border-2"</span><span class="punctuation">&gt;</span>2px border<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Border radius: rounded-sm to rounded-full --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"rounded-lg"</span><span class="punctuation">&gt;</span>Rounded<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"rounded-full"</span><span class="punctuation">&gt;</span>Circle/Pill<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Border color --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"border-2 border-emerald-500"</span><span class="punctuation">&gt;</span>Emerald border<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>Shadows</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Shadow sizes: shadow-sm, shadow, shadow-md, shadow-lg, shadow-xl, shadow-2xl --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"shadow-lg"</span><span class="punctuation">&gt;</span>Large shadow<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Custom shadow --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"shadow-[0_4px_20px_rgba(16,185,129,0.4)]"</span><span class="punctuation">&gt;</span>Glowing shadow<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- No shadow --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"shadow-none"</span><span class="punctuation">&gt;</span>No shadow<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>Quick Reference</h2>
+
+        <div class="concept">
+          <h3>Border Radius</h3>
+          <ul>
+            <li><code>rounded-none</code> - 0</li>
+            <li><code>rounded-sm</code> - 0.125rem</li>
+            <li><code>rounded</code> - 0.25rem (default)</li>
+            <li><code>rounded-md</code> - 0.375rem</li>
+            <li><code>rounded-lg</code> - 0.5rem</li>
+            <li><code>rounded-xl</code> - 0.75rem</li>
+            <li><code>rounded-2xl</code> - 1rem</li>
+            <li><code>rounded-full</code> - 9999px (circle)</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Common Patterns</h3>
+          <ul>
+            <li><code>border border-gray-300 rounded-lg</code> - Card with subtle border</li>
+            <li><code>rounded-full w-12 h-12</code> - Circular icon button</li>
+            <li><code>shadow-lg rounded-xl</code> - Elevated card</li>
+            <li><code>hover:shadow-xl transition-shadow</code> - Hover lift effect</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-09.html">← Previous</a>
+      <a href="lesson-11.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

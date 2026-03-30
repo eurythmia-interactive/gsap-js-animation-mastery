@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10 - Product-Focused Layout - Landing Page Design</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans'],
+            display: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-09.html" class="nav-link">← Previous</a>
+        <a href="lesson-11.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 10</span>
+        <span>Part 5: Landing Page Design</span>
+      </div>
+
+      <h1>Product-Focused Layout</h1>
+      <p>Product-focused landing pages lead with the product itself—screenshots, demos, or rich visuals take center stage. This approach works best for SaaS products, apps, and digital tools where seeing the product is believing.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Product-Focused Layout</span>
+        </div>
+        <div class="demo-container">
+          <div class="w-full max-w-6xl mx-auto">
+            <!-- Hero with product -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+              <div>
+                <h2 class="text-3xl md:text-4xl font-bold font-display text-white mb-6">
+                  The platform that grows with you
+                </h2>
+                <p class="text-lg text-zinc-400 mb-8">
+                  From startup to enterprise, our platform scales to meet your needs. Powerful features, intuitive interface, and dedicated support.
+                </p>
+                <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-8 py-4 rounded-full transition-colors">
+                  Start Building
+                </button>
+              </div>
+              <div class="relative">
+                <div class="bg-zinc-800 rounded-2xl p-4 shadow-2xl shadow-black/50 border border-zinc-700">
+                  <div class="bg-zinc-900 rounded-xl aspect-video flex items-center justify-center">
+                    <div class="text-center">
+                      <div class="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                      </div>
+                      <span class="text-zinc-600">Product Demo</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Floating badge -->
+                <div class="absolute -top-4 -right-4 bg-amber-500 text-black text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+                  New v2.0
+                </div>
+              </div>
+            </div>
+
+            <!-- Feature grid -->
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="bg-zinc-800/50 rounded-xl p-6 border border-zinc-700">
+                <div class="w-10 h-10 bg-amber-500/10 rounded-lg flex items-center justify-center mb-4">
+                  <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                </div>
+                <h3 class="text-white font-semibold mb-2">Lightning Fast</h3>
+                <p class="text-sm text-zinc-500">Sub-second load times worldwide</p>
+              </div>
+              <div class="bg-zinc-800/50 rounded-xl p-6 border border-zinc-700">
+                <div class="w-10 h-10 bg-amber-500/10 rounded-lg flex items-center justify-center mb-4">
+                  <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                  </svg>
+                </div>
+                <h3 class="text-white font-semibold mb-2">Secure by Default</h3>
+                <p class="text-sm text-zinc-500">Enterprise-grade encryption</p>
+              </div>
+              <div class="bg-zinc-800/50 rounded-xl p-6 border border-zinc-700">
+                <div class="w-10 h-10 bg-amber-500/10 rounded-lg flex items-center justify-center mb-4">
+                  <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                  </svg>
+                </div>
+                <h3 class="text-white font-semibold mb-2">Analytics Built-in</h3>
+                <p class="text-sm text-zinc-500">Real-time insights dashboard</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Product Screenshot Section</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- 2-column layout --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"grid lg:grid-cols-2 gap-12 items-center"</span><span class="punctuation">&gt;</span>
+  
+  <span class="comment">&lt;!-- Text content --&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">h2</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-3xl md:text-4xl font-bold font-display"</span><span class="punctuation">&gt;</span>The platform...<span class="punctuation">&lt;/</span><span class="tag">h2</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-lg text-zinc-400"</span><span class="punctuation">&gt;</span>Description...<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  
+  <span class="comment">&lt;!-- Product visual --&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"relative"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-zinc-800 rounded-2xl p-4 shadow-2xl"</span><span class="punctuation">&gt;</span>
+      <span class="punctuation">&lt;</span><span class="tag">img</span> <span class="attr">src</span><span class="punctuation">=</span><span class="string">"/product.png"</span> <span class="attr">alt</span><span class="punctuation">=</span><span class="string">"Product"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="comment">&lt;!-- Floating element --&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"absolute -top-4 -right-4 bg-amber-500 text-black px-4 py-2 rounded-full"</span><span class="punctuation">&gt;</span>
+      New!
+    <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+
+        <div class="concept">
+          <h3>Product-Focused Characteristics</h3>
+          <ul>
+            <li><strong>Product screenshot hero</strong> - Large, prominent product visual</li>
+            <li><strong>Floating UI elements</strong> - Annotations, badges, highlights</li>
+            <li><strong>Feature grid below</strong> - Quick scan of key features</li>
+            <li><strong>Tech-forward aesthetic</strong> - Dark theme, clean lines</li>
+            <li><strong>Subtle shadows</strong> - Depth for the product mockup</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Screenshot Best Practices</h3>
+          <ul>
+            <li>Use realistic content, not placeholder data</li>
+            <li>Add subtle shadows for depth</li>
+            <li>Include browser/app chrome for context</li>
+            <li>Consider rounded corners matching your brand</li>
+            <li>Add floating elements to highlight features</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Grid Layouts</h3>
+          <ul>
+            <li><code>grid-cols-1 md:grid-cols-2</code> - 2 columns on tablet+</li>
+            <li><code>grid-cols-1 md:grid-cols-3</code> - 3 columns on tablet+</li>
+            <li><code>gap-6</code> or <code>gap-8</code> - Consistent gaps</li>
+            <li>Use <code>items-center</code> to align content vertically</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-09.html">← Previous</a>
+      <a href="lesson-11.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

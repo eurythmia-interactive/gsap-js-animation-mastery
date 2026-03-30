@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 03: Hero to Scroll - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+  function splitText(selector, type = 'chars') {
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) return [];
+    const text = el.textContent || '';
+    el.dataset.orig = text;
+    el.innerHTML = '';
+    if (!text) return [];
+    
+    if (type === 'chars') {
+      return Array.from(text).map(c => {
+        const s = document.createElement('span');
+        s.innerHTML = c === ' ' ? '&nbsp;' : c;
+        s.style.display = 'inline-block';
+        el.appendChild(s);
+        return s;
+      });
+    } else {
+      return text.split(' ').map(w => {
+        const s = document.createElement('span');
+        s.textContent = w;
+        s.style.display = 'inline-block';
+        s.style.marginRight = '0.25em';
+        el.appendChild(s);
+        return s;
+      });
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-container {
+      background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+      position: relative;
+      overflow: hidden;
+      min-height: 600px;
+    }
+    
+    .scroll-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+    }
+    
+    .hero-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 12vw, 7rem);
+      color: #ffffff;
+      text-align: center;
+      line-height: 0.95;
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+    
+    .scroll-arrow {
+      width: 24px;
+      height: 24px;
+      border-right: 2px solid rgba(255, 255, 255, 0.5);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+      transform: rotate(45deg);
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(45deg) translateY(10px); }
+    }
+    
+    .scroll-content {
+      opacity: 0;
+      transform: translateY(50px);
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .scroll-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+    
+    .scroll-content p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-sunset">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">Hero to Scroll</h1>
+    <p class="lesson-subtitle">ScrollTrigger-driven text reveals</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - Scroll Animation</div>
+      <div class="demo-container" id="demo-container">
+        <div class="scroll-section">
+          <h2 class="hero-text" id="hero-text">SCROLL TO<br>EXPERIENCE</h2>
+          <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="scroll-arrow"></div>
+          </div>
+        </div>
+        
+        <div class="scroll-content" id="scroll-content">
+          <h3>You Made It</h3>
+          <p>The hero text animate as you scroll into view. This creates an engaging, cinematic experience that rewards interaction.</p>
+        </div>
+      </div>
+      
+      <div class="view-toggle">
+        <button class="active" onclick="setView('desktop')">Desktop</button>
+        <button onclick="setView('phone')">Phone Sim</button>
+        <button onclick="setView('mobile')">Mobile</button>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"scroll-section"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">id</span>=<span class="string">"hero-text"</span><span class="tag">&gt;</span>SCROLL TO EXPERIENCE<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"scroll-content"</span> <span class="attr">id</span>=<span class="string">"scroll-content"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h3&gt;</span>You Made It<span class="tag">&lt;/h3&gt;</span>
+  <span class="tag">&lt;p&gt;</span>Text reveals as you scroll...<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript with ScrollTrigger</div>
+      <pre class="code-block"><span class="comment">// Register ScrollTrigger plugin</span>
+gsap.<span class="attr">registerPlugin</span>(ScrollTrigger);
+
+<span class="comment">// Split the hero text into characters using custom splitText</span>
+<span class="keyword">const</span> split = <span class="attr">splitText</span>(<span class="string">"#hero-text"</span>, <span class="string">"chars"</span>);
+
+<span class="comment">// Set initial state - hidden below</span>
+gsap.<span class="attr">set</span>(split, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">100</span> });
+
+<span class="comment">// Hero text animation - triggered on scroll</span>
+gsap.<span class="attr">to</span>(split, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">y</span>: <span class="number">0</span>,
+  <span class="attr">stagger</span>: <span class="number">0.05</span>,
+  <span class="attr">duration</span>: <span class="number">1</span>,
+  <span class="attr">ease</span>: <span class="string">"power3.out"</span>,
+  <span class="attr">scrollTrigger</span>: {
+    <span class="attr">trigger</span>: <span class="string">"#hero-text"</span>,
+    <span class="attr">start</span>: <span class="string">"top 80%"</span>,
+    <span class="attr">end</span>: <span class="string">"top 30%"</span>,
+    <span class="attr">scrub</span>: <span class="number">1</span> <span class="comment">// Smooth scrubbing</span>
+  }
+});
+
+<span class="comment">// Content fade in on scroll</span>
+gsap.<span class="attr">to</span>(<span class="string">"#scroll-content"</span>, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">y</span>: <span class="number">0</span>,
+  <span class="attr">duration</span>: <span class="number">1</span>,
+  <span class="attr">ease</span>: <span class="string">"power2.out"</span>,
+  <span class="attr">scrollTrigger</span>: {
+    <span class="attr">trigger</span>: <span class="string">"#scroll-content"</span>,
+    <span class="attr">start</span>: <span class="string">"top 80%"</span>,
+    <span class="attr">toggleActions</span>: <span class="string">"play none none reverse"</span>
+  }
+});</pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// ScrollTrigger options:</span>
+<span class="comment">// start: "top 80%" - element top at 80% from viewport top
+</span><span class="comment">// end: "top 30%" - animation completes at 30%
+</span><span class="comment">// scrub: 1 - animation tied to scroll position
+</span><span class="comment">// toggleActions - what happens on enter/leave</span>
+<span class="comment">//   "play none none reverse"</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-02.html" class="nav-link nav-link--prev">← Staggered Headlines</a>
+    <a href="lesson-04.html" class="nav-link nav-link--next">Next: Product Hero →</a>
+  </nav>
+
+  <script>
+    let heroSplit, contentTl;
+    
+    function initAnimation() {
+      gsap.registerPlugin(ScrollTrigger);
+      
+      heroSplit = splitText("#hero-text", "chars");
+      
+      gsap.set(heroSplit, { opacity: 0, y: 100 });
+      
+      gsap.to(heroSplit, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.05,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#hero-text",
+          start: "top 80%",
+          end: "top 30%",
+          scrub: 1
+        }
+      });
+      
+      gsap.to("#scroll-content", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#scroll-content",
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>

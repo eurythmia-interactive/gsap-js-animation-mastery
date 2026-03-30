@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 09: System Fonts - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      border: 12px solid #e7e5e4;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 150px;
+      height: 30px;
+      background: #fff;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 130px;
+      height: 5px;
+      background: #1c1917;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.2;
+    }
+    .font-system { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    .font-serif { font-family: Georgia, "Times New Roman", serif; }
+    .font-mono { font-family: "SF Mono", Monaco, "Cascadia Code", monospace; }
+  </style>
+</head>
+<body class="lesson-page palette-stone">
+  <header class="lesson-header">
+    <h1 class="lesson-title">System Fonts</h1>
+    <p class="lesson-subtitle">Leverage native fonts for performance and platform familiarity</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #fafaf9; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #fff;">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-stone-900 text-sm font-semibold">9:41</span>
+              <div class="flex items-center gap-1">
+                <span class="text-stone-900 text-xs">●●●●</span>
+              </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="px-4 pt-2 pb-4">
+              <h1 class="text-stone-900 text-xl font-bold">System Fonts</h1>
+              <p class="text-stone-500 text-sm">Native performance</p>
+            </div>
+            
+            <!-- Font Comparison -->
+            <div class="px-4 space-y-4">
+              <!-- System Font Stack -->
+              <div class="bg-stone-50 rounded-2xl p-4">
+                <div class="text-stone-400 text-xs font-semibold uppercase tracking-wider mb-2">Sans-Serif (System)</div>
+                <p class="font-system text-stone-900 text-base">
+                  The quick brown fox jumps over the lazy dog.
+                </p>
+                <p class="text-stone-500 text-xs mt-2 font-mono">-apple-system, BlinkMacSystemFont, Segoe UI, Roboto</p>
+              </div>
+              
+              <!-- SF Pro (iOS) -->
+              <div class="bg-stone-100 rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="text-stone-600 text-xs font-semibold uppercase tracking-wider">iOS: SF Pro</div>
+                  <span class="text-stone-400 text-xs">🍎</span>
+                </div>
+                <p class="font-system text-stone-800 text-lg" style="-apple-system-font-family: 'SF Pro';">
+                  Almost Before
+                </p>
+                <p class="text-stone-600 text-sm mt-1">System font on iOS devices</p>
+              </div>
+              
+              <!-- Roboto (Android) -->
+              <div class="bg-stone-100 rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="text-stone-600 text-xs font-semibold uppercase tracking-wider">Android: Roboto</div>
+                  <span class="text-stone-400 text-xs">🤖</span>
+                </div>
+                <p class="text-stone-800 text-lg" style="font-family: 'Roboto', sans-serif;">
+                  The Highest building
+                </p>
+                <p class="text-stone-600 text-sm mt-1">System font on Android devices</p>
+              </div>
+              
+              <!-- Serif -->
+              <div class="bg-stone-50 rounded-2xl p-4">
+                <div class="text-stone-400 text-xs font-semibold uppercase tracking-wider mb-2">Serif</div>
+                <p class="font-serif text-stone-800 text-base italic">
+                  The quick brown fox jumps over the lazy dog.
+                </p>
+                <p class="text-stone-500 text-xs mt-2 font-mono">Georgia, "Times New Roman"</p>
+              </div>
+              
+              <!-- Monospace -->
+              <div class="bg-stone-900 rounded-2xl p-4">
+                <div class="text-stone-400 text-xs font-semibold uppercase tracking-wider mb-2">Monospace</div>
+                <p class="font-mono text-stone-300 text-sm">
+                  const greeting = "Hello, World!";
+                </p>
+                <p class="text-stone-500 text-xs mt-2 font-mono">SF Mono, Monaco, Cascadia Code</p>
+              </div>
+              
+              <!-- Performance Note -->
+              <div class="bg-amber-50 rounded-2xl p-4 border border-amber-100">
+                <div class="text-amber-700 text-xs font-semibold mb-2">⚡ Performance Tip</div>
+                <p class="text-amber-800 text-sm">
+                  System fonts load instantly because they're already on the device. Use them for UI elements and save custom fonts for decorative headlines.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- System font stack --&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"font-sans"</span><span class="tag">&gt;</span>
+  System font stack
+<span class="tag">&lt;/p&gt;</span>
+
+<span class="comment">&lt;!-- Tailwind font families --&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"font-sans"</span><span class="tag">&gt;</span>
+  Sans-serif stack
+<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"font-serif"</span><span class="tag">&gt;</span>
+  Serif stack
+<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"font-mono"</span><span class="tag">&gt;</span>
+  Monospace stack
+<span class="tag">&lt;/p&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Font Stacks</div>
+        <pre class="code-block"><span class="comment">/* iOS System Font */</span>
+<span class="attr">font-family</span>: -apple-system, 
+  BlinkMacSystemFont, 
+  "SF Pro Text", 
+  "SF Pro Display", 
+  "Helvetica Neue", 
+  Arial, 
+  sans-serif;
+
+<span class="comment">/* Android System Font */</span>
+<span class="attr">font-family</span>: "Roboto",
+  "Segoe UI", 
+  "Droid Sans", 
+  sans-serif;
+
+<span class="comment">/* Universal Mobile-First */</span>
+<span class="attr">font-family</span>: -apple-system, 
+  BlinkMacSystemFont, 
+  "Segoe UI", 
+  Roboto, 
+  "Helvetica Neue", 
+  Arial, 
+  sans-serif;</pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-08.html" class="nav-link nav-link--prev">← Line Length & Leading</a>
+    <a href="lesson-10.html" class="nav-link nav-link--next">Next: Vertical Stacking →</a>
+  </nav>
+</body>
+</html>

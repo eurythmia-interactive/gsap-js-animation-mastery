@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 02: Staggered Headlines - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+  function splitText(selector, type = 'chars') {
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) return [];
+    const text = el.textContent || '';
+    el.dataset.orig = text;
+    el.innerHTML = '';
+    if (!text) return [];
+    
+    if (type === 'chars') {
+      return Array.from(text).map(c => {
+        const s = document.createElement('span');
+        s.innerHTML = c === ' ' ? '&nbsp;' : c;
+        s.style.display = 'inline-block';
+        el.appendChild(s);
+        return s;
+      });
+    } else {
+      return text.split(' ').map(w => {
+        const s = document.createElement('span');
+        s.textContent = w;
+        s.style.display = 'inline-block';
+        s.style.marginRight = '0.25em';
+        el.appendChild(s);
+        return s;
+      });
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-container {
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    
+    .headline-line {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      color: #ffffff;
+      line-height: 1.1;
+      overflow: hidden;
+    }
+    
+    .subline {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 2rem;
+      opacity: 0;
+    }
+    
+    .glow-orb {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    
+    .glow-orb--1 { background: #ff6b35; top: 10%; left: 10%; }
+    .glow-orb--2 { background: #f72585; bottom: 10%; right: 10%; }
+  </style>
+</head>
+<body class="lesson-page palette-sunset">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">Staggered Headlines</h1>
+    <p class="lesson-subtitle">Multi-line reveal with timeline choreography</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - Timeline Choreography</div>
+      <div class="demo-container">
+        <div class="glow-orb glow-orb--1"></div>
+        <div class="glow-orb glow-orb--2"></div>
+        
+        <div class="headline-wrapper">
+          <h2 class="headline-line" id="line1">THINK DIFFERENT</h2>
+          <h2 class="headline-line" id="line2">BREAK LIMITS</h2>
+          <h2 class="headline-line" id="line3">CREATE MORE</h2>
+        </div>
+        <p class="subline" id="subline">Design. Develop. Deliver.</p>
+        
+        <div class="view-toggle">
+          <button class="active" onclick="setView('desktop')">Desktop</button>
+          <button onclick="setView('phone')">Phone Sim</button>
+          <button onclick="setView('mobile')">Mobile</button>
+        </div>
+        
+        <div class="animation-controls" style="margin-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="playAnimation()">▶ Play</button>
+          <button class="btn btn-secondary" onclick="resetAnimation()">Reset</button>
+          <button class="btn btn-secondary" onclick="replayAnimation()">Replay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"headline-wrapper"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">id</span>=<span class="string">"line1"</span><span class="tag">&gt;</span>THINK DIFFERENT<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">id</span>=<span class="string">"line2"</span><span class="tag">&gt;</span>BREAK LIMITS<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">id</span>=<span class="string">"line3"</span><span class="tag">&gt;</span>CREATE MORE<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">id</span>=<span class="string">"subline"</span><span class="tag">&gt;</span>Design. Develop. Deliver.<span class="tag">&lt;/p&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript Animation</div>
+      <pre class="code-block"><span class="comment">// Split each line into characters using custom splitText</span>
+<span class="keyword">const</span> split1 = <span class="attr">splitText</span>(<span class="string">"#line1"</span>, <span class="string">"chars"</span>);
+<span class="keyword">const</span> split2 = <span class="attr">splitText</span>(<span class="string">"#line2"</span>, <span class="string">"chars"</span>);
+<span class="keyword">const</span> split3 = <span class="attr">splitText</span>(<span class="string">"#line3"</span>, <span class="string">"chars"</span>);
+
+<span class="comment">// Set initial state</span>
+[split1, split2, split3].forEach(split => {
+  gsap.<span class="attr">set</span>(split, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">80</span> });
+});
+
+<span class="comment">// Create master timeline</span>
+<span class="keyword">const</span> tl = gsap.timeline();
+
+<span class="comment">// Line 1 - 0.5s duration</span>
+tl.<span class="attr">to</span>(split1, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">y</span>: <span class="number">0</span>,
+  <span class="attr">stagger</span>: <span class="number">0.04</span>,
+  <span class="attr">duration</span>: <span class="number">0.5</span>,
+  <span class="attr">ease</span>: <span class="string">"power3.out"</span>
+})
+
+<span class="comment">// Line 2 - starts 0.2s before line 1 ends (overlap)</span>
+.<span class="attr">to</span>(split2, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">y</span>: <span class="number">0</span>,
+  <span class="attr">stagger</span>: <span class="number">0.04</span>,
+  <span class="attr">duration</span>: <span class="number">0.5</span>,
+  <span class="attr">ease</span>: <span class="string">"power3.out"</span>
+}, <span class="string">"-=0.25"</span>)
+
+<span class="comment">// Line 3</span>
+.<span class="attr">to</span>(split3, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">y</span>: <span class="number">0</span>,
+  <span class="attr">stagger</span>: <span class="number">0.04</span>,
+  <span class="attr">duration</span>: <span class="number">0.5</span>,
+  <span class="attr">ease</span>: <span class="string">"power3.out"</span>
+}, <span class="string">"-=0.25"</span>)
+
+<span class="comment">// Subline fades in last</span>
+.<span class="attr">to</span>(<span class="string">"#subline"</span>, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">duration</span>: <span class="number">0.8</span>,
+  <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+}, <span class="string">"+=0.2"</span>);</pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// Timeline positioning with overlap:</span>
+<span class="comment">// "-=0.25" means start 0.25s before previous ends
+</span><span class="comment">// "+=0.2" means start 0.2s after previous ends
+</span>
+<span class="comment">// power3.out gives more "punch" than power2.out
+</span><span class="comment">// Stagger of 0.04 = 40ms between characters</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-01.html" class="nav-link nav-link--prev">← The Big Reveal</a>
+    <a href="lesson-03.html" class="nav-link nav-link--next">Next: Hero to Scroll →</a>
+  </nav>
+
+  <script>
+    let tl;
+    let split1, split2, split3;
+    
+    function initAnimation() {
+      split1 = splitText("#line1", "chars");
+      split2 = splitText("#line2", "chars");
+      split3 = splitText("#line3", "chars");
+      
+      [split1, split2, split3].forEach(split => {
+        gsap.set(split, { opacity: 0, y: 80 });
+      });
+      gsap.set("#subline", { opacity: 0 });
+      
+      tl = gsap.timeline();
+      
+      tl.to(split1, {
+        opacity: 1, y: 0, stagger: 0.04, duration: 0.5, ease: "power3.out"
+      })
+      .to(split2, {
+        opacity: 1, y: 0, stagger: 0.04, duration: 0.5, ease: "power3.out"
+      }, "-=0.25")
+      .to(split3, {
+        opacity: 1, y: 0, stagger: 0.04, duration: 0.5, ease: "power3.out"
+      }, "-=0.25")
+      .to("#subline", {
+        opacity: 1, duration: 0.8, ease: "power2.out"
+      }, "+=0.2");
+      
+      tl.pause();
+    }
+    
+    function playAnimation() { tl.play(); }
+    function resetAnimation() {
+      [split1, split2, split3].forEach(split => {
+        gsap.set(split, { opacity: 0, y: 80 });
+      });
+      gsap.set("#subline", { opacity: 0 });
+      if (tl) tl.restart();
+    }
+    function replayAnimation() { if (tl) tl.restart(); }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 10: Vertical Stacking - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      border: 12px solid #262626;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 150px;
+      height: 30px;
+      background: #000;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 130px;
+      height: 5px;
+      background: #fff;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-brutalist">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Vertical Stacking</h1>
+    <p class="lesson-subtitle">Mobile-first column layouts and stacking patterns</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #000; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #000;">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-white text-sm font-bold">9:41</span>
+              <span class="text-white text-xs">●●●●</span>
+            </div>
+            
+            <!-- Stacked Header -->
+            <header class="px-4 py-3 border-b border-zinc-800">
+              <div class="flex items-center justify-between">
+                <h1 class="text-white text-lg font-black tracking-tight">NEWS</h1>
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                  </div>
+                </div>
+              </div>
+            </header>
+            
+            <!-- Stacked Content -->
+            <main class="flex flex-col gap-4 p-4">
+              <!-- Featured Card -->
+              <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+                <div class="aspect-video bg-gradient-to-br from-red-600 to-red-800 rounded-lg mb-4 flex items-center justify-center">
+                  <span class="text-white/30 text-4xl font-black">01</span>
+                </div>
+                <span class="text-red-500 text-xs font-bold uppercase tracking-wider">Breaking</span>
+                <h2 class="text-white text-lg font-bold mt-1 leading-tight">Brutalist design embraces raw functionality and bold aesthetics</h2>
+                <p class="text-zinc-500 text-xs mt-2">2 hours ago • 4 min read</p>
+              </div>
+              
+              <!-- Secondary Cards -->
+              <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+                <div class="flex gap-3">
+                  <div class="w-20 h-20 bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-lg flex-shrink-0"></div>
+                  <div class="flex-1">
+                    <span class="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Tech</span>
+                    <h3 class="text-white font-bold mt-1 leading-tight">Minimalism in digital products continues to evolve</h3>
+                    <p class="text-zinc-600 text-xs mt-2">5 hours ago</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+                <div class="flex gap-3">
+                  <div class="w-20 h-20 bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-lg flex-shrink-0"></div>
+                  <div class="flex-1">
+                    <span class="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Design</span>
+                    <h3 class="text-white font-bold mt-1 leading-tight">High contrast interfaces gain popularity in 2026</h3>
+                    <p class="text-zinc-600 text-xs mt-2">8 hours ago</p>
+                  </div>
+                </div>
+              </div>
+            </main>
+            
+            <!-- Stacked Footer -->
+            <footer class="p-4 border-t border-zinc-800">
+              <button class="w-full bg-red-600 text-white py-4 rounded-xl font-bold uppercase tracking-wider active:bg-red-700 transition-colors">
+                Load More
+              </button>
+            </footer>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- Mobile-first vertical layout --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"min-h-screen bg-black"</span><span class="tag">&gt;</span>
+  
+  <span class="comment">&lt;!-- Stacked header --&gt;</span>
+  <span class="tag">&lt;header</span> <span class="attr">class</span>=<span class="string">"p-4 border-b border-zinc-800"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h1</span> <span class="attr">class</span>=<span class="string">"text-white text-xl font-bold"</span><span class="tag">&gt;</span>Header<span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;/header&gt;</span>
+  
+  <span class="comment">&lt;!-- Stacked content --&gt;</span>
+  <span class="tag">&lt;main</span> <span class="attr">class</span>=<span class="string">"flex flex-col gap-4 p-4"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bg-zinc-900 p-4 rounded-xl"</span><span class="tag">&gt;</span>Card 1<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bg-zinc-900 p-4 rounded-xl"</span><span class="tag">&gt;</span>Card 2<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bg-zinc-900 p-4 rounded-xl"</span><span class="tag">&gt;</span>Card 3<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/main&gt;</span>
+  
+  <span class="comment">&lt;!-- Stacked footer --&gt;</span>
+  <span class="tag">&lt;footer</span> <span class="attr">class</span>=<span class="string">"p-4 border-t border-zinc-800"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="string">"w-full bg-red-600 text-white 
+                 py-4 rounded-xl font-bold"</span><span class="tag">&gt;</span>
+      Full-Width Button
+    <span class="tag">&lt;/button&gt;</span>
+  <span class="tag">&lt;/footer&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Mobile-First Principles</div>
+        <pre class="code-block"><span class="comment">/* Single column as default */</span>
+<span class="attr">flex-direction</span>: <span class="number">column</span>;  <span class="comment">/* or flex-col */</span>
+
+<span class="comment">/* Vertical gaps */</span>
+<span class="attr">gap</span>: <span class="number">1rem</span>;  <span class="comment">/* space-y-4 in Tailwind */</span>
+
+<span class="comment">/* Full-width cards */</span>
+<span class="attr">width</span>: <span class="number">100%</span>;  <span class="comment">/* or w-full */</span>
+
+<span class="comment">/* Full-width buttons */</span>
+<span class="attr">min-height</span>: <span class="number">48px</span>;
+<span class="attr">width</span>: <span class="number">100%</span>;</pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-09.html" class="nav-link nav-link--prev">← System Fonts</a>
+    <a href="lesson-11.html" class="nav-link nav-link--next">Next: Touch-Friendly Spacing →</a>
+  </nav>
+</body>
+</html>

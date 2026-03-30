@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 12 - Dark Mode - Tailwind CSS Basics</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Enable class-based dark mode
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <style>
+    /* Toggle switch styling */
+    .toggle-switch {
+      width: 50px;
+      height: 26px;
+      background: #374151;
+      border-radius: 13px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .toggle-switch.dark {
+      background: #10b981;
+    }
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.3s;
+    }
+    .toggle-switch.dark::after {
+      transform: translateX(24px);
+    }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+  <header class="header bg-white/90 dark:bg-gray-900/90 backdrop-blur">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back text-gray-700 dark:text-gray-300">← Back to Index</a>
+      <div class="nav-links">
+        <span class="part-badge">Lesson 12</span>
+        <!-- Dark mode toggle -->
+        <button id="darkToggle" class="toggle-switch" aria-label="Toggle dark mode"></button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 12</span>
+        <span>Part 4: Tailwind CSS Basics</span>
+      </div>
+
+      <h1 class="text-gray-900 dark:text-white">Dark Mode</h1>
+      <p class="text-gray-600 dark:text-gray-400">Style for dark mode using the <code class="dark:text-emerald-400">dark:</code> prefix. Click the toggle above to switch modes!</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Dark Mode (Toggle Above)</span>
+        </div>
+        <div class="demo-container dark:bg-gray-800">
+          <div class="space-y-6 w-full max-w-2xl">
+            <!-- Simple Dark Mode -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+              <h3 class="text-gray-900 dark:text-white font-semibold mb-2">Card Title</h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                This card adapts to dark mode. Background and text colors change automatically.
+              </p>
+              <button class="mt-4 bg-emerald-500 hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                Action Button
+              </button>
+            </div>
+            
+            <!-- Color Palette -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="bg-blue-500 dark:bg-blue-600 p-4 rounded-lg text-white text-center font-medium">
+                Blue 500/600
+              </div>
+              <div class="bg-purple-500 dark:bg-purple-600 p-4 rounded-lg text-white text-center font-medium">
+                Purple 500/600
+              </div>
+              <div class="bg-pink-500 dark:bg-pink-600 p-4 rounded-lg text-white text-center font-medium">
+                Pink 500/600
+              </div>
+              <div class="bg-orange-500 dark:bg-orange-600 p-4 rounded-lg text-white text-center font-medium">
+                Orange 500/600
+              </div>
+            </div>
+            
+            <!-- Text Colors -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+              <p class="text-gray-900 dark:text-gray-100 font-semibold mb-2">Gray-900 on light, Gray-100 on dark</p>
+              <p class="text-gray-500 dark:text-gray-400">Gray-500 on light, Gray-400 on dark</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Dark Mode Setup</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Enable class-based dark mode --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">script</span><span class="punctuation">&gt;</span>
+  tailwind.config = {
+    darkMode: 'class'
+  }
+<span class="punctuation">&lt;/</span><span class="tag">script</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>Using dark: Prefix</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Background: white on light, gray-800 on dark --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-white dark:bg-gray-800"</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Text: gray-900 on light, gray-100 on dark --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-gray-900 dark:text-gray-100"</span><span class="punctuation">&gt;</span>Adaptive text<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Colors can shift slightly between modes --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-emerald-500 dark:bg-emerald-600"</span><span class="punctuation">&gt;</span>Button<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>Dark Mode Best Practices</h2>
+
+        <div class="concept">
+          <h3>Enabling Dark Mode</h3>
+          <ul>
+            <li><strong>Class-based</strong> (recommended): <code>darkMode: 'class'</code></li>
+            <li>Add <code>dark</code> class to <code>&lt;html&gt;</code> to activate</li>
+            <li>Toggle via JavaScript: <code>document.documentElement.classList.toggle('dark')</code></li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Color Guidelines</h3>
+          <ul>
+            <li>Don't use pure black (#000) - use <code>gray-900</code> or <code>gray-800</code></li>
+            <li>Shift colors slightly: <code>blue-500</code> → <code>blue-600</code> for dark mode</li>
+            <li>Reduce shadow intensity in dark mode</li>
+            <li>Use slightly muted backgrounds for better contrast</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Manual Toggle Example</h3>
+          <code>document.documentElement.classList.toggle('dark')</code>
+          <p class="text-gray-400 mt-1">Toggle this on a button click to switch modes.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer dark:bg-gray-800 dark:border-gray-700">
+    <nav class="nav">
+      <a href="lesson-11.html" class="text-emerald-600 dark:text-emerald-400">← Previous</a>
+      <a href="lesson-13.html" class="text-emerald-600 dark:text-emerald-400">Next →</a>
+    </nav>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('darkToggle');
+    const html = document.documentElement;
+    
+    // Check for saved preference or system preference
+    if (localStorage.getItem('darkMode') === 'true' || 
+        (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.classList.add('dark');
+      toggle.classList.add('dark');
+    }
+    
+    toggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      toggle.classList.toggle('dark');
+      localStorage.setItem('darkMode', html.classList.contains('dark'));
+    });
+  </script>
+</body>
+</html>

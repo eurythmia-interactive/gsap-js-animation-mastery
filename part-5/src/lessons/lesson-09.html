@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 09 - Bold/Statement Design - Landing Page Design</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans'],
+            display: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-08.html" class="nav-link">← Previous</a>
+        <a href="lesson-10.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 09</span>
+        <span>Part 5: Landing Page Design</span>
+      </div>
+
+      <h1>Bold/Statement Design</h1>
+      <p>Bold landing pages use oversized typography, high contrast, and dramatic visuals to make an immediate impact. This approach works for brands that want to stand out and make a memorable impression.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Bold Statement Design</span>
+        </div>
+        <div class="demo-container">
+          <div class="w-full">
+            <!-- Full-width bold statement -->
+            <div class="bg-black min-h-[60vh] flex items-center justify-center py-24">
+              <h1 class="text-7xl md:text-8xl lg:text-[10rem] font-black text-white tracking-tighter leading-none">
+                BOLD
+              </h1>
+            </div>
+            
+            <!-- Supporting statement -->
+            <div class="bg-zinc-950 py-20">
+              <div class="max-w-4xl mx-auto px-6">
+                <p class="text-3xl md:text-4xl lg:text-5xl text-zinc-400 leading-tight font-light">
+                  "Design is not just what it <span class="text-amber-500 font-bold">looks</span> like. Design is how it <span class="text-amber-500 font-bold">works</span>."
+                </p>
+                <p class="mt-8 text-lg text-zinc-600">— Steve Jobs</p>
+              </div>
+            </div>
+            
+            <!-- CTA section -->
+            <div class="bg-black pb-24 text-center">
+              <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-12 py-5 rounded-full text-lg transition-all hover:scale-105">
+                Make It Bold
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Oversized Typography</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Statement headline --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-black min-h-[60vh] flex items-center justify-center"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">h1</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-7xl md:text-8xl lg:text-[10rem] font-black text-white tracking-tighter leading-none"</span><span class="punctuation">&gt;</span>
+    BOLD
+  <span class="punctuation">&lt;/</span><span class="tag">h1</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Large quote --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-3xl md:text-4xl lg:text-5xl text-zinc-400 leading-tight"</span><span class="punctuation">&gt;</span>
+  "Design is not just..."
+<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Large CTA --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-amber-500 text-black font-bold px-12 py-5 rounded-full text-lg"</span><span class="punctuation">&gt;</span>
+  Make It Bold
+<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+
+        <div class="concept">
+          <h3>Bold Design Characteristics</h3>
+          <ul>
+            <li><strong>Oversized typography</strong> - 8xl, 9xl, or custom clamp() sizes</li>
+            <li><strong>High contrast</strong> - Black background, white text</li>
+            <li><strong>Single word/phrase</strong> - One powerful statement</li>
+            <li><strong>Dramatic visuals</strong> - Large, impactful imagery</li>
+            <li><strong>Minimal content</strong> - Restraint creates impact</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Typography for Impact</h3>
+          <ul>
+            <li><code>text-[10rem]</code> - Massive statement text</li>
+            <li><code>tracking-tighter</code> - Tighten large type</li>
+            <li><code>leading-none</code> - No extra line height</li>
+            <li><code>font-black</code> - Heaviest weight available</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>When to Use Bold Design</h3>
+          <ul>
+            <li>Creative agencies and portfolios</li>
+            <li>Bold, youthful brands</li>
+            <li>Product launches</li>
+            <li>Event promotions</li>
+            <li>When you want to be remembered</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-08.html">← Previous</a>
+      <a href="lesson-10.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

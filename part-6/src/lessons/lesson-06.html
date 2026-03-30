@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 06: Dark Typography - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      border: 12px solid #1a1a1a;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 150px;
+      height: 30px;
+      background: #000;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 130px;
+      height: 5px;
+      background: #fff;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-slate">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Dark Typography</h1>
+    <p class="lesson-subtitle">Reduced eye strain, contrast ratios, and text hierarchy in dark interfaces</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #09090b; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #09090b;">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-white text-sm font-semibold">9:41</span>
+              <div class="flex items-center gap-1">
+                <span class="text-white text-xs">●●●●</span>
+              </div>
+            </div>
+            
+            <!-- Article Reader -->
+            <div class="px-4 pt-2">
+              <!-- Article Header -->
+              <div class="mb-4">
+                <span class="text-cyan-400 text-xs font-semibold uppercase tracking-wider">Technology</span>
+                <h1 class="text-white text-2xl font-bold mt-2 leading-tight">The Future of Dark Mode in Mobile Design</h1>
+                <div class="flex items-center gap-2 mt-3 text-gray-500 text-sm">
+                  <span>March 30, 2026</span>
+                  <span>•</span>
+                  <span>5 min read</span>
+                </div>
+              </div>
+              
+              <!-- Hero Image -->
+              <div class="aspect-video bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-2xl mb-6 flex items-center justify-center">
+                <svg class="w-16 h-16 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              
+              <!-- Article Body -->
+              <article class="space-y-4">
+                <p class="text-gray-300 leading-relaxed">
+                  Dark mode has evolved from a simple aesthetic choice to an essential feature that significantly impacts user experience and device battery life.
+                </p>
+                <p class="text-gray-400 leading-relaxed">
+                  When designing for dark interfaces, typography hierarchy becomes crucial. The goal is to maintain readability while reducing eye strain in low-light conditions.
+                </p>
+                
+                <!-- Text Hierarchy Demo -->
+                <div class="bg-zinc-900 rounded-2xl p-4 mt-6">
+                  <div class="text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-3">Text Hierarchy</div>
+                  <div class="space-y-3">
+                    <div>
+                      <p class="text-gray-500 text-xs mb-1">Primary (zinc-100)</p>
+                      <p class="text-zinc-100 text-base font-medium">Main headings and titles</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-500 text-xs mb-1">Body (zinc-300)</p>
+                      <p class="text-zinc-300 text-sm">Primary body text for comfortable reading</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-500 text-xs mb-1">Secondary (zinc-400)</p>
+                      <p class="text-zinc-400 text-sm">Secondary information and captions</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-500 text-xs mb-1">Muted (zinc-500)</p>
+                      <p class="text-zinc-500 text-sm">Timestamps, metadata, hints</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <p class="text-gray-400 leading-relaxed">
+                  Avoid using pure white (#ffffff) for body text as it can cause discomfort in extended reading sessions.
+                </p>
+              </article>
+            </div>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- Dark mode typography hierarchy --&gt;</span>
+
+<span class="comment">&lt;!-- Primary text (headings) --&gt;</span>
+<span class="tag">&lt;h1</span> <span class="attr">class</span>=<span class="string">"text-zinc-100 text-2xl font-bold"</span><span class="tag">&gt;</span>
+  Heading
+<span class="tag">&lt;/h1&gt;</span>
+
+<span class="comment">&lt;!-- Body text (zinc-300 for reading) --&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"text-zinc-300 text-base 
+               leading-relaxed"</span><span class="tag">&gt;</span>
+  Body text content
+<span class="tag">&lt;/p&gt;</span>
+
+<span class="comment">&lt;!-- Secondary text (captions, metadata) --&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"text-zinc-400 text-sm"</span><span class="tag">&gt;</span>
+  Secondary information
+<span class="tag">&lt;/p&gt;</span>
+
+<span class="comment">&lt;!-- Muted text (timestamps) --&gt;</span>
+<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="string">"text-zinc-500 text-xs"</span><span class="tag">&gt;</span>
+  2h ago
+<span class="tag">&lt;/span&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Contrast Guidelines</div>
+        <pre class="code-block"><span class="comment">/* WCAG Contrast Ratios */</span>
+
+<span class="comment">/* zinc-100 on black = 16.1:1 (Excellent) */</span>
+<span class="attr">text-zinc-100</span> <span class="attr">bg-black</span>
+
+<span class="comment">/* zinc-300 on black = 11.5:1 (Excellent) */</span>
+<span class="attr">text-zinc-300</span> <span class="attr">bg-black</span>
+
+<span class="comment">/* zinc-400 on black = 7.0:1 (AAA) */</span>
+<span class="attr">text-zinc-400</span> <span class="attr">bg-black</span>
+
+<span class="comment">/* zinc-500 on black = 4.6:1 (AA) */</span>
+<span class="attr">text-zinc-500</span> <span class="attr">bg-black</span>
+
+<span class="comment">/* AVOID: Pure white for body text */</span>
+<span class="comment">/* text-white can cause eye strain */</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-05.html" class="nav-link nav-link--prev">← Elevated Surfaces</a>
+    <a href="lesson-07.html" class="nav-link nav-link--next">Next: Fluid Type Scale →</a>
+  </nav>
+</body>
+</html>

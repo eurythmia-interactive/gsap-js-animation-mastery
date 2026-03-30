@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Part 7: Advanced Text Animation - GSAP Mastery</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@400;500;600&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/style.css">
+  <style>
+    .course-index {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a0a0f 0%, #12121f 100%);
+      padding: 2rem;
+    }
+    
+    .course-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .course-badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: rgba(255, 107, 53, 0.1);
+      border: 1px solid #ff6b35;
+      border-radius: 50px;
+      color: #ff6b35;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    
+    .course-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .course-subtitle {
+      font-size: 1.125rem;
+      color: #a0a0b0;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .exercises-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .exercise-card {
+      background: #1a1a2e;
+      border: 1px solid #2a2a3e;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: #ffffff;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .exercise-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--card-accent), var(--card-accent-2));
+    }
+    
+    .exercise-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-accent);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+    
+    .exercise-card__number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--card-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+    
+    .exercise-card__title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .exercise-card__desc {
+      font-size: 0.875rem;
+      color: #8888a0;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    
+    .exercise-card__lessons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .lesson-badge {
+      padding: 0.25rem 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: #c4c4d4;
+    }
+    
+    .exercise-card__arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--card-accent);
+      font-size: 0.875rem;
+    }
+    
+    /* Palette-specific accents */
+    .exercise-card--sunset { --card-accent: #ff6b35; --card-accent-2: #f72585; }
+    .exercise-card--mint { --card-accent: #0d9488; --card-accent-2: #10b981; }
+    .exercise-card--corporate { --card-accent: #1e3a5f; --card-accent-2: #c9a227; }
+    .exercise-card--playful { --card-accent: #ff6b6b; --card-accent-2: #feca57; }
+    .exercise-card--dataviz { --card-accent: #3b82f6; --card-accent-2: #06b6d4; }
+    .exercise-card--pastel { --card-accent: #c4b5fd; --card-accent-2: #fda4af; }
+    .exercise-card--cinematic { --card-accent: #7c3aed; --card-accent-2: #db2777; }
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #1a1a2e;
+      border: 1px solid #2a2a3e;
+      border-radius: 8px;
+      color: #a0a0b0;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      transition: all 0.2s;
+    }
+    
+    .back-link:hover {
+      color: #ffffff;
+      border-color: #ff6b35;
+    }
+    
+    @media (max-width: 768px) {
+      .exercises-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="course-index">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <a href="../index.html" class="back-link">← Back to Course Hub</a>
+    
+    <header class="course-header">
+      <span class="course-badge">Part 7</span>
+      <h1 class="course-title">Advanced Text Animation</h1>
+      <p class="course-subtitle">Master professional text animations with GSAP SplitText, ScrollTrigger, and premium typography. 7 distinct website types, 7 unique color palettes, 21 techniques.</p>
+    </header>
+    
+    <div class="exercises-grid">
+      <!-- Exercise 1: Landing Pages -->
+      <a href="src/lessons/lesson-01.html" class="exercise-card exercise-card--sunset">
+        <div class="exercise-card__number">Exercise 1</div>
+        <h2 class="exercise-card__title">Landing Pages</h2>
+        <p class="exercise-card__desc">Bold hero text reveals, staggered headlines, dramatic statements</p>
+        <div class="exercise-card__lessons">
+          <span class="lesson-badge">L01: Big Reveal</span>
+          <span class="lesson-badge">L02: Staggered</span>
+          <span class="lesson-badge">L03: Hero Scroll</span>
+        </div>
+        <div class="exercise-card__arrow">Start Learning →</div>
+      </a>
+      
+      <!-- Exercise 2: E-commerce -->
+      <a href="src/lessons/lesson-04.html" class="exercise-card exercise-card--mint">
+        <div class="exercise-card__number">Exercise 2</div>
+        <h2 class="exercise-card__title">E-commerce</h2>
+        <p class="exercise-card__desc">Product hero animations, price reveals, add-to-cart drama</p>
+        <div class="exercise-card__lessons">
+          <span class="lesson-badge">L04: Product Hero</span>
+          <span class="lesson-badge">L05: Price Drama</span>
+          <span class="lesson-badge">L06: Add to Cart</span>
+        </div>
+        <div class="exercise-card__arrow">Start Learning →</div>
+      </a>
+      
+      <!-- Exercise 3: Corporate -->
+      <a href="src/lessons/lesson-07.html" class="exercise-card exercise-card--corporate">
+        <div class="exercise-card__number">Exercise 3</div>
+        <h2 class="exercise-card__title">Corporate</h2>
+        <p class="exercise-card__desc">Trust-building reveals, professional taglines, service grids</p>
+        <div class="exercise-card__lessons">
+          <span class="lesson-badge">L07: Trust Building</span>
+          <span class="lesson-badge">L08: Service Grid</span>
+          <span class="lesson-badge">L09: Tagline Power</span>
+        </div>
+        <div class="exercise-card__arrow">Start Learning →</div>
+      </a>
+      
+      <!-- Exercise 4: Polls/Quizzes -->
+      <a href="src/lessons/lesson-10.html" class="exercise-card exercise-card--playful">
+        <div class="exercise-card__number">Exercise 4</div>
+        <h2 class="exercise-card__title">Polls & Quizzes</h2>
+        <p class="exercise-card__desc">Question reveals, answer animations, progress indicators</p>
+        <div class="exercise-card__lessons">
+          <span class="lesson-badge">L10: Question Enter</span>
+          <span class="lesson-badge">L11: Answer Choices</span>
+          <span class="lesson-badge">L12: Progress Bar</span>
+        </div>
+        <div class="exercise-card__arrow">Start Learning →</div>
+      </a>
+      
+      <!-- Exercise 5: Infographics -->
+      <a href="src/lessons/lesson-13.html" class="exercise-card exercise-card--dataviz">
+        <div class="exercise-card__number">Exercise 5</div>
+        <h2 class="exercise-card__title">Infographics</h2>
+        <p class="exercise-card__desc">Animated statistics, data labels, timeline milestones</p>
+        <div class="exercise-card__lessons">
+          <span class="lesson-badge">L13: Stat Counter</span>
+          <span class="lesson-badge">L14: Data Labels</span>
+          <span class="lesson-badge">L15: Timeline</span>
+        </div>
+        <div class="exercise-card__arrow">Start Learning →</div>
+      </a>
+      
+      <!-- Exercise 6: Animated Poetry -->
+      <a href="src/lessons/lesson-16.html" class="exercise-card exercise-card--pastel">
+        <div class="exercise-card__number">Exercise 6</div>
+        <h2 class="exercise-card__title">Animated Poetry</h2>
+        <p class="exercise-card__desc">Stanza reveals, word emphasis, expressive choreography</p>
+        <div class="exercise-card__lessons">
+          <span class="lesson-badge">L16: Line by Line</span>
+          <span class="lesson-badge">L17: Word Emphasis</span>
+          <span class="lesson-badge">L18: Full Choreo</span>
+        </div>
+        <div class="exercise-card__arrow">Start Learning →</div>
+      </a>
+      
+      <!-- Exercise 7: Storytelling -->
+      <a href="src/lessons/lesson-19.html" class="exercise-card exercise-card--cinematic">
+        <div class="exercise-card__number">Exercise 7</div>
+        <h2 class="exercise-card__title">Storytelling</h2>
+        <p class="exercise-card__desc">Scene openers, narrative flow, dramatic finales</p>
+        <div class="exercise-card__lessons">
+          <span class="lesson-badge">L19: Scene Opener</span>
+          <span class="lesson-badge">L20: Narrative</span>
+          <span class="lesson-badge">L21: The Finale</span>
+        </div>
+        <div class="exercise-card__arrow">Start Learning →</div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

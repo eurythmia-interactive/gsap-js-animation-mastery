@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 12: Section Rhythm - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      border: 12px solid #262626;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 150px;
+      height: 30px;
+      background: #000;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 130px;
+      height: 5px;
+      background: #fff;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-brutalist">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Section Rhythm</h1>
+    <p class="lesson-subtitle">Consistent vertical flow and breathing room in mobile layouts</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #000; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #000;">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-white text-sm font-bold">9:41</span>
+              <span class="text-white text-xs">●●●●</span>
+            </div>
+            
+            <!-- Hero Section - Most Spacious -->
+            <section class="py-12 px-4 text-center">
+              <h1 class="text-white text-3xl font-black tracking-tight mb-3">
+                SECTION RHYTHM
+              </h1>
+              <p class="text-zinc-500 text-sm max-w-[280px] mx-auto">
+                Consistent vertical flow creates comfortable reading experiences
+              </p>
+              <button class="mt-6 px-8 py-3 bg-red-600 text-white rounded-xl font-bold uppercase tracking-wider text-sm">
+                Get Started
+              </button>
+            </section>
+            
+            <!-- Standard Section -->
+            <section class="py-8 px-4">
+              <h2 class="text-white text-lg font-bold mb-3">Standard Section</h2>
+              <p class="text-zinc-400 text-sm leading-relaxed">
+                Medium spacing for standard content sections. Use this for feature descriptions and regular content blocks.
+              </p>
+            </section>
+            
+            <!-- Compact List Section -->
+            <section class="py-6 px-4">
+              <div class="text-zinc-500 text-xs font-bold uppercase tracking-wider mb-3">List Items</div>
+              <div class="space-y-0">
+                <div class="flex items-center justify-between py-4 border-b border-zinc-900">
+                  <span class="text-white text-sm">Design Systems</span>
+                  <span class="text-zinc-600">→</span>
+                </div>
+                <div class="flex items-center justify-between py-4 border-b border-zinc-900">
+                  <span class="text-white text-sm">Components</span>
+                  <span class="text-zinc-600">→</span>
+                </div>
+                <div class="flex items-center justify-between py-4 border-b border-zinc-900">
+                  <span class="text-white text-sm">Typography</span>
+                  <span class="text-zinc-600">→</span>
+                </div>
+                <div class="flex items-center justify-between py-4">
+                  <span class="text-white text-sm">Color Theory</span>
+                  <span class="text-zinc-600">→</span>
+                </div>
+              </div>
+            </section>
+            
+            <!-- Feature Grid -->
+            <section class="py-8 px-4">
+              <h2 class="text-white text-lg font-bold mb-4">Features</h2>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-zinc-900 rounded-xl p-4">
+                  <div class="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center mb-2">
+                    <span class="text-white text-lg font-black">01</span>
+                  </div>
+                  <p class="text-white text-xs font-bold">Mobile First</p>
+                  <p class="text-zinc-500 text-xs mt-1">Design for small screens first</p>
+                </div>
+                <div class="bg-zinc-900 rounded-xl p-4">
+                  <div class="w-8 h-8 bg-zinc-800 rounded-lg flex items-center justify-center mb-2">
+                    <span class="text-white text-lg font-black">02</span>
+                  </div>
+                  <p class="text-white text-xs font-bold">Touch Friendly</p>
+                  <p class="text-zinc-500 text-xs mt-1">48px minimum targets</p>
+                </div>
+                <div class="bg-zinc-900 rounded-xl p-4">
+                  <div class="w-8 h-8 bg-zinc-800 rounded-lg flex items-center justify-center mb-2">
+                    <span class="text-white text-lg font-black">03</span>
+                  </div>
+                  <p class="text-white text-xs font-bold">Fast Loading</p>
+                  <p class="text-zinc-500 text-xs mt-1">Optimized assets</p>
+                </div>
+                <div class="bg-zinc-900 rounded-xl p-4">
+                  <div class="w-8 h-8 bg-zinc-800 rounded-lg flex items-center justify-center mb-2">
+                    <span class="text-white text-lg font-black">04</span>
+                  </div>
+                  <p class="text-white text-xs font-bold">Accessible</p>
+                  <p class="text-zinc-500 text-xs mt-1">WCAG compliant</p>
+                </div>
+              </div>
+            </section>
+            
+            <!-- Rhythm Guide -->
+            <section class="mx-4 mb-4 p-4 bg-zinc-900 rounded-xl border border-zinc-800">
+              <div class="text-red-500 text-xs font-bold uppercase tracking-wider mb-3">Vertical Rhythm Scale</div>
+              <div class="space-y-2">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-4 bg-red-600/30 rounded"></div>
+                  <span class="text-zinc-500 text-xs">py-16 (Hero)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-3 bg-zinc-700/50 rounded"></div>
+                  <span class="text-zinc-500 text-xs">py-12 (Large)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-2 bg-zinc-700/50 rounded"></div>
+                  <span class="text-zinc-500 text-xs">py-8 (Standard)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-1 bg-zinc-700/50 rounded"></div>
+                  <span class="text-zinc-500 text-xs">py-6 (Compact)</span>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- Spacious hero section --&gt;</span>
+<span class="tag">&lt;section</span> <span class="attr">class</span>=<span class="string">"py-16 px-4 text-center"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h1</span> <span class="attr">class</span>=<span class="string">"text-3xl font-black"</span><span class="tag">&gt;</span>Hero<span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"text-zinc-400 mt-4"</span><span class="tag">&gt;</span>Subtitle<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/section&gt;</span>
+
+<span class="comment">&lt;!-- Standard section --&gt;</span>
+<span class="tag">&lt;section</span> <span class="attr">class</span>=<span class="string">"py-8 px-4"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">class</span>=<span class="string">"text-lg font-bold mb-3"</span><span class="tag">&gt;</span>Title<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"text-zinc-400 text-sm"</span><span class="tag">&gt;</span>Content<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/section&gt;</span>
+
+<span class="comment">&lt;!-- Compact list section --&gt;</span>
+<span class="tag">&lt;section</span> <span class="attr">class</span>=<span class="string">"py-6 px-4"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"py-4 border-b border-zinc-900"</span><span class="tag">&gt;</span>
+    List Item
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Section Padding Scale</div>
+        <pre class="code-block"><span class="comment">/* Hero / Important sections */</span>
+<span class="attr">padding-top</span>: <span class="number">64px</span>;  <span class="comment">/* py-16 */</span>
+<span class="attr">padding-bottom</span>: <span class="number">64px</span>;
+
+<span class="comment">/* Large sections */</span>
+<span class="attr">padding-top</span>: <span class="number">48px</span>;  <span class="comment">/* py-12 */</span>
+<span class="attr">padding-bottom</span>: <span class="number">48px</span>;
+
+<span class="comment">/* Standard sections */</span>
+<span class="attr">padding-top</span>: <span class="number">32px</span>;  <span class="comment">/* py-8 */</span>
+<span class="attr">padding-bottom</span>: <span class="number">32px</span>;
+
+<span class="comment">/* Compact sections */</span>
+<span class="attr">padding-top</span>: <span class="number">24px</span>;  <span class="comment">/* py-6 */</span>
+<span class="attr">padding-bottom</span>: <span class="number">24px</span>;</pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-11.html" class="nav-link nav-link--prev">← Touch-Friendly Spacing</a>
+    <a href="lesson-13.html" class="nav-link nav-link--next">Next: Mobile Grid Systems →</a>
+  </nav>
+</body>
+</html>

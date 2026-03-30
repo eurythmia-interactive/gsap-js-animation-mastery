@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 18: Complete Mobile App UI - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 393px;
+      height: 852px;
+      border-radius: 55px;
+      border: 14px solid #e5e7eb;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 126px;
+      height: 37px;
+      background: #fff;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 24px 24px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 166px;
+      height: 6px;
+      background: #1f2937;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.2;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-pastel">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Complete Mobile App UI</h1>
+    <p class="lesson-subtitle">Instagram-style social app combining all mobile design concepts</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #fdf4ff; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #fff;">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-gray-900 text-sm font-semibold">9:41</span>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-900 text-xs">●●●●</span>
+              </div>
+            </div>
+            
+            <!-- App Header -->
+            <header class="px-4 py-3 border-b border-gray-100">
+              <div class="flex items-center justify-between">
+                <h1 class="text-xl font-bold text-gray-900 tracking-tight">Wanderlust</h1>
+                <div class="flex items-center gap-4">
+                  <button class="p-2">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </button>
+                  <button class="p-2">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                  </button>
+                </div>
+              </div>
+            </header>
+            
+            <!-- Stories -->
+            <div class="py-3 px-4 border-b border-gray-100">
+              <div class="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4">
+                <!-- Your Story -->
+                <div class="flex flex-col items-center gap-1 flex-shrink-0">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 p-[3px]">
+                    <div class="w-full h-full rounded-full bg-white p-[3px]">
+                      <div class="w-full h-full rounded-full bg-gray-100 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-gray-500 text-xs">Your Story</span>
+                </div>
+                <!-- Story 1 -->
+                <div class="flex flex-col items-center gap-1 flex-shrink-0">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 p-[3px]">
+                    <div class="w-full h-full rounded-full bg-white p-[3px]">
+                      <div class="w-full h-full rounded-full bg-gradient-to-br from-pink-300 to-orange-300"></div>
+                    </div>
+                  </div>
+                  <span class="text-gray-600 text-xs">sarah</span>
+                </div>
+                <!-- Story 2 -->
+                <div class="flex flex-col items-center gap-1 flex-shrink-0">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 p-[3px]">
+                    <div class="w-full h-full rounded-full bg-white p-[3px]">
+                      <div class="w-full h-full rounded-full bg-gradient-to-br from-blue-300 to-cyan-300"></div>
+                    </div>
+                  </div>
+                  <span class="text-gray-600 text-xs">alex</span>
+                </div>
+                <!-- Story 3 -->
+                <div class="flex flex-col items-center gap-1 flex-shrink-0">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 p-[3px]">
+                    <div class="w-full h-full rounded-full bg-white p-[3px]">
+                      <div class="w-full h-full rounded-full bg-gradient-to-br from-green-300 to-emerald-300"></div>
+                    </div>
+                  </div>
+                  <span class="text-gray-600 text-xs">jordan</span>
+                </div>
+                <!-- Story 4 -->
+                <div class="flex flex-col items-center gap-1 flex-shrink-0">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 p-[3px]">
+                    <div class="w-full h-full rounded-full bg-white p-[3px]">
+                      <div class="w-full h-full rounded-full bg-gradient-to-br from-yellow-300 to-orange-300"></div>
+                    </div>
+                  </div>
+                  <span class="text-gray-600 text-xs">taylor</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Feed Posts -->
+            <div class="pb-20">
+              <!-- Post 1 -->
+              <article class="border-b border-gray-100">
+                <!-- Post Header -->
+                <div class="flex items-center justify-between px-4 py-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-pink-300 to-orange-300"></div>
+                    <div>
+                      <p class="text-gray-900 text-sm font-semibold">sarah.explores</p>
+                      <p class="text-gray-500 text-xs">Tokyo, Japan</p>
+                    </div>
+                  </div>
+                  <button class="p-2">
+                    <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                  </button>
+                </div>
+                <!-- Post Image -->
+                <div class="aspect-square bg-gradient-to-br from-pink-200 to-purple-200"></div>
+                <!-- Post Actions -->
+                <div class="px-4 py-3">
+                  <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-4">
+                      <button class="p-1">
+                        <svg class="w-7 h-7 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                      </button>
+                      <button class="p-1">
+                        <svg class="w-7 h-7 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                      </button>
+                      <button class="p-1">
+                        <svg class="w-7 h-7 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                      </button>
+                    </div>
+                    <button class="p-1">
+                      <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+                    </button>
+                  </div>
+                  <p class="text-gray-900 text-sm font-semibold mb-1">2,847 likes</p>
+                  <p class="text-gray-700 text-sm"><span class="font-semibold">sarah.explores</span> Finding peace in the chaos of Tokyo's streets. 🌸</p>
+                  <p class="text-gray-400 text-xs mt-2">View all 89 comments</p>
+                </div>
+              </article>
+              
+              <!-- Post 2 -->
+              <article class="border-b border-gray-100">
+                <div class="flex items-center justify-between px-4 py-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-300 to-cyan-300"></div>
+                    <div>
+                      <p class="text-gray-900 text-sm font-semibold">alex.adventures</p>
+                      <p class="text-gray-500 text-xs">San Francisco</p>
+                    </div>
+                  </div>
+                  <button class="p-2">
+                    <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                  </button>
+                </div>
+                <div class="aspect-square bg-gradient-to-br from-blue-200 to-cyan-200"></div>
+                <div class="px-4 py-3">
+                  <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-4">
+                      <button class="p-1">
+                        <svg class="w-7 h-7 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                      </button>
+                      <button class="p-1">
+                        <svg class="w-7 h-7 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                      </button>
+                      <button class="p-1">
+                        <svg class="w-7 h-7 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                      </button>
+                    </div>
+                    <button class="p-1">
+                      <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+                    </button>
+                  </div>
+                  <p class="text-gray-900 text-sm font-semibold mb-1">1,523 likes</p>
+                  <p class="text-gray-700 text-sm"><span class="font-semibold">alex.adventures</span> Golden hour at the bridge. ✨</p>
+                  <p class="text-gray-400 text-xs mt-2">View all 47 comments</p>
+                </div>
+              </article>
+            </div>
+            
+            <!-- Tab Bar -->
+            <nav class="fixed bottom-0 inset-x-0 bg-white border-t border-gray-100 pb-[env(safe-area-inset-bottom)]">
+              <div class="flex items-center justify-around py-3">
+                <button class="p-2">
+                  <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                </button>
+                <button class="p-2">
+                  <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </button>
+                <button class="p-2">
+                  <div class="w-6 h-6 bg-gradient-to-br from-pink-400 to-purple-500 rounded-lg"></div>
+                </button>
+                <button class="p-2">
+                  <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                </button>
+                <button class="p-2">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-blue-300 to-cyan-300"></div>
+                </button>
+              </div>
+            </nav>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Concepts Used</div>
+      <pre class="code-block"><span class="comment">&lt;!-- Safe area for tab bar --&gt;</span>
+<span class="tag">&lt;nav</span> <span class="attr">class</span>=<span class="string">"fixed bottom-0 pb-[env(safe-area-inset-bottom)] 
+               bg-white border-t border-gray-100"</span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- Tab content --&gt;</span>
+<span class="tag">&lt;/nav&gt;</span>
+
+<span class="comment">&lt;!-- Story circle with ring --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"w-16 h-16 rounded-full 
+               bg-gradient-to-br from-pink-400 to-purple-500 
+               p-[3px]"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"w-full h-full rounded-full 
+               bg-white p-[3px]"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"w-full h-full rounded-full 
+                 bg-pink-300"</span><span class="tag">&gt;</span><span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- Full-width post image --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"aspect-square w-full"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">class</span>=<span class="string">"w-full h-full object-cover"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Mobile Design Checklist</div>
+        <pre class="code-block"><span class="comment">✅ Completed in this UI:</span>
+
+<span class="attr">✓</span> Safe areas (notch, home indicator)
+<span class="attr">✓</span> 44-48px touch targets
+<span class="attr">✓</span> System fonts
+<span class="attr">✓</span> Fluid typography
+<span class="attr">✓</span> Optimal line length (65ch)
+<span class="attr">✓</span> Vertical stacking
+<span class="attr">✓</span> Touch-friendly spacing
+<span class="attr">✓</span> Section rhythm
+<span class="attr">✓</span> 4-column grid (stories)
+<span class="attr">✓</span> Aspect ratios (story circles)
+<span class="attr">✓</span> Card proportions (posts)
+<span class="attr">✓</span> Horizontal scroll (stories)
+<span class="attr">✓</span> Dark mode support ready</pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-17.html" class="nav-link nav-link--prev">← Pull-to-Refresh</a>
+    <a href="../index.html" class="nav-link nav-link--next">← Back to Index</a>
+  </nav>
+</body>
+</html>

@@ -1,0 +1,360 @@
+/* Part 6: Mobile-First Design - Multi-Palette Theme */
+
+/* ============================================
+   PHONE FRAME MOCKUP STYLES
+   ============================================ */
+
+.demo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+  background: #1a1a1a;
+}
+
+.phone-frame {
+  width: 375px;
+  height: 812px;
+  border-radius: 40px;
+  border: 12px solid #1a1a1a;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.phone-notch {
+  width: 150px;
+  height: 30px;
+  background: #000;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 20px 20px;
+  z-index: 10;
+}
+
+.phone-home-indicator {
+  width: 130px;
+  height: 5px;
+  background: #fff;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.3;
+}
+
+.phone-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.phone-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* iPhone 14 Pro Dynamic Island variant */
+.phone-frame--dynamic-island .phone-notch {
+  width: 126px;
+  height: 37px;
+  border-radius: 20px;
+}
+
+/* ============================================
+   PALETTE 1: ROSE/VERMILLION (Lessons 01-03)
+   ============================================ */
+
+.palette-rose {
+  --primary: #f43f5e;
+  --primary-dark: #e11d48;
+  --primary-light: #fb7185;
+  --secondary: #f97316;
+  --accent: #fbbf24;
+  --background: #0f0f0f;
+  --surface: #1a1a1a;
+  --surface-elevated: #242424;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --border: #2e2e2e;
+}
+
+/* ============================================
+   PALETTE 2: SLATE/ZINC (Lessons 04-06)
+   ============================================ */
+
+.palette-slate {
+  --primary: #64748b;
+  --primary-dark: #475569;
+  --primary-light: #94a3b8;
+  --secondary: #06b6d4;
+  --accent: #22d3ee;
+  --background: #09090b;
+  --surface: #18181b;
+  --surface-elevated: #27272a;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1a1;
+  --text-muted: #71717a;
+  --border: #3f3f46;
+}
+
+/* ============================================
+   PALETTE 3: STONE/CREAM (Lessons 07-09)
+   ============================================ */
+
+.palette-stone {
+  --primary: #78716c;
+  --primary-dark: #57534e;
+  --primary-light: #a8a29e;
+  --secondary: #ca8a04;
+  --accent: #a16207;
+  --background: #fafaf9;
+  --surface: #f5f5f4;
+  --surface-elevated: #ffffff;
+  --text-primary: #1c1917;
+  --text-secondary: #57534e;
+  --text-muted: #78716c;
+  --border: #e7e5e4;
+}
+
+/* ============================================
+   PALETTE 4: RED/BLACK BRUTALIST (Lessons 10-12)
+   ============================================ */
+
+.palette-brutalist {
+  --primary: #dc2626;
+  --primary-dark: #b91c1c;
+  --primary-light: #ef4444;
+  --secondary: #000000;
+  --accent: #fef08a;
+  --background: #000000;
+  --surface: #111111;
+  --surface-elevated: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --text-muted: #525252;
+  --border: #262626;
+}
+
+/* ============================================
+   PALETTE 5: IOS SYSTEM BLUE (Lessons 13-15)
+   ============================================ */
+
+.palette-ios {
+  --primary: #007aff;
+  --primary-dark: #0056b3;
+  --primary-light: #4d9fff;
+  --secondary: #34c759;
+  --accent: #ff9500;
+  --background: #000000;
+  --surface: #1c1c1e;
+  --surface-elevated: #2c2c2e;
+  --text-primary: #ffffff;
+  --text-secondary: #8e8e93;
+  --text-muted: #636366;
+  --border: #38383a;
+  --system-gray: #48484a;
+  --system-gray2: #636366;
+  --system-gray3: #48484a;
+  --system-gray4: #3a3a3c;
+  --system-gray5: #2c2c2e;
+  --system-gray6: #1c1c1e;
+}
+
+/* ============================================
+   PALETTE 6: MATERIAL PURPLE/TEAL (Lessons 16-17)
+   ============================================ */
+
+.palette-material {
+  --primary: #a855f7;
+  --primary-dark: #9333ea;
+  --primary-light: #c084fc;
+  --secondary: #14b8a6;
+  --accent: #2dd4bf;
+  --background: #0f0f0f;
+  --surface: #1a1a1a;
+  --surface-elevated: #262626;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --border: #404040;
+}
+
+/* ============================================
+   PALETTE 7: PASTEL SOFT (Lesson 18)
+   ============================================ */
+
+.palette-pastel {
+  --primary: #f472b6;
+  --primary-dark: #ec4899;
+  --primary-light: #f9a8d4;
+  --secondary: #818cf8;
+  --accent: #34d399;
+  --background: #fdf4ff;
+  --surface: #ffffff;
+  --surface-elevated: #faf5ff;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border: #e5e7eb;
+}
+
+/* ============================================
+   LESSON PAGE LAYOUT
+   ============================================ */
+
+.lesson-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a12 0%, #12121f 100%);
+  padding: 2rem;
+}
+
+.lesson-header {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.lesson-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.lesson-subtitle {
+  font-size: 1.125rem;
+  color: #a0a0b0;
+}
+
+.lesson-content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.demo-section {
+  background: #1a1a2e;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid #2a2a3e;
+}
+
+.demo-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ff6b35;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.code-section {
+  background: #12121f;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid #2a2a3e;
+  overflow-x: auto;
+}
+
+.code-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #00d4ff;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.code-block {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+  white-space: pre;
+}
+
+/* Syntax highlighting */
+.code-block .keyword { color: #c792ea; }
+.code-block .string { color: #c3e88d; }
+.code-block .number { color: #f78c6c; }
+.code-block .comment { color: #546e7a; }
+.code-block .tag { color: #f07178; }
+.code-block .attr { color: #ffcb6b; }
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 2rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid #2a2a3e;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #1a1a2e;
+  border: 1px solid #2a2a3e;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background: #2a2a3e;
+  border-color: #ff6b35;
+}
+
+.nav-link--prev { color: #a0a0b0; }
+.nav-link--next { background: #ff6b35; border-color: #ff6b35; }
+.nav-link--next:hover { background: #ff8b55; }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .lesson-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .lesson-title {
+    font-size: 1.75rem;
+  }
+  
+  .demo-wrapper {
+    padding: 1rem;
+  }
+  
+  .phone-frame {
+    transform: scale(0.85);
+    transform-origin: top center;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-frame {
+    transform: scale(0.75);
+  }
+}

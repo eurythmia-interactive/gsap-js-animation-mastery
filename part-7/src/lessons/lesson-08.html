@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 08: Service Grid - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-container {
+      background: linear-gradient(180deg, #fafbfc 0%, #f1f4f8 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 700px;
+    }
+    
+    .service-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+    }
+    
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg, #1e3a5f 0%, #c9a227 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .service-icon svg {
+      width: 30px;
+      height: 30px;
+      color: white;
+    }
+    
+    .service-title {
+      font-family: 'Abril Fatface', serif;
+      font-size: 1.25rem;
+      color: #1a202c;
+      margin-bottom: 0.5rem;
+    }
+    
+    .service-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: #718096;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-corporate">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">Service Grid</h1>
+    <p class="lesson-subtitle">Staggered service card text animations</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - Staggered Card Reveals</div>
+      <div class="demo-container">
+        <div class="services-grid">
+          <div class="service-card" id="card-1">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            </div>
+            <h3 class="service-title">Strategy</h3>
+            <p class="service-desc">Comprehensive business planning and market analysis</p>
+          </div>
+          
+          <div class="service-card" id="card-2">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            </div>
+            <h3 class="service-title">Design</h3>
+            <p class="service-desc">User-centered interfaces that drive engagement</p>
+          </div>
+          
+          <div class="service-card" id="card-3">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <h3 class="service-title">Development</h3>
+            <p class="service-desc">Scalable solutions built with modern technology</p>
+          </div>
+          
+          <div class="service-card" id="card-4">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+            </div>
+            <h3 class="service-title">Analytics</h3>
+            <p class="service-desc">Data-driven insights for continuous optimization</p>
+          </div>
+          
+          <div class="service-card" id="card-5">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h3 class="service-title">Support</h3>
+            <p class="service-desc">24/7 dedicated assistance for your success</p>
+          </div>
+          
+          <div class="service-card" id="card-6">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            </div>
+            <h3 class="service-title">Global</h3>
+            <p class="service-desc">Worldwide reach with local expertise</p>
+          </div>
+        </div>
+        
+        <div class="view-toggle">
+          <button class="active" onclick="setView('desktop')">Desktop</button>
+          <button onclick="setView('phone')">Phone Sim</button>
+          <button onclick="setView('mobile')">Mobile</button>
+        </div>
+        
+        <div class="animation-controls" style="margin-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="playAnimation()">▶ Play</button>
+          <button class="btn btn-secondary" onclick="resetAnimation()">Reset</button>
+          <button class="btn btn-secondary" onclick="replayAnimation()">Replay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"services-grid"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"service-card"</span> <span class="attr">id</span>=<span class="string">"card-1"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"service-icon"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;h3</span> <span class="attr">class</span>=<span class="string">"service-title"</span><span class="tag">&gt;</span>Strategy<span class="tag">&lt;/h3&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"service-desc"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="comment">&lt;!-- More cards... --&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript Animation</div>
+      <pre class="code-block"><span class="comment">// Select all service cards</span>
+<span class="keyword">const</span> cards = gsap.<span class="attr">utils</span>.<span class="attr">toArray</span>(<span class="string">".service-card"</span>);
+
+<span class="comment">// Set initial state - all invisible and below</span>
+gsap.<span class="attr">set</span>(cards, {
+  <span class="attr">opacity</span>: <span class="number">0</span>,
+  <span class="attr">y</span>: <span class="number">60</span>,
+  <span class="attr">scale</span>: <span class="number">0.9</span>
+});
+
+<span class="comment">// Animate cards with stagger</span>
+<span class="keyword">const</span> tl = gsap.timeline();
+
+tl.<span class="attr">to</span>(cards, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">y</span>: <span class="number">0</span>,
+  <span class="attr">scale</span>: <span class="number">1</span>,
+  <span class="attr">stagger</span>: {
+    <span class="attr">amount</span>: <span class="number">0.8</span>,  <span class="comment">// Total stagger time</span>
+    <span class="attr">from</span>: <span class="string">"start"</span>
+  },
+  <span class="attr">duration</span>: <span class="number">0.8</span>,
+  <span class="attr">ease</span>: <span class="string">"back.out(1.4)"</span>
+});
+
+<span class="comment">// Alternative: stagger by grid position</span>
+<span class="comment">// stagger: { each: 0.1, grid: [2, 3], from: "start" }</span></pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// gsap.utils.toArray converts selector to array
+</span><span class="comment">// stagger: { amount: 0.8 } = spread over 800ms total
+</span><span class="comment">// stagger: { grid: [2, 3] } = 2 rows, 3 columns
+</span><span class="comment">// back.out(1.4) = slight overshoot for life</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-07.html" class="nav-link nav-link--prev">← Trust Building</a>
+    <a href="lesson-09.html" class="nav-link nav-link--next">Next: Tagline Power →</a>
+  </nav>
+
+  <script>
+    let tl;
+    
+    function initAnimation() {
+      const cards = gsap.utils.toArray(".service-card");
+      
+      gsap.set(cards, {
+        opacity: 0,
+        y: 60,
+        scale: 0.9
+      });
+      
+      tl = gsap.timeline();
+      
+      tl.to(cards, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        stagger: {
+          amount: 0.8,
+          from: "start"
+        },
+        duration: 0.8,
+        ease: "back.out(1.4)"
+      });
+      
+      tl.pause();
+    }
+    
+    function playAnimation() { tl.play(); }
+    function resetAnimation() {
+      const cards = gsap.utils.toArray(".service-card");
+      gsap.set(cards, { opacity: 0, y: 60, scale: 0.9 });
+      if (tl) tl.restart();
+    }
+    function replayAnimation() { if (tl) tl.restart(); }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>

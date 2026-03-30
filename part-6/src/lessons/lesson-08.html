@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 08: Line Length & Leading - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      border: 12px solid #e7e5e4;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 150px;
+      height: 30px;
+      background: #fff;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 130px;
+      height: 5px;
+      background: #1c1917;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.2;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-stone">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Line Length & Leading</h1>
+    <p class="lesson-subtitle">Optimal 40-60 character line length and relaxed line height for mobile reading</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #fafaf9; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #fff;">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-stone-900 text-sm font-semibold">9:41</span>
+              <div class="flex items-center gap-1">
+                <span class="text-stone-900 text-xs">●●●●</span>
+              </div>
+            </div>
+            
+            <!-- Article Content -->
+            <article class="px-4 pt-2">
+              <!-- Header -->
+              <div class="mb-6">
+                <span class="text-amber-600 text-xs font-semibold uppercase tracking-wider">Design</span>
+                <h1 class="text-stone-900 text-2xl font-bold mt-2 leading-tight">
+                  The Art of Mobile Reading
+                </h1>
+                <p class="text-stone-500 text-sm mt-2">Optimal line length creates comfortable reading experiences</p>
+              </div>
+              
+              <!-- Optimal Line Length Demo -->
+              <div class="bg-stone-50 rounded-2xl p-4 mb-6">
+                <div class="text-stone-600 text-xs font-semibold uppercase tracking-wider mb-3">Optimal: 45-65 Characters</div>
+                <p class="text-stone-700 text-base leading-[1.7] tracking-tight">
+                  The quick brown fox jumps over the lazy dog. Mobile text should be constrained to an optimal line length of 45-65 characters for comfortable reading.
+                </p>
+                <div class="mt-3 flex items-center gap-2 text-xs text-stone-400">
+                  <span class="bg-stone-200 text-stone-600 px-2 py-1 rounded">~52 chars</span>
+                  <span>Ideal for body text</span>
+                </div>
+              </div>
+              
+              <!-- Too Narrow -->
+              <div class="bg-red-50 rounded-2xl p-4 mb-4 border border-red-100">
+                <div class="text-red-600 text-xs font-semibold uppercase tracking-wider mb-2">Too Narrow</div>
+                <p class="text-stone-700 text-sm leading-[1.7]">
+                  The quick brown fox jumps over.
+                </p>
+                <p class="text-red-500 text-xs mt-2">~24 characters - disrupts reading flow</p>
+              </div>
+              
+              <!-- Too Wide -->
+              <div class="bg-amber-50 rounded-2xl p-4 mb-6 border border-amber-100">
+                <div class="text-amber-600 text-xs font-semibold uppercase tracking-wider mb-2">Too Wide</div>
+                <p class="text-stone-700 text-base leading-[1.4]" style="max-width: none;">
+                  The quick brown fox jumps over the lazy dog. This line is far too long and makes it difficult for readers to track from the end of one line to the beginning of the next.
+                </p>
+                <p class="text-amber-600 text-xs mt-2">~92 characters - hard to track lines</p>
+              </div>
+              
+              <!-- Guidelines -->
+              <div class="bg-stone-100 rounded-2xl p-4">
+                <div class="text-stone-700 text-xs font-semibold mb-3">Reading Guidelines</div>
+                <div class="space-y-2 text-sm text-stone-600">
+                  <div class="flex items-start gap-2">
+                    <span class="text-stone-400">•</span>
+                    <span><strong>Line length:</strong> 45-65 characters (max-w-[65ch])</span>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-stone-400">•</span>
+                    <span><strong>Line height:</strong> 1.5-1.7 for body text</span>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-stone-400">•</span>
+                    <span><strong>Letter spacing:</strong> Tighter for headlines</span>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-stone-400">•</span>
+                    <span><strong>Justify:</strong> Avoid on mobile</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- Optimal reading width --&gt;</span>
+<span class="tag">&lt;article</span> <span class="attr">class</span>=<span class="string">"max-w-[65ch] mx-auto p-4"</span><span class="tag">&gt;</span>
+  
+  <span class="comment">&lt;!-- Headline - tight tracking --&gt;</span>
+  <span class="tag">&lt;h1</span> <span class="attr">class</span>=<span class="string">"text-2xl font-bold 
+               tracking-tight text-stone-900"</span><span class="tag">&gt;</span>
+    Article Title
+  <span class="tag">&lt;/h1&gt;</span>
+  
+  <span class="comment">&lt;!-- Body text - relaxed leading --&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"text-stone-700 
+               leading-[1.7] space-y-4"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p&gt;</span>
+      Body text optimized for comfortable reading.
+    <span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/article&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Optimal Values</div>
+        <pre class="code-block"><span class="comment">/* Line length (characters per line) */</span>
+<span class="attr">max-width</span>: <span class="number">65ch</span>;  <span class="comment">/* Optimal: 45-65 */</span>
+<span class="attr">max-width</span>: <span class="number">75ch</span>;  <span class="comment">/* Comfortable: 60-75 */</span>
+<span class="attr">max-width</span>: <span class="number">40ch</span>;  <span class="comment">/* Narrow: 30-40 */</span>
+
+<span class="comment">/* Line height */</span>
+<span class="attr">line-height</span>: <span class="number">1.4</span>;  <span class="comment">/* Tight - headlines */</span>
+<span class="attr">line-height</span>: <span class="number">1.5</span>;  <span class="comment">/* Normal - UI */</span>
+<span class="attr">line-height</span>: <span class="number">1.6</span>;  <span class="comment">/* Relaxed - body */</span>
+<span class="attr">line-height</span>: <span class="number">1.7</span>;  <span class="comment">/* Extra relaxed */</span>
+
+<span class="comment">/* Letter spacing */</span>
+<span class="attr">tracking-tight</span>;   <span class="comment">/* -0.025em - headlines */</span>
+<span class="attr">tracking-normal</span>;   <span class="comment">/* 0 - body */</span>
+<span class="attr">tracking-wide</span>;     <span class="comment">/* 0.025em - captions */</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-07.html" class="nav-link nav-link--prev">← Fluid Type Scale</a>
+    <a href="lesson-09.html" class="nav-link nav-link--next">Next: System Fonts →</a>
+  </nav>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 14: Data Labels - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=Source+Sans Pro:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-container {
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .chart-container {
+      width: 100%;
+      max-width: 500px;
+    }
+    
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      height: 200px;
+      padding: 0 1rem;
+      border-bottom: 2px solid #334155;
+    }
+    
+    .bar-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      max-width: 80px;
+    }
+    
+    .bar {
+      width: 40px;
+      background: linear-gradient(180deg, #3b82f6 0%, #06b6d4 100%);
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      height: 0;
+    }
+    
+    .bar-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #94a3b8;
+      margin-top: 0.75rem;
+      text-align: center;
+    }
+    
+    .bar-value {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      color: #f8fafc;
+      opacity: 0;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-dataviz">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">Data Labels</h1>
+    <p class="lesson-subtitle">Label reveals synced to chart elements</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - Chart Label Animation</div>
+      <div class="demo-container">
+        <div class="chart-container">
+          <div class="bar-chart">
+            <div class="bar-item">
+              <div class="bar" id="bar-1" data-height="60"><span class="bar-value">2.4M</span></div>
+              <span class="bar-label">Jan</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" id="bar-2" data-height="85"><span class="bar-value">4.8M</span></div>
+              <span class="bar-label">Feb</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" id="bar-3" data-height="75"><span class="bar-value">3.9M</span></div>
+              <span class="bar-label">Mar</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" id="bar-4" data-height="95"><span class="bar-value">5.2M</span></div>
+              <span class="bar-label">Apr</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" id="bar-5" data-height="100"><span class="bar-value">6.1M</span></div>
+              <span class="bar-label">May</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="view-toggle">
+          <button class="active" onclick="setView('desktop')">Desktop</button>
+          <button onclick="setView('phone')">Phone Sim</button>
+          <button onclick="setView('mobile')">Mobile</button>
+        </div>
+        
+        <div class="animation-controls" style="margin-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="playAnimation()">▶ Play</button>
+          <button class="btn btn-secondary" onclick="resetAnimation()">Reset</button>
+          <button class="btn btn-secondary" onclick="replayAnimation()">Replay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bar-chart"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bar-item"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bar"</span> <span class="attr">id</span>=<span class="string">"bar-1"</span> <span class="attr">data-height</span>=<span class="string">"60"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="string">"bar-value"</span><span class="tag">&gt;</span>2.4M<span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="string">"bar-label"</span><span class="tag">&gt;</span>Jan<span class="tag">&lt;/span&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="comment">&lt;!-- More bars... --&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript Animation</div>
+      <pre class="code-block"><span class="comment">// Get all bars</span>
+<span class="keyword">const</span> bars = gsap.<span class="attr">utils</span>.<span class="attr">toArray</span>(<span class="string">".bar"</span>);
+
+<span class="comment">// Set initial state - bars at 0 height</span>
+bars.<span class="attr">forEach</span>(bar => {
+  gsap.<span class="attr">set</span>(bar, { <span class="attr">height</span>: <span class="number">0</span> });
+  bar.<span class="attr">querySelector</span>(<span class="string">".bar-value"</span>).<span class="attr">style</span>.<span class="attr">opacity</span> = <span class="number">0</span>;
+});
+
+<span class="comment">// Create staggered animation</span>
+<span class="keyword">const</span> tl = gsap.timeline();
+
+tl
+  <span class="comment">// Bars grow up</span>
+  .<span class="attr">to</span>(bars, {
+    <span class="attr">height</span>: (i) => bars[i].<span class="attr">dataset</span>.height + <span class="string">"%"</span>,
+    <span class="attr">stagger</span>: <span class="number">0.15</span>,
+    <span class="attr">duration</span>: <span class="number">0.8</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+  })
+  <span class="comment">// Labels fade in</span>
+  .<span class="attr">fromTo</span>(<span class="string">".bar-label"</span>,
+    { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">10</span> },
+    { <span class="attr">opacity</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">0</span>, <span class="attr">stagger</span>: <span class="number">0.1</span>, <span class="attr">duration</span>: <span class="number">0.4</span> },
+    <span class="string">"-=0.6"</span>
+  )
+  <span class="comment">// Values pop in at top of bars</span>
+  .<span class="attr">to</span>(<span class="string">".bar-value"</span>,
+    { <span class="attr">opacity</span>: <span class="number">1</span>, <span class="attr">stagger</span>: <span class="number">0.1</span>, <span class="attr">duration</span>: <span class="number">0.3</span>, <span class="attr">ease</span>: <span class="string">"back.out(2)"</span> },
+    <span class="string">"-=0.4"</span>
+  );</pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// data-height attribute stores target height
+</span><span class="comment">// height: (i) => dynamic value per element
+</span><span class="comment">// Negative position in timeline "-=0.6"
+</span><span class="comment">// Creates synced chart + label reveal</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-13.html" class="nav-link nav-link--prev">← Stat Counter</a>
+    <a href="lesson-15.html" class="nav-link nav-link--next">Next: Timeline Text →</a>
+  </nav>
+
+  <script>
+    let tl;
+    
+    function initAnimation() {
+      const bars = gsap.utils.toArray(".bar");
+      
+      bars.forEach(bar => {
+        gsap.set(bar, { height: 0 });
+        bar.querySelector(".bar-value").style.opacity = 0;
+      });
+      
+      tl = gsap.timeline();
+      
+      tl.to(bars, {
+        height: (i) => bars[i].dataset.height + "%",
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power2.out"
+      })
+      .fromTo(".bar-label",
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, stagger: 0.1, duration: 0.4 },
+        "-=0.6"
+      )
+      .to(".bar-value",
+        { opacity: 1, stagger: 0.1, duration: 0.3, ease: "back.out(2)" },
+        "-=0.4"
+      );
+      
+      tl.pause();
+    }
+    
+    function playAnimation() { tl.play(); }
+    function resetAnimation() {
+      const bars = gsap.utils.toArray(".bar");
+      bars.forEach(bar => {
+        gsap.set(bar, { height: 0 });
+        bar.querySelector(".bar-value").style.opacity = 0;
+      });
+      if (tl) tl.restart();
+    }
+    function replayAnimation() { if (tl) tl.restart(); }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>

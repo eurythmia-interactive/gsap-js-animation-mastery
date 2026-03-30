@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 03 - Colors & Opacity - Tailwind CSS Basics</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-02.html" class="nav-link">← Previous</a>
+        <a href="lesson-04.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 03</span>
+        <span>Part 4: Tailwind CSS Basics</span>
+      </div>
+
+      <h1>Colors & Opacity</h1>
+      <p>Learn how to use Tailwind's comprehensive color system for text, backgrounds, and opacity.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Colors & Opacity</span>
+        </div>
+        <div class="demo-container">
+          <div class="space-y-6 w-full max-w-2xl">
+            <!-- Text Colors -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Text Colors (text-*)</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-800 rounded text-white text-sm">white</span>
+                <span class="px-3 py-1 bg-gray-800 rounded text-gray-400 text-sm">gray-400</span>
+                <span class="px-3 py-1 bg-gray-800 rounded text-red-500 text-sm">red-500</span>
+                <span class="px-3 py-1 bg-gray-800 rounded text-orange-500 text-sm">orange-500</span>
+                <span class="px-3 py-1 bg-gray-800 rounded text-emerald-500 text-sm">emerald-500</span>
+                <span class="px-3 py-1 bg-gray-800 rounded text-blue-500 text-sm">blue-500</span>
+                <span class="px-3 py-1 bg-gray-800 rounded text-purple-500 text-sm">purple-500</span>
+              </div>
+            </div>
+            
+            <!-- Background Colors -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Background Colors (bg-*)</p>
+              <div class="flex flex-wrap gap-2">
+                <div class="w-12 h-12 bg-red-500 rounded"></div>
+                <div class="w-12 h-12 bg-orange-500 rounded"></div>
+                <div class="w-12 h-12 bg-emerald-500 rounded"></div>
+                <div class="w-12 h-12 bg-blue-500 rounded"></div>
+                <div class="w-12 h-12 bg-purple-500 rounded"></div>
+                <div class="w-12 h-12 bg-pink-500 rounded"></div>
+              </div>
+            </div>
+            
+            <!-- Opacity -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">Opacity (opacity-* or / notation)</p>
+              <div class="flex items-center gap-4">
+                <div class="text-center">
+                  <div class="w-12 h-12 bg-emerald-500 opacity-100 rounded mx-auto mb-1"></div>
+                  <span class="text-xs text-gray-500">100%</span>
+                </div>
+                <div class="text-center">
+                  <div class="w-12 h-12 bg-emerald-500 opacity-75 rounded mx-auto mb-1"></div>
+                  <span class="text-xs text-gray-500">75%</span>
+                </div>
+                <div class="text-center">
+                  <div class="w-12 h-12 bg-emerald-500 opacity-50 rounded mx-auto mb-1"></div>
+                  <span class="text-xs text-gray-500">50%</span>
+                </div>
+                <div class="text-center">
+                  <div class="w-12 h-12 bg-emerald-500 opacity-25 rounded mx-auto mb-1"></div>
+                  <span class="text-xs text-gray-500">25%</span>
+                </div>
+                <div class="text-center">
+                  <div class="w-12 h-12 bg-emerald-500 rounded mx-auto mb-1 flex items-center justify-center">
+                    <span class="text-xs text-white/50">/50</span>
+                  </div>
+                  <span class="text-xs text-gray-500">bg/emerald-500/50</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Text & Background Colors</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Text colors --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-white"</span><span class="punctuation">&gt;</span>White text<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-emerald-500"</span><span class="punctuation">&gt;</span>Emerald text<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Background colors --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-gray-800"</span><span class="punctuation">&gt;</span>Dark background<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-blue-500"</span><span class="punctuation">&gt;</span>Blue background<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>Opacity Variants</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Using opacity-* class --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-black opacity-50"</span><span class="punctuation">&gt;</span>50% opacity<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Using slash notation (modern) --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-black/50"</span><span class="punctuation">&gt;</span>50% opacity<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-white/75"</span><span class="punctuation">&gt;</span>75% text opacity<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>Color Shades</h2>
+        <p>Most colors in Tailwind have shades from 50 (lightest) to 900 (darkest):</p>
+
+        <div class="concept">
+          <h3>Gray Scale Example</h3>
+          <ul>
+            <li><code>text-gray-50</code> - Lightest (near white)</li>
+            <li><code>text-gray-100</code>, <code>text-gray-200</code>, <code>text-gray-300</code></li>
+            <li><code>text-gray-400</code> - Default body text gray</li>
+            <li><code>text-gray-500</code> - Medium gray</li>
+            <li><code>text-gray-600</code>, <code>text-gray-700</code>, <code>text-gray-800</code></li>
+            <li><code>text-gray-900</code> - Darkest (near black)</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Slash Notation</h3>
+          <p>The slash notation <code>bg-emerald-500/50</code> is modern and concise. It sets the opacity at the same time as the color, making it easier to read.</p>
+        </div>
+
+        <div class="tip">
+          <h3>Common Colors</h3>
+          <p>Tailwind includes: gray, red, orange, yellow, green, emerald, teal, blue, sky, cyan, purple, pink, and more!</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-02.html">← Previous</a>
+      <a href="lesson-04.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

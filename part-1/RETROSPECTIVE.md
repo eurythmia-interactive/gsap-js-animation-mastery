@@ -905,6 +905,122 @@ The best tutorials aren't written perfectly the first time - they're refined thr
 
 ---
 
-*Document created: March 2026*  
-*Project: GSAP Fundamentals Course*  
-*Purpose: Educational resource for GSAP learners and tutorial creators*
+## 12. Part 7: Advanced Text Animation
+
+### What Part 7 Teaches
+
+Part 7 introduces **GSAP SplitText** - a powerful plugin for animating text at the character, word, and line level. SplitText is 100% FREE for everyone thanks to Webflow's support.
+
+**Key Concepts:**
+- Character animations (wave, cascade, stagger)
+- Word animations (bounce, elastic reveals)
+- Line animations (sequential reveals)
+- Timeline choreography with text
+- ScrollTrigger text reveals
+
+### 7 Exercises with Different Palettes
+
+Part 7 breaks tradition by using **7 distinct color palettes** - one per exercise:
+
+| Exercise | Type | Palette | Theme |
+|----------|------|---------|-------|
+| E1 | Landing Pages | Sunset Gradient | Orange/Pink/Purple |
+| E2 | E-commerce | Fresh Mint | Teal/Emerald light |
+| E3 | Corporate | Corporate Navy | Navy/Gold |
+| E4 | Polls/Quizzes | Playful Vibrant | Coral/Yellow dark |
+| E5 | Infographics | Data Viz | Blue/Cyan/Teal dark |
+| E6 | Animated Poetry | Artistic Pastel | Lavender/Rose/Peach |
+| E7 | Storytelling | Cinematic Dark | Purple/Pink |
+
+This multi-palette approach teaches text animation in different visual contexts, keeping students engaged across 21 lessons.
+
+### 3 Screen Formats (Desktop, Phone Sim, Mobile)
+
+Part 7 implements a **view mode toggle** allowing users to preview text animations in three formats:
+
+| Mode | Description |
+|------|-------------|
+| Desktop | Full landscape presentation |
+| Phone Sim | Phone frame mockup on desktop |
+| Mobile | Actual responsive behavior |
+
+```html
+<!-- Toggle buttons -->
+<div class="view-toggle">
+  <button data-view="desktop" class="active">Desktop</button>
+  <button data-view="phone-sim">Phone Sim</button>
+  <button data-view="mobile">Mobile</button>
+</div>
+```
+
+### The SplitText Workaround
+
+**Important Note:** SplitText is NOT available on public CDNs (unlike GSAP core). The plugin must be loaded from your own version or the CDN links found in GSAP documentation.
+
+However, for this tutorial series, we use a **custom splitText() function** that achieves similar results:
+
+```javascript
+// Custom splitText implementation
+function splitText(element, type = 'chars') {
+  const text = element.textContent;
+  element.innerHTML = '';
+  
+  const wrapper = document.createElement('span');
+  wrapper.style.display = 'inline-block';
+  wrapper.style.whiteSpace = 'pre';
+  
+  // Split by type
+  if (type === 'chars') {
+    text.split('').forEach(char => {
+      const span = document.createElement('span');
+      span.className = 'split-char';
+      span.textContent = char;
+      wrapper.appendChild(span);
+    });
+  } else if (type === 'words') {
+    text.split(' ').forEach(word => {
+      const span = document.createElement('span');
+      span.className = 'split-word';
+      span.textContent = word + ' ';
+      wrapper.appendChild(span);
+    });
+  }
+  
+  element.appendChild(wrapper);
+  
+  // Return array of elements
+  return {
+    chars: element.querySelectorAll('.split-char'),
+    words: element.querySelectorAll('.split-word'),
+    lines: element.querySelectorAll('.split-line')
+  };
+}
+```
+
+This allows the same animation patterns without requiring the official plugin.
+
+### Navigation Improvement
+
+Every Part 7 lesson includes a **top navigation header** with links to:
+- Part 7 Index (`/part-7/index.html`)
+- Global Hub (`/index.html`)
+- Previous/Next lesson
+
+This provides consistent navigation across all 21 lessons.
+
+---
+
+### Summary
+
+Part 7 represents a significant evolution in the tutorial platform:
+- Multi-palette design keeps 21 lessons visually fresh
+- View mode toggle demonstrates responsive text animation
+- Custom SplitText implementation makes lessons runnable without plugin CDN issues
+- Improved navigation ensures students never get lost
+
+The techniques learned here apply to hero sections, product displays, data visualizations, and creative storytelling.
+
+---
+
+*Part 7 added: March 2026*  
+*For Advanced Text Animation with GSAP*

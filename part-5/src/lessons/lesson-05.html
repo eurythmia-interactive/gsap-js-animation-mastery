@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 05 - Value Proposition - Landing Page Design</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans'],
+            display: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-04.html" class="nav-link">← Previous</a>
+        <a href="lesson-06.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 05</span>
+        <span>Part 5: Landing Page Design</span>
+      </div>
+
+      <h1>Value Proposition</h1>
+      <p>Your value proposition is the core promise you make to customers. It answers the question: "Why should I choose you?" Effective landing pages communicate this clearly using the problem-solution framework.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Value Proposition Structure</span>
+        </div>
+        <div class="demo-container">
+          <div class="w-full max-w-5xl mx-auto">
+            <!-- Problem Section -->
+            <div class="text-center mb-16">
+              <h3 class="text-sm font-semibold text-red-400 uppercase tracking-wider mb-3">The Problem</h3>
+              <p class="text-2xl md:text-3xl text-zinc-300 leading-relaxed">
+                "Building landing pages takes weeks. Designers are expensive. Tools are complicated."
+              </p>
+            </div>
+
+            <!-- Solution Section -->
+            <div class="bg-zinc-800/50 rounded-2xl p-8 md:p-12 border border-amber-500/20">
+              <h3 class="text-sm font-semibold text-amber-500 uppercase tracking-wider mb-3">Our Solution</h3>
+              <h2 class="text-3xl md:text-4xl font-bold font-display text-white mb-6">
+                Launch landing pages in hours, not weeks
+              </h2>
+              <p class="text-lg text-zinc-400 mb-8">
+                Our drag-and-drop builder lets anyone create stunning, high-converting landing pages without code. Pre-built templates, automatic optimization, and instant publishing.
+              </p>
+
+              <!-- Key Benefits -->
+              <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center md:text-left">
+                  <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mx-auto md:mx-0 mb-4">
+                    <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                  </div>
+                  <h4 class="text-white font-semibold mb-2">10x Faster</h4>
+                  <p class="text-sm text-zinc-500">Launch campaigns in hours instead of weeks</p>
+                </div>
+                <div class="text-center md:text-left">
+                  <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mx-auto md:mx-0 mb-4">
+                    <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </div>
+                  <h4 class="text-white font-semibold mb-2">Save $5,000+</h4>
+                  <p class="text-sm text-zinc-500">No designers or developers needed</p>
+                </div>
+                <div class="text-center md:text-left">
+                  <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mx-auto md:mx-0 mb-4">
+                    <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                  </div>
+                  <h4 class="text-white font-semibold mb-2">2x Conversions</h4>
+                  <p class="text-sm text-zinc-500">Built-in optimization increases results</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Value Proposition Structure</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Problem Statement --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">h3</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-sm font-semibold text-red-400 uppercase tracking-wider"</span><span class="punctuation">&gt;</span>
+  The Problem
+<span class="punctuation">&lt;/</span><span class="tag">h3</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-2xl md:text-3xl text-zinc-300"</span><span class="punctuation">&gt;</span>
+  "Building landing pages takes weeks..."
+<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Solution Section --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-zinc-800/50 rounded-2xl p-8 border border-amber-500/20"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">h2</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-3xl md:text-4xl font-bold font-display"</span><span class="punctuation">&gt;</span>
+    Launch landing pages in hours
+  <span class="punctuation">&lt;/</span><span class="tag">h2</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Benefit Card --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-center"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">h4</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-white font-semibold mb-2"</span><span class="punctuation">&gt;</span>10x Faster<span class="punctuation">&lt;/</span><span class="tag">h4</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-sm text-zinc-500"</span><span class="punctuation">&gt;</span>Launch campaigns faster<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+
+        <div class="concept">
+          <h3>Problem-Solution Framework</h3>
+          <ul>
+            <li><strong>Acknowledge the pain</strong> - Customers need to feel understood</li>
+            <li><strong>Present the solution</strong> - Your product as the answer</li>
+            <li><strong>Show specific benefits</strong> - Quantifiable improvements</li>
+            <li><strong>Use social proof</strong> - Build credibility</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Writing Strong Value Propositions</h3>
+          <ul>
+            <li>Lead with outcomes, not features</li>
+            <li>Use specific numbers when possible</li>
+            <li>Address the main objection directly</li>
+            <li>Keep it to one clear promise</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Benefit vs Feature</h3>
+          <ul>
+            <li><strong>Feature:</strong> "Drag-and-drop builder"</li>
+            <li><strong>Benefit:</strong> "Launch pages in hours, not weeks"</li>
+          </ul>
+          <p class="mt-2 text-zinc-400">Always translate features into user outcomes.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-04.html">← Previous</a>
+      <a href="lesson-06.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

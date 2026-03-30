@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 04 - Hero Section Mastery - Landing Page Design</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans'],
+            display: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-03.html" class="nav-link">← Previous</a>
+        <a href="lesson-05.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 04</span>
+        <span>Part 5: Landing Page Design</span>
+      </div>
+
+      <h1>Hero Section Mastery</h1>
+      <p>The hero section is the most critical part of your landing page. It must immediately capture attention, communicate value, and guide users toward a primary call-to-action.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Hero Section Layout</span>
+        </div>
+        <div class="demo-container">
+          <div class="w-full max-w-6xl mx-auto">
+            <!-- Navigation -->
+            <div class="flex items-center justify-between mb-12">
+              <div class="text-xl font-bold text-white">BrandName</div>
+              <div class="hidden md:flex items-center gap-8">
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors">Features</a>
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors">Pricing</a>
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors">About</a>
+              </div>
+              <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-6 py-2 rounded-full transition-colors">
+                Get Started
+              </button>
+            </div>
+            
+            <!-- Hero Content -->
+            <div class="text-center mb-16">
+              <span class="inline-block px-4 py-1 bg-amber-500/10 text-amber-500 rounded-full text-sm font-medium mb-6">
+                New: Version 2.0 is here
+              </span>
+              <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-white mb-6 leading-tight">
+                Build landing pages that <span class="text-amber-500">convert</span>
+              </h1>
+              <p class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-8">
+                The all-in-one platform for creating beautiful, high-converting landing pages. No code required.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-8 py-4 rounded-full transition-all hover:shadow-lg hover:shadow-amber-500/25">
+                  Start Free Trial
+                </button>
+                <button class="border border-zinc-600 hover:border-zinc-400 text-white font-medium px-8 py-4 rounded-full transition-colors">
+                  Watch Demo
+                </button>
+              </div>
+              <p class="text-sm text-zinc-500 mt-4">Free 14-day trial • No credit card required</p>
+            </div>
+
+            <!-- Hero Visual Placeholder -->
+            <div class="bg-zinc-800 rounded-2xl p-8 border border-zinc-700">
+              <div class="bg-zinc-900 rounded-xl h-64 flex items-center justify-center">
+                <span class="text-zinc-600">Product screenshot or illustration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Hero Section Structure</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Badge/Tag --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">span</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"inline-block px-4 py-1 bg-amber-500/10 text-amber-500 rounded-full text-sm"</span><span class="punctuation">&gt;</span>
+  New: Version 2.0
+<span class="punctuation">&lt;/</span><span class="tag">span</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Headline with accent --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">h1</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-4xl md:text-5xl lg:text-6xl font-bold font-display"</span><span class="punctuation">&gt;</span>
+  Build landing pages that <span class="punctuation">&lt;</span><span class="tag">span</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-amber-500"</span><span class="punctuation">&gt;</span>convert<span class="punctuation">&lt;/</span><span class="tag">span</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">h1</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- CTA Buttons --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-amber-500 hover:bg-amber-600 text-black font-bold px-8 py-4 rounded-full"</span><span class="punctuation">&gt;</span>
+  Start Free Trial
+<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"border border-zinc-600 text-white px-8 py-4 rounded-full"</span><span class="punctuation">&gt;</span>
+  Watch Demo
+<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+
+        <div class="concept">
+          <h3>Hero Section Anatomy</h3>
+          <ul>
+            <li><strong>Navigation</strong> - Logo, key links, CTA button</li>
+            <li><strong>Badge/Tag</strong> - Optional attention grabber</li>
+            <li><strong>Headline</strong> - Value proposition with accent color</li>
+            <li><strong>Subheadline</strong> - Elaborates on the headline</li>
+            <li><strong>Primary CTA</strong> - Most important action</li>
+            <li><strong>Secondary CTA</strong> - Alternative action</li>
+            <li><strong>Social proof</strong> - Trust indicator (optional)</li>
+            <li><strong>Visual</strong> - Product screenshot or illustration</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Attention Grabbers</h3>
+          <ul>
+            <li>Use a badge/tag above the headline</li>
+            <li>Highlight key words with accent color</li>
+            <li>Include numbers or specific claims</li>
+            <li>Add urgency with time-sensitive offers</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>CTA Placement</h3>
+          <ul>
+            <li>Primary CTA should be above the fold</li>
+            <li>Use high contrast with surrounding elements</li>
+            <li>Provide secondary option for hesitant users</li>
+            <li>Include trust signals near CTAs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-03.html">← Previous</a>
+      <a href="lesson-05.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

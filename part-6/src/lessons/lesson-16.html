@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 16: Swipe & Gestures - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      border: 12px solid #262626;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 150px;
+      height: 30px;
+      background: #000;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 130px;
+      height: 5px;
+      background: #fff;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+    .card-stack {
+      perspective: 1000px;
+    }
+    .swipe-card {
+      touch-action: pan-y;
+      user-select: none;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-material">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Swipe & Gestures</h1>
+    <p class="lesson-subtitle">Horizontal snap scroll, swipe actions, and momentum scrolling</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #0f0f0f; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #0f0f0f;">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-white text-sm font-semibold">9:41</span>
+              <div class="flex items-center gap-1">
+                <span class="text-white text-xs">●●●●</span>
+              </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="px-4 pt-2 pb-4">
+              <h1 class="text-white text-xl font-bold">Discover</h1>
+              <p class="text-gray-500 text-sm">Swipe to explore</p>
+            </div>
+            
+            <!-- Horizontal Snap Scroll -->
+            <div class="px-4 pb-4">
+              <div class="text-purple-400 text-xs font-semibold uppercase tracking-wider mb-3">Categories</div>
+              <div class="flex gap-3 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory">
+                <div class="min-w-[140px] snap-center">
+                  <div class="aspect-[3/4] bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl flex items-center justify-center">
+                    <span class="text-white text-lg font-bold">Music</span>
+                  </div>
+                </div>
+                <div class="min-w-[140px] snap-center">
+                  <div class="aspect-[3/4] bg-gradient-to-br from-teal-500 to-cyan-500 rounded-3xl flex items-center justify-center">
+                    <span class="text-white text-lg font-bold">Tech</span>
+                  </div>
+                </div>
+                <div class="min-w-[140px] snap-center">
+                  <div class="aspect-[3/4] bg-gradient-to-br from-orange-500 to-red-500 rounded-3xl flex items-center justify-center">
+                    <span class="text-white text-lg font-bold">Travel</span>
+                  </div>
+                </div>
+                <div class="min-w-[140px] snap-center">
+                  <div class="aspect-[3/4] bg-gradient-to-br from-blue-500 to-indigo-500 rounded-3xl flex items-center justify-center">
+                    <span class="text-white text-lg font-bold">Art</span>
+                  </div>
+                </div>
+                <div class="min-w-[140px] snap-center">
+                  <div class="aspect-[3/4] bg-gradient-to-br from-green-500 to-emerald-500 rounded-3xl flex items-center justify-center">
+                    <span class="text-white text-lg font-bold">Food</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Swipe Cards (Tinder-style) -->
+            <div class="px-4 pb-4">
+              <div class="text-purple-400 text-xs font-semibold uppercase tracking-wider mb-3">Swipe Cards</div>
+              <div class="card-stack relative h-[280px]">
+                <!-- Card 3 (back) -->
+                <div class="absolute inset-0 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-3xl p-6 flex flex-col justify-end transform translate-x-4 scale-95 opacity-50">
+                  <span class="text-white/50 text-xs font-medium mb-1">3 of 3</span>
+                  <h3 class="text-white text-xl font-bold">Nature</h3>
+                  <p class="text-white/70 text-sm">Explore the outdoors</p>
+                </div>
+                <!-- Card 2 (middle) -->
+                <div class="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-6 flex flex-col justify-end transform -translate-x-4 scale-95 opacity-50">
+                  <span class="text-white/50 text-xs font-medium mb-1">2 of 3</span>
+                  <h3 class="text-white text-xl font-bold">Cities</h3>
+                  <p class="text-white/70 text-sm">Urban adventures await</p>
+                </div>
+                <!-- Card 1 (front) -->
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl p-6 flex flex-col justify-end swipe-card">
+                  <span class="text-white/50 text-xs font-medium mb-1">1 of 3</span>
+                  <h3 class="text-white text-xl font-bold">Adventure</h3>
+                  <p class="text-white/70 text-sm">Discover new experiences</p>
+                  <div class="flex gap-3 mt-4">
+                    <div class="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center">
+                      <span class="text-white text-xl">✕</span>
+                    </div>
+                    <div class="flex-1"></div>
+                    <div class="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center">
+                      <span class="text-white text-xl">♡</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Gesture Info -->
+            <div class="mx-4 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
+              <div class="text-purple-400 text-xs font-semibold uppercase tracking-wider mb-3">Gesture Patterns</div>
+              <div class="space-y-2 text-sm">
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-purple-600/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span class="text-purple-400 text-xs">↔</span>
+                  </div>
+                  <div>
+                    <p class="text-white font-medium">Horizontal Scroll</p>
+                    <p class="text-gray-500 text-xs">snap-x, snap-mandatory</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-teal-600/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span class="text-teal-400 text-xs">↕</span>
+                  </div>
+                  <div>
+                    <p class="text-white font-medium">Vertical Pan</p>
+                    <p class="text-gray-500 text-xs">touch-pan-y for maps</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 bg-orange-600/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span class="text-orange-400 text-xs">↻</span>
+                  </div>
+                  <div>
+                    <p class="text-white font-medium">Swipe Actions</p>
+                    <p class="text-gray-500 text-xs">Reveal on swipe</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- Horizontal snap scroll --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"flex gap-4 overflow-x-auto 
+               snap-x snap-mandatory pb-4"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"min-w-[280px] snap-center"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"aspect-[3/4] bg-purple-500 
+                 rounded-3xl"</span><span class="tag">&gt;</span>Card<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- Touch-friendly styling --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"touch-pan-y"  <span class="comment">/* Allow vertical pan */</span>
+       <span class="attr">overscroll-contain</span>  <span class="comment">/* Contain scroll */</span>
+<span class="tag">&gt;</span>
+
+<span class="comment">&lt;!-- Swipe action reveal --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"relative overflow-hidden"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="string">"absolute left-0 w-20 bg-red-500"</span><span class="tag">&gt;</span>
+    Delete
+  <span class="tag">&lt;/button&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bg-zinc-900 p-4"</span><span class="tag">&gt;</span>Content<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Gesture Best Practices</div>
+        <pre class="code-block"><span class="comment">/* Horizontal snap scrolling */</span>
+<span class="attr">overflow-x</span>: <span class="number">auto</span>;
+<span class="attr">scroll-snap-type</span>: <span class="number">x mandatory</span>;
+<span class="attr">scroll-snap-align</span>: <span class="number">center</span>;
+
+<span class="comment">/* Momentum scrolling */</span>
+<span class="attr">-webkit-overflow-scrolling</span>: <span class="number">touch</span>;
+
+<span class="comment">/* Prevent scroll chaining */</span>
+<span class="attr">overscroll-behavior</span>: <span class="number">contain</span>;
+
+<span class="comment">/* Touch action hints */</span>
+<span class="attr">touch-action</span>: <span class="number">pan-y</span>;  <span class="comment">/* Vertical only */</span>
+<span class="attr">touch-action</span>: <span class="number">manipulation</span>;  <span class="comment">/* No zoom */</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-15.html" class="nav-link nav-link--prev">← Card Proportions</a>
+    <a href="lesson-17.html" class="nav-link nav-link--next">Next: Pull-to-Refresh →</a>
+  </nav>
+</body>
+</html>

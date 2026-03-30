@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 16: Line by Line - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+  function splitText(selector, type = 'chars') {
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) return [];
+    const text = el.textContent || '';
+    el.dataset.orig = text;
+    el.innerHTML = '';
+    if (!text) return [];
+    
+    if (type === 'chars') {
+      return Array.from(text).map(c => {
+        const s = document.createElement('span');
+        s.innerHTML = c === ' ' ? '&nbsp;' : c;
+        s.style.display = 'inline-block';
+        el.appendChild(s);
+        return s;
+      });
+    } else {
+      return text.split(' ').map(w => {
+        const s = document.createElement('span');
+        s.textContent = w;
+        s.style.display = 'inline-block';
+        s.style.marginRight = '0.25em';
+        el.appendChild(s);
+        return s;
+      });
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-container {
+      background: linear-gradient(180deg, #1c1917 0%, #292524 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .poem-container {
+      max-width: 600px;
+      text-align: center;
+    }
+    
+    .poem-stanza {
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .poem-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      color: #fafaf9;
+      line-height: 2;
+    }
+    
+    .poem-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: #fafaf9;
+      margin-bottom: 0.5rem;
+    }
+    
+    .poem-author {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: #a8a29e;
+      margin-bottom: 2rem;
+    }
+    
+    .glow-effect {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    
+    .glow-effect--lavender { background: #c4b5fd; top: 20%; left: 10%; }
+    .glow-effect--rose { background: #fda4af; bottom: 20%; right: 10%; }
+  </style>
+</head>
+<body class="lesson-page palette-pastel">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">Line by Line</h1>
+    <p class="lesson-subtitle">Stanza-by-stanza poetic reveals</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - Poetic Animation</div>
+      <div class="demo-container">
+        <div class="glow-effect glow-effect--lavender"></div>
+        <div class="glow-effect glow-effect--rose"></div>
+        
+        <div class="poem-container">
+          <h2 class="poem-title">The Quiet Hour</h2>
+          <p class="poem-author">by Sarah Jennings</p>
+          
+          <div class="poem-stanza" id="stanza-1">
+            <p class="poem-line">The world holds its breath at dawn,</p>
+            <p class="poem-line">as shadows yield to light,</p>
+            <p class="poem-line">and every creature stirs anew.</p>
+          </div>
+          
+          <div class="poem-stanza" id="stanza-2">
+            <p class="poem-line">In quiet moments, souls unfold,</p>
+            <p class="poem-line">like flowers meeting sun,</p>
+            <p class="poem-line">the heart discovers what it knows.</p>
+          </div>
+          
+          <div class="poem-stanza" id="stanza-3">
+            <p class="poem-line">This is the gift of being here,</p>
+            <p class="poem-line">of seeing, feeling, loving,</p>
+            <p class="poem-line">the simple miracle of now.</p>
+          </div>
+        </div>
+        
+        <div class="view-toggle">
+          <button class="active" onclick="setView('desktop')">Desktop</button>
+          <button onclick="setView('phone')">Phone Sim</button>
+          <button onclick="setView('mobile')">Mobile</button>
+        </div>
+        
+        <div class="animation-controls" style="margin-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="playAnimation()">▶ Play</button>
+          <button class="btn btn-secondary" onclick="resetAnimation()">Reset</button>
+          <button class="btn btn-secondary" onclick="replayAnimation()">Replay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"poem-container"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">class</span>=<span class="string">"poem-title"</span><span class="tag">&gt;</span>The Quiet Hour<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"poem-author"</span><span class="tag">&gt;</span>by Sarah Jennings<span class="tag">&lt;/p&gt;</span>
+  
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"poem-stanza"</span> <span class="attr">id</span>=<span class="string">"stanza-1"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"poem-line"</span><span class="tag">&gt;</span>The world holds its breath...<span class="tag">&lt;/p&gt;</span>
+    <span class="comment">&lt;!-- More lines --&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="comment">&lt;!-- More stanzas --&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript Animation</div>
+      <pre class="code-block"><span class="comment">// Get all stanzas and lines</span>
+<span class="keyword">const</span> stanzas = gsap.<span class="attr">utils</span>.<span class="attr">toArray</span>(<span class="string">".poem-stanza"</span>);
+<span class="keyword">const</span> lines = gsap.<span class="attr">utils</span>.<span class="attr">toArray</span>(<span class="string">".poem-line"</span>);
+
+<span class="comment">// Set initial states</span>
+gsap.<span class="attr">set</span>(stanzas, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">30</span> });
+gsap.<span class="attr">set</span>(<span class="string">".poem-title, .poem-author"</span>, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: -<span class="number">20</span> });
+
+<span class="keyword">const</span> tl = gsap.timeline();
+
+<span class="comment">// Title and author first</span>
+tl.<span class="attr">to</span>(<span class="string">".poem-title"</span>, {
+  <span class="attr">opacity</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">0</span>, <span class="attr">duration</span>: <span class="number">1</span>, <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+})
+.<span class="attr">to</span>(<span class="string">".poem-author"</span>, {
+  <span class="attr">opacity</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">0</span>, <span class="attr">duration</span>: <span class="number">0.8</span>, <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+}, <span class="string">"-=0.5"</span>)
+<span class="comment">// Stanzas appear one by one</span>
+.<span class="attr">to</span>(stanzas, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">y</span>: <span class="number">0</span>,
+  <span class="attr">stagger</span>: <span class="number">1.5</span>,  <span class="comment">// 1.5s between stanzas</span>
+  <span class="attr">duration</span>: <span class="number">1</span>,
+  <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+}, <span class="string">"+=0.5"</span>)
+<span class="comment">// Lines within each stanza fade in</span>
+.<span class="attr">to</span>(lines, {
+  <span class="attr">opacity</span>: <span class="number">1</span>,
+  <span class="attr">stagger</span>: <span class="number">0.8</span>,  <span class="comment">// 800ms per line</span>
+  <span class="attr">duration</span>: <span class="number">0.6</span>,
+  <span class="attr">ease</span>: <span class="string">"power1.out"</span>
+}, <span class="string">"-=2"</span>);</pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// Poetic timing = slow, contemplative
+</span><span class="comment">// stagger: 1.5 for stanzas = reading pace
+</span><span class="comment">// Lines within stanzas are secondary reveal
+</span><span class="comment">// power1.out = gentle, not punchy</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-15.html" class="nav-link nav-link--prev">← Timeline Text</a>
+    <a href="lesson-17.html" class="nav-link nav-link--next">Next: Word Emphasis →</a>
+  </nav>
+
+  <script>
+    let tl;
+    
+    function initAnimation() {
+      const stanzas = gsap.utils.toArray(".poem-stanza");
+      const lines = gsap.utils.toArray(".poem-line");
+      
+      gsap.set(stanzas, { opacity: 0, y: 30 });
+      gsap.set(".poem-title, .poem-author", { opacity: 0, y: -20 });
+      
+      tl = gsap.timeline();
+      
+      tl.to(".poem-title", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
+        .to(".poem-author", { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.5")
+        .to(stanzas, { opacity: 1, y: 0, stagger: 1.5, duration: 1, ease: "power2.out" }, "+=0.5")
+        .to(lines, { opacity: 1, stagger: 0.8, duration: 0.6, ease: "power1.out" }, "-=2");
+      
+      tl.pause();
+    }
+    
+    function playAnimation() { tl.play(); }
+    function resetAnimation() {
+      gsap.set(".poem-stanza", { opacity: 0, y: 30 });
+      gsap.set(".poem-title, .poem-author", { opacity: 0, y: -20 });
+      if (tl) tl.restart();
+    }
+    function replayAnimation() { if (tl) tl.restart(); }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 02: Touch Targets - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 393px;
+      height: 852px;
+      border-radius: 55px;
+      border: 14px solid #18181b;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 126px;
+      height: 37px;
+      background: #000;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 24px 24px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 166px;
+      height: 6px;
+      background: #fff;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+    .touch-demo:active {
+      transform: scale(0.97);
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-rose">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Touch Targets</h1>
+    <p class="lesson-subtitle">Design with 44x44px minimum and proper spacing for comfortable touch interaction</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #0f0f0f; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: linear-gradient(180deg, #1a1a2e 0%, #0f0f0f 100%);">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-white text-sm font-semibold">9:41</span>
+              <div class="flex items-center gap-1">
+                <span class="text-white text-xs">●●●●</span>
+              </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="px-4 pt-2 pb-4">
+              <h1 class="text-white text-xl font-bold">Touch Targets</h1>
+              <p class="text-gray-400 text-sm">44×44px minimum required</p>
+            </div>
+            
+            <!-- Too Small Warning -->
+            <div class="mx-4 p-4 bg-zinc-900 rounded-2xl border border-red-900/50 mb-4">
+              <div class="text-red-400 text-xs font-semibold uppercase tracking-wider mb-2">❌ Too Small (32×32)</div>
+              <div class="flex justify-center">
+                <button class="w-8 h-8 bg-rose-500 rounded-lg flex items-center justify-center text-white text-xs touch-demo transition-transform">
+                  A
+                </button>
+              </div>
+              <p class="text-gray-500 text-xs text-center mt-2">Hard to tap accurately</p>
+            </div>
+            
+            <!-- Minimum Size -->
+            <div class="mx-4 p-4 bg-zinc-900 rounded-2xl border border-zinc-800 mb-4">
+              <div class="text-green-400 text-xs font-semibold uppercase tracking-wider mb-2">✓ Minimum (44×44)</div>
+              <button class="w-full min-h-[44px] bg-rose-500 rounded-xl flex items-center justify-center text-white font-semibold touch-demo transition-transform active:scale-[0.98]">
+                Minimum Touch Target
+              </button>
+              <p class="text-gray-500 text-xs text-center mt-2">WCAG 2.1 compliant</p>
+            </div>
+            
+            <!-- Comfortable Size -->
+            <div class="mx-4 p-4 bg-zinc-900 rounded-2xl border border-zinc-800 mb-4">
+              <div class="text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-2">✓✓ Comfortable (48×48+)</div>
+              <button class="w-full min-h-[48px] bg-gradient-to-r from-rose-500 to-pink-500 rounded-xl flex items-center justify-center text-white font-semibold touch-demo transition-transform active:scale-[0.98]">
+                Comfortable Touch Target
+              </button>
+              <p class="text-gray-500 text-xs text-center mt-2">Material Design recommendation</p>
+            </div>
+            
+            <!-- Touch Grid -->
+            <div class="mx-4 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
+              <div class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-3">Interactive Button Grid</div>
+              <div class="grid grid-cols-4 gap-2">
+                <button class="aspect-square min-h-[48px] bg-zinc-800 rounded-xl flex items-center justify-center text-rose-400 font-bold text-lg touch-demo transition-transform active:scale-95">1</button>
+                <button class="aspect-square min-h-[48px] bg-zinc-800 rounded-xl flex items-center justify-center text-rose-400 font-bold text-lg touch-demo transition-transform active:scale-95">2</button>
+                <button class="aspect-square min-h-[48px] bg-zinc-800 rounded-xl flex items-center justify-center text-rose-400 font-bold text-lg touch-demo transition-transform active:scale-95">3</button>
+                <button class="aspect-square min-h-[48px] bg-zinc-800 rounded-xl flex items-center justify-center text-rose-400 font-bold text-lg touch-demo transition-transform active:scale-95">4</button>
+                <button class="aspect-square min-h-[48px] bg-zinc-800 rounded-xl flex items-center justify-center text-rose-400 font-bold text-lg touch-demo transition-transform active:scale-95">5</button>
+                <button class="aspect-square min-h-[48px] bg-zinc-800 rounded-xl flex items-center justify-center text-rose-400 font-bold text-lg touch-demo transition-transform active:scale-95">6</button>
+                <button class="aspect-square min-h-[48px] bg-zinc-800 rounded-xl flex items-center justify-center text-rose-400 font-bold text-lg touch-demo transition-transform active:scale-95">7</button>
+                <button class="aspect-square min-h-[48px] bg-zinc-800 rounded-xl flex items-center justify-center text-rose-400 font-bold text-lg touch-demo transition-transform active:scale-95">8</button>
+              </div>
+              <p class="text-gray-500 text-xs text-center mt-3">48×48px targets with 8px gaps</p>
+            </div>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- Minimum size button --&gt;</span>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="string">"min-w-[44px] min-h-[44px] 
+               px-4 py-2 bg-rose-500 rounded-lg"</span><span class="tag">&gt;</span>
+  Touch Me
+<span class="tag">&lt;/button&gt;</span>
+
+<span class="comment">&lt;!-- Comfortable touch target --&gt;</span>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="string">"w-full min-h-[48px] 
+               px-6 py-4 bg-rose-500 rounded-xl"</span><span class="tag">&gt;</span>
+  Primary Action
+<span class="tag">&lt;/button&gt;</span>
+
+<span class="comment">&lt;!-- Touch-friendly link list --&gt;</span>
+<span class="tag">&lt;nav</span> <span class="attr">class</span>=<span class="string">"space-y-1"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"block min-h-[48px] 
+             flex items-center px-4"</span><span class="tag">&gt;</span>
+    Navigation Item
+  <span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;/nav&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Guidelines</div>
+        <pre class="code-block"><span class="comment">/* Apple HIG */</span>
+<span class="attr">min-size</span>: <span class="number">44pt</span> × <span class="number">44pt</span> (≈44×44px at 1x)
+
+<span class="comment">/* WCAG 2.1 Level AA */</span>
+<span class="attr">min-size</span>: <span class="number">44px</span> × <span class="number">44px</span>
+
+<span class="comment">/* Material Design */</span>
+<span class="attr">min-size</span>: <span class="number">48dp</span> (48 CSS pixels)
+
+<span class="comment">/* Gap between targets */</span>
+<span class="attr">gap</span>: <span class="number">8px</span> - <span class="number">16px</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-01.html" class="nav-link nav-link--prev">← Screen Anatomy</a>
+    <a href="lesson-03.html" class="nav-link nav-link--next">Next: Safe Areas →</a>
+  </nav>
+</body>
+</html>

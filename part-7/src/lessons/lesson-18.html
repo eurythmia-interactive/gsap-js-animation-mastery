@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 18: Full Choreography - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+  function splitText(selector, type = 'chars') {
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) return [];
+    const text = el.textContent || '';
+    el.dataset.orig = text;
+    el.innerHTML = '';
+    if (!text) return [];
+    
+    if (type === 'chars') {
+      return Array.from(text).map(c => {
+        const s = document.createElement('span');
+        s.innerHTML = c === ' ' ? '&nbsp;' : c;
+        s.style.display = 'inline-block';
+        el.appendChild(s);
+        return s;
+      });
+    } else {
+      return text.split(' ').map(w => {
+        const s = document.createElement('span');
+        s.textContent = w;
+        s.style.display = 'inline-block';
+        s.style.marginRight = '0.25em';
+        el.appendChild(s);
+        return s;
+      });
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-container {
+      background: linear-gradient(180deg, #1c1917 0%, #292524 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .poem-display {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .poem-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: #fafaf9;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+    
+    .poem-author {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: #a8a29e;
+      margin-bottom: 3rem;
+    }
+    
+    .poem-stanza {
+      margin-bottom: 2.5rem;
+      opacity: 0;
+    }
+    
+    .poem-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.25rem, 3vw, 1.5rem);
+      color: #fafaf9;
+      line-height: 2.2;
+    }
+    
+    .poem-divider {
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, #c4b5fd, #fda4af, #fdba74);
+      margin: 2rem auto;
+      transform: scaleX(0);
+      transform-origin: center;
+    }
+    
+    .glow-orb {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    
+    .glow-orb--1 { background: #c4b5fd; top: -100px; left: -100px; }
+    .glow-orb--2 { background: #fda4af; bottom: -100px; right: -100px; }
+  </style>
+</head>
+<body class="lesson-page palette-pastel">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">Full Choreography</h1>
+    <p class="lesson-subtitle">Complete poem with mixed animation types</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - Complete Poetic Animation</div>
+      <div class="demo-container">
+        <div class="glow-orb glow-orb--1"></div>
+        <div class="glow-orb glow-orb--2"></div>
+        
+        <div class="poem-display">
+          <h2 class="poem-title" id="poem-title">Wildflowers</h2>
+          <p class="poem-author">by Daniel Morrison</p>
+          
+          <div class="poem-divider" id="poem-divider"></div>
+          
+          <div class="poem-stanza" id="stanza-1">
+            <p class="poem-line">In fields where no one walks,</p>
+            <p class="poem-line">wildflowers learn to dance,</p>
+            <p class="poem-line">swaying to the wind's invisible song.</p>
+          </div>
+          
+          <div class="poem-stanza" id="stanza-2">
+            <p class="poem-line">They ask for nothing, need no care,</p>
+            <p class="poem-line">just sun and rain and room to grow,</p>
+            <p class="poem-line">a quiet bloom that catches light.</p>
+          </div>
+          
+          <div class="poem-stanza" id="stanza-3">
+            <p class="poem-line">Perhaps we too could learn to be</p>
+            <p class="poem-line">so simply, purely, gloriously</p>
+            <p class="poem-line">alive, like flowers in the wild.</p>
+          </div>
+        </div>
+        
+        <div class="view-toggle">
+          <button class="active" onclick="setView('desktop')">Desktop</button>
+          <button onclick="setView('phone')">Phone Sim</button>
+          <button onclick="setView('mobile')">Mobile</button>
+        </div>
+        
+        <div class="animation-controls" style="margin-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="playAnimation()">▶ Play</button>
+          <button class="btn btn-secondary" onclick="resetAnimation()">Reset</button>
+          <button class="btn btn-secondary" onclick="replayAnimation()">Replay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"poem-display"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">class</span>=<span class="string">"poem-title"</span> <span class="attr">id</span>=<span class="string">"poem-title"</span><span class="tag">&gt;</span>Wildflowers<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"poem-author"</span><span class="tag">&gt;</span>by Daniel Morrison<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"poem-divider"</span> <span class="attr">id</span>=<span class="string">"poem-divider"</span><span class="tag">&gt;&lt;/div&gt;</span>
+  
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"poem-stanza"</span> <span class="attr">id</span>=<span class="string">"stanza-1"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"poem-stanza"</span> <span class="attr">id</span>=<span class="string">"stanza-2"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"poem-stanza"</span> <span class="attr">id</span>=<span class="string">"stanza-3"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript Animation</div>
+      <pre class="code-block"><span class="comment">// Split title into words using custom splitText</span>
+<span class="keyword">const</span> titleSplit = <span class="attr">splitText</span>(<span class="string">"#poem-title"</span>, <span class="string">"words"</span>);
+<span class="keyword">const</span> stanzas = gsap.<span class="attr">utils</span>.<span class="attr">toArray</span>(<span class="string">".poem-stanza"</span>);
+
+<span class="comment">// Set initial states</span>
+gsap.<span class="attr">set</span>(titleSplit, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">50</span> });
+gsap.<span class="attr">set</span>(<span class="string">".poem-author"</span>, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">20</span> });
+gsap.<span class="attr">set</span>(<span class="string">"#poem-divider"</span>, { <span class="attr">scaleX</span>: <span class="number">0</span> });
+gsap.<span class="attr">set</span>(stanzas, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">40</span> });
+
+<span class="keyword">const</span> tl = gsap.timeline();
+
+tl
+  <span class="comment">// Title word reveal with scale</span>
+  .<span class="attr">to</span>(titleSplit, {
+    <span class="attr">opacity</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">0</span>,
+    <span class="attr">stagger</span>: <span class="number">0.15</span>,
+    <span class="attr">duration</span>: <span class="number">0.8</span>,
+    <span class="attr">ease</span>: <span class="string">"back.out(1.5)"</span>
+  })
+  <span class="comment">// Author name</span>
+  .<span class="attr">to</span>(<span class="string">".poem-author"</span>, {
+    <span class="attr">opacity</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">0</span>,
+    <span class="attr">duration</span>: <span class="number">0.6</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+  }, <span class="string">"-=0.3"</span>)
+  <span class="comment">// Divider draws across</span>
+  .<span class="attr">to</span>(<span class="string">"#poem-divider"</span>, {
+    <span class="attr">scaleX</span>: <span class="number">1</span>,
+    <span class="attr">duration</span>: <span class="number">1</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.inOut"</span>
+  }, <span class="string">"+=0.2"</span>)
+  <span class="comment">// Stanzas fade in with stagger</span>
+  .<span class="attr">to</span>(stanzas, {
+    <span class="attr">opacity</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">0</span>,
+    <span class="attr">stagger</span>: <span class="number">2</span>,  <span class="comment">// 2s between stanzas</span>
+    <span class="attr">duration</span>: <span class="number">1.2</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+  }, <span class="string">"-=0.5"</span>);</pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// Multiple animation types combined
+</span><span class="comment">// back.out for title's playful pop
+</span><span class="comment">// power2 for body content
+</span><span class="comment">// Divider draws using scaleX
+</span><span class="comment">// Stagger timing creates reading rhythm</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-17.html" class="nav-link nav-link--prev">← Word Emphasis</a>
+    <a href="lesson-19.html" class="nav-link nav-link--next">Next: Scene Opener →</a>
+  </nav>
+
+  <script>
+    let tl;
+    let titleSplit;
+    
+    function initAnimation() {
+      titleSplit = splitText("#poem-title", "words");
+      
+      const stanzas = gsap.utils.toArray(".poem-stanza");
+      
+      gsap.set(titleSplit, { opacity: 0, y: 50 });
+      gsap.set(".poem-author", { opacity: 0, y: 20 });
+      gsap.set("#poem-divider", { scaleX: 0 });
+      gsap.set(stanzas, { opacity: 0, y: 40 });
+      
+      tl = gsap.timeline();
+      
+      tl.to(titleSplit, {
+        opacity: 1, y: 0, stagger: 0.15, duration: 0.8, ease: "back.out(1.5)"
+      })
+      .to(".poem-author", { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+      .to("#poem-divider", { scaleX: 1, duration: 1, ease: "power2.inOut" }, "+=0.2")
+      .to(stanzas, { opacity: 1, y: 0, stagger: 2, duration: 1.2, ease: "power2.out" }, "-=0.5");
+      
+      tl.pause();
+    }
+    
+    function playAnimation() { tl.play(); }
+    function resetAnimation() {
+      titleSplit = splitText("#poem-title", "words");
+      gsap.set(titleSplit, { opacity: 0, y: 50 });
+      gsap.set(".poem-author", { opacity: 0, y: 20 });
+      gsap.set("#poem-divider", { scaleX: 0 });
+      gsap.set(".poem-stanza", { opacity: 0, y: 40 });
+      if (tl) tl.restart();
+    }
+    function replayAnimation() { if (tl) tl.restart(); }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>

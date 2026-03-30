@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 20: Narrative Flow - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;500&family=Source+Sans Pro:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+  function splitText(selector, type = 'chars') {
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) return [];
+    const text = el.textContent || '';
+    el.dataset.orig = text;
+    el.innerHTML = '';
+    if (!text) return [];
+    
+    if (type === 'chars') {
+      return Array.from(text).map(c => {
+        const s = document.createElement('span');
+        s.innerHTML = c === ' ' ? '&nbsp;' : c;
+        s.style.display = 'inline-block';
+        el.appendChild(s);
+        return s;
+      });
+    } else {
+      return text.split(' ').map(w => {
+        const s = document.createElement('span');
+        s.textContent = w;
+        s.style.display = 'inline-block';
+        s.style.marginRight = '0.25em';
+        el.appendChild(s);
+        return s;
+      });
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-container {
+      background: linear-gradient(180deg, #030712 0%, #0a0a14 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .story-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .story-section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    
+    .story-chapter {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #7c3aed;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+    
+    .story-text {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: #fafafa;
+      line-height: 1.9;
+    }
+    
+    .story-highlight {
+      color: #f472b6;
+      font-weight: 500;
+    }
+    
+    .scroll-hint {
+      text-align: center;
+      padding: 2rem;
+      color: #6b7280;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+    }
+    
+    .scroll-arrow {
+      display: inline-block;
+      margin-top: 0.5rem;
+      animation: float 2s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+  </style>
+</head>
+<body class="lesson-page palette-cinematic">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">Narrative Flow</h1>
+    <p class="lesson-subtitle">Paragraph reveals with scroll sync</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - Scroll-Triggered Story</div>
+      <div class="demo-container" id="demo-container">
+        <div class="story-container">
+          <div class="story-section" id="section-1">
+            <p class="story-chapter">Chapter II</p>
+            <p class="story-text">The city hummed beneath her feet as Maya stepped onto the rooftop. Three years she had waited for this moment, watching from the shadows, learning the rhythms of a world that didn't know she existed.</p>
+          </div>
+          
+          <div class="story-section" id="section-2">
+            <p class="story-chapter">Chapter III</p>
+            <p class="story-text">Tonight would change everything. Not just for her, but for <span class="story-highlight">everyone</span> who had lost someone to the darkness that lurked in plain sight. She was their last hope, and she wouldn't fail.</p>
+          </div>
+          
+          <div class="story-section" id="section-3">
+            <p class="story-chapter">Chapter IV</p>
+            <p class="story-text">The wind picked up, carrying whispers of secrets long buried. Above, the stars seemed to lean closer, as if eager to witness what was about to unfold. This was her story. Her <span class="story-highlight">destiny</span>.</p>
+          </div>
+        </div>
+        
+        <div class="scroll-hint">
+          <span>Scroll to read</span>
+          <div class="scroll-arrow">↓</div>
+        </div>
+      </div>
+      
+      <div class="view-toggle">
+        <button class="active" onclick="setView('desktop')">Desktop</button>
+        <button onclick="setView('phone')">Phone Sim</button>
+        <button onclick="setView('mobile')">Mobile</button>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"story-container"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"story-section"</span> <span class="attr">id</span>=<span class="string">"section-1"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"story-chapter"</span><span class="tag">&gt;</span>Chapter II<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"story-text"</span><span class="tag">&gt;</span>The city hummed...<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="comment">&lt;!-- More sections... --&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript with ScrollTrigger</div>
+      <pre class="code-block"><span class="comment">// Register ScrollTrigger</span>
+gsap.<span class="attr">registerPlugin</span>(ScrollTrigger);
+
+<span class="comment">// Get all story sections</span>
+<span class="keyword">const</span> sections = gsap.<span class="attr">utils</span>.<span class="attr">toArray</span>(<span class="string">".story-section"</span>);
+
+<span class="comment">// Animate each section on scroll</span>
+sections.<span class="attr">forEach</span>((section, index) => {
+  <span class="comment">// The chapter label and text animate together</span>
+  <span class="keyword">const</span> chapter = section.<span class="attr">querySelector</span>(<span class="string">".story-chapter"</span>);
+  <span class="keyword">const</span> text = section.<span class="attr">querySelector</span>(<span class="string">".story-text"</span>);
+  
+  <span class="comment">// Set initial state</span>
+  gsap.<span class="attr">set</span>(section, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">60</span> });
+  
+  <span class="comment">// Create scroll-triggered animation</span>
+  gsap.<span class="attr">to</span>(section, {
+    <span class="attr">opacity</span>: <span class="number">1</span>,
+    <span class="attr">y</span>: <span class="number">0</span>,
+    <span class="attr">duration</span>: <span class="number">1</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.out"</span>,
+    <span class="attr">scrollTrigger</span>: {
+      <span class="attr">trigger</span>: section,
+      <span class="attr">start</span>: <span class="string">"top 80%"</span>,
+      <span class="attr">end</span>: <span class="string">"top 40%"</span>,
+      <span class="attr">scrub</span>: <span class="number">1</span> <span class="comment">// Smooth scroll-linked animation</span>
+    }
+  });
+  
+  <span class="comment">// Highlighted words pulse on scroll</span>
+  <span class="keyword">const</span> highlights = section.<span class="attr">querySelectorAll</span>(<span class="string">".story-highlight"</span>);
+  highlights.<span class="attr">forEach</span>(hl => {
+    gsap.<span class="attr">to</span>(hl, {
+      <span class="attr">scale</span>: <span class="number">1.05</span>,
+      <span class="attr">duration</span>: <span class="number">0.5</span>,
+      <span class="attr">ease</span>: <span class="string">"power2.out"</span>,
+      <span class="attr">scrollTrigger</span>: {
+        <span class="attr">trigger</span>: hl,
+        <span class="attr">start</span>: <span class="string">"top 80%"</span>,
+        <span class="attr">toggleActions</span>: <span class="string">"play none none reverse"</span>
+      }
+    });
+  });
+});</pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// ScrollTrigger with scrub: 1
+</span><span class="comment">// Animation tied to scroll position
+</span><span class="comment">// Each section is independent trigger
+</span><span class="comment">// Highlights pulse on their own trigger</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-19.html" class="nav-link nav-link--prev">← Scene Opener</a>
+    <a href="lesson-21.html" class="nav-link nav-link--next">Next: The Finale →</a>
+  </nav>
+
+  <script>
+    function initAnimation() {
+      gsap.registerPlugin(ScrollTrigger);
+      
+      const sections = gsap.utils.toArray(".story-section");
+      
+      sections.forEach((section, index) => {
+        const highlights = section.querySelectorAll(".story-highlight");
+        
+        gsap.set(section, { opacity: 0, y: 60 });
+        
+        gsap.to(section, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            end: "top 40%",
+            scrub: 1
+          }
+        });
+        
+        highlights.forEach(hl => {
+          gsap.to(hl, {
+            scale: 1.05,
+            duration: 0.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: hl,
+              start: "top 80%",
+              toggleActions: "play none none reverse"
+            }
+          });
+        });
+      });
+    }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>

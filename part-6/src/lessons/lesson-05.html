@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lesson 05: Elevated Surfaces - Part 6</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      border: 12px solid #1a1a1a;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 150px;
+      height: 30px;
+      background: #000;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+    .phone-home-indicator {
+      width: 130px;
+      height: 5px;
+      background: #fff;
+      border-radius: 3px;
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body class="lesson-page palette-slate">
+  <header class="lesson-header">
+    <h1 class="lesson-title">Elevated Surfaces</h1>
+    <p class="lesson-subtitle">Create visual hierarchy using surface lightness variations</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo</div>
+      <div class="demo-wrapper" style="background: #09090b; padding: 2rem;">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #09090b;">
+            <!-- Status Bar -->
+            <div class="flex justify-between items-center px-6 pt-4 pb-2">
+              <span class="text-white text-sm font-semibold">9:41</span>
+              <div class="flex items-center gap-1">
+                <span class="text-white text-xs">●●●●</span>
+              </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="px-4 pt-2 pb-4">
+              <h1 class="text-white text-xl font-bold">Social Feed</h1>
+              <p class="text-gray-400 text-sm">Elevation hierarchy in action</p>
+            </div>
+            
+            <!-- Feed Cards with Elevation -->
+            <div class="px-4 space-y-3">
+              <!-- Post 1 -->
+              <div class="bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500"></div>
+                  <div>
+                    <p class="text-white text-sm font-semibold">Sarah Chen</p>
+                    <p class="text-gray-500 text-xs">2h ago</p>
+                  </div>
+                </div>
+                <p class="text-gray-300 text-sm leading-relaxed mb-3">Dark mode design is all about creating depth through lightness. Higher surfaces should appear lighter.</p>
+                <div class="aspect-video bg-zinc-800 rounded-xl"></div>
+                <div class="flex items-center gap-6 mt-3">
+                  <button class="flex items-center gap-2 text-gray-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    <span class="text-xs">2.4k</span>
+                  </button>
+                  <button class="flex items-center gap-2 text-gray-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                    <span class="text-xs">128</span>
+                  </button>
+                  <button class="flex items-center gap-2 text-gray-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                    <span class="text-xs">Share</span>
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Post 2 - Higher Elevation (Modal-like) -->
+              <div class="bg-zinc-800 rounded-2xl p-4">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-rose-400 to-orange-500"></div>
+                  <div>
+                    <p class="text-white text-sm font-semibold">Alex Rivera</p>
+                    <p class="text-gray-500 text-xs">4h ago</p>
+                  </div>
+                </div>
+                <p class="text-gray-300 text-sm leading-relaxed">Notice how this post has a lighter background? That's intentional elevation - it stands out more.</p>
+                <div class="mt-3 bg-zinc-700 rounded-xl p-3">
+                  <p class="text-gray-400 text-xs italic">"Higher elevation surfaces should be used sparingly for important content."</p>
+                </div>
+              </div>
+              
+              <!-- Base Level -->
+              <div class="bg-zinc-950 rounded-2xl p-4 border border-zinc-800">
+                <p class="text-gray-500 text-xs">This is the base level - zinc-950 on true black</p>
+              </div>
+            </div>
+            
+            <!-- Elevation Legend -->
+            <div class="mx-4 mt-4 p-3 bg-black rounded-xl border border-zinc-800">
+              <div class="text-cyan-400 text-xs font-semibold mb-2">Elevation Scale</div>
+              <div class="flex gap-2">
+                <div class="flex-1 text-center">
+                  <div class="h-6 bg-black border border-zinc-800 rounded mb-1"></div>
+                  <span class="text-gray-600 text-[10px]">Base</span>
+                </div>
+                <div class="flex-1 text-center">
+                  <div class="h-6 bg-zinc-900 rounded mb-1"></div>
+                  <span class="text-gray-600 text-[10px]">+1dp</span>
+                </div>
+                <div class="flex-1 text-center">
+                  <div class="h-6 bg-zinc-800 rounded mb-1"></div>
+                  <span class="text-gray-600 text-[10px]">+2dp</span>
+                </div>
+                <div class="flex-1 text-center">
+                  <div class="h-6 bg-zinc-700 rounded mb-1"></div>
+                  <span class="text-gray-600 text-[10px]">+3dp</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">Key Code</div>
+      <pre class="code-block"><span class="comment">&lt;!-- Base surface (true black) --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bg-black"</span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- Lowest elevation --&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- Elevation 1 (zinc-900) --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bg-zinc-900 rounded-2xl p-4"</span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- Standard card --&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- Elevation 2 (zinc-800) --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bg-zinc-800 rounded-2xl p-4"</span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- Higher importance --&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- Elevation 3 (zinc-700) - modals --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bg-zinc-700 rounded-2xl p-4"</span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- Most important --&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      
+      <div class="mt-6 pt-6 border-t border-gray-700">
+        <div class="code-title">Dark Mode Elevation Rules</div>
+        <pre class="code-block"><span class="comment">/* In dark mode: */</span>
+<span class="comment">/* LIGHTER = HIGHER ELEVATION */</span>
+<span class="comment">/* DARKER = LOWER ELEVATION */</span>
+
+<span class="comment">/* Don't use shadows for elevation */</span>
+<span class="comment">/* Use lightness shifts instead */</span>
+
+<span class="comment">/* z-950: True black (base) */</span>
+<span class="comment">/* z-900: +1dp (cards, list items) */</span>
+<span class="comment">/* z-800: +2dp (elevated cards) */</span>
+<span class="comment">/* z-700: +3dp (modals, dialogs) */</span>
+<span class="comment">/* z-600: +4dp (highest - rarely used) */</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-04.html" class="nav-link nav-link--prev">← Dark Mode Foundations</a>
+    <a href="lesson-06.html" class="nav-link nav-link--next">Next: Dark Typography →</a>
+  </nav>
+</body>
+</html>

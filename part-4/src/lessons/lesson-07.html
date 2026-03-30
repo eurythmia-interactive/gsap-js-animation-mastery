@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 07 - Responsive Design - Tailwind CSS Basics</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-06.html" class="nav-link">← Previous</a>
+        <a href="lesson-08.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 07</span>
+        <span>Part 4: Tailwind CSS Basics</span>
+      </div>
+
+      <h1>Responsive Design</h1>
+      <p>Master Tailwind's mobile-first responsive prefixes: sm:, md:, lg:, and xl:</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Responsive Design</span>
+        </div>
+        <div class="demo-container">
+          <div class="bg-gray-800 p-4 rounded w-full max-w-4xl">
+            <p class="text-gray-400 text-sm mb-4">Resize your browser to see the changes:</p>
+            
+            <!-- Responsive Box -->
+            <div class="text-center mb-4">
+              <div class="bg-emerald-500 p-4 rounded text-white font-semibold
+                          text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
+                Text Size Changes
+              </div>
+              <p class="text-xs text-gray-500 mt-2">
+                xs → sm → md → lg → xl
+              </p>
+            </div>
+            
+            <!-- Responsive Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-blue-500 p-4 rounded text-white text-center">
+                <span class="md:hidden">1 col (mobile)</span>
+                <span class="hidden md:block lg:hidden">2 cols (tablet)</span>
+                <span class="hidden lg:block">4 cols (desktop)</span>
+              </div>
+              <div class="bg-purple-500 p-4 rounded text-white text-center">
+                <span class="md:hidden">2 col (mobile)</span>
+                <span class="hidden md:block lg:hidden">2 cols (tablet)</span>
+                <span class="hidden lg:block">4 cols (desktop)</span>
+              </div>
+              <div class="bg-orange-500 p-4 rounded text-white text-center">
+                <span class="md:hidden">3 col (mobile)</span>
+                <span class="hidden md:block lg:hidden">2 cols (tablet)</span>
+                <span class="hidden lg:block">4 cols (desktop)</span>
+              </div>
+              <div class="bg-pink-500 p-4 rounded text-white text-center">
+                <span class="md:hidden">4 col (mobile)</span>
+                <span class="hidden md:block lg:hidden">2 cols (tablet)</span>
+                <span class="hidden lg:block">4 cols (desktop)</span>
+              </div>
+            </div>
+            
+            <!-- Show/Hide Example -->
+            <div class="mt-4 p-4 bg-gray-700 rounded">
+              <p class="text-sm text-gray-300 mb-2">hidden md:block - "Show only from tablet"</p>
+              <div class="hidden md:block bg-emerald-600 p-3 rounded text-white text-center">
+                I appear on tablet and larger!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Responsive Prefixes</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Mobile first: base styles apply to all, then override at breakpoints --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-center md:text-left"</span><span class="punctuation">&gt;</span>
+  Centered on mobile, left on tablet+
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Responsive grid: 1 col mobile, 2 tablet, 4 desktop --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>Showing/Hiding Elements</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Hidden on mobile, shown from md (768px+) --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"hidden md:block"</span><span class="punctuation">&gt;</span>Visible on tablet+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Shown on mobile, hidden from md --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"block md:hidden"</span><span class="punctuation">&gt;</span>Visible only on mobile<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>Breakpoints</h2>
+
+        <div class="concept">
+          <h3>Tailwind Breakpoints</h3>
+          <ul>
+            <li><code>sm:</code> - 640px (Large phones)</li>
+            <li><code>md:</code> - 768px (Tablets)</li>
+            <li><code>lg:</code> - 1024px (Laptops)</li>
+            <li><code>xl:</code> - 1280px (Desktops)</li>
+            <li><code>2xl:</code> - 1536px (Large screens)</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Mobile First Philosophy</h3>
+          <p>Styles without a prefix apply to all screen sizes. Then you add prefixes to progressively enhance for larger screens.</p>
+          <p class="mt-2"><code>flex-col md:flex-row</code> = Stack on mobile, row on tablet+</p>
+        </div>
+
+        <div class="tip">
+          <h3>Common Patterns</h3>
+          <ul>
+            <li><code>grid-cols-1 md:grid-cols-2 lg:grid-cols-3</code> - Responsive card grid</li>
+            <li><code>flex-col md:flex-row</code> - Responsive flex layout</li>
+            <li><code>hidden md:block</code> - Hide on mobile, show on tablet+</li>
+            <li><code>w-full md:w-1/2</code> - Full width mobile, half desktop</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-06.html">← Previous</a>
+      <a href="lesson-08.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

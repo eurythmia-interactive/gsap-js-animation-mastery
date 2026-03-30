@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 06 - Social Proof - Landing Page Design</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans'],
+            display: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-05.html" class="nav-link">← Previous</a>
+        <a href="lesson-07.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 06</span>
+        <span>Part 5: Landing Page Design</span>
+      </div>
+
+      <h1>Social Proof</h1>
+      <p>Social proof builds trust by showing that others have had a positive experience with your product. Effective landing pages leverage testimonials, logos, and metrics to establish credibility.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Social Proof Elements</span>
+        </div>
+        <div class="demo-container">
+          <div class="w-full max-w-5xl mx-auto space-y-12">
+            <!-- Logo Strip -->
+            <div class="text-center">
+              <p class="text-sm text-zinc-500 uppercase tracking-wider mb-6">Trusted by teams at</p>
+              <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+                <div class="text-2xl font-bold text-zinc-600">Acme Corp</div>
+                <div class="text-2xl font-bold text-zinc-600">Globex</div>
+                <div class="text-2xl font-bold text-zinc-600">Initech</div>
+                <div class="text-2xl font-bold text-zinc-600">Umbrella</div>
+                <div class="text-2xl font-bold text-zinc-600">Stark Ind</div>
+              </div>
+            </div>
+
+            <!-- Metrics -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-amber-500 mb-1">10K+</div>
+                <p class="text-sm text-zinc-500">Happy Customers</p>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-amber-500 mb-1">99%</div>
+                <p class="text-sm text-zinc-500">Satisfaction Rate</p>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-amber-500 mb-1">4.9/5</div>
+                <p class="text-sm text-zinc-500">Average Rating</p>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-amber-500 mb-1">50M+</div>
+                <p class="text-sm text-zinc-500">Pages Created</p>
+              </div>
+            </div>
+
+            <!-- Testimonial -->
+            <div class="bg-zinc-800/50 rounded-2xl p-8 border border-zinc-700">
+              <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex-shrink-0">
+                  <div class="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center">
+                    <span class="text-2xl font-bold text-amber-500">SM</span>
+                  </div>
+                </div>
+                <div>
+                  <p class="text-lg text-white mb-4 leading-relaxed">
+                    "This platform completely transformed how we launch marketing campaigns. What used to take our team two weeks now takes two hours. The results speak for themselves—our conversion rates doubled."
+                  </p>
+                  <p class="text-amber-500 font-semibold">Sarah Mitchell</p>
+                  <p class="text-sm text-zinc-500">Marketing Director, Acme Corp</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Logo Strip</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Logo strip - use muted text for logos you don't own --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"flex flex-wrap justify-center items-center gap-8"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-2xl font-bold text-zinc-600"</span><span class="punctuation">&gt;</span>Acme Corp<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-2xl font-bold text-zinc-600"</span><span class="punctuation">&gt;</span>Globex<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Metrics --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"grid grid-cols-2 md:grid-cols-4 gap-6"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-center"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-3xl font-bold text-amber-500"</span><span class="punctuation">&gt;</span>10K+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-sm text-zinc-500"</span><span class="punctuation">&gt;</span>Happy Customers<span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+
+        <div class="concept">
+          <h3>Types of Social Proof</h3>
+          <ul>
+            <li><strong>Logo Strip</strong> - "Trusted by X" shows recognized names</li>
+            <li><strong>Metrics</strong> - Numbers prove scale and success</li>
+            <li><strong>Testimonials</strong> - Customer quotes build trust</li>
+            <li><strong>Case Studies</strong> - Detailed success stories</li>
+            <li><strong>Reviews</strong> - Third-party validation</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Testimonial Best Practices</h3>
+          <ul>
+            <li>Include a real photo or avatar</li>
+            <li>Add name, title, and company</li>
+            <li>Focus on specific, quantifiable results</li>
+            <li>Keep quotes authentic and relatable</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Metrics That Convert</h3>
+          <ul>
+            <li>Customer count (10K+, 1M+)</li>
+            <li>Satisfaction rate (99%, 4.9/5)</li>
+            <li>Time saved (10x faster)</li>
+            <li>Revenue impact (2x conversions)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-05.html">← Previous</a>
+      <a href="lesson-07.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

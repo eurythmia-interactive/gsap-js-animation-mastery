@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 06 - Grid - Tailwind CSS Basics</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-05.html" class="nav-link">← Previous</a>
+        <a href="lesson-07.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 06</span>
+        <span>Part 4: Tailwind CSS Basics</span>
+      </div>
+
+      <h1>Grid</h1>
+      <p>Create two-dimensional layouts with Tailwind's CSS Grid utilities.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Grid</span>
+        </div>
+        <div class="demo-container">
+          <div class="space-y-6 w-full max-w-2xl">
+            <!-- Basic Grid -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">grid grid-cols-3 (3 equal columns)</p>
+              <div class="grid grid-cols-3 gap-4 bg-gray-800 p-4 rounded">
+                <div class="bg-emerald-500 p-4 rounded text-white text-center">1</div>
+                <div class="bg-emerald-500 p-4 rounded text-white text-center">2</div>
+                <div class="bg-emerald-500 p-4 rounded text-white text-center">3</div>
+                <div class="bg-emerald-500 p-4 rounded text-white text-center">4</div>
+                <div class="bg-emerald-500 p-4 rounded text-white text-center">5</div>
+                <div class="bg-emerald-500 p-4 rounded text-white text-center">6</div>
+              </div>
+            </div>
+            
+            <!-- Column Span -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">col-span-2 (spanning columns)</p>
+              <div class="grid grid-cols-4 gap-4 bg-gray-800 p-4 rounded">
+                <div class="col-span-2 bg-blue-500 p-4 rounded text-white text-center">Span 2</div>
+                <div class="bg-blue-500 p-4 rounded text-white text-center">Auto</div>
+                <div class="bg-blue-500 p-4 rounded text-white text-center">Auto</div>
+              </div>
+            </div>
+            
+            <!-- Responsive Grid -->
+            <div>
+              <p class="text-gray-400 text-sm mb-2">grid-cols-1 md:grid-cols-2 lg:grid-cols-3</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-gray-800 p-4 rounded">
+                <div class="bg-purple-500 p-4 rounded text-white text-center">Card 1</div>
+                <div class="bg-purple-500 p-4 rounded text-white text-center">Card 2</div>
+                <div class="bg-purple-500 p-4 rounded text-white text-center">Card 3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Basic Grid</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- 3 column grid with gaps --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"grid grid-cols-3 gap-4"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span><span class="punctuation">&gt;</span>Item 1<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span><span class="punctuation">&gt;</span>Item 2<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span><span class="punctuation">&gt;</span>Item 3<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>Spanning Columns</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- 4 column grid with spanning --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"grid grid-cols-4 gap-4"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"col-span-2"</span><span class="punctuation">&gt;</span>Spans 2 columns<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span><span class="punctuation">&gt;</span>Auto<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span><span class="punctuation">&gt;</span>Auto<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>Grid vs Flexbox</h2>
+
+        <div class="concept">
+          <h3>When to Use Grid</h3>
+          <ul>
+            <li>Two-dimensional layouts (rows AND columns)</li>
+            <li>Card layouts, galleries, dashboards</li>
+            <li>When items need to line up both horizontally and vertically</li>
+            <li>Known number of columns</li>
+          </ul>
+        </div>
+
+        <div class="concept">
+          <h3>When to Use Flexbox</h3>
+          <ul>
+            <li>One-dimensional layouts (row OR column)</li>
+            <li>Navigation bars, button groups</li>
+            <li>Content that wraps naturally</li>
+            <li>Unknown number of items</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Column Classes</h3>
+          <ul>
+            <li><code>grid-cols-1</code> to <code>grid-cols-12</code></li>
+            <li><code>col-span-2</code> - Span 2 columns</li>
+            <li><code>col-span-full</code> - Span entire row</li>
+            <li><code>gap-4</code> - 1rem gap between items</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-05.html">← Previous</a>
+      <a href="lesson-07.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

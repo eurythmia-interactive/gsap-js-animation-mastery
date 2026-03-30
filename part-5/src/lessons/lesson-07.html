@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 07 - Call to Action - Landing Page Design</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans'],
+            display: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-06.html" class="nav-link">← Previous</a>
+        <a href="lesson-08.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 07</span>
+        <span>Part 5: Landing Page Design</span>
+      </div>
+
+      <h1>Call to Action</h1>
+      <p>A call-to-action (CTA) is where conversion happens. Effective CTAs use contrast, clarity, and strategic placement to guide users toward the desired action. This lesson covers button hierarchy and optimization techniques.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Button Hierarchy</span>
+        </div>
+        <div class="demo-container">
+          <div class="w-full max-w-3xl mx-auto space-y-8">
+            <!-- Primary CTA -->
+            <div class="text-center">
+              <p class="text-sm text-zinc-500 mb-4">Primary CTA - Most prominent</p>
+              <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-10 py-4 rounded-full shadow-lg shadow-amber-500/25 transition-all hover:scale-105">
+                Start Free Trial
+              </button>
+              <p class="text-xs text-zinc-600 mt-2">Amber background, shadow glow, scale on hover</p>
+            </div>
+
+            <!-- Secondary CTA -->
+            <div class="text-center">
+              <p class="text-sm text-zinc-500 mb-4">Secondary CTA - Less prominent</p>
+              <button class="border-2 border-zinc-600 hover:border-zinc-400 text-white font-semibold px-8 py-3 rounded-lg transition-colors">
+                View Demo
+              </button>
+              <p class="text-xs text-zinc-600 mt-2">Outline style, neutral colors</p>
+            </div>
+
+            <!-- Tertiary CTA -->
+            <div class="text-center">
+              <p class="text-sm text-zinc-500 mb-4">Tertiary CTA - Minimal</p>
+              <a href="#" class="text-amber-500 hover:text-amber-400 font-medium underline underline-offset-4 transition-colors">
+                Learn more about our features
+              </a>
+              <p class="text-xs text-zinc-600 mt-2">Text link style, subtle presence</p>
+            </div>
+
+            <!-- CTA with trust signal -->
+            <div class="text-center pt-4">
+              <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-10 py-4 rounded-full shadow-lg shadow-amber-500/25 transition-all hover:scale-105 mb-4">
+                Get Started Free
+              </button>
+              <div class="flex items-center justify-center gap-4 text-sm text-zinc-500">
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0 1 10 0v2a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2zm8-2v2H7V7a3 3 0 1 1 6 0z" clip-rule="evenodd"/>
+                  </svg>
+                  No credit card required
+                </span>
+                <span>•</span>
+                <span>14-day free trial</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Button Hierarchy</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Primary CTA --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-amber-500 hover:bg-amber-600 text-black font-bold px-10 py-4 rounded-full shadow-lg shadow-amber-500/25"</span><span class="punctuation">&gt;</span>
+  Start Free Trial
+<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Secondary CTA --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"border-2 border-zinc-600 hover:border-zinc-400 text-white font-semibold px-8 py-3 rounded-lg"</span><span class="punctuation">&gt;</span>
+  View Demo
+<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Tertiary CTA --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">a</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-amber-500 hover:text-amber-400 font-medium underline underline-offset-4"</span><span class="punctuation">&gt;</span>
+  Learn more
+<span class="punctuation">&lt;/</span><span class="tag">a</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Trust signals near CTA --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">span</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"flex items-center gap-1 text-sm text-zinc-500"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">svg</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"w-4 h-4 text-green-500"</span> <span class="attr">fill</span><span class="punctuation">=</span><span class="string">"currentColor"</span> <span class="attr">viewBox</span><span class="punctuation">=</span><span class="string">"0 0 20 20"</span><span class="punctuation">&gt;</span>...<span class="punctuation">&lt;/</span><span class="tag">svg</span><span class="punctuation">&gt;</span>
+  No credit card required
+<span class="punctuation">&lt;/</span><span class="tag">span</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+
+        <div class="concept">
+          <h3>CTA Design Principles</h3>
+          <ul>
+            <li><strong>Contrast</strong> - Stand out from surrounding elements</li>
+            <li><strong>Clarity</strong> - Action-oriented text ("Get Started", not "Submit")</li>
+            <li><strong>Size</strong> - Large enough to be noticed</li>
+            <li><strong>Space</strong> - Surrounding whitespace helps focus</li>
+            <li><strong>Feedback</strong> - Hover/focus states provide feedback</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>CTA Text Best Practices</h3>
+          <ul>
+            <li>Use first-person: "Get my free trial" not "Get your free trial"</li>
+            <li>Be specific: "Start free trial" not "Click here"</li>
+            <li>Create urgency: "Start now" or "Get access"</li>
+            <li>Focus on value: "Get started free" not "Sign up"</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Trust Signals to Pair with CTAs</h3>
+          <ul>
+            <li>"No credit card required"</li>
+            <li>"14-day free trial"</li>
+            <li>"Cancel anytime"</li>
+            <li>Security badges/lock icons</li>
+            <li>Money-back guarantee</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-06.html">← Previous</a>
+      <a href="lesson-08.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

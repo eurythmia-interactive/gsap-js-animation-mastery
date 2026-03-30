@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 15 - Complete Landing Page - Landing Page Design</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans'],
+            display: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-14.html" class="nav-link">← Previous</a>
+        <span class="nav-link disabled">Next →</span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 15</span>
+        <span>Part 5: Landing Page Design</span>
+      </div>
+
+      <h1>Complete Landing Page</h1>
+      <p>Now we bring it all together. This lesson demonstrates a complete, production-ready landing page that incorporates typography, spacing, grids, social proof, CTAs, and all the principles we've learned.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Complete Landing Page</span>
+        </div>
+        <div class="demo-container !p-0">
+          <div class="w-full bg-zinc-900">
+            <!-- Navigation -->
+            <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+              <div class="text-xl font-bold text-white">LaunchKit</div>
+              <div class="hidden md:flex items-center gap-8">
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors text-sm">Features</a>
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors text-sm">Pricing</a>
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors text-sm">Testimonials</a>
+              </div>
+              <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-5 py-2 rounded-full text-sm transition-colors">
+                Get Started
+              </button>
+            </nav>
+
+            <!-- Hero -->
+            <section class="text-center px-6 py-20 max-w-4xl mx-auto">
+              <span class="inline-block px-4 py-1 bg-amber-500/10 text-amber-500 rounded-full text-sm font-medium mb-6">
+                Trusted by 10,000+ teams
+              </span>
+              <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-white mb-6 leading-tight">
+                Ship landing pages in <span class="text-amber-500">hours</span>, not weeks
+              </h1>
+              <p class="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
+                Build beautiful, high-converting landing pages without code. Pre-built templates, drag-and-drop builder, instant publishing.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-8 py-4 rounded-full transition-all hover:shadow-lg hover:shadow-amber-500/25">
+                  Start Free Trial
+                </button>
+                <button class="border border-zinc-600 hover:border-zinc-400 text-white font-medium px-8 py-4 rounded-full transition-colors">
+                  Watch Demo
+                </button>
+              </div>
+              <p class="text-sm text-zinc-500 mt-4">No credit card required • 14-day free trial</p>
+            </section>
+
+            <!-- Logo strip -->
+            <section class="px-6 py-12 border-y border-zinc-800">
+              <p class="text-center text-sm text-zinc-500 mb-6">Powering growth at</p>
+              <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+                <div class="text-xl font-bold text-zinc-600">Acme</div>
+                <div class="text-xl font-bold text-zinc-600">Globex</div>
+                <div class="text-xl font-bold text-zinc-600">Initech</div>
+                <div class="text-xl font-bold text-zinc-600">Umbrella</div>
+              </div>
+            </section>
+
+            <!-- Features -->
+            <section class="px-6 py-20 max-w-6xl mx-auto">
+              <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold font-display text-white mb-4">Everything you need</h2>
+                <p class="text-zinc-400 max-w-xl mx-auto">Powerful features to help you launch faster and convert more visitors.</p>
+              </div>
+              <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-zinc-800/50 rounded-xl p-6 border border-zinc-700">
+                  <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                  </div>
+                  <h3 class="text-white font-semibold mb-2">Lightning Fast</h3>
+                  <p class="text-sm text-zinc-500">Launch pages in under 5 minutes with our drag-and-drop builder.</p>
+                </div>
+                <div class="bg-zinc-800/50 rounded-xl p-6 border border-zinc-700">
+                  <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                  </div>
+                  <h3 class="text-white font-semibold mb-2">Built-in Analytics</h3>
+                  <p class="text-sm text-zinc-500">Track conversions, visitors, and engagement with real-time dashboards.</p>
+                </div>
+                <div class="bg-zinc-800/50 rounded-xl p-6 border border-zinc-700">
+                  <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                  </div>
+                  <h3 class="text-white font-semibold mb-2">Enterprise Security</h3>
+                  <p class="text-sm text-zinc-500">SOC 2 compliant with 256-bit SSL encryption for all data.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="px-6 py-20 text-center bg-zinc-800/30">
+              <h2 class="text-3xl md:text-4xl font-bold font-display text-white mb-4">Ready to launch?</h2>
+              <p class="text-zinc-400 mb-8 max-w-xl mx-auto">Join 10,000+ teams already using LaunchKit to ship faster.</p>
+              <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-10 py-4 rounded-full transition-all hover:shadow-lg hover:shadow-amber-500/25">
+                Get Started Free
+              </button>
+              <p class="text-sm text-zinc-500 mt-4">No credit card required</p>
+            </section>
+
+            <!-- Footer -->
+            <footer class="px-6 py-8 border-t border-zinc-800 text-center">
+              <p class="text-sm text-zinc-500">© 2026 LaunchKit. All rights reserved.</p>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Complete Landing Page Structure</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Navigation --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">nav</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"flex items-center justify-between px-6 py-4 max-w-7xl mx-auto"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-xl font-bold text-white"</span><span class="punctuation">&gt;</span>LaunchKit<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-amber-500 text-black font-bold px-5 py-2 rounded-full"</span><span class="punctuation">&gt;</span>Get Started<span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">nav</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Hero Section --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">section</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-center px-6 py-20 max-w-4xl mx-auto"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">h1</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-4xl md:text-5xl lg:text-6xl font-bold font-display"</span><span class="punctuation">&gt;</span>
+    Ship landing pages in <span class="punctuation">&lt;</span><span class="tag">span</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-amber-500"</span><span class="punctuation">&gt;</span>hours<span class="punctuation">&lt;/</span><span class="tag">span</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">h1</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">button</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-amber-500 text-black font-bold px-8 py-4 rounded-full"</span><span class="punctuation">&gt;</span>
+    Start Free Trial
+  <span class="punctuation">&lt;/</span><span class="tag">button</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">section</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Features Grid --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">section</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"px-6 py-20 max-w-6xl mx-auto"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"grid md:grid-cols-3 gap-8"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-zinc-800/50 rounded-xl p-6"</span><span class="punctuation">&gt;</span>Feature 1<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-zinc-800/50 rounded-xl p-6"</span><span class="punctuation">&gt;</span>Feature 2<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-zinc-800/50 rounded-xl p-6"</span><span class="punctuation">&gt;</span>Feature 3<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">section</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>Key Takeaways</h2>
+
+        <div class="concept">
+          <h3>Putting It All Together</h3>
+          <ul>
+            <li><strong>Consistent spacing</strong> - Use a spacing scale throughout</li>
+            <li><strong>Typography hierarchy</strong> - Playfair for headlines, Inter for body</li>
+            <li><strong>Clear CTAs</strong> - Primary and secondary actions</li>
+            <li><strong>Social proof</strong> - Logos, metrics, testimonials</li>
+            <li><strong>Mobile responsive</strong> - Stack on mobile, side-by-side on desktop</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Complete Landing Page Checklist</h3>
+          <ul>
+            <li>□ Navigation with logo and CTA</li>
+            <li>□ Hero with headline, subheadline, and CTA</li>
+            <li>□ Trust signals (logos, metrics)</li>
+            <li>□ Value proposition or features</li>
+            <li>□ Social proof or testimonials</li>
+            <li>□ Final CTA section</li>
+            <li>□ Footer with links</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Congratulations!</h3>
+          <p>You've completed Part 5 of the GSAP Tutorial Platform! You now have the skills to design beautiful, conversion-focused landing pages using Tailwind CSS.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-14.html">← Previous</a>
+      <span style="opacity: 0.5;">Next →</span>
+    </nav>
+  </footer>
+</body>
+</html>

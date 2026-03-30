@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 11 - Positioning - Tailwind CSS Basics</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-10.html" class="nav-link">← Previous</a>
+        <a href="lesson-12.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 11</span>
+        <span>Part 4: Tailwind CSS Basics</span>
+      </div>
+
+      <h1>Positioning</h1>
+      <p>Control element positioning with relative, absolute, fixed, sticky, and z-index utilities.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - Positioning</span>
+        </div>
+        <div class="demo-container" style="min-height: 400px;">
+          <div class="space-y-8 w-full max-w-2xl">
+            <!-- Relative & Absolute -->
+            <div class="relative bg-gray-800 p-6 rounded-lg" style="height: 200px;">
+              <p class="text-gray-400 text-sm mb-2">relative + absolute inset-0</p>
+              <div class="absolute inset-0 bg-emerald-500/20 border-2 border-dashed border-emerald-500 rounded-lg flex items-center justify-center">
+                <div class="bg-emerald-500 px-4 py-2 rounded text-white text-sm font-semibold">
+                  Absolute Overlay
+                </div>
+              </div>
+              <div class="absolute bottom-2 right-2 bg-blue-500 px-3 py-1 rounded text-white text-xs">
+                Bottom Right
+              </div>
+            </div>
+            
+            <!-- Z-Index -->
+            <div class="relative bg-gray-800 p-6 rounded-lg" style="height: 120px;">
+              <p class="text-gray-400 text-sm mb-2">z-index layering</p>
+              <div class="absolute left-4 top-4 w-20 h-20 bg-purple-500 rounded-lg flex items-center justify-center text-white text-sm z-10">z-10</div>
+              <div class="absolute left-8 top-8 w-20 h-20 bg-pink-500 rounded-lg flex items-center justify-center text-white text-sm z-20">z-20</div>
+              <div class="absolute left-12 top-12 w-20 h-20 bg-orange-500 rounded-lg flex items-center justify-center text-white text-sm z-30">z-30</div>
+            </div>
+            
+            <!-- Centering Techniques -->
+            <div class="relative bg-gray-800 p-6 rounded-lg" style="height: 150px;">
+              <p class="text-gray-400 text-sm mb-2">Centering: absolute + translate</p>
+              <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-emerald-500 px-6 py-3 rounded-lg text-white font-semibold">
+                Perfectly Centered
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Position Properties</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Position values --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"relative"</span><span class="punctuation">&gt;</span>Relative to itself<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"absolute"</span><span class="punctuation">&gt;</span>Relative to parent<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"fixed"</span><span class="punctuation">&gt;</span>Fixed to viewport<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"sticky"</span><span class="punctuation">&gt;</span>Sticky until scrolled past<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+
+        <h3>Placement</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Inset (top/right/bottom/left) --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"absolute inset-0"</span><span class="punctuation">&gt;</span>Full coverage<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"absolute top-0 left-0"</span><span class="punctuation">&gt;</span>Top left<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"absolute bottom-4 right-4"</span><span class="punctuation">&gt;</span>Bottom right with offset<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Z-index --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"relative z-10"</span><span class="punctuation">&gt;</span>Layer 10<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"relative -z-10"</span><span class="punctuation">&gt;</span>Behind (negative)<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>Quick Reference</h2>
+
+        <div class="concept">
+          <h3>Position Values</h3>
+          <ul>
+            <li><code>static</code> - Default (normal flow)</li>
+            <li><code>relative</code> - Positioned relative to normal</li>
+            <li><code>absolute</code> - Removed from flow, relative to positioned parent</li>
+            <li><code>fixed</code> - Fixed to viewport window</li>
+            <li><code>sticky</code> - Sticks when scrolling past</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Centering Patterns</h3>
+          <p><strong>Transform translate:</strong></p>
+          <code>absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2</code>
+          <p class="mt-2"><strong>Flexbox:</strong></p>
+          <code>absolute inset-0 flex items-center justify-center</code>
+        </div>
+
+        <div class="tip">
+          <h3>Z-Index Scale</h3>
+          <p><code>z-0</code>, <code>z-10</code>, <code>z-20</code>, <code>z-30</code>, <code>z-40</code>, <code>z-50</code>, <code>z-auto</code></p>
+          <p class="mt-1 text-gray-400">Use <code>-z-10</code> for negative values to push behind.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-10.html">← Previous</a>
+      <a href="lesson-12.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

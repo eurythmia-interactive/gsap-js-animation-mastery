@@ -1,0 +1,177 @@
+# GSAP + Tailwind Integration Example
+
+A reference lesson showing how GSAP and Tailwind work together.
+
+---
+
+## Concept
+
+- **Tailwind** handles: styling, colors, layout, spacing
+- **GSAP** handles: animation timing, choreography, precise control
+
+---
+
+## Live Demo
+
+<!-- Demo area with Tailwind-styled card + GSAP animation -->
+<section class="demo-section">
+  <div class="demo-container">
+    <div class="gsap-tailwind-card">
+      <div class="card-content">
+        <div class="card-badge">New</div>
+        <h3 class="card-title">Animated Card</h3>
+        <p class="card-text">
+          This card is styled with Tailwind and animated with GSAP.
+          Tailwind handles the look, GSAP handles the motion.
+        </p>
+        <button class="card-button">Hover Me</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+---
+
+## The Code
+
+### HTML (with Tailwind classes)
+```html
+<!-- Tailwind CDN + GSAP CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<div class="bg-slate-800 rounded-2xl shadow-xl p-8 max-w-md">
+  <div class="card-badge bg-emerald-500 text-white text-xs px-2 py-1 rounded-full inline-block mb-4">
+    New
+  </div>
+  <h3 class="text-2xl font-bold text-white mb-2">Animated Card</h3>
+  <p class="text-slate-300 mb-6">
+    This card is styled with Tailwind and animated with GSAP.
+  </p>
+  <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg transition-all">
+    Hover Me
+  </button>
+</div>
+```
+
+### JavaScript (GSAP animation)
+```javascript
+// Entrance animation timeline
+const tl = gsap.timeline();
+
+tl.fromTo('.card-badge', 
+  { opacity: 0, y: -20 }, 
+  { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.7)' }
+)
+.fromTo('.card-title', 
+  { opacity: 0, x: -30 }, 
+  { opacity: 1, x: 0, duration: 0.5 }, 
+  '-=0.3'
+)
+.fromTo('.card-text', 
+  { opacity: 0, y: 20 }, 
+  { opacity: 1, y: 0, duration: 0.5 }, 
+  '-=0.3'
+)
+.fromTo('.card-button', 
+  { opacity: 0, scale: 0.8 }, 
+  { opacity: 1, scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)' }, 
+  '-=0.2'
+);
+
+// Button hover with GSAP
+document.querySelector('.card-button').addEventListener('mouseenter', () => {
+  gsap.to('.card-button', { 
+    scale: 1.05, 
+    backgroundColor: '#059669', // emerald-600
+    duration: 0.2 
+  });
+});
+
+document.querySelector('.card-button').addEventListener('mouseleave', () => {
+  gsap.to('.card-button', { 
+    scale: 1, 
+    backgroundColor: '#10b981', // emerald-500
+    duration: 0.3 
+  });
+});
+```
+
+---
+
+## Key Patterns
+
+### Pattern 1: Tailwind Structure + GSAP Animation
+```html
+<!-- Use Tailwind for all visual styling -->
+<div class="bg-emerald-500 rounded-xl shadow-lg p-6">
+  <!-- GSAP animates properties Tailwind can't -->
+  <script>gsap.to(this, { rotation: 5, duration: 0.3 });</script>
+</div>
+```
+
+### Pattern 2: GSAP Timeline + Tailwind Styling
+```javascript
+const tl = gsap.timeline();
+tl.fromTo('.element', { opacity: 0 }, { opacity: 1, duration: 1 });
+// Tailwind classes provide colors, shadows, spacing
+```
+
+### Pattern 3: Hover States
+```javascript
+// Tailwind handles basic transition
+// GSAP handles precise animation on hover
+<div class="transition-all duration-300 hover:scale-105">
+  <script>
+  element.addEventListener('mouseenter', () => {
+    gsap.to(element, { scale: 1.1, duration: 0.2 });
+  });
+  </script>
+</div>
+```
+
+---
+
+## Dark Mode Aware Animation
+
+```javascript
+// Check dark mode before animating
+const isDark = document.documentElement.classList.contains('dark');
+
+gsap.to('.glow', {
+  backgroundColor: isDark ? '#10b981' : '#059669',
+  duration: 0.5
+});
+```
+
+---
+
+## Responsive Animation
+
+```javascript
+// Match Tailwind breakpoints
+const isMobile = window.innerWidth < 768;
+
+gsap.to('.hero', {
+  x: isMobile ? 0 : 100,
+  duration: 1
+});
+```
+
+---
+
+## Best Practices
+
+| Do | Don't |
+|----|-------|
+| Use Tailwind for colors, spacing, typography | Animate Tailwind class names directly |
+| Use GSAP for timing, choreography, scroll | Override Tailwind's transition with GSAP unnecessarily |
+| Check dark mode before animation starts | Assume light mode only |
+| Use `gsap.context()` for cleanup | Leave animation listeners hanging |
+
+---
+
+## See Also
+
+- `.opencode/skills/gsap-tailwind-integration.md` - Full integration patterns
+- `.opencode/plans/GSAP-TAILWIND-COURSES.md` - Course ideas

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 13 - White Space Usage - Landing Page Design</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans'],
+            display: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a href="../../index.html" class="nav-back">← Back to Index</a>
+      <div class="nav-links">
+        <a href="lesson-12.html" class="nav-link">← Previous</a>
+        <a href="lesson-14.html" class="nav-link">Next →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="lesson">
+      <div class="lesson-meta">
+        <span class="lesson-number">Lesson 13</span>
+        <span>Part 5: Landing Page Design</span>
+      </div>
+
+      <h1>White Space Usage</h1>
+      <p>White space (or negative space) is the empty area around elements. It's not "wasted" space—it's a powerful design tool that creates breathing room, guides attention, and communicates elegance and quality.</p>
+
+      <div class="demo-section">
+        <div class="demo-header">
+          <span class="demo-title">Demo - White Space Comparison</span>
+        </div>
+        <div class="demo-container">
+          <div class="w-full max-w-6xl mx-auto">
+            <!-- Tight spacing example -->
+            <div class="mb-16">
+              <p class="text-xs text-red-400 font-semibold mb-4">Without White Space (Too Tight)</p>
+              <div class="bg-zinc-800 rounded-xl p-4">
+                <div class="flex flex-wrap gap-2">
+                  <span class="bg-zinc-700 px-3 py-2 rounded text-sm">Feature A</span>
+                  <span class="bg-zinc-700 px-3 py-2 rounded text-sm">Feature B</span>
+                  <span class="bg-zinc-700 px-3 py-2 rounded text-sm">Feature C</span>
+                  <span class="bg-zinc-700 px-3 py-2 rounded text-sm">Feature D</span>
+                  <span class="bg-zinc-700 px-3 py-2 rounded text-sm">Feature E</span>
+                  <span class="bg-zinc-700 px-3 py-2 rounded text-sm">Feature F</span>
+                </div>
+                <p class="text-zinc-400 text-sm mt-4">Dense, cramped, hard to scan</p>
+              </div>
+            </div>
+
+            <!-- Generous spacing example -->
+            <div class="mb-16">
+              <p class="text-xs text-green-400 font-semibold mb-4">With White Space (Generous)</p>
+              <div class="bg-zinc-800 rounded-xl p-8">
+                <div class="flex flex-wrap justify-center gap-4">
+                  <div class="bg-zinc-700 px-6 py-4 rounded-lg text-center">
+                    <div class="text-amber-500 font-bold mb-1">Feature A</div>
+                    <div class="text-zinc-500 text-xs">Description</div>
+                  </div>
+                  <div class="bg-zinc-700 px-6 py-4 rounded-lg text-center">
+                    <div class="text-amber-500 font-bold mb-1">Feature B</div>
+                    <div class="text-zinc-500 text-xs">Description</div>
+                  </div>
+                  <div class="bg-zinc-700 px-6 py-4 rounded-lg text-center">
+                    <div class="text-amber-500 font-bold mb-1">Feature C</div>
+                    <div class="text-zinc-500 text-xs">Description</div>
+                  </div>
+                </div>
+                <p class="text-zinc-400 text-sm mt-6 text-center">Clean, elegant, easy to scan</p>
+              </div>
+            </div>
+
+            <!-- Ultra minimal example -->
+            <div class="text-center py-16">
+              <p class="text-xs text-amber-500 font-semibold mb-4">Ultra Minimal (Maximum White Space)</p>
+              <h3 class="text-2xl font-display text-white mb-4">Less Elements</h3>
+              <p class="text-zinc-500 max-w-md mx-auto mb-8">
+                When you remove everything unnecessary, what remains becomes powerful.
+              </p>
+              <button class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-8 py-3 rounded-full transition-colors">
+                Experience More
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>The Code</h2>
+
+        <h3>Generous White Space</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-label">HTML</span>
+          </div>
+          <div class="code-content">
+            <pre><code><span class="comment">&lt;!-- Generous padding on container --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-zinc-800 rounded-xl p-8"</span><span class="punctuation">&gt;</span>
+  
+  <span class="comment">&lt;!-- Cards with gap --&gt;</span>;
+  <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"flex flex-wrap justify-center gap-4"</span><span class="punctuation">&gt;</span>
+    <span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"bg-zinc-700 px-6 py-4 rounded-lg text-center"</span><span class="punctuation">&gt;</span>
+      Feature A
+    <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span>
+
+<span class="comment">&lt;!-- Minimal section with max-width --&gt;</span>
+<span class="punctuation">&lt;</span><span class="tag">div</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-center py-16"</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">h3</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-2xl font-display text-white mb-4"</span><span class="punctuation">&gt;</span>
+    Less Elements
+  <span class="punctuation">&lt;/</span><span class="tag">h3</span><span class="punctuation">&gt;</span>
+  <span class="punctuation">&lt;</span><span class="tag">p</span> <span class="attr">class</span><span class="punctuation">=</span><span class="string">"text-zinc-500 max-w-md mx-auto mb-8"</span><span class="punctuation">&gt;</span>
+    Description
+  <span class="punctuation">&lt;/</span><span class="tag">p</span><span class="punctuation">&gt;</span>
+<span class="punctuation">&lt;/</span><span class="tag">div</span><span class="punctuation">&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-content">
+        <h2>How It Works</h2>
+
+        <div class="concept">
+          <h3>White Space Benefits</h3>
+          <ul>
+            <li><strong>Focus</strong> - Draws attention to what matters</li>
+            <li><strong>Clarity</strong> - Makes content easier to scan</li>
+            <li><strong>Elegance</strong> - Creates premium feel</li>
+            <li><strong>Breathing room</strong> - Reduces cognitive load</li>
+            <li><strong>Hierarchy</strong> - Naturally establishes importance</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>White Space Techniques</h3>
+          <ul>
+            <li>Increase section padding (<code>py-16</code>, <code>py-24</code>)</li>
+            <li>Use <code>max-w-*</code> to constrain text width</li>
+            <li>Add <code>gap-*</code> between elements</li>
+            <li>Use margins to separate content blocks</li>
+            <li>Center content with <code>mx-auto</code></li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <h3>Common Mistakes</h3>
+          <ul>
+            <li>Filling every pixel with content</li>
+            <li>Cramming too many elements together</li>
+            <li>Ignoring mobile spacing needs</li>
+            <li>Using same spacing everywhere</li>
+            <li>Thinking white space is wasted space</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="nav">
+      <a href="lesson-12.html">← Previous</a>
+      <a href="lesson-14.html">Next →</a>
+    </nav>
+  </footer>
+</body>
+</html>

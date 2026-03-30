@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 21: The Finale - Part 7</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;500&family=Source+Sans Pro:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+  function splitText(selector, type = 'chars') {
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) return [];
+    const text = el.textContent || '';
+    el.dataset.orig = text;
+    el.innerHTML = '';
+    if (!text) return [];
+    
+    if (type === 'chars') {
+      return Array.from(text).map(c => {
+        const s = document.createElement('span');
+        s.innerHTML = c === ' ' ? '&nbsp;' : c;
+        s.style.display = 'inline-block';
+        el.appendChild(s);
+        return s;
+      });
+    } else {
+      return text.split(' ').map(w => {
+        const s = document.createElement('span');
+        s.textContent = w;
+        s.style.display = 'inline-block';
+        s.style.marginRight = '0.25em';
+        el.appendChild(s);
+        return s;
+      });
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .demo-container {
+      background: linear-gradient(180deg, #030712 0%, #0a0a14 50%, #030712 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .credits-container {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .credits-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+    
+    .credits-subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: #9ca3af;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+    
+    .credits-divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #7c3aed, #db2777, transparent);
+      margin: 3rem auto;
+    }
+    
+    .credits-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 400px;
+    }
+    
+    .credits-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+    }
+    
+    .credits-role {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #db2777;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+    }
+    
+    .credits-name {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 1.25rem;
+      color: #fafafa;
+    }
+    
+    .credits-footer {
+      margin-top: 4rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    
+    .glow-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      pointer-events: none;
+    }
+    
+    .glow-ring--1 { width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .glow-ring--2 { width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .glow-ring--3 { width: 200px; height: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  </style>
+</head>
+<body class="lesson-page palette-cinematic">
+  <!-- Navigation Header -->
+  <nav class="top-nav">
+    <a href="../index.html" class="top-nav__link">← Part 7 Index</a>
+    <span class="top-nav__title">Advanced Text Animation</span>
+    <a href="../../index.html" class="top-nav__link top-nav__link--hub">Global Hub →</a>
+  </nav>
+  
+  <header class="lesson-header">
+    <h1 class="lesson-title">The Finale</h1>
+    <p class="lesson-subtitle">Credits/ending with orchestrated elements</p>
+  </header>
+
+  <div class="lesson-content">
+    <div class="demo-section">
+      <div class="demo-title">Live Demo - Credits Animation</div>
+      <div class="demo-container">
+        <div class="glow-ring glow-ring--1" id="ring-1"></div>
+        <div class="glow-ring glow-ring--2" id="ring-2"></div>
+        <div class="glow-ring glow-ring--3" id="ring-3"></div>
+        
+        <div class="credits-container">
+          <h2 class="credits-title" id="credits-title">The End</h2>
+          <p class="credits-subtitle" id="credits-subtitle">A GSAP Animation Story</p>
+          
+          <div class="credits-divider" id="credits-divider"></div>
+          
+          <ul class="credits-list">
+            <li class="credits-item" id="credit-1">
+              <p class="credits-role">Created With</p>
+              <p class="credits-name">GSAP & SplitText</p>
+            </li>
+            <li class="credits-item" id="credit-2">
+              <p class="credits-role">Design & Animation</p>
+              <p class="credits-name">The GSAP Team</p>
+            </li>
+            <li class="credits-item" id="credit-3">
+              <p class="credits-role">Inspired By</p>
+              <p class="credits-name">Creative Developers Everywhere</p>
+            </li>
+          </ul>
+          
+          <p class="credits-footer" id="credits-footer">Thank you for watching</p>
+        </div>
+        
+        <div class="view-toggle">
+          <button class="active" onclick="setView('desktop')">Desktop</button>
+          <button onclick="setView('phone')">Phone Sim</button>
+          <button onclick="setView('mobile')">Mobile</button>
+        </div>
+        
+        <div class="animation-controls" style="margin-top: 1.5rem;">
+          <button class="btn btn-primary" onclick="playAnimation()">▶ Play</button>
+          <button class="btn btn-secondary" onclick="resetAnimation()">Reset</button>
+          <button class="btn btn-secondary" onclick="replayAnimation()">Replay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <div class="code-title">HTML Structure</div>
+      <pre class="code-block"><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"credits-container"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">class</span>=<span class="string">"credits-title"</span> <span class="attr">id</span>=<span class="string">"credits-title"</span><span class="tag">&gt;</span>The End<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"credits-subtitle"</span> <span class="attr">id</span>=<span class="string">"credits-subtitle"</span><span class="tag">&gt;</span>A GSAP Animation Story<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"credits-divider"</span> <span class="attr">id</span>=<span class="string">"credits-divider"</span><span class="tag">&gt;&lt;/div&gt;</span>
+  <span class="tag">&lt;ul</span> <span class="attr">class</span>=<span class="string">"credits-list"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li</span> <span class="attr">class</span>=<span class="string">"credits-item"</span> <span class="attr">id</span>=<span class="string">"credit-1"</span><span class="tag">&gt;</span>...<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;/ul&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"credits-footer"</span> <span class="attr">id</span>=<span class="string">"credits-footer"</span><span class="tag">&gt;</span>Thank you<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+      <div class="code-title" style="margin-top: 1.5rem;">JavaScript Animation</div>
+      <pre class="code-block"><span class="comment">// Split title for dramatic reveal using custom splitText</span>
+<span class="keyword">const</span> titleSplit = <span class="attr">splitText</span>(<span class="string">"#credits-title"</span>, <span class="string">"chars"</span>);
+<span class="keyword">const</span> credits = gsap.<span class="attr">utils</span>.<span class="attr">toArray</span>(<span class="string">".credits-item"</span>);
+
+<span class="comment">// Set initial states</span>
+gsap.<span class="attr">set</span>(titleSplit, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">50</span>, <span class="attr">scale</span>: <span class="number">0.5</span> });
+gsap.<span class="attr">set</span>(<span class="string">"#credits-subtitle, .credits-divider, .credits-footer"</span>, { <span class="attr">opacity</span>: <span class="number">0</span> });
+gsap.<span class="attr">set</span>(credits, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">y</span>: <span class="number">30</span> });
+gsap.<span class="attr">set</span>(<span class="string">".glow-ring"</span>, { <span class="attr">opacity</span>: <span class="number">0</span>, <span class="attr">scale</span>: <span class="number">0.5</span> });
+
+<span class="keyword">const</span> tl = gsap.timeline();
+
+tl
+  <span class="comment">// Glow rings expand outward</span>
+  .<span class="attr">to</span>(<span class="string">".glow-ring"</span>, {
+    <span class="attr">opacity</span>: <span class="number">0.5</span>,
+    <span class="attr">scale</span>: <span class="number">1</span>,
+    <span class="attr">stagger</span>: <span class="number">0.3</span>,
+    <span class="attr">duration</span>: <span class="number">1.5</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+  })
+  <span class="comment">// Title characters reveal with scale</span>
+  .<span class="attr">to</span>(titleSplit, {
+    <span class="attr">opacity</span>: <span class="number">1</span>,
+    <span class="attr">y</span>: <span class="number">0</span>,
+    <span class="attr">scale</span>: <span class="number">1</span>,
+    <span class="attr">stagger</span>: <span class="number">0.08</span>,
+    <span class="attr">duration</span>: <span class="number">0.8</span>,
+    <span class="attr">ease</span>: <span class="string">"back.out(1.5)"</span>
+  }, <span class="string">"-=1"</span>)
+  <span class="comment">// Subtitle fades in</span>
+  .<span class="attr">to</span>(<span class="string">"#credits-subtitle"</span>, {
+    <span class="attr">opacity</span>: <span class="number">1</span>,
+    <span class="attr">duration</span>: <span class="number">1</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+  }, <span class="string">"-=0.3"</span>)
+  <span class="comment">// Divider draws</span>
+  .<span class="attr">fromTo</span>(<span class="string">"#credits-divider"</span>,
+    { <span class="attr">scaleX</span>: <span class="number">0</span> },
+    { <span class="attr">opacity</span>: <span class="number">1</span>, <span class="attr">scaleX</span>: <span class="number">1</span>, <span class="attr">duration</span>: <span class="number">1</span>, <span class="attr">ease</span>: <span class="string">"power2.inOut"</span> }
+  , <span class="string">"+=0.3"</span>)
+  <span class="comment">// Credits items appear one by one</span>
+  .<span class="attr">to</span>(credits, {
+    <span class="attr">opacity</span>: <span class="number">1</span>,
+    <span class="attr">y</span>: <span class="number">0</span>,
+    <span class="attr">stagger</span>: <span class="number">0.8</span>,
+    <span class="attr">duration</span>: <span class="number">0.8</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+  }, <span class="string">"-=0.5"</span>)
+  <span class="comment">// Final thank you message</span>
+  .<span class="attr">to</span>(<span class="string">"#credits-footer"</span>, {
+    <span class="attr">opacity</span>: <span class="number">1</span>,
+    <span class="attr">duration</span>: <span class="number">1.5</span>,
+    <span class="attr">ease</span>: <span class="string">"power2.out"</span>
+  }, <span class="string">"+=0.5"</span>);</pre>
+      
+      <div class="code-title" style="margin-top: 1.5rem;">Key Concepts</div>
+      <pre class="code-block"><span class="comment">// Multiple elements = orchestrated finale
+</span><span class="comment">// Ring expansion creates depth
+</span><span class="comment">// back.out for playful character reveal
+</span><span class="comment">// Timeline sequences for dramatic ending</span></pre>
+    </div>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="lesson-20.html" class="nav-link nav-link--prev">← Narrative Flow</a>
+    <a href="../../index.html" class="nav-link nav-link--next">Global Hub →</a>
+  </nav>
+
+  <script>
+    let tl;
+    let titleSplit;
+    
+    function initAnimation() {
+      titleSplit = splitText("#credits-title", "chars");
+      const credits = gsap.utils.toArray(".credits-item");
+      
+      gsap.set(titleSplit, { opacity: 0, y: 50, scale: 0.5 });
+      gsap.set("#credits-subtitle, .credits-divider, .credits-footer", { opacity: 0 });
+      gsap.set(credits, { opacity: 0, y: 30 });
+      gsap.set(".glow-ring", { opacity: 0, scale: 0.5 });
+      
+      tl = gsap.timeline();
+      
+      tl.to(".glow-ring", { opacity: 0.5, scale: 1, stagger: 0.3, duration: 1.5, ease: "power2.out" })
+        .to(titleSplit, { opacity: 1, y: 0, scale: 1, stagger: 0.08, duration: 0.8, ease: "back.out(1.5)" }, "-=1")
+        .to("#credits-subtitle", { opacity: 1, duration: 1, ease: "power2.out" }, "-=0.3")
+        .fromTo("#credits-divider", { scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 1, ease: "power2.inOut" }, "+=0.3")
+        .to(credits, { opacity: 1, y: 0, stagger: 0.8, duration: 0.8, ease: "power2.out" }, "-=0.5")
+        .to("#credits-footer", { opacity: 1, duration: 1.5, ease: "power2.out" }, "+=0.5");
+      
+      tl.pause();
+    }
+    
+    function playAnimation() { tl.play(); }
+    function resetAnimation() {
+      titleSplit = splitText("#credits-title", "chars");
+      gsap.set(titleSplit, { opacity: 0, y: 50, scale: 0.5 });
+      gsap.set("#credits-subtitle, .credits-divider, .credits-footer", { opacity: 0 });
+      gsap.set(".credits-item", { opacity: 0, y: 30 });
+      gsap.set(".glow-ring", { opacity: 0, scale: 0.5 });
+      if (tl) tl.restart();
+    }
+    function replayAnimation() { if (tl) tl.restart(); }
+    
+    function setView(view) {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.fonts.ready.then(() => {
+      initAnimation();
+    });
+  </script>
+</body>
+</html>
